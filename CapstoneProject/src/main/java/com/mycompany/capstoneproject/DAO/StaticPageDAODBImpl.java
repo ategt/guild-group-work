@@ -5,7 +5,7 @@
  */
 package com.mycompany.capstoneproject.DAO;
 
-import com.mycompany.capstoneproject.DTO.StaticPages;
+import com.mycompany.capstoneproject.DTO.StaticPage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,71 +17,71 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author apprentice
  */
-public class StaticPagesDAODBImpl implements StaticPagesInterface {
+public class StaticPageDAODBImpl implements StaticPageInterface {
 
      private JdbcTemplate jdbcTemplate;
 
     @Inject
-    public StaticPagesDAODBImpl(JdbcTemplate jdbcTemplate) {
+    public StaticPageDAODBImpl(JdbcTemplate jdbcTemplate) {
 
         this.jdbcTemplate = jdbcTemplate;
         
     }
     
     @Override
-    public StaticPages create(StaticPages stat) {
+    public StaticPage create(StaticPage stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM asdf WHERE id = ?;";
     
     @Override
-    public StaticPages get(Integer id) {
+    public StaticPage get(Integer id) {
         if (id == null)
             return null;
         try {
-            return jdbcTemplate.queryForObject(GET_STATIC_PAGE_BY_ID, new StaticPagesMapper(), id);
+            return jdbcTemplate.queryForObject(GET_STATIC_PAGE_BY_ID, new StaticPageMapper(), id);
         } catch (org.springframework.dao.EmptyResultDataAccessException ex){
             return null;
         }
     }
 
     
-    private static final class StaticPageMapper implements RowMapper<StaticPages> {
+    private static final class StaticPageMapper implements RowMapper<StaticPage> {
 
         @Override
-        public StaticPages mapRow(ResultSet rs, int i) throws SQLException {
+        public StaticPage mapRow(ResultSet rs, int i) throws SQLException {
 
-            StaticPages staticPages = new StaticPages();
+            StaticPage staticPage = new StaticPage();
 
-            staticPages.setId(rs.getInt("id"));
+            staticPage.setId(rs.getInt("id"));
 
-//            staticPages.setFirstName(rs.getString("first_name"));
-//            staticPages.setLastName(rs.getString("last_name"));
-//            staticPages.setStreetNumber(rs.getString("street_number"));
-//            staticPages.setStreetName(rs.getString("street_name"));
-//            staticPages.setCity(rs.getString("city"));
-//            staticPages.setState(rs.getString("state"));
-//            staticPages.setZip(rs.getString("zip"));
+//            staticPage.setFirstName(rs.getString("first_name"));
+//            staticPage.setLastName(rs.getString("last_name"));
+//            staticPage.setStreetNumber(rs.getString("street_number"));
+//            staticPage.setStreetName(rs.getString("street_name"));
+//            staticPage.setCity(rs.getString("city"));
+//            staticPage.setState(rs.getString("state"));
+//            staticPage.setZip(rs.getString("zip"));
 
-            return staticPages;
+            return staticPage;
         }
 
     }
 
     
     @Override
-    public void update(StaticPages stat) {
+    public void update(StaticPage stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(StaticPages stat) {
+    public void delete(StaticPage stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<StaticPages> listBlogs() {
+    public List<StaticPage> listBlogs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
