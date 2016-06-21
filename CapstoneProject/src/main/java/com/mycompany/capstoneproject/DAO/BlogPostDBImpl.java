@@ -9,16 +9,39 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author apprentice
  */
-public class BlogPostDBImpl implements BlogPostInterface{
+public class BlogPostDBImpl implements BlogPostInterface {
+
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post(title, author, content, date_posted, expires_on, post_on) VALUES(?, ?, ?, ?, ?, ?)";
+
+    private JdbcTemplate jdbcTemplate;
+
+    public BlogPostDBImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public BlogPost create(BlogPost post) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_INSERT_BLOGPOST, 
+                post.getTitle(),
+                post.getAuthor(), 
+                post.getContent(), 
+                post.getPostedOn(), 
+                post.getExpireOn(),
+                post.getDateToPostOn());
+        
+        Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        
+        post.setId(id);
+        return post;
     }
 
     @Override
@@ -60,5 +83,5 @@ public class BlogPostDBImpl implements BlogPostInterface{
     public BlogPost getBySlug(String slug) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
