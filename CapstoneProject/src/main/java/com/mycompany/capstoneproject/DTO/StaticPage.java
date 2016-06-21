@@ -9,6 +9,6 @@ package com.mycompany.capstoneproject.DTO;
  *
  * @author apprentice
  */
-public class StaticPages {
+public class StaticPage {
     
 }
