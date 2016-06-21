@@ -54,7 +54,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
             StaticPage staticPage = new StaticPage();
 
-            staticPage.setId(rs.getInt("id"));
+            //staticPage.setId(rs.getInt("id"));
 
 //            staticPage.setFirstName(rs.getString("first_name"));
 //            staticPage.setLastName(rs.getString("last_name"));

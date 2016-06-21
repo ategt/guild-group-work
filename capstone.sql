@@ -19,7 +19,7 @@
 -- Table structure for table `category`
 --
 
-CREATE SCHEMA `capstone` ;
+
 
 
 DROP TABLE IF EXISTS `category`;
