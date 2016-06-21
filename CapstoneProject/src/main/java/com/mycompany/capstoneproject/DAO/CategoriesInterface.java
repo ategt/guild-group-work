@@ -5,10 +5,18 @@
  */
 package com.mycompany.capstoneproject.DAO;
 
+import com.mycompany.capstoneproject.DTO.Category;
+import java.util.List;
+
 /**
  *
  * @author apprentice
  */
 public interface CategoriesInterface {
     
+        public Category create(Category category);
+    public Category get(Integer id);
+    public void update(Category category);
+    public void delete(Category category);
+    public List<Category> listBlogs();
 }
