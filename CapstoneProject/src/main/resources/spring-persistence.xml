@@ -37,4 +37,8 @@
     <bean id="blogPostDao" class="com.mycompany.capstoneproject.dao.BlogPostsDBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+    
+    <bean id="staticPageDao" class="com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
 </beans>
