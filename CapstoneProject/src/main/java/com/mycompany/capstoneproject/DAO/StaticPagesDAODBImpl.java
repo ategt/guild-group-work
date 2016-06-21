@@ -14,14 +14,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author apprentice
  */
-public class StaticPagesImpl implements StaticPagesInterface {
+public class StaticPagesDAODBImpl implements StaticPagesInterface {
 
      private JdbcTemplate jdbcTemplate;
 
     @Inject
-    public StaticPagesImpl(JdbcTemplate jdbcTemplate) {
+    public StaticPagesDAODBImpl(JdbcTemplate jdbcTemplate) {
 
         this.jdbcTemplate = jdbcTemplate;
+        
     }
     
     @Override
