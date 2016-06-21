@@ -9,6 +9,6 @@ package com.mycompany.capstoneproject.DTO;
  *
  * @author apprentice
  */
-public class Comments {
+public class Comment {
     
 }
