@@ -22,7 +22,7 @@ public class BlogPostDBImpl implements BlogPostInterface{
     }
 
     @Override
-    public BlogPost get(Integer id) {
+    public BlogPost getById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -53,6 +53,11 @@ public class BlogPostDBImpl implements BlogPostInterface{
 
     @Override
     public List<BlogPost> listByCategory(Category category) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public BlogPost getBySlug(String slug) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

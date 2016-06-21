@@ -17,7 +17,8 @@ import java.util.List;
 public interface BlogPostInterface {
     
     public BlogPost create(BlogPost post);
-    public BlogPost get(Integer id);
+    public BlogPost getById(Integer id);
+    public BlogPost getBySlug(String slug);
     public void update(BlogPost post);
     public void delete(BlogPost post);
     public List<BlogPost> listBlogs();
