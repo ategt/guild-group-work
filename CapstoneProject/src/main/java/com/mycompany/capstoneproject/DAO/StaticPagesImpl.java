@@ -7,6 +7,8 @@ package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.StaticPages;
 import java.util.List;
+import javax.inject.Inject;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -14,14 +16,24 @@ import java.util.List;
  */
 public class StaticPagesImpl implements StaticPagesInterface {
 
+     private JdbcTemplate jdbcTemplate;
+
+    @Inject
+    public StaticPagesImpl(JdbcTemplate jdbcTemplate) {
+
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    
     @Override
     public StaticPages create(StaticPages stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM asdf WHERE id = ?;";
+    
     @Override
     public StaticPages get(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
