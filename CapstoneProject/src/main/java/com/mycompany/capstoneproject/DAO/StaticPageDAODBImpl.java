@@ -19,34 +19,34 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public class StaticPageDAODBImpl implements StaticPageInterface {
 
-     private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Inject
     public StaticPageDAODBImpl(JdbcTemplate jdbcTemplate) {
 
         this.jdbcTemplate = jdbcTemplate;
-        
+
     }
-    
+
     @Override
     public StaticPage create(StaticPage stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM asdf WHERE id = ?;";
-    
+    private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM static_page WHERE id = ?;";
+
     @Override
     public StaticPage get(Integer id) {
-        if (id == null)
+        if (id == null) {
             return null;
+        }
         try {
             return jdbcTemplate.queryForObject(GET_STATIC_PAGE_BY_ID, new StaticPageMapper(), id);
-        } catch (org.springframework.dao.EmptyResultDataAccessException ex){
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
             return null;
         }
     }
 
-    
     private static final class StaticPageMapper implements RowMapper<StaticPage> {
 
         @Override
@@ -56,20 +56,25 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
             staticPage.setId(rs.getInt("id"));
 
-//            staticPage.setFirstName(rs.getString("first_name"));
-//            staticPage.setLastName(rs.getString("last_name"));
-//            staticPage.setStreetNumber(rs.getString("street_number"));
-//            staticPage.setStreetName(rs.getString("street_name"));
-//            staticPage.setCity(rs.getString("city"));
-//            staticPage.setState(rs.getString("state"));
-//            staticPage.setZip(rs.getString("zip"));
+            staticPage.setTitle(rs.getString("title"));
+            staticPage.setContent(rs.getString("content"));
 
+            Long imageId = rs.getLong("image_id");
+
+            // either use the image Dao or talk to someone about SQL joins.
+            
+            // It would be nice if this code could work.
+            /*
+            ImageDao imageDao = new ImageDao();
+            Image image = imageDao.get(imageId);
+            staticPage.setImage(image);
+            */
+            
             return staticPage;
         }
 
     }
 
-    
     @Override
     public void update(StaticPage stat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -84,5 +89,5 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     public List<StaticPage> listBlogs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
