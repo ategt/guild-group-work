@@ -47,6 +47,20 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
         }
     }
 
+    private static final String GET_STATIC_PAGE_BY_TITLE = "SELECT * FROM static_page WHERE title = ?;";
+
+    @Override
+    public StaticPage getByTitle(String title) {
+        if (title == null) {
+            return null;
+        }
+        try {
+            return jdbcTemplate.queryForObject(GET_STATIC_PAGE_BY_TITLE, new StaticPageMapper(), title);
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
     private static final class StaticPageMapper implements RowMapper<StaticPage> {
 
         @Override
@@ -62,14 +76,12 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
             Long imageId = rs.getLong("image_id");
 
             // either use the image Dao or talk to someone about SQL joins.
-            
             // It would be nice if this code could work.
             /*
             ImageDao imageDao = new ImageDao();
             Image image = imageDao.get(imageId);
             staticPage.setImage(image);
-            */
-            
+             */
             return staticPage;
         }
 
