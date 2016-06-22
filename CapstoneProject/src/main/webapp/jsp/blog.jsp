@@ -21,12 +21,13 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}">Home</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                 </ul>    
             </div>
 
             <div class="row">
 
-                <form method="POST" class="form-horizontal">
+                <form method="POST" action="./" class="form-horizontal">
 
                     <div class="form-group">
                         <label for="title" class="col-md-4 control-label">Title: </label>
@@ -52,7 +53,7 @@
                             <textarea id="content-input" class="form-control"></textarea>
                         </div>
                     </div>
-       
+
 
 
                     <input id="create-submit" type="submit" class="btn btn-default center-block"/>

@@ -20,7 +20,7 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="${pageContext.request.contextPath}">Home</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
 
                 </ul>    
