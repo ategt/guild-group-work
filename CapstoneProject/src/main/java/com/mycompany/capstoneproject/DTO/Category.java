@@ -10,7 +10,7 @@ package com.mycompany.capstoneproject.DTO;
  * @author apprentice
  */
 public class Category {
-    
+
     private Integer id;
     private String name;
 
@@ -29,7 +29,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
 }

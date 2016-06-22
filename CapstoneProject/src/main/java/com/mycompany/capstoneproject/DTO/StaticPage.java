@@ -10,6 +10,7 @@ package com.mycompany.capstoneproject.DTO;
  * @author apprentice
  */
 public class StaticPage {
+
     private int id;
     private String title;
     private Image image;
@@ -46,6 +47,5 @@ public class StaticPage {
     public void setContent(String content) {
         this.content = content;
     }
-    
-    
+
 }

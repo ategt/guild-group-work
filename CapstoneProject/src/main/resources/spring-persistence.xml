@@ -41,4 +41,8 @@
     <bean id="staticPageDao" class="com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+    
+    <bean id="userDao" class="com.mycompany.capstoneproject.DAO.UserDaoDBImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
 </beans>
