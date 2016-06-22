@@ -6,6 +6,7 @@
 package com.mycompany.capstoneproject.controller;
 
 import com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl;
+import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import java.util.Map;
 import javax.inject.Inject;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/aboutus")
 public class StaticPageController {
 
-    private StaticPageDAODBImpl staticPageDao;
+    private StaticPageInterface staticPageDao;
 
     @Inject
-    public StaticPageController(StaticPageDAODBImpl staticPageDao) {
+    public StaticPageController(StaticPageInterface staticPageDao) {
         this.staticPageDao = staticPageDao;
     }
 

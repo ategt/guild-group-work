@@ -9,6 +9,7 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import java.util.List;
+import javax.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
     private JdbcTemplate jdbcTemplate;
 
+    @Inject
     public BlogPostDBImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

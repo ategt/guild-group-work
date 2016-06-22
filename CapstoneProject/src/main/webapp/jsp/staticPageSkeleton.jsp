@@ -18,7 +18,14 @@
     </head>
     <body>
         <div class="container">
-            
+            <div class="row">
+                <div class="col-lg-2">Title:</div>
+                <div class="col-lg-10">${staticPage.title}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">Content:</div>
+                <div class="col-lg-10">${staticPage.content}</div>
+            </div>
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
