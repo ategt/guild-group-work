@@ -60,6 +60,20 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
         }
     }
 
+    private static final String GET_STATIC_PAGE_BY_TITLE = "SELECT * FROM static_page WHERE title = ?;";
+
+    @Override
+    public StaticPage getByTitle(String title) {
+        if (title == null) {
+            return null;
+        }
+        try {
+            return jdbcTemplate.queryForObject(GET_STATIC_PAGE_BY_TITLE, new StaticPageMapper(), title);
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
     @Override
     public void update(StaticPage staticPage) {
 
@@ -79,6 +93,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     @Override
     public List<StaticPage> listBlogs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private static final class StaticPageMapper implements RowMapper<StaticPage> {

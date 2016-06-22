@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject.controller;
 import com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DTO.StaticPage;
+import com.mycompany.capstoneproject.bll.StaticPageShow;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
@@ -30,18 +31,39 @@ public class StaticPageController {
     @RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
     public String showbyid(@PathVariable("id") Integer staticPageId, Map model) {
 
-        return showById( staticPageId,  model);
+        return StaticPageShow.showById(staticPageId, model, staticPageDao);
     }
         
 
     @RequestMapping(value = "/ById/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable("id") Integer staticPageId, Map model) {
 
-        StaticPage staticPage = staticPageDao.get(staticPageId);
+       return StaticPageShow.showById(staticPageId, model, staticPageDao);
+    }
 
-        model.put("staticPage", staticPage);
+    @RequestMapping(value = "/bytitle/{title}", method = RequestMethod.GET)
+    public String showbytitle(@PathVariable("title") String title, Map model) {
 
-        return "staticPageSkeleton";
+        return StaticPageShow.showByTitle(title, model, staticPageDao);
+    }
+        
+
+    @RequestMapping(value = "/byTitle/{title}", method = RequestMethod.GET)
+    public String showByTitle(@PathVariable("title") String title, Map model) {
+
+       return StaticPageShow.showByTitle(title, model, staticPageDao);
+    }
+
+    @RequestMapping(value = "/title/{title}", method = RequestMethod.GET)
+    public String showByJusttitle(@PathVariable("title") String title, Map model) {
+
+       return StaticPageShow.showByTitle(title, model, staticPageDao);
+    }
+
+    @RequestMapping(value = "/Title/{title}", method = RequestMethod.GET)
+    public String showByJustTitle(@PathVariable("title") String title, Map model) {
+
+       return StaticPageShow.showByTitle(title, model, staticPageDao);
     }
 
 }
