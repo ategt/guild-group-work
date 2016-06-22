@@ -40,6 +40,7 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     public CategoryDAODBImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
