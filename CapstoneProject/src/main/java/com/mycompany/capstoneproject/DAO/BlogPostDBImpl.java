@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post(title, author, content, date_posted, expires_on, post_on) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post(title, user_id, content, date_posted, expires_on, post_on, slug) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
     private JdbcTemplate jdbcTemplate;
 
