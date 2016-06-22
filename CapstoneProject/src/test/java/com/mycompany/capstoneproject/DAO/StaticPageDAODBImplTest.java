@@ -1,39 +1,39 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package com.mycompany.capstoneproject.DAO;
-//
-//import com.mycompany.capstoneproject.DTO.StaticPage;
-//import java.util.List;
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
-//
-///**
-// *
-// * @author apprentice
-// */
-//public class StaticPageDAODBImplTest {
-//
-//    ApplicationContext ctx;
-//
-//    public StaticPageDAODBImplTest() {
-//        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
-//    }
-//
-//    @Before
-//    public void setUp() {
-//    }
-//
-//    @After
-//    public void tearDown() {
-//    }
-//
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.capstoneproject.DAO;
+
+import com.mycompany.capstoneproject.DTO.StaticPage;
+import java.util.List;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ *
+ * @author apprentice
+ */
+public class StaticPageDAODBImplTest {
+
+    ApplicationContext ctx;
+
+    public StaticPageDAODBImplTest() {
+        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
 ////    /**
 ////     * Test of create method, of class StaticPageDAODBImpl.
 ////     */
@@ -48,9 +48,9 @@
 ////        // TODO review the generated test code and remove the default call to fail.
 ////        fail("The test case is a prototype.");
 ////    }
-//    /**
-//     * Test of get method, of class StaticPageDAODBImpl.
-//     */
+    /**
+     * Test of get method, of class StaticPageDAODBImpl.
+     */
 //    @Test
 //    public void testGet() {
 //        System.out.println("get");
@@ -62,10 +62,10 @@
 //        // TODO review the generated test code and remove the default call to fail.
 //        //fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of get method, of class StaticPageDAODBImpl.
-//     */
+
+    /**
+     * Test of get method, of class StaticPageDAODBImpl.
+     */
 //    @Test
 //    public void testGetB() {
 //        System.out.println("get");
@@ -77,10 +77,10 @@
 //        // TODO review the generated test code and remove the default call to fail.
 //        //fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of get method, of class StaticPageDAODBImpl.
-//     */
+
+    /**
+     * Test of get method, of class StaticPageDAODBImpl.
+     */
 //    @Test
 //    public void testGetC() {
 //        System.out.println("get");
@@ -98,7 +98,7 @@
 //        assertTrue(verifyStaticPage(expResult, result ));
 //        
 //    }
-//
+
 //    private Boolean verifyStaticPage(StaticPage staticPage1, StaticPage staticPage2) {
 //
 //        assertEquals(staticPage1.getContent(), staticPage2.getContent());
@@ -130,42 +130,42 @@
 //        return valid;
 //
 //    }
-//
+
 ////    /**
 ////     * Test of update method, of class StaticPageDAODBImpl.
 ////     */
-////    @Test
-////    public void testUpdate() {
-////        System.out.println("update");
-////        StaticPage stat = null;
-////        StaticPageDAODBImpl instance = null;
-////        instance.update(stat);
-////        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-////    }
-////    /**
-////     * Test of delete method, of class StaticPageDAODBImpl.
-////     */
-////    @Test
-////    public void testDelete() {
-////        System.out.println("delete");
-////        StaticPage stat = null;
-////        StaticPageDAODBImpl instance = null;
-////        instance.delete(stat);
-////        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-////    }
-////    /**
-////     * Test of listBlogs method, of class StaticPageDAODBImpl.
-////     */
-////    @Test
-////    public void testListBlogs() {
-////        System.out.println("listBlogs");
-////        StaticPageDAODBImpl instance = null;
-////        List<StaticPage> expResult = null;
-////        List<StaticPage> result = instance.listBlogs();
-////        assertEquals(expResult, result);
-////        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-////    }
-//}
+//    @Test
+//    public void testUpdate() {
+//        System.out.println("update");
+//        StaticPage stat = null;
+//        StaticPageDAODBImpl instance = null;
+//        instance.update(stat);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    /**
+//     * Test of delete method, of class StaticPageDAODBImpl.
+//     */
+//    @Test
+//    public void testDelete() {
+//        System.out.println("delete");
+//        StaticPage stat = null;
+//        StaticPageDAODBImpl instance = null;
+//        instance.delete(stat);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    /**
+//     * Test of listBlogs method, of class StaticPageDAODBImpl.
+//     */
+//    @Test
+//    public void testListBlogs() {
+//        System.out.println("listBlogs");
+//        StaticPageDAODBImpl instance = null;
+//        List<StaticPage> expResult = null;
+//        List<StaticPage> result = instance.listBlogs();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+}
