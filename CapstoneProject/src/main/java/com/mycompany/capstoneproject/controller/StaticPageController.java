@@ -44,4 +44,15 @@ public class StaticPageController {
         return "staticPageSkeleton";
     }
 
+
+    @RequestMapping(value = "/ById/{id}", method = RequestMethod.GET)
+    public String editById(@PathVariable("id") Integer staticPageId, Map model) {
+
+        StaticPage staticPage = staticPageDao.get(staticPageId);
+
+        model.put("staticPage", staticPage);
+
+        return "staticPageSkeleton";
+    }
+
 }
