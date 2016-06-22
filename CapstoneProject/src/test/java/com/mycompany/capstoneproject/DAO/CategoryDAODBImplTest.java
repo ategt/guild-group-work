@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
  */
 public class CategoryDAODBImplTest {
 
-<<<<<<< HEAD
   
 
     @Before
@@ -171,7 +170,7 @@ public class CategoryDAODBImplTest {
 
         System.out.println(cats);
     }
-=======
+    
 //    public CategoryDAODBImplTest() {
 //    }
 //
@@ -395,5 +394,4 @@ public class CategoryDAODBImplTest {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
 
->>>>>>> 9c66c81e430d72e20be05b036aed46ab3aeb2669
 }
