@@ -38,7 +38,7 @@ public class HomeController {
         List<BlogPost> posts = blogPostDao.listBlogs();
 
         model.put("posts", posts);
-        return "home";
+        return "index";
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
