@@ -92,10 +92,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<BlogPost> listBlogs(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public List<BlogPost> listBlogs(Date date) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     @Override
     public List<BlogPost> listByHashTags(HashTag hashTag) {
@@ -109,6 +109,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public BlogPost getBySlug(String slug) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<BlogPost> listBlogs(Integer start) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
