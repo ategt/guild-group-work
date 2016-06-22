@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author apprentice
  */
 @Controller
-@RequestMapping(value = "/categories")
+@RequestMapping(value = "/category")
 public class CategoriesController {
 
     private CategoriesInterface categoryDAO;

@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
  */
 public class CategoryDAODBImplTest {
 
-    public CategoryDAODBImplTest() {
-    }
+  
 
     @Before
     public void setUp() {
@@ -39,12 +38,7 @@ public class CategoryDAODBImplTest {
         System.out.println("");
         System.out.println("create");
         System.out.println("");
-//        Category category = null;
-//        CategoryDAODBImpl instance = null;
-//        Category expResult = null;
-//        Category result = instance.create(category);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+
 
         Category category = new Category();
 
@@ -75,12 +69,6 @@ public class CategoryDAODBImplTest {
         System.out.println("");
         System.out.println("get");
         System.out.println("");
-//        Integer id = null;
-//        CategoryDAODBImpl instance = null;
-//        Category expResult = null;
-//        Category result = instance.get(id);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
 
         Category category = new Category();
 
@@ -120,10 +108,7 @@ public class CategoryDAODBImplTest {
         System.out.println("");
         System.out.println("update");
         System.out.println("");
-//        Category category = null;
-//        CategoryDAODBImpl instance = null;
-//        instance.update(category);
-        // TODO review the generated test code and remove the default call to fail.
+
 
         Category category = new Category();
 
@@ -153,54 +138,7 @@ public class CategoryDAODBImplTest {
 
     }
 
-    /**
-     * Test of delete method, of class CategoryDAODBImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("delete");
-        System.out.println("");
-//        Category category = null;
-//        CategoryDAODBImpl instance = null;
-//        instance.delete(category);
-        // TODO review the generated test code and remove the default call to fail.
-//        
-//        Category category = new Category();
-//        
-//       
-//        
-//        category.setId(1);
-//        category.setName("Sports");
-//        String name1 = category.getName();
-//        int id1 = category.getId();
-//
-//        category.setId(2);
-//        category.setName("Weather");
-//        String name2 = category.getName();
-//        int id2 = category.getId();
-//
-//        category.setId(3);
-//        category.setName("Politics");
-//        String name3 = category.getName();
-//        int id3 = category.getId();
-//
-//        category.setId(4);
-//        category.setName("Cats");
-//        String name4 = category.getName();
-//        int id4 = category.getId();
-//
-//        System.out.println(id1 + " , " + name1);
-//        System.out.println(id2 + " , " + name2);
-//        System.out.println(id3 + " , " + name3);
-//        System.out.println(id4 + " , " + name4);
-//        
-//      
-//        
-        
 
-    }
 
     /**
      * Test of listCategories method, of class CategoryDAODBImpl.
@@ -213,11 +151,7 @@ public class CategoryDAODBImplTest {
         System.out.println("");
 
         Category category = new Category();
-//        CategoryDAODBImpl instance = null;
-//        List<Category> expResult = null;
-//        List<Category> result = instance.listCategories();
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+
 
         List<String> cats = new ArrayList();
 
@@ -235,11 +169,5 @@ public class CategoryDAODBImplTest {
         cats.add(weather);
 
         System.out.println(cats);
-
     }
-
-    private CategoryDAODBImpl CategoryDAODBImpl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
