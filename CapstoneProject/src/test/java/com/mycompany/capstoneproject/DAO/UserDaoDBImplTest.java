@@ -67,6 +67,40 @@ public class UserDaoDBImplTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of create method, of class UserDaoDBImpl.
+     */
+    @Test
+    public void testCreateB() {
+        System.out.println("create");
+        User user = new User();
+
+        String name = "Billy Bob";
+        String role = "Gretal";
+        String password = "StinkyCheese1";
+        String email = "GreatBilly@JimsBarbiqueEmporium.com";
+        int numberOfComments = 3;
+        int id = 5;
+
+        Date dateJoined = new Date();
+
+        user.setId(id);
+
+        user.setEmail(email);
+        user.setName(name);
+        user.setJoinedOn(dateJoined);
+        user.setNumOfComments(numberOfComments);
+        user.setRole(role);
+        user.setPassword(password);
+        
+        user = null;
+        
+        UserInterface instance = ctx.getBean("userDaoDBImpl", UserInterface.class);
+        User expResult = user;
+        User result = instance.create(user);
+        assertEquals(expResult, result);
+    }
+
 //
 //    /**
 //     * Test of get method, of class UserDaoDBImpl.

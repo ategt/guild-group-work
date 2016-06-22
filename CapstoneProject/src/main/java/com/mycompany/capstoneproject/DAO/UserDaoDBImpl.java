@@ -26,6 +26,9 @@ public class UserDaoDBImpl implements UserInterface {
     @Override
     public User create(User user) {
 
+        if ( user == null )
+            return null;
+            
         jdbcTemplate.update(SQL_INSERT_USER, 
                 user.getName(),
                 user.getRole(),
