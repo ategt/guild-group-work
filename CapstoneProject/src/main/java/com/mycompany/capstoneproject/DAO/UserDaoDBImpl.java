@@ -7,16 +7,25 @@ package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.User;
 import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author apprentice
  */
-public class UserDaoDBImpl implements UserInterface{
+public class UserDaoDBImpl implements UserInterface {
 
+    private static final String SQL_INSERT_USER = "INSERT INTO post(name, role, password, email, num_of_comments, date_joined) VALUES(?, ?, ?, ?, ?, ?)";
+
+    private JdbcTemplate jdbcTemplate;
+    
+    public UserDaoDBImpl(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    
     @Override
     public User create(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -38,5 +47,5 @@ public class UserDaoDBImpl implements UserInterface{
     public List<User> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
