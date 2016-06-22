@@ -18,5 +18,5 @@ public interface CategoriesInterface {
     public Category get(Integer id);
     public void update(Category category);
     public void delete(Category category);
-    public List<Category> listBlogs();
+    public List<Category> listCategories();
 }
