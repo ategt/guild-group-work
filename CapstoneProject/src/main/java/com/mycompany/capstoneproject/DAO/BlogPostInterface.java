@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject.DAO;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public interface BlogPostInterface {
     public void update(BlogPost post);
     public void delete(BlogPost post);
     public List<BlogPost> listBlogs();
-    public List<BlogPost> listBlogs(Integer start);
+    public List<BlogPost> listBlogs(Date date);
     public List<BlogPost> listByHashTags(HashTag hashTag);
     public List<BlogPost> listByCategory(Category category);
     

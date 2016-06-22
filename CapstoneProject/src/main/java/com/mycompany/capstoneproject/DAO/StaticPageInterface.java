@@ -16,6 +16,7 @@ public interface StaticPageInterface {
     
     public StaticPage create(StaticPage stat);
     public StaticPage get(Integer id);
+    public StaticPage getByTitle(String title);
     public void update(StaticPage stat);
     public void delete(StaticPage stat);
     public List<StaticPage> listBlogs();
