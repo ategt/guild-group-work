@@ -21,9 +21,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author apprentice
  */
 public class StaticPageShowTest {
+<<<<<<< HEAD
 //    
 //    ApplicationContext ctx;
 //
+=======
+    
+    ApplicationContext ctx;
+
+>>>>>>> 9c66c81e430d72e20be05b036aed46ab3aeb2669
 //    public StaticPageShowTest() {
 //        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
 //    }

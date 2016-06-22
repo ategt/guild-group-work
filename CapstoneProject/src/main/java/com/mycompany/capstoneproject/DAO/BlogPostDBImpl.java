@@ -24,16 +24,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author apprentice
  */
 public class BlogPostDBImpl implements BlogPostInterface {
-    
+
     //create
     private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
+
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)"; 
     
+
     //read 
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post where id = ?";
-    
-     //update 
+
+    //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
+
     
      //delete query
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM orders where id = ?";
@@ -43,6 +46,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
     
     
     
+
+
+//    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+
+
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -53,22 +61,21 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public BlogPost create(BlogPost post) {
-        jdbcTemplate.update(SQL_INSERT_BLOGPOST, 
+        jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
-                post.getAuthor().getId(), 
-                post.getContent(), 
-                post.getPostedOn(), 
+                post.getAuthor().getId(),
+                post.getContent(),
+                post.getPostedOn(),
                 post.getExpireOn(),
                 post.getDateToPostOn());
-        
+
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        
+
         post.setId(id);
-        
+
 //        jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
 //                post.getCategory().getId(),
 //                post.getId());
-        
         return post;
     }
 
@@ -79,15 +86,16 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public void update(BlogPost post) {
- jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
+        jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                 post.getTitle(),
-                post.getAuthor().getId(), 
-                post.getContent(), 
-                post.getPostedOn(), 
+                post.getAuthor().getId(),
+                post.getContent(),
+                post.getPostedOn(),
                 post.getExpireOn(),
                 post.getDateToPostOn(),
                 post.getId()
-                );    }
+        );
+    }
 
     @Override
     public void delete(BlogPost post) {
@@ -103,7 +111,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 //    public List<BlogPost> listBlogs(Date date) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-
     @Override
     public List<BlogPost> listByHashTags(HashTag hashTag) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -123,7 +130,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     public List<BlogPost> listBlogs(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
@@ -134,8 +141,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
 //            user.setId(rs.getInt("user_id"));
-            post.setContent(rs.getString("content")); 
-            post.setPostedOn(rs.getDate("date_posted")); 
+            post.setContent(rs.getString("content"));
+            post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
 

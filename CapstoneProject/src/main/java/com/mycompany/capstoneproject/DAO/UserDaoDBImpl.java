@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class UserDaoDBImpl implements UserInterface {
 
-    private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined) VALUES (?, ?, ?, ?, ?, ? )";
 
     private JdbcTemplate jdbcTemplate;
     
@@ -26,6 +26,9 @@ public class UserDaoDBImpl implements UserInterface {
     @Override
     public User create(User user) {
 
+        if ( user == null )
+            return null;
+            
         jdbcTemplate.update(SQL_INSERT_USER, 
                 user.getName(),
                 user.getRole(),

@@ -27,7 +27,6 @@
             </div>
 
             <div class="row">
-
                 <h1> hola, senor. Yo quiero tacos y cerveza</h1>
             </div>
 

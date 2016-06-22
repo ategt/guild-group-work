@@ -41,6 +41,7 @@
     <bean id="staticPageDao" class="com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+<<<<<<< HEAD
     
     <bean id="userDao" class="com.mycompany.capstoneproject.DAO.UserDaoDBImpl">
         <constructor-arg ref="jdbcTemplate"/>
@@ -49,4 +50,11 @@
     <bean id="categoriesDao" class="com.mycompany.capstoneproject.DAO.CategoryDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+=======
+
+    <bean id="userDaoDBImpl" class="com.mycompany.capstoneproject.DAO.UserDaoDBImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+>>>>>>> 9c66c81e430d72e20be05b036aed46ab3aeb2669
 </beans>
