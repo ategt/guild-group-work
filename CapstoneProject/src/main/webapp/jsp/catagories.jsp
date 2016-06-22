@@ -27,6 +27,7 @@
                 <ul class="nav nav-tabs">
                     <!--<li role="presentation"><a href="${pageContext.request.contextPath}" class="glyphicon glyphicon-home">Home</a></li>-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home" class="glyphicon glyphicon-circle-arrow-up">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="glyphicon glyphicon-circle-arrow-up">Categories</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/login" class="glyphicon glyphicon-plus-sign">Login</a></li>
 
 
