@@ -49,4 +49,8 @@
     <bean id="categoriesDao" class="com.mycompany.capstoneproject.DAO.CategoryDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+    
+<!--    <bean id="hashtagDao" class="com.mycompany.capstoneproject.DAO.HashTagInterface">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>-->
 </beans>
