@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface CategoriesInterface {
     
-        public Category create(Category category);
+    public Category create(Category category);
     public Category get(Integer id);
     public void update(Category category);
     public void delete(Category category);

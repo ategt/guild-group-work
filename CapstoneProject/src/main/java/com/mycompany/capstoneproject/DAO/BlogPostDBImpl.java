@@ -112,7 +112,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     }
 
     @Override
-    public List<BlogPost> listBlogs(Integer start) {
+    public List<BlogPost> listBlogs(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
