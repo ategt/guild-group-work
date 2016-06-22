@@ -8,6 +8,8 @@ package com.mycompany.capstoneproject;
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
+import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,13 @@ public class BlogController {
     public BlogController(BlogPostInterface blogPostDao, UserInterface userDao){
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
+    }
+    
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String search(Map model) {
+
+        return "blog";
     }
     
     @RequestMapping(value="/", method=RequestMethod.POST)
