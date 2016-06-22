@@ -26,6 +26,19 @@ public class UserDaoDBImpl implements UserInterface {
     @Override
     public User create(User user) {
 
+        jdbcTemplate.update(SQL_INSERT_USER, 
+                user.getName(),
+                user.getRole(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getNumOfComments(),
+                user.getJoinedOn());
+        
+        Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        
+        user.setId(id);
+        return user;
+        
     }
 
     @Override
