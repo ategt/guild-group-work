@@ -2,7 +2,6 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
-import com.mycompany.capstoneproject.DAO.CategoryDAODBImpl;
 import com.mycompany.capstoneproject.DAO.HashTagInterface;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
@@ -20,15 +19,15 @@ public class HomeController {
 
     private BlogPostInterface blogPostDao;
     private CategoriesInterface categoriesDao;
-    private HashTagInterface hashTagDao;
+//    private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
 
     @Inject
-    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, HashTagInterface HTDao, StaticPageInterface SPDao, UserInterface UDao) {
+    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao) {
         this.blogPostDao = BPDao;
         this.categoriesDao = CDao;
-        this.hashTagDao = HTDao;
+
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
@@ -44,9 +43,9 @@ public class HomeController {
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String category(Map model) {
 
-        List<Category> cat = categoriesDao.listCategories();
+        List<Category> categories = categoriesDao.listCategories();
 
-        model.put("categories", cat);
+        model.put("categories", categories);
 
         Category category = new Category();
 

@@ -21,10 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryDAODBImpl implements CategoriesInterface {
 
     //create query
-    private static final String SQL_INSERT_CATEGORY = "INSERT INTO category (name, order_id) VALUES (?,?)";
+    private static final String SQL_INSERT_CATEGORY = "INSERT INTO category (name) VALUES (?)";
 
     //update query
-    private static final String SQL_UPDATE_CATEGORY = "UPDATE category SET name = ?, order_id = ? WHERE id = ?";
+    private static final String SQL_UPDATE_CATEGORY = "UPDATE category SET name = ? WHERE id = ?";
 
     //delete query
     private static final String SQL_DELETE_CATEGORY = "DELETE FROM category where id = ?";
@@ -46,11 +46,13 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public Category create(Category category) {
         jdbcTemplate.update(SQL_INSERT_CATEGORY,
-                category.getName(),
-                category.getId()
-        );
+                category.getName()
+               
+            );
+               
+        
 
-        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", int.class);
+        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         category.setId(id);
 
@@ -58,7 +60,7 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+
     public Category get(Integer id) {
         return jdbcTemplate.queryForObject(SQL_GET_CATEGORY, new CategoryDAODBImpl.CategoryMapper(), id);
     }
@@ -67,8 +69,10 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public void update(Category category) {
         jdbcTemplate.update(SQL_UPDATE_CATEGORY,
-                category.getId(),
-                category.getName());
+               
+                category.getName(),
+                category.getId()
+        );
     }
 
     @Override
@@ -89,7 +93,7 @@ public class CategoryDAODBImpl implements CategoriesInterface {
 
             Category category = new Category();
 
-            category.setId(i);
+            category.setId(rs.getInt("id"));
             category.setName(rs.getString("name"));
 
             return category;

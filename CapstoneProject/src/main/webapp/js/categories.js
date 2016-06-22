@@ -14,7 +14,7 @@ $(document).ready(function(){
         $('#add-contact-validation-errors').empty();
         var categoryData = JSON.stringify( {
           
-            name:$('#category-input').val()
+            name:$('#name-input').val()
          
         });
         
@@ -43,7 +43,7 @@ $(document).ready(function(){
               $('#category-table').append($(tableRow));
               
               
-            $('#category-input').val('');
+            $('#name-input').val('');
    
               
            },
@@ -78,36 +78,36 @@ $(document).ready(function(){
                 </tr>  ";
     }
     
-    $('#showCategoryModal').on('show.bs.modal' , function(e){
-       
-        var link = $(e.relatedTarget);
-        
-        var categoryId = link.data('category-id');
-        
-        console.log(categoryId);
-        
-        $.ajax({
-           
-            url:contextRoot + "/category/" + categoryId,
-            type: 'GET' ,
-            dataType: 'json',
-            beforeSend: function(xhr){
-              
-              xhr.setRequestHeader("Accept", "application/json");
-                
-            },
-            success: function(data , status){
-              
-              $('#category-name').text(data.category);
-             
-            },
-            error: function(data , status){
-                alert('error');
-            }
-            
-        });
-        
-    });
+//    $('#showCategoryModal').on('show.bs.modal' , function(e){
+//       
+//        var link = $(e.relatedTarget);
+//        
+//        var categoryId = link.data('category-id');
+//        
+//        console.log(categoryId);
+//        
+//        $.ajax({
+//           
+//            url:contextRoot + "/category/" + categoryId,
+//            type: 'GET' ,
+//            dataType: 'json',
+//            beforeSend: function(xhr){
+//              
+//              xhr.setRequestHeader("Accept", "application/json");
+//                
+//            },
+//            success: function(data , status){
+//              
+//              $('#category-name').text(data.category);
+//             
+//            },
+//            error: function(data , status){
+//                alert('error');
+//            }
+//            
+//        });
+//        
+//    });
     
     $('#editCategoryModal').on('show.bs.modal' , function(e){
        
@@ -130,7 +130,7 @@ $(document).ready(function(){
             success: function(data , status){
               
               $('#edit-id').val(data.id);
-              $('#edit-category-name').val(data.category);
+              $('#edit-category-name').val(data.name);
            
                 
             },

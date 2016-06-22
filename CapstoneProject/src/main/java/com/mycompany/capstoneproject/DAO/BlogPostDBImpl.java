@@ -28,13 +28,28 @@ public class BlogPostDBImpl implements BlogPostInterface {
     //create
     private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
 
+    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)"; 
+    
+
     //read 
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post where id = ?";
 
     //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
 
-    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+    
+     //delete query
+    private static final String SQL_DELETE_BLOGPOST = "DELETE FROM orders where id = ?";
+
+    //list query
+    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM orders";
+    
+    
+    
+
+
+//    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+
 
     private JdbcTemplate jdbcTemplate;
 
