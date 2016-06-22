@@ -6,6 +6,7 @@
 package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
+import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BlogController {
     
     private BlogPostInterface blogPostDao;
+    private UserInterface userDao;
     
     @Inject
-    public BlogController(BlogPostInterface blogPostDao){
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao){
         this.blogPostDao = blogPostDao;
+        this.userDao = userDao;
     }
     
     @RequestMapping(value="/", method=RequestMethod.POST)

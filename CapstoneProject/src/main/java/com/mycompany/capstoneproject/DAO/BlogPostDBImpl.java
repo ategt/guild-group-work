@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post(title, author, content, date_posted, expires_on, post_on) VALUES(?, ?, ?, ?, ?, ?)";
-
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post(title, user_id, content, date_posted, expires_on, post_on, slug) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
     private JdbcTemplate jdbcTemplate;
 
     public BlogPostDBImpl(JdbcTemplate jdbcTemplate) {
@@ -32,7 +32,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     public BlogPost create(BlogPost post) {
         jdbcTemplate.update(SQL_INSERT_BLOGPOST, 
                 post.getTitle(),
-                post.getAuthor(), 
+                post.getAuthor().getId(), 
                 post.getContent(), 
                 post.getPostedOn(), 
                 post.getExpireOn(),
@@ -41,6 +41,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         
         post.setId(id);
+        
+        jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
+                post.getCategory().getId(),
+                post.getId());
+        
         return post;
     }
 
