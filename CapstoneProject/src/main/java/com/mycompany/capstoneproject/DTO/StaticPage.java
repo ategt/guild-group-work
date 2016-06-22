@@ -13,7 +13,7 @@ public class StaticPage {
 
     private int id;
     private String title;
-    private Image image;
+    private int image_id;
     private String content;
 
     public int getId() {
@@ -32,13 +32,14 @@ public class StaticPage {
         this.title = title;
     }
 
-    public Image getImage() {
-        return image;
+    public int getImage_id() {
+        return image_id;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage_id(int image_id) {
+        this.image_id = image_id;
     }
+
 
     public String getContent() {
         return content;

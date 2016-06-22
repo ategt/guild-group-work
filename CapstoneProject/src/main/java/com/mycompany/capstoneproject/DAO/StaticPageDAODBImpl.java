@@ -19,6 +19,8 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public class StaticPageDAODBImpl implements StaticPageInterface {
 
+    private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id) VALUES (?, ?, ?);";
+    private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=? WHERE id=?";
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -29,8 +31,19 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     }
 
     @Override
-    public StaticPage create(StaticPage stat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StaticPage create(StaticPage staticPage) {
+
+        jdbcTemplate.update(SQL_INSERT_STATIC_PAGE,
+                staticPage.getTitle(),
+                staticPage.getImage_id(),
+                staticPage.getContent());
+
+        Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
+
+        staticPage.setId(id);
+
+        return staticPage;
+
     }
 
     private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM static_page WHERE id = ?;";
@@ -61,6 +74,28 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
         }
     }
 
+    @Override
+    public void update(StaticPage staticPage) {
+
+        jdbcTemplate.update(SQL_UPDATE_STATIC_PAGE,
+                staticPage.getTitle(),
+                staticPage.getImage_id(),
+                staticPage.getContent(),
+                staticPage.getId());
+
+    }
+
+    @Override
+    public void delete(StaticPage staticPage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<StaticPage> listBlogs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
     private static final class StaticPageMapper implements RowMapper<StaticPage> {
 
         @Override
@@ -85,21 +120,6 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
             return staticPage;
         }
 
-    }
-
-    @Override
-    public void update(StaticPage stat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(StaticPage stat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<StaticPage> listBlogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
