@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello Controller Page</title>
+        <title>Basic Static Page</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,15 +18,14 @@
     </head>
     <body>
         <div class="container">
-            <h1>Spring MVC Application from Archetype</h1>
-            <hr/>
-            <div class="navbar">
-                 <ul class="nav nav-tabs">
-                 <li role="presentation"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/hello/sayhi">Hello Controller</a></li>
-                </ul>    
+            <div class="row">
+                <div class="col-lg-2">Title:</div>
+                <div class="col-lg-10">${staticPage.title}</div>
             </div>
-            <h2>Hello, From the Controller!</h2>
+            <div class="row">
+                <div class="col-lg-2">Content:</div>
+                <div class="col-lg-10">${staticPage.content}</div>
+            </div>
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
