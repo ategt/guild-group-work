@@ -24,6 +24,7 @@ public class AdminPanelController {
 
     private StaticPageInterface staticPageDao;
 
+    @Inject
     public AdminPanelController(StaticPageInterface staticPageDao) {
         this.staticPageDao = staticPageDao;
     }
