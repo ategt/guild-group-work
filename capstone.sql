@@ -19,9 +19,6 @@
 -- Table structure for table `category`
 --
 
-
-
-
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -171,6 +168,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (4,'http',NULL),(5,'www',NULL);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,11 +187,11 @@ CREATE TABLE `post` (
   `date_posted` datetime DEFAULT NULL,
   `expires_on` datetime DEFAULT NULL,
   `post_on` datetime DEFAULT NULL,
-  `slug` varchar(150) DEFAULT NULL,
+  `slug` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_post_1_idx` (`user_id`),
   CONSTRAINT `fk_post_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,6 +200,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,'Test 1',1,'Testing 1.2.3..','2016-06-22 15:50:15','2016-06-22 15:50:15','2016-06-22 15:50:15','Test'),(2,'Test 1',1,'Testing 1.2.3..','2016-06-22 15:50:58','2016-06-22 15:50:58','2016-06-22 15:50:58','Test'),(3,'Test 1',1,'Testing 1.2.3..','2016-06-22 15:52:38','2016-06-22 15:52:38','2016-06-22 15:52:38','Test'),(4,'Test 1',1,'Testing 1.2.3..','2016-06-22 15:53:10','2016-06-22 15:53:10','2016-06-22 15:53:10','Test'),(5,'Test 1',1,'Testing 1.2.3..','2016-06-22 16:28:10','2016-06-22 16:28:10','2016-06-22 16:28:10','Test');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +219,7 @@ CREATE TABLE `static_page` (
   PRIMARY KEY (`id`),
   KEY `fk_static_page_1_idx` (`image_id`),
   CONSTRAINT `fk_static_page_1` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,6 +228,7 @@ CREATE TABLE `static_page` (
 
 LOCK TABLES `static_page` WRITE;
 /*!40000 ALTER TABLE `static_page` DISABLE KEYS */;
+INSERT INTO `static_page` VALUES (2,'About Us','We are the best',5),(3,'About Statalac','coo',4);
 /*!40000 ALTER TABLE `static_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,13 +242,15 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) DEFAULT NULL,
+  `unique_user_id` bigint(20) DEFAULT NULL,
   `role` varchar(150) DEFAULT NULL,
   `password` varchar(150) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `num_of_comments` bigint(20) DEFAULT NULL,
   `date_joined` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniqueUserNameId` (`name`,`unique_user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,6 +259,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 15:45:17'),(2,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 15:50:15'),(3,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 15:50:58'),(4,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 15:52:39'),(5,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 15:53:10'),(6,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-22 16:28:11'),(7,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:22:52'),(8,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:22:53'),(9,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:23:26'),(10,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:23:26'),(11,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:25:18'),(12,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:25:19'),(13,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:25:19'),(14,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:25:20'),(15,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:29:26'),(16,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:29:26'),(17,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:32:16'),(18,'Billy Bob',NULL,'Gretal','StinkyCheese1','GreatBilly@JimsBarbiqueEmporium.com',3,'2016-06-23 09:32:17');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-21 16:21:53
+-- Dump completed on 2016-06-23 10:37:46
