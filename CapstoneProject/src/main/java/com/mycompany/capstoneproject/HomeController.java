@@ -33,14 +33,23 @@ public class HomeController {
         this.userDao = UDao;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model) {
         List<BlogPost> posts = blogPostDao.listBlogs();
        
         model.put("posts", posts);
+        
+        List<Category> categories = categoriesDao.listCategories();
 
-        return "index";
+        model.put("categories", categories);
+        
+         
+
+        return "home";
     }
+    
+    
+  
 
     
 

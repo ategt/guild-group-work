@@ -20,7 +20,7 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
 
@@ -33,7 +33,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-12"><h1>Training</h1></div>
+                        <div class="col-md-12"><h1>Pats Warehouse and Stuff</h1></div>
 
 
                     </div>
@@ -53,15 +53,15 @@
                     <div class="col-md-3">
 
 
-                        <h4 class="">Search</h4>
+                        <!--<h4 class="">Search</h4>-->
 
-                        <div class="input-group">
+<!--                        <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
-                        </div>
+                        </div>-->
                         <button type="button" class="btn btn-default btn-sm btn-block hidden-lg hidden-md" data-toggle="collapse" data-target="#demo">Refine your search <span class="caret"></span>
 
                         </button>
@@ -69,36 +69,38 @@
                         <div id="demo" class="collapse in">
                             <hr>
                             <div class="list-group list-group">
-                                <h4 class="">Category</h4>
-                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item <span class="label label-primary">New</span></a>
+                                <h4 class="">Categories</h4>
+                                <c:forEach items="${categories}" var="cat">
+                                    <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
+                                    
+                                </c:forEach>
+                                
+<!--                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item <span class="label label-primary">New</span></a>
                                 <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>	
                                 <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a>
                                 <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>	
-                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
-                                <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a> 
-                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
+                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
 
                                 <div id="categories" class="collapse">
 
-                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
+<!--                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
                                     <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
                                     <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a> 
                                     <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                    <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
+                                    <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
                                 </div>
 
 
                                 <button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>
 
-                                <hr class="">
+<!--                                <hr class="">
                                 <h4 class="">Viewing Options</h4>
                                 <a href="#" class="list-group-item"><span class="badge">14</span> Upcoming Sessions</a>
 
                                 <a href="#" class="list-group-item"><span class="badge">3</span> OnDemand</a>
                                 <hr class="">	
                                 <a href="#" class="list-group-item">Archived Courses</a>
-                                <a href="#" class="list-group-item">Courses In Development</a>
+                                <a href="#" class="list-group-item">Courses In Development</a>-->
                             </div>
                         </div>
 
@@ -124,19 +126,23 @@
                             <div class="well">
 
                                 <h4>Course Catalog</h4>
-                                <p><a href="#"><img src="http://placehold.it/400X500" class="img-responsive"></a></p>
+                                <p><a href="#"><img src="http://f.tqn.com/y/freebies/1/L/D/S/alloy-catalog.jpg" class="img-responsive"></a></p>
 
-                                <p>Everything you need to know about our webinars, including speaker bios, topics, and courses.</p>
+                                <p>Everything you need to know about our warehouse, including mens and womens clothing, inventory, and specials.</p>
 
-                                <button class="btn btn-sm btn-block btn-warning">Download</button>
+                                <!--<button class="btn btn-sm btn-block btn-warning">Download</button>-->
                             </div>
 
                             <hr>
 
-                            <h4 class="text-center">CPE Partners</h4>
+                            <h4 class="text-center">President</h4>
+                            <h4 class="text-center">CEO</h4>
+                            <h4 class="text-center">Chairman</h4>
+                            <h4 class="text-center">The Board Of Directors</h4>
+                            <h4 class="text-center">Manager</h4>
 
-                            <p><a href="#"><img class="center-block" src="http://placehold.it/100X100"></a></p>
-
+                            <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
+                            <h4 class='text-center'>Patrick Toner</h4>
 
 
                         </div>
