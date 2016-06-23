@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,11 +52,10 @@ public class BlogController {
         return "blog";
     }
     
-    @RequestMapping(value="/", method=RequestMethod.POST)
-    @ResponseBody
-    public BlogPost createPost(BlogPost post){
+    @RequestMapping(value="/create", method=RequestMethod.POST)
+    public String create(@ModelAttribute BlogPost post){
         
-        return blogPostDao.create(post);
-        
+        blogPostDao.create(post);
+        return "redirect:/";
     }
 }

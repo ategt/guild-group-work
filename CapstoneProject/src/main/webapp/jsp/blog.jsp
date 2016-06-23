@@ -28,12 +28,12 @@
 
             <div>
 
-                <form method="POST" action="./" class="form-horizontal">
+                <form method="POST" action="./create" class="form-horizontal">
 
                     <div class="form-group">
                         <label for="title" class="col-md-4 control-label">Title: </label>
                         <div class="col-md-8">
-                            <input type="text" id="title-input" class="form-control"></input>
+                            <input type="text" id="title-input" name="title" class="form-control"></input>
                         </div>
                     </div>
 <!--                    <div class="form-group">
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <label for="content" class="col-md-4 control-label"> Content:</label>
                         <div class="col-md-8">
-                            <textarea id="content-input" class="form-control"></textarea>
+                            <textarea id="content-input" name="content" class="form-control"></textarea>
                         </div>
                     </div>
                     <input id="create-submit" type="submit" class="btn btn-default center-block"/>
