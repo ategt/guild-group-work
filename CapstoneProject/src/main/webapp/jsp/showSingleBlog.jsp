@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>Capstone</h1>
+            <h1>Single Blog Post</h1>
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
@@ -25,70 +25,57 @@
                          <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                 </ul>    
             </div>
-
-            <div>
-
-                <form method="POST" action="./" class="form-horizontal">
-
-                    <div class="form-group">
-                        <label for="title" class="col-md-4 control-label">Title: </label>
-                        <div class="col-md-8">
-                            <input type="text" id="title-input" class="form-control"></input>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="author" class="col-md-4 control-label">Author </label>
-                        <div class="col-md-8">
-                            <input type="text" id="author-input" class="form-control"></input>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="category" class="col-md-4 control-label"> Category: </label>
-                        <div class="col-md-8">
-                            <input type="text" id="category-input" class="form-control"></input>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="content" class="col-md-4 control-label"> Content:</label>
-                        <div class="col-md-8">
-                            <textarea id="content-input" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <input id="create-submit" type="submit" class="btn btn-default center-block"/>
-                </form>
-            </div>
-
+                
+                <div class="row-fluid top30 pagetitle">
+  
+  <div class="container">
+    
+    <div class="row">
+      
+      <div class="col-md-12"><h1>Title</h1></div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+  
+</div>
+<div class="container">
+  
+      <hr>
+      
+      
+      <div class="row">
+        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
         </div>
+        <div class="col-sm-8">
+          <h3 class="title" id="title-input">Title</h3>
+          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
+          <p>Body.</p>
+          
+          <p class="text-muted">Created by <a href="#">Author</a></p>
+          
+          </hr>
+      
+      
+      
+
+      
+      
+    </div>
+  </div>
+</div>
+
+
+<!--        
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/blog.js"></script>
         <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                height: 500,
-                theme: 'modern',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen',
-                    'insertdatetime media nonbreaking save table contextmenu directionality',
-                    'emoticons template paste textcolor colorpicker textpattern imagetools'
-                ],
-                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                toolbar2: 'print preview media | forecolor backcolor emoticons',
-                image_advtab: true,
-                templates: [
-                    {title: 'Test template 1', content: 'Test 1'},
-                    {title: 'Test template 2', content: 'Test 2'}
-                ],
-                content_css: [
-                    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ]
-            });
-        </script>
     </body>
 </html>
 
