@@ -39,10 +39,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     
      //delete query
-    private static final String SQL_DELETE_BLOGPOST = "DELETE FROM orders where id = ?";
+    private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
     //list query
-    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM orders";
+    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
     
     
     
@@ -109,7 +109,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public List<BlogPost> listBlogs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST, new BlogPostDBImpl.BlogPostMapper());
     }
 
 //    @Override
