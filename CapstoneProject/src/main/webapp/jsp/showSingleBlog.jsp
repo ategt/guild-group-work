@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Post</title>
+        <title>Hello Controller Page</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -16,14 +16,16 @@
     </head>
     <body>
         <div class="container">
-            <h1>Single Blog Post</h1>
+            <h1>Capstone</h1>
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                    <li role="presentation" ><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                      <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
+                    
+
                 </ul>    
             </div>
 
@@ -33,7 +35,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-12"><h1>Title</h1></div>
+                        <div class="col-md-12"><h1>Single Blog Post</h1></div>
 
 
                     </div>
@@ -45,19 +47,28 @@
             </div>
             <div class="container">
 
-                <hr>
 
-                
-               <hr>
+
+
+
+             
+
+
+
+
+
+                        </div>
+
+                        <hr>
                         
-                         <c:forEach items="${posts}" var="post">
+                         <c items="${singlePost}" var="post">
                             
                                 <div class="row">
                             <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
                             </div>
                             <div class="col-sm-8">
                                 <h3 class="title">${post.title}</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
+                                <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${posts.category}</h4>
                                 <h5>${post.content}</h5>
 
                                 <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
@@ -67,29 +78,19 @@
                        
                         <hr>
                             </tr>
-                        </c:forEach>
-            
-                </hr>
+                        </c>
 
-
-
-
-
-
-
-
+                    </div>
+                </div>
             </div>
+
+
         </div>
-    </div>
 
-
-    <!--        
-    
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/blog.js"></script>
-    <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
-</body>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    </body>
 </html>
+
 

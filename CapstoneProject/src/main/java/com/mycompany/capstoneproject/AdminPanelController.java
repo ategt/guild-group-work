@@ -5,17 +5,16 @@
  */
 package com.mycompany.capstoneproject;
 
-<<<<<<< HEAD
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
-=======
+
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
->>>>>>> 709a1dec2faf502d1bb15c3c4811067239900088
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author apprentice
  */
-<<<<<<< HEAD
+
 //@Controller
 //@RequestMapping(value = "/admin")
 //public class AdminPanelController {
@@ -52,7 +51,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //        return "blog";
 //    }
 //
-=======
+
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminPanelController {
@@ -75,15 +74,15 @@ public class AdminPanelController {
         return "adminPanel";
     }
 
->>>>>>> 709a1dec2faf502d1bb15c3c4811067239900088
+
 //    @RequestMapping(value = "/create", method = RequestMethod.POST)
 //    public String create(@ModelAttribute BlogPost post) {
 //
 //        blogPostDao.create(post);
 //        return "redirect:/";
 //    }
-<<<<<<< HEAD
+
 //}
-=======
+
 }
->>>>>>> 709a1dec2faf502d1bb15c3c4811067239900088
+

@@ -96,7 +96,7 @@ public class BlogController {
         post.setDateToPostOn(postOn);
         
         blogPostDao.create(post);
-        return "redirect:/";
+        return "home";
     }
     
     

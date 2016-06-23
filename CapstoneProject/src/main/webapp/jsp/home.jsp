@@ -111,7 +111,7 @@
 
                             <div class="well">
 
-                                <h4>Course Catalog</h4>
+                                <h4>Company Catalog</h4>
                                 <p><a href="#"><img src="http://f.tqn.com/y/freebies/1/L/D/S/alloy-catalog.jpg" class="img-responsive"></a></p>
 
                                 <p>Everything you need to know about our warehouse, including mens and womens clothing, inventory, and specials.</p>
@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <h3 class="title">${post.title}</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
+                                <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category}</h4>
                                 <h5>${post.content}</h5>
 
                                 <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
