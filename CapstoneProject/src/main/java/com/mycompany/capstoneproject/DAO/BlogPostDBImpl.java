@@ -145,7 +145,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
-//            user.setId(rs.getInt("user_id"));
             post.setContent(rs.getString("content"));
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));

@@ -9,15 +9,23 @@ import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
+import com.mycompany.capstoneproject.DTO.BlogPostCommand;
 import com.mycompany.capstoneproject.DTO.Category;
+import com.mycompany.capstoneproject.DTO.Comment;
+import com.mycompany.capstoneproject.DTO.HashTag;
+import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.User;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -53,9 +61,62 @@ public class BlogController {
     }
     
     @RequestMapping(value="/create", method=RequestMethod.POST)
-    public String create(@ModelAttribute BlogPost post){
+    public String create(@ModelAttribute BlogPostCommand postCommand){
+        User author = userDao.get(postCommand.getAuthorId());
+        Category category = categoriesDao.get(postCommand.getCategoryId());
+        
+        Date datePosted = new Date();
+        Date postExpires = new Date();
+        Date postOn = new Date();
+        
+        Comment comment = new Comment();
+        comment.setComment("This test is dope, yo");
+        List<Comment> comments = new ArrayList();
+        comments.add(comment);
+        
+        Image img = new Image();
+        img.setUrl("");
+        
+        HashTag hashtag = new HashTag();
+        hashtag.setName("#blessed");
+        List<HashTag> hashTags = new ArrayList();
+        hashTags.add(hashtag);
+        
+        BlogPost post = new BlogPost();
+        post.setTitle(postCommand.getTitle());
+        post.setSlug(postCommand.getTitle());
+        post.setAuthor(author);
+        post.setCategory(category);
+        post.setContent(postCommand.getContent());
+        post.setComments(comments);
+        post.setImage(img);
+        post.setHashTag(hashTags);
+        post.setPostedOn(datePosted);
+        post.setExpireOn(postExpires);
+        post.setDateToPostOn(postOn);
         
         blogPostDao.create(post);
         return "redirect:/";
+    }
+    
+        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId , Map model){
+        
+        BlogPost post = blogPostDao.getById(postId);
+        
+        return "showSingleBlog";
+    }
+    
+    @RequestMapping(value = "/{slug}/{id}" , method = RequestMethod.GET)
+    @ResponseBody
+    public BlogPost getPost(@PathVariable String slug , Integer postId){
+        
+        BlogPost post = blogPostDao.getBySlug(slug);
+        
+        
+        
+        
+        
+        return post;
     }
 }
