@@ -5,25 +5,22 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author apprentice
  */
 public class BlogPostCommand {
     
-    private Integer categoryId;
+    private int categoryId;
     private String title;
     private String content;
-    private Integer authorId;
+    private int authorId;
 
-    public Integer getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -43,11 +40,11 @@ public class BlogPostCommand {
         this.content = content;
     }
 
-    public Integer getAuthorId() {
+    public int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Integer authorId) {
+    public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
 

@@ -45,9 +45,9 @@
                     <div class="form-group" id='author-input-div'>
                         <label for="author" class="col-md-4 control-label">Author </label>
                         <div class="col-md-8">
-                            <select class="btn btn-default dropdown" id="author-input" name="author">
+                            <select class="btn btn-default dropdown" id="author-input" name="authorId">
                                 <c:forEach items="${users}" var="user">
-                                    <option value="${user.id}"class="form-control">${user.name}</option>
+                                    <option value="${user.id}" class="form-control">${user.name}</option>
                                 </c:forEach>
                             </select>
                             <!--<input type="text" id="state-input" class="form-control"></input>-->
@@ -63,9 +63,9 @@
                     <div class="form-group" id='category-input-div'>
                         <label for="category" class="col-md-4 control-label"> Category: </label>
                         <div class="col-md-8">
-                            <select class="btn btn-default dropdown" id="category-input" name="category">
+                            <select class="btn btn-default dropdown" id="category-input" name="categoryId">
                                 <c:forEach items="${categories}" var="category">
-                                    <option value="${category.id}"class="form-control">${category.name}</option>
+                                    <option value="${category.id}" class="form-control">${category.name}</option>
                                 </c:forEach>
                             </select>
                             <!--<input type="text" id="state-input" class="form-control"></input>-->
