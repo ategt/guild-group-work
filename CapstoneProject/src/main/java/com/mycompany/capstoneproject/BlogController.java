@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -34,12 +35,13 @@ public class BlogController {
     
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String search(Map model) {
+    public String blog(Map model) {
 
         return "blog";
     }
     
     @RequestMapping(value="/", method=RequestMethod.POST)
+    @ResponseBody
     public BlogPost createPost(BlogPost post){
         
         return blogPostDao.create(post);
