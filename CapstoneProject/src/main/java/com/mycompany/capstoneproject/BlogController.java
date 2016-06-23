@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -46,5 +48,26 @@ public class BlogController {
         
         return blogPostDao.create(post);
         
+    }
+    
+        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId , Map model){
+        
+        BlogPost post = blogPostDao.getById(postId);
+        
+        return "showSingleBlog";
+    }
+    
+    @RequestMapping(value = "/{slug}/{id}" , method = RequestMethod.GET)
+    @ResponseBody
+    public BlogPost getPost(@PathVariable String slug , Integer postId){
+        
+        BlogPost post = blogPostDao.getBySlug(slug);
+        
+        
+        
+        
+        
+        return post;
     }
 }
