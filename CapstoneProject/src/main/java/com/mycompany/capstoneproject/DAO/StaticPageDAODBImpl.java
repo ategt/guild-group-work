@@ -91,7 +91,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     }
 
     @Override
-    public List<StaticPage> listBlogs() {
+    public List<StaticPage> listPages() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
