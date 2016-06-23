@@ -28,7 +28,7 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <!--<li role="presentation"><a href="${pageContext.request.contextPath}" class="glyphicon glyphicon-home">Home</a></li>-->
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/home" class="glyphicon glyphicon-home">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/" class="glyphicon glyphicon-home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/blog/" class="">Blog</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/login" class="glyphicon glyphicon-log-in">Login</a></li>
