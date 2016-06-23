@@ -19,6 +19,6 @@ public interface StaticPageInterface {
     public StaticPage getByTitle(String title);
     public void update(StaticPage stat);
     public void delete(StaticPage stat);
-    public List<StaticPage> listBlogs();
+    public List<StaticPage> listPages();
     
 }

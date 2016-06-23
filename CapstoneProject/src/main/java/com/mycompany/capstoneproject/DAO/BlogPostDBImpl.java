@@ -9,10 +9,13 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.User;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,14 +31,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
     //create
     private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
 
-    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)"; 
-    
+    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
     //read 
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post where id = ?";
 
     //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
+
 
     
      //delete query
@@ -48,9 +51,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
     
 
 
+
 //    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
-
-
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -61,7 +63,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public BlogPost create(BlogPost post) {
-        
+
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
                 post.getAuthor().getId(),
@@ -87,19 +89,29 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public void update(BlogPost post) {
-        
-        if (post.getAuthor() == null)
+
+        if (post.getAuthor() == null) {
             return;
-        
-        jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
-                post.getTitle(),
-                post.getAuthor().getId(),
-                post.getContent(),
-                post.getPostedOn(),
-                post.getExpireOn(),
-                post.getDateToPostOn(),
-                post.getId()
-        );
+        }
+
+        if (post.getId() > 0) {
+
+            try {
+                jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
+                        post.getTitle(),
+                        post.getAuthor().getId(),
+                        post.getContent(),
+                        post.getPostedOn(),
+                        post.getExpireOn(),
+                        post.getDateToPostOn(),
+                        post.getId()
+                );
+
+            } catch (org.springframework.dao.DataIntegrityViolationException ex) {
+                Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 
     @Override
