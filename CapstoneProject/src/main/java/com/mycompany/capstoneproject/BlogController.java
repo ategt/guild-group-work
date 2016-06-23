@@ -61,7 +61,7 @@ public class BlogController {
     }
     
     @RequestMapping(value="/create", method=RequestMethod.POST)
-    public String create(@ModelAttribute BlogPostCommand postCommand){
+    public String create(@ModelAttribute BlogPostCommand postCommand, Map model){
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
         
@@ -96,7 +96,8 @@ public class BlogController {
         post.setDateToPostOn(postOn);
         
         blogPostDao.create(post);
-        return "redirect:/";
+        model.put("post", post);
+        return "showSingleBlog";
     }
     
     
