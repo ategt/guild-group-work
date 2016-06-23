@@ -99,10 +99,19 @@ public class BlogController {
         return "redirect:/";
     }
     
+    
         @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer postId , Map model){
         
-        BlogPost post = blogPostDao.getById(postId);
+        BlogPost posts = blogPostDao.getById(postId);
+        
+          
+       
+        model.put("singlePost", posts);
+        
+//        List<Category> categories = categoriesDao.listCategories();
+//
+//        model.put("categories", categories);
         
         return "showSingleBlog";
     }
