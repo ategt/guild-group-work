@@ -61,6 +61,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public BlogPost create(BlogPost post) {
+        
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
                 post.getAuthor().getId(),
@@ -86,6 +87,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public void update(BlogPost post) {
+        
+        if (post.getAuthor() == null)
+            return;
+        
         jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                 post.getTitle(),
                 post.getAuthor().getId(),
