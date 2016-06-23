@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author apprentice
  */
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/adminPanel")
 public class AdminPanelController {
 
     private StaticPageInterface staticPageDao;

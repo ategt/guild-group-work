@@ -21,6 +21,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
     private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id) VALUES (?, ?, ?);";
     private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=? WHERE id=?";
+    private static final String SQL_GET_STATIC_PAGE_LIST = "SELECT * FROM capstone.static_page";
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -35,8 +36,9 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
         jdbcTemplate.update(SQL_INSERT_STATIC_PAGE,
                 staticPage.getTitle(),
-                staticPage.getImage_id(),
-                staticPage.getContent());
+                staticPage.getContent(),
+                staticPage.getImage_id());
+        
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
 
@@ -79,8 +81,8 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
         jdbcTemplate.update(SQL_UPDATE_STATIC_PAGE,
                 staticPage.getTitle(),
-                staticPage.getImage_id(),
                 staticPage.getContent(),
+                staticPage.getImage_id(),
                 staticPage.getId());
 
     }
@@ -92,7 +94,8 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
     @Override
     public List<StaticPage> listPages() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return jdbcTemplate.query(SQL_GET_STATIC_PAGE_LIST, new StaticPageMapper());
 
     }
 
