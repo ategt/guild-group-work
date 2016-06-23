@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}">Home</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                         <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                 </ul>    
             </div>
 
@@ -36,17 +36,41 @@
                             <input type="text" id="title-input" class="form-control"></input>
                         </div>
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label for="author" class="col-md-4 control-label">Author </label>
                         <div class="col-md-8">
                             <input type="text" id="author-input" class="form-control"></input>
                         </div>
+                    </div>-->
+                    <div class="form-group" id='author-input-div'>
+                        <label for="author" class="col-md-4 control-label">Author </label>
+                        <div class="col-md-8">
+                            <select class="btn btn-default dropdown" id="author-input" name="author">
+                                <c:forEach items="${users}" var="user">
+                                    <option value="${user.id}"class="form-control">${user.name}</option>
+                                </c:forEach>
+                            </select>
+                            <!--<input type="text" id="state-input" class="form-control"></input>-->
+                        </div>
+                        <div id="add-order-validation-category-error" class="validation-errors pull-right"></div>
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label for="category" class="col-md-4 control-label"> Category: </label>
                         <div class="col-md-8">
                             <input type="text" id="category-input" class="form-control"></input>
                         </div>
+                    </div>-->
+                    <div class="form-group" id='category-input-div'>
+                        <label for="category" class="col-md-4 control-label"> Category: </label>
+                        <div class="col-md-8">
+                            <select class="btn btn-default dropdown" id="category-input" name="category">
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.id}"class="form-control">${category.name}</option>
+                                </c:forEach>
+                            </select>
+                            <!--<input type="text" id="state-input" class="form-control"></input>-->
+                        </div>
+                        <div id="add-order-validation-category-error" class="validation-errors pull-right"></div>
                     </div>
                     <div class="form-group">
                         <label for="content" class="col-md-4 control-label"> Content:</label>
@@ -63,7 +87,6 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/blog.js"></script>
         <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({
