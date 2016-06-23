@@ -46,18 +46,29 @@
   
       <hr>
       
-      
+      <form method="POST" class="form-horizontal">
       <div class="row">
         <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
         </div>
         <div class="col-sm-8">
           <h3 class="title" id="title-input">Title</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-          <p>Body.</p>
+          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p >
+          <h5 id="content-input"></h5>
           
-          <p class="text-muted">Created by <a href="#">Author</a></p>
+          <p class="text-muted">Created by <a href="#" id="author-input"></a></p>
           
+       
+          </form>
           </hr>
+          
+          <c:forEach items="${states}" var="state">
+                            <tr id="state-row-${state.id}">
+                                <td><a data-state-id="${state.id}" data-toggle="modal" data-target="#showStateModal">${state.state}</a></td>
+                                <td>${state.stateTax}</td>
+                                <td><a data-state-id="${state.id}" data-toggle="modal" data-target="#editStateModal">Edit</a></td>
+                                <td><a data-state-id="${state.id}" class="delete-link">Delete</a></td>
+                            </tr>
+                        </c:forEach>
       
       
       
