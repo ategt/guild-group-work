@@ -9,8 +9,10 @@ import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
+import com.mycompany.capstoneproject.DTO.BlogPostCommand;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.User;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -53,7 +55,23 @@ public class BlogController {
     }
     
     @RequestMapping(value="/create", method=RequestMethod.POST)
-    public String create(@ModelAttribute BlogPost post){
+    public String create(@ModelAttribute BlogPostCommand postCommand){
+        User author = userDao.get(postCommand.getAuthorId());
+        Category category = categoriesDao.get(postCommand.getCategoryId());
+        
+        Date datePosted = new Date();
+        Date postExpires = new Date();
+        Date postOn = new Date();
+        
+        BlogPost post = new BlogPost();
+        post.setTitle(postCommand.getTitle());
+        post.setSlug(postCommand.getTitle());
+        post.setAuthor(author);
+        post.setCategory(category);
+        post.setContent(postCommand.getContent());
+        post.setPostedOn(datePosted);
+        post.setExpireOn(postExpires);
+        post.setDateToPostOn(postOn);
         
         blogPostDao.create(post);
         return "redirect:/";
