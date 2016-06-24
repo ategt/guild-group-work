@@ -66,7 +66,10 @@ public class BlogController {
     public String editById(@PathVariable("id") Integer id, Map model) {
 
         BlogPost blogPost = blogPostDao.getById(id);
+        List<User> users = userDao.list();
         
+        
+        model.put("users", users);
         model.put("blogPost", blogPost);
         
         return "editBlog";

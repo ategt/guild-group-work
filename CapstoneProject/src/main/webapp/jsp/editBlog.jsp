@@ -20,20 +20,20 @@
     </head>
     <body>
         <div class="container">
-            <form:form method="POST" commandName="blogPost" action="${pageContext.request.contextPath}/edit/${blogPost.id}" >
-                 
-                <div class="form-group">
-                    <form:label path="id" class="col-sm-3 control-label" >Slug:</form:label>
+            <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/edit/${blogPost.id}" >
 
-                    <div class="col-sm-7">
-                        <form:input path="id" style="text-align: center" class="form-control" type="text" disabled="true" />
+                <div class="form-group">
+                    <form:label path="id" class="col-sm-3 control-label" >ID:</form:label>
+
+                        <div class="col-sm-7">
+                        <form:input path="id" style="text-align: center" class="col-sm-9 form-control" type="text" disabled="true" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <form:label path="slug" class="col-sm-3 control-label" >Slug:</form:label>
 
-                    <div class="col-sm-7">
+                        <div class="col-sm-7">
                         <form:input path="slug" style="text-align: center" class="form-control" type="text" disabled="true" />
                     </div>
                 </div>
@@ -41,13 +41,13 @@
                 <div class="form-group">
                     <form:label path="title" class="col-sm-3 control-label" >Title:</form:label>
 
-                    <div class="col-sm-7">
+                        <div class="col-sm-7">
                         <form:input path="title" style="text-align: center" class="form-control" type="text" disabled="true" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="content" for="productName" class="col-sm-3 control-label" >Product:</form:label>
+                    <form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
 
                         <div class="col-sm-7">
                         <form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
@@ -55,9 +55,37 @@
                 </div>
 
 
-                
+                <div class="form-group" id="author-input-div">
+                    <form:label path="author" class="col-md-4 control-label">Author: </form:label>
+                        <div class="col-md-8">
+                            <select class="btn btn-default dropdown" id="author-input" name="authorId">
+                            <c:forEach items="${users}" var="user">
+                                <option value="${user.id}" class="form-control">${user.name}</option>
+                            </c:forEach>
+                        </select>
+                        <!--<input type="text" id="state-input" class="form-control"></input>-->
+                    </div>
+                    <div id="add-order-validation-category-error" class="validation-errors pull-right">
+                    </div>
+                </div>
+
+                <div class="form-group" id="category-input-div">
+                    <form:label path="category" class="col-md-4 control-label"> Category: </form:label>
+                        <div class="col-md-8">
+                        <form:select class="btn btn-default dropdown" id="category-input" path="category">
+                            <c:forEach items="${categories}" var="category">
+                                <form:option value="${category.id}" class="form-control">${category.name}</form:option>
+                            </c:forEach>
+                        </form:select>
+                        <!--<input type="text" id="state-input" class="form-control"></input>-->
+                    </div>
+                    <div id="add-order-validation-category-error" class="validation-errors pull-right">
+
+                    </div>
+                </div>
+
             </form:form>
-                            
+
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
@@ -66,3 +94,18 @@
     </body>
 </html>
 
+<!--                <div class="form-group">
+<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
+
+    <div class="col-sm-7">
+<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
+</div>
+</div>
+
+<div class="form-group">
+<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
+
+    <div class="col-sm-7">
+<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
+</div>
+</div>-->
