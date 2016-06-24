@@ -62,9 +62,9 @@
                         <hr>
                         
 
-                         <c items="${singlePost}" var="post">
+                        <div items="${singlePost}" var="post">
 
-                         <c items="${posts}" var="post">
+                        
 
                             
                                 <div class="row">
@@ -76,13 +76,15 @@
                                 <h5>${post.content}</h5>
 
                                 <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+                                 <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
+<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
 
                             </div>
                         </div>
                        
                         <hr>
                             </tr>
-                        </c>
+                        </div>
 
             
                 </hr>

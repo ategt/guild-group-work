@@ -10,11 +10,12 @@ package com.mycompany.capstoneproject.DTO;
  * @author apprentice
  */
 public class BlogPostCommand {
-    
+
     private int categoryId;
     private String title;
     private String content;
     private int authorId;
+    private int id;
 
     public int getCategoryId() {
         return categoryId;
@@ -48,5 +49,18 @@ public class BlogPostCommand {
         this.authorId = authorId;
     }
 
-    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

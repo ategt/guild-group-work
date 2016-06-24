@@ -11,19 +11,20 @@ import java.util.UUID;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
  * @author apprentice
  */
-public class BlogPostDaoDBImplTest {
+public class BlogPostDBImplTest {
 
     ApplicationContext ctx;
-//
-//    public BlogPostDaoDBImplTest() {
-//        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
-//    }
-//
+
+    public BlogPostDBImplTest() {
+        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
+    }
+
 //    @Before
 //    public void setUp() {
 //    }
@@ -100,6 +101,22 @@ public class BlogPostDaoDBImplTest {
 
     }
 
+    @Test
+    public void testNullGet() {
+        System.out.println("get - null");
+
+        BlogPostInterface blogPostDao = ctx.getBean("blogPostDao", BlogPostInterface.class);
+
+        // Test get method.
+        BlogPost returnedPost = blogPostDao.getById(null);
+
+        assertEquals(returnedPost, null);
+
+        //This is a test get with nulls.
+        // If it makes it to here, it passed.
+        assertTrue(true);
+    }
+
     private static Boolean verifyBlogPost(BlogPost blogPost1, BlogPost blogPost2) {
         if (blogPost1 == null && blogPost2 == null) {
             return true;
@@ -127,15 +144,15 @@ public class BlogPostDaoDBImplTest {
             valid = false;
         }
 
-        if (!isSameDay(blogPost1.getDateToPostOn(), blogPost2.getDateToPostOn()) ) {
+        if (!isSameDay(blogPost1.getDateToPostOn(), blogPost2.getDateToPostOn())) {
             valid = false;
         }
 
-        if (!isSameDay(blogPost1.getExpireOn(), blogPost2.getExpireOn()) ) {
+        if (!isSameDay(blogPost1.getExpireOn(), blogPost2.getExpireOn())) {
             valid = false;
         }
 
-        if (!isSameDay(blogPost1.getPostedOn(), blogPost2.getPostedOn()) ) {
+        if (!isSameDay(blogPost1.getPostedOn(), blogPost2.getPostedOn())) {
             valid = false;
         }
 
@@ -157,17 +174,16 @@ public class BlogPostDaoDBImplTest {
     private BlogPost blogPostFactory() {
 
         BlogPost blogPost = new BlogPost();
-        
+
         Date dateToPostOn = new Date();
         Date expireOn = new Date();
         Date postedOn = new Date();
-        
+
         UUID uuid = UUID.randomUUID();
         String content = uuid.toString();
-        
+
         String title = UUID.randomUUID().toString();
-        
-        
+
 //        blogPost.setAuthor(author);
 //        blogPost.setCategory(category);
 //        blogPost.setComments(comments);
@@ -180,9 +196,9 @@ public class BlogPostDaoDBImplTest {
         blogPost.setPostedOn(postedOn);
         //blogPost.setSlug(slug);
         blogPost.setTitle(title);
-        
+
         return blogPost;
-        
+
     }
 
 }

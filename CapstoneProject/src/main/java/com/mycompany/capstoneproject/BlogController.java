@@ -7,6 +7,7 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
+import com.mycompany.capstoneproject.DAO.HashTagInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.BlogPostCommand;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,11 +43,17 @@ public class BlogController {
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
 
+    private HashTagInterface hashTagDao;
+
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao) {
+
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface HDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
+        this.hashTagDao = HDao;
+
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -57,6 +66,21 @@ public class BlogController {
         model.put("category", category);
         model.put("categories", categories);
         return "blog";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editById(@PathVariable("id") Integer id, Map model) {
+
+        BlogPost blogPost = blogPostDao.getById(id);
+
+        List<User> users = userDao.list();
+        
+        
+        model.put("users", users);
+
+        model.put("blogPost", blogPost);
+
+        return "editBlog";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -76,11 +100,19 @@ public class BlogController {
         Image img = new Image();
         img.setUrl("");
 
-        HashTag hashtag = new HashTag();
-        hashtag.setName("#blessed");
+        List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
-        hashTags.add(hashtag);
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag.toLowerCase());
+            hashTagDao.create(newHashTag);
+            if(hashTags.contains(newHashTag.getName())){
+                
+            }else{
+                hashTags.add(newHashTag);
+            }
 
+        }
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -96,6 +128,13 @@ public class BlogController {
 
         blogPostDao.create(post);
 
+
+        blogPostDao.create(post);
+        
+        for (HashTag hashTag : hashTags) {
+            hashTagDao.updateHashTagPostTable(hashTag, post);
+        }
+
         model.put("post", post);
         return "showSingleBlog";
 
@@ -104,9 +143,15 @@ public class BlogController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer postId, Map model) {
 
-        BlogPost posts = blogPostDao.getById(postId);
+        BlogPost post = blogPostDao.getById(postId);
 
-        model.put("singlePost", posts);
+        User author = userDao.get(post.getAuthor().getId());
+        post.setAuthor(author);
+
+        Category category = categoriesDao.get(post.getCategory().getId());
+        post.setCategory(category);
+
+        model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
 //
