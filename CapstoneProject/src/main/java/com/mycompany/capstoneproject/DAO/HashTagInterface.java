@@ -18,6 +18,6 @@ public interface HashTagInterface {
     public HashTag get(Integer id);
     public void update(HashTag hashTag);
     public void delete(HashTag hashTag);
-    public List<HashTag> listBlogs();
+    public List<HashTag> listHashTags();
     
 }
