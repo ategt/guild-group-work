@@ -45,11 +45,14 @@ public class BlogController {
     private HashTagInterface hashTagDao;
 
     @Inject
+
     public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface HDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
         this.hashTagDao = HDao;
+
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -62,6 +65,21 @@ public class BlogController {
         model.put("category", category);
         model.put("categories", categories);
         return "blog";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editById(@PathVariable("id") Integer id, Map model) {
+
+        BlogPost blogPost = blogPostDao.getById(id);
+
+        List<User> users = userDao.list();
+        
+        
+        model.put("users", users);
+
+        model.put("blogPost", blogPost);
+
+        return "editBlog";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -81,10 +99,14 @@ public class BlogController {
         Image img = new Image();
         img.setUrl("");
 
-        HashTag hashtag = new HashTag();
-        hashtag.setName("#blessed");
+        List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
-        hashTags.add(hashtag);
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag);
+            hashTagDao.create(newHashTag);
+            hashTags.add(newHashTag);
+        }
 
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
@@ -98,6 +120,7 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
+
         
         String cont = post.getContent();
 
@@ -138,7 +161,7 @@ public class BlogController {
             HashTag h = new HashTag();
             h.setName(cont);
         }
-        
+
 
         blogPostDao.create(post);
 
@@ -147,19 +170,17 @@ public class BlogController {
 
     }
 
-    
-    
-        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId , Map model){
-        
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId, Map model) {
+
         BlogPost post = blogPostDao.getById(postId);
-        
+
         User author = userDao.get(post.getAuthor().getId());
         post.setAuthor(author);
-        
+
         Category category = categoriesDao.get(post.getCategory().getId());
         post.setCategory(category);
-        
+
         model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();

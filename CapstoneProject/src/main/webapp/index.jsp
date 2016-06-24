@@ -55,13 +55,13 @@
 
                         <!--<h4 class="">Search</h4>-->
 
-<!--                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>-->
                         <button type="button" class="btn btn-default btn-sm btn-block hidden-lg hidden-md" data-toggle="collapse" data-target="#demo">Refine your search <span class="caret"></span>
 
                         </button>
@@ -72,35 +72,35 @@
                                 <h4 class="">Categories</h4>
                                 <c:forEach items="${categories}" var="cat">
                                     <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
-                                    
+
                                 </c:forEach>
-                                
-<!--                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item <span class="label label-primary">New</span></a>
-                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>	
-                                <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a>
-                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>	
-                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
+
+                                <!--                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item <span class="label label-primary">New</span></a>
+                                                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>	
+                                                                <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a>
+                                                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>	
+                                                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
 
                                 <div id="categories" class="collapse">
 
-<!--                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                    <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
-                                    <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a> 
-                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                    <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
+                                    <!--                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
+                                                                        <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
+                                                                        <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a> 
+                                                                        <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
+                                                                        <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
                                 </div>
 
 
                                 <button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>
 
-<!--                                <hr class="">
-                                <h4 class="">Viewing Options</h4>
-                                <a href="#" class="list-group-item"><span class="badge">14</span> Upcoming Sessions</a>
-
-                                <a href="#" class="list-group-item"><span class="badge">3</span> OnDemand</a>
-                                <hr class="">	
-                                <a href="#" class="list-group-item">Archived Courses</a>
-                                <a href="#" class="list-group-item">Courses In Development</a>-->
+                                <!--                                <hr class="">
+                                                                <h4 class="">Viewing Options</h4>
+                                                                <a href="#" class="list-group-item"><span class="badge">14</span> Upcoming Sessions</a>
+                                
+                                                                <a href="#" class="list-group-item"><span class="badge">3</span> OnDemand</a>
+                                                                <hr class="">	
+                                                                <a href="#" class="list-group-item">Archived Courses</a>
+                                                                <a href="#" class="list-group-item">Courses In Development</a>-->
                             </div>
                         </div>
 

@@ -9,7 +9,6 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.User;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -41,12 +40,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
     //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
 
-     //delete query
+
+    //delete query
+
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
     //list query
     private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
-    
+
+
+//  private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -73,12 +77,23 @@ public class BlogPostDBImpl implements BlogPostInterface {
         jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
                 post.getCategory().getId(),
                 post.getId());
+
         return post;
     }
 
     @Override
     public BlogPost getById(Integer id) {
-        return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
+
+        if (id == null)
+            return null;
+        
+        try {
+            return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
+            return null;
+        }
+
+        //return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
     }
 
     @Override
@@ -104,7 +119,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
                 Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }
 
@@ -151,6 +165,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             user.setId(rs.getInt("user_id"));
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
+            post.setAuthor(user);
             post.setContent(rs.getString("content"));
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
