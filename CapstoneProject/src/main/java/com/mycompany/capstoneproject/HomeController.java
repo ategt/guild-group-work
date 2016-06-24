@@ -37,6 +37,8 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model) {
         List<BlogPost> posts = blogPostDao.listBlogs();
+        
+        
        
         model.put("posts", posts);
         

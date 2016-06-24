@@ -34,19 +34,25 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     //read 
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post JOIN category_post ON category_post.post_id=post.id AND post.id = ?";
-    
+
     private static final String SQL_GET_BLOGPOST_CATEGORY = "";
 
     //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
 
-
     //delete query
-
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
     //list query
-    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
+
+    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post JOIN category on category.name=name";
+                                                  
+//            + "                                          INNER JOIN user on user.name=name";
+
+//  private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+
+  
+
 
     private JdbcTemplate jdbcTemplate;
 
@@ -81,9 +87,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public BlogPost getById(Integer id) {
 
-        if (id == null)
+        if (id == null) {
             return null;
-        
+        }
+
         try {
             return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
@@ -158,18 +165,31 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
 
-          BlogPost post = new BlogPost();
+               BlogPost post = new BlogPost();
             User user = new User();
             user.setId(rs.getInt("user_id"));
+
+            post.setAuthor(user);
+
+            Category category = new Category();
+            category.setId(rs.getInt("category_id"));
+            post.setCategory(category);
+//            post.getCategory().setName(category.getName());
+
+
             
 //            Category category = new Category();
 //            category.setId(rs.getInt("category_id"));
             
+
             post.setId(rs.getInt("id"));
+            post.getCategory().setName(rs.getString("name"));
+//            post.getAuthor().setName(rs.getString("author"));
             post.setTitle(rs.getString("title"));
+
 //            post.setCategory(category);
+
             post.setContent(rs.getString("content"));
-            post.setAuthor(user);
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
@@ -186,15 +206,16 @@ public class BlogPostDBImpl implements BlogPostInterface {
             BlogPost post = new BlogPost();
             User user = new User();
             user.setId(rs.getInt("user_id"));
-            
+            post.setAuthor(user);
+
             Category category = new Category();
             category.setId(rs.getInt("category_id"));
-            
+            post.setCategory(category);
+            post.getCategory().setName(category.getName());
+
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
-            post.setCategory(category);
             post.setContent(rs.getString("content"));
-            post.setAuthor(user);
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
