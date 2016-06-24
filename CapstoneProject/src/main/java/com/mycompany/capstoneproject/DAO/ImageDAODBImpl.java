@@ -7,12 +7,19 @@ package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.Image;
 import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author apprentice
  */
-public class ImageDBImpl implements ImageInterface {
+public class ImageDAODBImpl implements ImageInterface {
+
+    private JdbcTemplate jdbcTemplate;
+
+    public ImageDAODBImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public Image create(Image image) {
@@ -38,5 +45,5 @@ public class ImageDBImpl implements ImageInterface {
     public List<Image> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
