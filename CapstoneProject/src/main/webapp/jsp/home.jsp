@@ -24,7 +24,9 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-
+                    <c:forEach items="${staticPages}" var="staticPage">
+                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
+                    </c:forEach>
 
                 </ul>    
             </div>
@@ -169,11 +171,10 @@
                         <hr>
 
 
-                                <h5 class="text-muted">Created by <a href="#">${post.author.name}</a></h5>
-                                <h5 class="text-muted">Posted on  <a href="#">${post.postedOn}</a></h5>
                                 
-                                <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>
-=======
+                                
+                                
+
                         <c:forEach items="${posts}" var="post">
 
                             <div class="row">
@@ -181,12 +182,12 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
-                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category}</h4>
+                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                     <h5>${post.content}</h5>
 
                                     <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
-
-
+                                    <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
+<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
                                 </div>
                             </div>
 

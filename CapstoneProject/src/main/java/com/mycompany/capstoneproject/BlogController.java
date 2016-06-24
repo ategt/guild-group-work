@@ -42,14 +42,18 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
+
     private HashTagInterface hashTagDao;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface hashTagDao) {
+
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface HDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
-        this.hashTagDao = hashTagDao;
+        this.hashTagDao = HDao;
+
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -79,6 +83,7 @@ public class BlogController {
         List<Category> categories = categoriesDao.listCategories();
         model.put("categories", categories);
 
+
         List<User> users = userDao.list();
         model.put("users", users);
         model.put("blogPostCommand", blogPostCommand);
@@ -98,6 +103,7 @@ public class BlogController {
         
         int authorId = blogPostCommand.getAuthorId();
         
+
         User user = userDao.get(authorId);
         
         blogPost.setAuthor(user);
@@ -129,6 +135,11 @@ public class BlogController {
         
         model.put("post", post);
 
+        //model.put("users", users);
+
+        //model.put("blogPost", blogPost);
+
+
 //        List<Category> categories = categoriesDao.listCategories();
 //
 //        model.put("categories", categories);
@@ -141,9 +152,36 @@ public class BlogController {
 
         blogPostDao.create(post);
 
+        updateHashTags(post);
+
         model.put("post", post);
         return "showSingleBlog";
 
+       
+
+    }
+
+    private void updateHashTags(BlogPost post) {
+        List<String> str = hashTagDao.findHashTags(post.getContent());
+        List<HashTag> hashTags = new ArrayList();
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag.toLowerCase());
+            hashTagDao.create(newHashTag);
+
+            if(hashTags.contains(newHashTag.getName())){
+                
+            }else{
+                hashTags.add(newHashTag);
+            }
+            
+            
+        }
+        
+        
+        for (HashTag hashTag : hashTags) {
+            hashTagDao.updateHashTagPostTable(hashTag, post);
+        }
     }
 
     private BlogPost convertPostCommandToPost(BlogPostCommand postCommand) {
@@ -162,10 +200,19 @@ public class BlogController {
         List<HashTag> hashTags = new ArrayList();
         for (String hashTag : str) {
             HashTag newHashTag = new HashTag();
-            newHashTag.setName(hashTag);
+            newHashTag.setName(hashTag.toLowerCase());
             hashTagDao.create(newHashTag);
-            hashTags.add(newHashTag);
+
+            if(hashTags.contains(newHashTag.getName())){
+                
+            }else{
+                hashTags.add(newHashTag);
+            }
+
+
         }
+       
+        
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -185,6 +232,7 @@ public class BlogController {
         if (blogPost == null) {
             return null;
         }
+
 
         BlogPostCommand blogPostCommand = new BlogPostCommand();
 
@@ -220,8 +268,8 @@ public class BlogController {
 
         BlogPost post = blogPostDao.getById(postId);
 
-        User author = userDao.get(post.getAuthor().getId());
-        post.setAuthor(author);
+//        User author = userDao.get(post.getAuthor().getId());
+//        post.setAuthor(author);
 
         Category category = categoriesDao.get(post.getCategory().getId());
         post.setCategory(category);

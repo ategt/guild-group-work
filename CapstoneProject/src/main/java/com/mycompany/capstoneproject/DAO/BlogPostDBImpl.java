@@ -11,6 +11,7 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,29 +28,29 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    //create
     private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
-    //read 
-    private static final String SQL_GET_BLOGPOST = "SELECT * FROM post JOIN category_post ON category_post.post_id=post.id AND post.id = ?";
-    
-    private static final String SQL_GET_BLOGPOST_CATEGORY = "";
+    private static final String SQL_GET_BLOGPOST = "SELECT * FROM post \n"
+            + "JOIN category_post \n"
+            + "ON category_post.post_id=post.id\n"
+            + "JOIN category\n"
+            + "ON category_post.category_id=category_id\n"
+            + "JOIN user\n"
+            + "ON user.id=user_id AND post.id = ?";
 
-    //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
-
-
-    //delete query
 
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
-    //list query
-    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
-
-
-//  private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
+    private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post \n"
+            + "JOIN category_post \n"
+            + "ON category_post.post_id=post.id\n"
+            + "JOIN category\n"
+            + "ON category_post.category_id=category_id\n"
+            + "JOIN user\n"
+            + "ON user.id=user_id";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -84,9 +85,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public BlogPost getById(Integer id) {
 
-        if (id == null)
+        if (id == null) {
             return null;
-        
+        }
+
         try {
             return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
@@ -109,6 +111,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
                         post.getAuthor().getId(),
+                        post.getCategory().getId(),
                         post.getContent(),
                         post.getPostedOn(),
                         post.getExpireOn(),
@@ -132,10 +135,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
         return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST, new BlogPostMapper());
     }
 
-//    @Override
-//    public List<BlogPost> listBlogs(Date date) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
     @Override
     public List<BlogPost> listByHashTags(HashTag hashTag) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -161,36 +160,20 @@ public class BlogPostDBImpl implements BlogPostInterface {
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
 
             BlogPost post = new BlogPost();
+
             User user = new User();
             user.setId(rs.getInt("user_id"));
-            post.setId(rs.getInt("id"));
-            post.setTitle(rs.getString("title"));
-            post.setContent(rs.getString("content"));
-            post.setPostedOn(rs.getDate("date_posted"));
-            post.setExpireOn(rs.getDate("expires_on"));
-            post.setDateToPostOn(rs.getDate("post_on"));
+            user.setName(rs.getString("user.name"));
+            post.setAuthor(user);
 
-            return post;
-        }
-
-    }
-
-    private static final class BlogPostWithCategoryMapper implements RowMapper<BlogPost> {
-
-        public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
-
-            BlogPost post = new BlogPost();
-            User user = new User();
-            user.setId(rs.getInt("user_id"));
-            
             Category category = new Category();
             category.setId(rs.getInt("category_id"));
-            
-            post.setId(rs.getInt("id"));
-            post.setTitle(rs.getString("title"));
+
             post.setCategory(category);
+            post.setId(rs.getInt("id"));
+            post.getCategory().setName(rs.getString("name"));
+            post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
-            post.setAuthor(user);
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
@@ -199,4 +182,5 @@ public class BlogPostDBImpl implements BlogPostInterface {
         }
 
     }
+
 }

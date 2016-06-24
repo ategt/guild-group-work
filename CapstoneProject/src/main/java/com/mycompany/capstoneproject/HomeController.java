@@ -8,6 +8,7 @@ import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
+import com.mycompany.capstoneproject.DTO.StaticPage;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -37,27 +38,23 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model) {
         List<BlogPost> posts = blogPostDao.listBlogs();
-       
-        model.put("posts", posts);
+        
+        List<StaticPage> staticPages = staticPageDao.listPages();
+        StaticPage staticPage = new StaticPage();
         
         List<Category> categories = categoriesDao.listCategories();
-
-        model.put("categories", categories);
         
         List<HashTag> hash = hashTagDao.listHashTags();
         
-        model.put("hashTag", hash);
         
-         
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        model.put("posts", posts);
+        model.put("categories", categories);
+        model.put("hashTag", hash);
 
         return "home";
     }
-    
-    
-  
-
-    
-
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String category(Map model) {
