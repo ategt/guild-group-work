@@ -132,6 +132,10 @@ public class BlogController {
 
 
         blogPostDao.create(post);
+        
+        for (HashTag hashTag : hashTags) {
+            hashTagDao.updateHashTagPostTable(hashTag, post);
+        }
 
         model.put("post", post);
         return "showSingleBlog";

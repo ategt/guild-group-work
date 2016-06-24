@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BlogPostDBImpl implements BlogPostInterface {
 
     //create
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, category_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
@@ -48,9 +48,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
     //list query
     private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
 
-
-//  private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
-
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -65,7 +62,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
                 post.getAuthor().getId(),
-                post.getCategory().getId(),
                 post.getContent(),
                 post.getPostedOn(),
                 post.getExpireOn(),
@@ -166,12 +162,12 @@ public class BlogPostDBImpl implements BlogPostInterface {
             User user = new User();
             user.setId(rs.getInt("user_id"));
             
-            Category category = new Category();
-            category.setId(rs.getInt("category_id"));
+//            Category category = new Category();
+//            category.setId(rs.getInt("category_id"));
             
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
-            post.setCategory(category);
+//            post.setCategory(category);
             post.setContent(rs.getString("content"));
             post.setAuthor(user);
             post.setPostedOn(rs.getDate("date_posted"));
