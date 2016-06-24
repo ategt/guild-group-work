@@ -110,10 +110,7 @@ public class BlogController {
             }else{
                 hashTags.add(newHashTag);
             }
-                
-                
-//          
-            
+
         }
 
         BlogPost post = new BlogPost();
