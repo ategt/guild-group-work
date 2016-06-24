@@ -76,7 +76,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         List<String> strs = new ArrayList<String>();
         while (mat.find()) {
             //System.out.println(mat.group(1));
-            strs.add(mat.group(1));
+            strs.add("#" + mat.group(1));
         }
 
         return strs;
