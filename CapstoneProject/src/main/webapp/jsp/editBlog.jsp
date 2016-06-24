@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="container">
-            <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/edit/${blogPost.id}" >
+            <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/blog/edit/" >
 
                 <div class="form-group">
                     <form:label path="id" class="col-sm-3 control-label" >ID:</form:label>
@@ -75,6 +75,8 @@
 
                     </div>
                 </div>
+                    
+                    <input type="submit" value="submit" />
 
             </form:form>
 

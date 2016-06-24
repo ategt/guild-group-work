@@ -87,7 +87,7 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/edit/", method = RequestMethod.POST)
-    public String submitEditById(@ModelAttribute("blogPostCommand") BlogPostCommand blogPostCommand, @PathVariable("id") Integer id, Map model) {
+    public String submitEditById(@ModelAttribute("blogPostCommand") BlogPostCommand blogPostCommand, Map model) {
         if (blogPostCommand == null) {
             return "unableToEdit";
         }
@@ -114,6 +114,8 @@ public class BlogController {
         
         blogPost.setCategory(category);
         
+        blogPostDao.update(blogPost);
+        
         //List<User> users = userDao.list();
         //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
 //        List<Category> categories = categoriesDao.listCategories();
@@ -122,14 +124,16 @@ public class BlogController {
 //        List<User> users = userDao.list();
 //        model.put("users", users);
 //        model.put("blogPostCommand", blogPostCommand);
-        model.put("post", blogPost);
+
+        BlogPost post = blogPostDao.getById(blogPostId);
+        
+        model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
 //
 //        model.put("categories", categories);
         return "showSingleBlog";
     }
-}
 
 @RequestMapping(value = "/create", method = RequestMethod.POST)
         public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
