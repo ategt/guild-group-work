@@ -121,46 +121,6 @@ public class BlogController {
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
 
-        
-        String cont = post.getContent();
-
-       
-//        Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
-//        Matcher mat = MY_PATTERN.matcher(cont);
-        List<String> hash = new ArrayList<String>();
-       if(cont.contains("#")){
-          String[] foundHash = cont.split("#");
-          String[] hashValue = new String[foundHash.length - 1];
-           
-           for (int i = 1; i < foundHash.length; i++) {
-               if(foundHash[i].contains(" ")){
-                   String[] hashtag1 =  foundHash[i].split(" ");
-                    hashValue[i-1] = hashtag1[0];
-                    
-                    
-//                    hashValue[i].
-                   
-               }
-//              String[] lastHash =  cont.split("#");
-//              int a = lastHash.length;
-//               if(lastHash[a].contains("#")){
-//                   int b = hashValue.length;
-//                   hashValue[i] = hashValue[b+1];
-//                   
-//               }
-               
-           }
-           
-           
-           model.put("hashTag", hashValue);
-                   
-           
-       }
-       
-        for (String string : hash) {
-            HashTag h = new HashTag();
-            h.setName(cont);
-        }
 
 
         blogPostDao.create(post);
