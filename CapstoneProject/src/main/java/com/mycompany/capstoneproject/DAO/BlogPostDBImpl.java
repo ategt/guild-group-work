@@ -44,6 +44,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
+    private static final String SQL_GET_DEFAULT_CATEGORY = "SELECT id FROM capstone.category\n"
+            + "ORDER BY id ASC\n"
+            + "LIMIT 1;";
+
     private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post \n"
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
@@ -75,8 +79,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         post.setId(id);
 
+        int categoryId = 0;
+        
+        if (post.getCategory() == null) {
+            // Set category to zero, or a default category.
+            categoryId = jdbcTemplate.queryForObject(SQL_GET_DEFAULT_CATEGORY, Integer.class);
+        } else {
+            categoryId =   post.getCategory().getId();
+        }
+
         jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
-                post.getCategory().getId(),
+                categoryId,
                 post.getId());
 
         return post;
