@@ -88,7 +88,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             return null;
         
         try {
-            return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
+            return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
             return null;
         }
@@ -165,6 +165,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             user.setId(rs.getInt("user_id"));
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
+            post.setAuthor(user);
             post.setContent(rs.getString("content"));
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));

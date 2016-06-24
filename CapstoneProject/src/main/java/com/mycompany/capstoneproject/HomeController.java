@@ -44,9 +44,9 @@ public class HomeController {
 
         model.put("categories", categories);
         
-        List<HashTag> hash = hashTagDao.listHashTags();
-        
-        model.put("hashTag", hash);
+//        List<HashTag> hash = hashTagDao.listHashTags();
+//        
+//        model.put("hashTag", hash);
         
          
 
