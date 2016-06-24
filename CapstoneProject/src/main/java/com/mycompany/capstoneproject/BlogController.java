@@ -68,36 +68,40 @@ public class BlogController {
     public String editById(@PathVariable("id") Integer id, Map model) {
 
         BlogPost blogPost = blogPostDao.getById(id);
-<<<<<<< HEAD
+
         List<User> users = userDao.list();
         
+        BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
         
         model.put("users", users);
-=======
-
->>>>>>> 05ba3aad5147fc2b5255e659109b3e47c09d786d
-        model.put("blogPost", blogPost);
+        model.put("blogPostCommand", blogPostCommand);
 
         return "editBlog";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
+        BlogPost post = convertPostCommandToPost(postCommand);
+
+        blogPostDao.create(post);
+
+        model.put("post", post);
+        return "showSingleBlog";
+
+    }
+
+    private BlogPost convertPostCommandToPost(BlogPostCommand postCommand) {
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
-
         Date datePosted = new Date();
         Date postExpires = new Date();
         Date postOn = new Date();
-
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
         comments.add(comment);
-
         Image img = new Image();
         img.setUrl("");
-
         List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
         for (String hashTag : str) {
@@ -106,7 +110,6 @@ public class BlogController {
             hashTagDao.create(newHashTag);
             hashTags.add(newHashTag);
         }
-
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -119,14 +122,21 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
-
-        blogPostDao.create(post);
-
-        model.put("post", post);
-        return "showSingleBlog";
-
+        return post;
     }
 
+    private BlogPostCommand convertCommandToBlogPost(BlogPost blogPost) {
+        BlogPostCommand blogPostCommand = new BlogPostCommand();
+        
+        blogPostCommand.setAuthorId(blogPost.getAuthor().getId());
+        blogPostCommand.setCategoryId(blogPost.getCategory().getId());
+        blogPostCommand.setContent(blogPost.getContent());
+        blogPostCommand.setId(blogPost.getId());
+        blogPostCommand.setTitle(blogPost.getTitle());
+        
+        return blogPostCommand;
+    }
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer postId, Map model) {
 
