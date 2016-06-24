@@ -115,7 +115,7 @@ public class BlogController {
         Category category = categoriesDao.get(post.getCategory().getId());
         post.setCategory(category);
         
-        model.put("singlePost", post);
+        model.put("post", post);
         
 //        List<Category> categories = categoriesDao.listCategories();
 //
