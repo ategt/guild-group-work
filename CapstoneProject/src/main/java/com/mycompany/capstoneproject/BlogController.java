@@ -42,6 +42,7 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
+
     private HashTagInterface hashTagDao;
 
     @Inject
@@ -112,7 +113,6 @@ public class BlogController {
             }
 
         }
-
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -126,6 +126,7 @@ public class BlogController {
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
 
+        blogPostDao.create(post);
 
 
         blogPostDao.create(post);
