@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,21 +35,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author apprentice
  */
 @Controller
-@RequestMapping(value="/blog")
+@RequestMapping(value = "/blog")
 public class BlogController {
-    
+
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
-    
+
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao){
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
     }
-    
-    
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String blog(Map model) {
         List<Category> categories = categoriesDao.listCategories();
@@ -59,29 +60,29 @@ public class BlogController {
         model.put("categories", categories);
         return "blog";
     }
-    
-    @RequestMapping(value="/create", method=RequestMethod.POST)
-    public String create(@ModelAttribute BlogPostCommand postCommand, Map model){
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
-        
+
         Date datePosted = new Date();
         Date postExpires = new Date();
         Date postOn = new Date();
-        
+
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
         comments.add(comment);
-        
+
         Image img = new Image();
         img.setUrl("");
-        
+
         HashTag hashtag = new HashTag();
         hashtag.setName("#blessed");
         List<HashTag> hashTags = new ArrayList();
         hashTags.add(hashtag);
-        
+
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -95,41 +96,67 @@ public class BlogController {
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
         
-        blogPostDao.create(post);
+        String cont = post.getContent();
 
+       
+//        Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
+//        Matcher mat = MY_PATTERN.matcher(cont);
+        List<String> hash = new ArrayList<String>();
+       if(cont.contains("#")){
+          String[] foundHash = cont.split("#");
+          String[] hashValue = new String[foundHash.length - 1];
+           
+           for (int i = 1; i < foundHash.length; i++) {
+               if(foundHash[i].contains(" ")){
+                   String[] hashtag1 =  foundHash[i].split(" ");
+                    hashValue[i-1] = hashtag1[0];
+                    
+//                    hashValue[i].
+                   
+               }
+              String[] lastHash =  cont.split("#");
+              int a = lastHash.length;
+               if(lastHash[a].contains("#")){
+                   int b = hashValue.length;
+                   hashValue[i] = hashValue[b+1];
+                   
+               }
+               
+           }
+           model.put("hashTag", hashValue);
+                   
+           
+       }
+       
+      
+        
+
+        blogPostDao.create(post);
 
         model.put("post", post);
         return "showSingleBlog";
 
     }
-    
-    
-        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId , Map model){
-        
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId, Map model) {
+
         BlogPost posts = blogPostDao.getById(postId);
-        
-          
-       
+
         model.put("singlePost", posts);
-        
+
 //        List<Category> categories = categoriesDao.listCategories();
 //
 //        model.put("categories", categories);
-        
         return "showSingleBlog";
     }
-    
-    @RequestMapping(value = "/{slug}/{id}" , method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public BlogPost getPost(@PathVariable String slug , Integer postId){
-        
+    public BlogPost getPost(@PathVariable String slug, Integer postId) {
+
         BlogPost post = blogPostDao.getBySlug(slug);
-        
-        
-        
-        
-        
+
         return post;
     }
 }
