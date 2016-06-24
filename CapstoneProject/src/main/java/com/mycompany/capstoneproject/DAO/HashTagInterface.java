@@ -5,6 +5,7 @@
  */
 package com.mycompany.capstoneproject.DAO;
 
+import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public interface HashTagInterface {
 
     public List<HashTag> listHashTags();
 
-    
     public List<String> findHashTags(String content);
 
 }
