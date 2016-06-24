@@ -34,25 +34,19 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
     //read 
-    private static final String SQL_GET_BLOGPOST = "SELECT * FROM post where id = ?";
+    private static final String SQL_GET_BLOGPOST = "SELECT * FROM post JOIN category_post ON category_post.post_id=post.id AND post.id = ?";
+    
+    private static final String SQL_GET_BLOGPOST_CATEGORY = "";
 
     //update 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
 
-
-    
      //delete query
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
     //list query
     private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post";
     
-    
-    
-
-
-
-//    private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -76,15 +70,15 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         post.setId(id);
 
-//        jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
-//                post.getCategory().getId(),
-//                post.getId());
+        jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
+                post.getCategory().getId(),
+                post.getId());
         return post;
     }
 
     @Override
     public BlogPost getById(Integer id) {
-        return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostDBImpl.BlogPostMapper(), id);
+        return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
     }
 
     @Override
@@ -121,7 +115,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public List<BlogPost> listBlogs() {
-        return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST, new BlogPostDBImpl.BlogPostMapper());
+        return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST, new BlogPostMapper());
     }
 
 //    @Override
@@ -154,7 +148,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
             BlogPost post = new BlogPost();
             User user = new User();
-
+            user.setId(rs.getInt("user_id"));
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
@@ -167,4 +161,28 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     }
 
+    private static final class BlogPostWithCategoryMapper implements RowMapper<BlogPost> {
+
+        public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
+
+            BlogPost post = new BlogPost();
+            User user = new User();
+            user.setId(rs.getInt("user_id"));
+            
+            Category category = new Category();
+            category.setId(rs.getInt("category_id"));
+            
+            post.setId(rs.getInt("id"));
+            post.setTitle(rs.getString("title"));
+            post.setCategory(category);
+            post.setContent(rs.getString("content"));
+            post.setAuthor(user);
+            post.setPostedOn(rs.getDate("date_posted"));
+            post.setExpireOn(rs.getDate("expires_on"));
+            post.setDateToPostOn(rs.getDate("post_on"));
+
+            return post;
+        }
+
+    }
 }

@@ -20,11 +20,11 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                      <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                    
+
 
                 </ul>    
             </div>
@@ -57,13 +57,13 @@
 
                         <!--<h4 class="">Search</h4>-->
 
-<!--                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>-->
                         <button type="button" class="btn btn-default btn-sm btn-block hidden-lg hidden-md" data-toggle="collapse" data-target="#demo">Refine your search <span class="caret"></span>
 
                         </button>
@@ -72,13 +72,14 @@
                             <hr>
                             <div class="list-group list-group">
                                 <h4 class="">Categories</h4>
+                                
                                 <c:forEach items="${categories}" var="cat">
                                     <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
-                                    
+
                                 </c:forEach>
 
                                 <div id="categories" class="collapse">
-
+                                    
                                 </div>
 
                                 <!--<button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>-->
@@ -103,7 +104,7 @@
                                 </div>
 
                                 <hr>
-                               
+
                             </div>
 
 
@@ -166,31 +167,35 @@
                         </div>
 
                         <hr>
-                        
-                         <c:forEach items="${posts}" var="post">
-                            
-                                <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">${post.title}</h3>
-                                <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category}</h4>
-                                <h5>${post.content}</h5>
+
 
                                 <h5 class="text-muted">Created by <a href="#">${post.author.name}</a></h5>
                                 <h5 class="text-muted">Posted on  <a href="#">${post.postedOn}</a></h5>
                                 
                                 <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>
+=======
+                        <c:forEach items="${posts}" var="post">
 
+                            <div class="row">
+                                <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
+                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category}</h4>
+                                    <h5>${post.content}</h5>
+
+                                    <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+
+
+                                </div>
                             </div>
-                        </div>
-                       
-                        <hr>
+
+                            <hr>
                             </tr>
                         </c:forEach>
 
 
-                        
+
 
 
 

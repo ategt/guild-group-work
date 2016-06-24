@@ -138,12 +138,20 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId, Map model) {
-
-        BlogPost posts = blogPostDao.getById(postId);
-
-        model.put("singlePost", posts);
+    
+    
+        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId , Map model){
+        
+        BlogPost post = blogPostDao.getById(postId);
+        
+        User author = userDao.get(post.getAuthor().getId());
+        post.setAuthor(author);
+        
+        Category category = categoriesDao.get(post.getCategory().getId());
+        post.setCategory(category);
+        
+        model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
 //

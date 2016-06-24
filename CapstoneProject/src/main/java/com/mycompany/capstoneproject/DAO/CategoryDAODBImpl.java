@@ -35,6 +35,7 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     //list query
     private static final String SQL_GET_CATEGORY_LIST = "SELECT * FROM category";
 
+    
     private JdbcTemplate jdbcTemplate;
 
     public CategoryDAODBImpl(JdbcTemplate jdbcTemplate) {
