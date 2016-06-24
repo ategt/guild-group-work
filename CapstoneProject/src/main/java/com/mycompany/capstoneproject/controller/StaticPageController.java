@@ -50,7 +50,18 @@ public class StaticPageController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "static";
+        return "staticAdmin";
+    }
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer id, Map model) {
+
+        StaticPage staticPage = staticPageDao.get(id);
+
+        model.put("staticPage", staticPage);
+
+        return "staticPageDisplay";
+
     }
 
     @RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
@@ -97,7 +108,7 @@ public class StaticPageController {
         staticPageDao.create(staticPage);
 
         model.put("staticPage", staticPage);
-        
+
         return "redirect:/static/";
     }
 
