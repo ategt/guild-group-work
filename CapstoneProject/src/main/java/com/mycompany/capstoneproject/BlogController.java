@@ -7,6 +7,7 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
+import com.mycompany.capstoneproject.DAO.HashTagInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.BlogPostCommand;
@@ -41,12 +42,14 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
+    private HashTagInterface hashTagDao;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao) {
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface HDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
+        this.hashTagDao = HDao;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -111,24 +114,30 @@ public class BlogController {
                    String[] hashtag1 =  foundHash[i].split(" ");
                     hashValue[i-1] = hashtag1[0];
                     
+                    
 //                    hashValue[i].
                    
                }
-              String[] lastHash =  cont.split("#");
-              int a = lastHash.length;
-               if(lastHash[a].contains("#")){
-                   int b = hashValue.length;
-                   hashValue[i] = hashValue[b+1];
-                   
-               }
+//              String[] lastHash =  cont.split("#");
+//              int a = lastHash.length;
+//               if(lastHash[a].contains("#")){
+//                   int b = hashValue.length;
+//                   hashValue[i] = hashValue[b+1];
+//                   
+//               }
                
            }
+           
+           
            model.put("hashTag", hashValue);
                    
            
        }
        
-      
+        for (String string : hash) {
+            HashTag h = new HashTag();
+            h.setName(cont);
+        }
         
 
         blogPostDao.create(post);

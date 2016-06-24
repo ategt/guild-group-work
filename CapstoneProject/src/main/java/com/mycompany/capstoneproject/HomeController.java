@@ -46,7 +46,7 @@ public class HomeController {
         
         List<HashTag> hash = hashTagDao.listHashTags();
         
-        model.put("hashTag", hash);
+         model.put("hashTag", hash);
         
          
 
