@@ -5,13 +5,18 @@
  */
 package com.mycompany.capstoneproject.DAO;
 
+import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.HashTag;
+import com.mycompany.capstoneproject.DTO.User;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +30,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     private static final String SQL_SELECT_HASHTAG = "";
     private static final String SQL_UPDATE_HASHTAG = "";
     private static final String SQL_DELETE_HASHTAG = "";
+    private static final String SQL_GET_HASHTAG_LIST = "SELECT * FROM hashtag";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -77,7 +83,20 @@ public class HashTagDaoDBImpl implements HashTagInterface {
 
     @Override
     public List<HashTag> listHashTags() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SQL_GET_HASHTAG_LIST, new HashTagMapper());
     }
 
+    private static final class HashTagMapper implements RowMapper<HashTag> {
+
+        public HashTag mapRow(ResultSet rs, int i) throws SQLException {
+
+            HashTag hashtag = new HashTag();
+
+            hashtag.setId(rs.getInt("id"));
+            hashtag.setName(rs.getString("name"));
+
+            return hashtag;
+        }
+
+    }
 }
