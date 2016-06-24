@@ -20,7 +20,7 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                      <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
@@ -37,12 +37,12 @@
                             <input type="text" id="title-input" name="title" class="form-control"></input>
                         </div>
                     </div>
-<!--                    <div class="form-group">
-                        <label for="author" class="col-md-4 control-label">Author </label>
-                        <div class="col-md-8">
-                            <input type="text" id="author-input" class="form-control"></input>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="form-group">
+                                            <label for="author" class="col-md-4 control-label">Author </label>
+                                            <div class="col-md-8">
+                                                <input type="text" id="author-input" class="form-control"></input>
+                                            </div>
+                                        </div>-->
                     <div class="form-group" id='author-input-div'>
                         <label for="author" class="col-md-4 control-label">Author </label>
                         <div class="col-md-8">
@@ -55,12 +55,12 @@
                         </div>
                         <div id="add-order-validation-category-error" class="validation-errors pull-right"></div>
                     </div>
-<!--                    <div class="form-group">
-                        <label for="category" class="col-md-4 control-label"> Category: </label>
-                        <div class="col-md-8">
-                            <input type="text" id="category-input" class="form-control"></input>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="form-group">
+                                            <label for="category" class="col-md-4 control-label"> Category: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" id="category-input" class="form-control"></input>
+                                            </div>
+                                        </div>-->
                     <div class="form-group" id='category-input-div'>
                         <label for="category" class="col-md-4 control-label"> Category: </label>
                         <div class="col-md-8">

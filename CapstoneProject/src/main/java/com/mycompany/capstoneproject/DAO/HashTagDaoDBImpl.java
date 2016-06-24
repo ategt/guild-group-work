@@ -75,4 +75,9 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         return strs;
     }
 
+    @Override
+    public List<HashTag> listHashTags() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

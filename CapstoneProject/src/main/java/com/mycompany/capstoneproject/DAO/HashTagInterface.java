@@ -23,6 +23,9 @@ public interface HashTagInterface {
     public void delete(HashTag hashTag);
 
     public List<HashTag> listBlogs();
+
+    public List<HashTag> listHashTags();
+
     
     public List<String> findHashTags(String content);
 
