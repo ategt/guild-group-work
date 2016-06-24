@@ -73,6 +73,9 @@ public class BlogController {
         
         BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
         
+        if (blogPostCommand == null)
+            return "unableToEdit";
+        
         model.put("users", users);
         model.put("blogPostCommand", blogPostCommand);
 
@@ -126,10 +129,31 @@ public class BlogController {
     }
 
     private BlogPostCommand convertCommandToBlogPost(BlogPost blogPost) {
+        if ( blogPost == null )
+            return null;
+            
         BlogPostCommand blogPostCommand = new BlogPostCommand();
         
-        blogPostCommand.setAuthorId(blogPost.getAuthor().getId());
-        blogPostCommand.setCategoryId(blogPost.getCategory().getId());
+        int blogAuthorId;
+        
+        if (blogPost.getAuthor() == null ) {
+            blogAuthorId = 0;
+        } else {
+            blogAuthorId = blogPost.getAuthor().getId();
+        }
+        
+        blogPostCommand.setAuthorId(blogAuthorId);
+        
+        int categoryId;
+        
+        if (blogPost.getCategory() == null ) {
+            categoryId = 0;
+        } else {
+            categoryId = blogPost.getCategory().getId();
+        }
+        
+        blogPostCommand.setCategoryId(categoryId);
+        
         blogPostCommand.setContent(blogPost.getContent());
         blogPostCommand.setId(blogPost.getId());
         blogPostCommand.setTitle(blogPost.getTitle());
