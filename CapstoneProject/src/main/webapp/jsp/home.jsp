@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
-                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category}</h4>
+                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                     <h5>${post.content}</h5>
 
                                     <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
