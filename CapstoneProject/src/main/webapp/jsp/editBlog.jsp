@@ -30,14 +30,6 @@
                     </div>
                 </div>
 
-<!--                <div class="form-group">
-                    <form:label path="slug" class="col-sm-3 control-label" >Slug:</form:label>
-
-                        <div class="col-sm-7">
-                        <form:input path="slug" style="text-align: center" class="form-control" type="text" disabled="true" />
-                    </div>
-                </div>-->
-
                 <div class="form-group">
                     <form:label path="title" class="col-sm-3 control-label" >Title:</form:label>
 
@@ -50,7 +42,7 @@
                     <form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
 
                         <div class="col-sm-7">
-                        <form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
+                        <form:input path="content" style="text-align: center" class="form-control" type="text" />
                     </div>
                 </div>
 
@@ -93,19 +85,3 @@
 
     </body>
 </html>
-
-<!--                <div class="form-group">
-<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
-
-    <div class="col-sm-7">
-<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
-</div>
-</div>
-
-<div class="form-group">
-<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
-
-    <div class="col-sm-7">
-<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
-</div>
-</div>-->

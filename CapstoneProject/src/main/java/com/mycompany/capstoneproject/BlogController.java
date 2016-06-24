@@ -69,21 +69,70 @@ public class BlogController {
 
         BlogPost blogPost = blogPostDao.getById(id);
 
-        List<User> users = userDao.list();
-        
+        //List<User> users = userDao.list();
         BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
-        
-        if (blogPostCommand == null)
+
+        if (blogPostCommand == null) {
             return "unableToEdit";
-        
+        }
+
+        List<Category> categories = categoriesDao.listCategories();
+        model.put("categories", categories);
+
+        List<User> users = userDao.list();
         model.put("users", users);
         model.put("blogPostCommand", blogPostCommand);
 
         return "editBlog";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
+    @RequestMapping(value = "/edit/", method = RequestMethod.POST)
+    public String submitEditById(@ModelAttribute("blogPostCommand") BlogPostCommand blogPostCommand, @PathVariable("id") Integer id, Map model) {
+        if (blogPostCommand == null) {
+            return "unableToEdit";
+        }
+
+        int blogPostId = blogPostCommand.getId();
+
+        BlogPost blogPost = blogPostDao.getById(blogPostId);
+        
+        int authorId = blogPostCommand.getAuthorId();
+        
+        User user = userDao.get(authorId);
+        
+        blogPost.setAuthor(user);
+ 
+        
+        // Consider resluging.
+        blogPost.setTitle(blogPostCommand.getTitle());
+        
+        // Do something here to recheck for #hashTags.
+        blogPost.setContent(blogPostCommand.getContent());
+        
+        int categoryId = blogPostCommand.getCategoryId();
+        Category category = categoriesDao.get(categoryId);
+        
+        blogPost.setCategory(category);
+        
+        //List<User> users = userDao.list();
+        //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
+//        List<Category> categories = categoriesDao.listCategories();
+//        model.put("categories", categories);
+//
+//        List<User> users = userDao.list();
+//        model.put("users", users);
+//        model.put("blogPostCommand", blogPostCommand);
+        model.put("post", blogPost);
+
+//        List<Category> categories = categoriesDao.listCategories();
+//
+//        model.put("categories", categories);
+        return "showSingleBlog";
+    }
+}
+
+@RequestMapping(value = "/create", method = RequestMethod.POST)
+        public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
 
         blogPostDao.create(post);
@@ -129,40 +178,41 @@ public class BlogController {
     }
 
     private BlogPostCommand convertCommandToBlogPost(BlogPost blogPost) {
-        if ( blogPost == null )
+        if (blogPost == null) {
             return null;
-            
+        }
+
         BlogPostCommand blogPostCommand = new BlogPostCommand();
-        
+
         int blogAuthorId;
-        
-        if (blogPost.getAuthor() == null ) {
+
+        if (blogPost.getAuthor() == null) {
             blogAuthorId = 0;
         } else {
             blogAuthorId = blogPost.getAuthor().getId();
         }
-        
+
         blogPostCommand.setAuthorId(blogAuthorId);
-        
+
         int categoryId;
-        
-        if (blogPost.getCategory() == null ) {
+
+        if (blogPost.getCategory() == null) {
             categoryId = 0;
         } else {
             categoryId = blogPost.getCategory().getId();
         }
-        
+
         blogPostCommand.setCategoryId(categoryId);
-        
+
         blogPostCommand.setContent(blogPost.getContent());
         blogPostCommand.setId(blogPost.getId());
         blogPostCommand.setTitle(blogPost.getTitle());
-        
+
         return blogPostCommand;
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId, Map model) {
+        public String show(@PathVariable("id") Integer postId, Map model) {
 
         BlogPost post = blogPostDao.getById(postId);
 
@@ -181,8 +231,8 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public BlogPost getPost(@PathVariable String slug, Integer postId) {
+        @ResponseBody
+        public BlogPost getPost(@PathVariable String slug, Integer postId) {
 
         BlogPost post = blogPostDao.getBySlug(slug);
 

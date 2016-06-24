@@ -16,20 +16,38 @@
     </head>
     <body>
         <div class="container">
-            <h1>The Monkey Tasked With Finding That Post Came Back Empty Handed!</h1>
+            
+            
+            <div class="row" style="margin: 40px 40px 40px 40px;">
+            </div>
+            <div class="text-center">
+                <h1>The Monkey Tasked With Finding That Post Came Back Empty Handed!</h1>
+            </div>
+            
+            <div class="row" style="margin: 40px 40px 40px 40px;">
+            </div>
             <hr/>
-            <h2>It looks like that blog post does not exist.</h2>
+            
+            <div class="row" style="margin: 40px 40px 40px 40px;">
+            </div>
+            <div class="text-center">
+                <h2>It looks like that blog post does not exist.</h2>
+            </div>
+
+            <div class="row" style="margin: 40px 40px 40px 40px;">
+            </div>
+
             <div class="row">
-                <div class="col-sm-offset-2 col-sm-2" >
+                <div class="col-sm-offset-3 col-sm-2 text-center" >
                     <a href="${pageContext.request.contextPath}">Go To The Home Page</a>
-                    
+
                 </div>
-                
-                <div class="col-sm-offset-1 col-sm-2" >
+
+                <div class="col-sm-offset-2 col-sm-2 text-center" >
                     <a href="mailto:ptoner@thesoftwareguild.com">Report This Issue To Technical Support</a>
-                    
+
                 </div>
-                
+
             </div>
         </div>
 
