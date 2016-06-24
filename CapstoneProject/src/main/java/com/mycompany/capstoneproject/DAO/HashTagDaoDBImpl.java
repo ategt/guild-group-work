@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class HashTagDaoDBImpl implements HashTagInterface {
 
     private static final String SQL_INSERT_HASHTAG = "INSERT INTO hashtag (name) VALUES (?)";
-    private static final String SQL_INSERT_HASHTAG_POST = "";
+    private static final String SQL_INSERT_HASHTAG_POST = "INSERT INTO hashtag_post (hashtag_id, post_id) VALUES (?, ?);";
     private static final String SQL_SELECT_HASHTAG = "";
     private static final String SQL_UPDATE_HASHTAG = "";
     private static final String SQL_DELETE_HASHTAG = "";
@@ -85,6 +85,11 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     @Override
     public List<HashTag> listHashTags() {
         return jdbcTemplate.query(SQL_GET_HASHTAG_LIST, new HashTagMapper());
+    }
+
+    @Override
+    public void updateHashTagPostTable(HashTag hashtag, BlogPost post) {
+        jdbcTemplate.update(SQL_INSERT_HASHTAG_POST, hashtag.getId(), post.getId());
     }
 
     private static final class HashTagMapper implements RowMapper<HashTag> {

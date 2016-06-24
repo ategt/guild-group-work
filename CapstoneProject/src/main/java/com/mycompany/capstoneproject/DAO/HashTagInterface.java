@@ -16,6 +16,8 @@ import java.util.List;
 public interface HashTagInterface {
 
     public HashTag create(HashTag hashTag);
+    
+    public void updateHashTagPostTable(HashTag hashtag, BlogPost post);
 
     public HashTag get(Integer id);
 
