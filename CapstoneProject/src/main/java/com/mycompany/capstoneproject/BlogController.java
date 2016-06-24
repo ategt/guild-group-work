@@ -7,6 +7,7 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
+import com.mycompany.capstoneproject.DAO.HashTagInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.BlogPostCommand;
@@ -39,12 +40,14 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
+    private HashTagInterface hashTagDao;
     
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao){
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface hashTagDao){
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
+        this.hashTagDao = hashTagDao;
     }
     
     
@@ -77,10 +80,16 @@ public class BlogController {
         Image img = new Image();
         img.setUrl("");
         
-        HashTag hashtag = new HashTag();
-        hashtag.setName("#blessed");
+
+        List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
-        hashTags.add(hashtag);
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag);
+            hashTagDao.create(newHashTag);
+            hashTags.add(newHashTag);
+        }
+        
         
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());

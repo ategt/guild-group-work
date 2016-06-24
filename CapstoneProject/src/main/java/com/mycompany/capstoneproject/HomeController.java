@@ -20,7 +20,7 @@ public class HomeController {
 
     private BlogPostInterface blogPostDao;
     private CategoriesInterface categoriesDao;
-//    private HashTagInterface hashTagDao;
+    private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
 
