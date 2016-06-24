@@ -7,6 +7,7 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
+import com.mycompany.capstoneproject.DAO.HashTagInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.BlogPostCommand;
@@ -41,12 +42,14 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
+    private HashTagInterface hashTagDao;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao) {
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface hashTagDao) {
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
+        this.hashTagDao = hashTagDao;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -61,17 +64,20 @@ public class BlogController {
         return "blog";
     }
 
-
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editById(@PathVariable("id") Integer id, Map model) {
 
         BlogPost blogPost = blogPostDao.getById(id);
+<<<<<<< HEAD
         List<User> users = userDao.list();
         
         
         model.put("users", users);
+=======
+
+>>>>>>> 05ba3aad5147fc2b5255e659109b3e47c09d786d
         model.put("blogPost", blogPost);
-        
+
         return "editBlog";
     }
 
@@ -92,10 +98,14 @@ public class BlogController {
         Image img = new Image();
         img.setUrl("");
 
-        HashTag hashtag = new HashTag();
-        hashtag.setName("#blessed");
+        List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
-        hashTags.add(hashtag);
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag);
+            hashTagDao.create(newHashTag);
+            hashTags.add(newHashTag);
+        }
 
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
@@ -109,38 +119,6 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
-       
-//        Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
-//        Matcher mat = MY_PATTERN.matcher(cont);
-        List<String> hash = new ArrayList<String>();
-       if(cont.contains("#")){
-          String[] foundHash = cont.split("#");
-          String[] hashValue = new String[foundHash.length - 1];
-           
-           for (int i = 1; i < foundHash.length; i++) {
-               if(foundHash[i].contains(" ")){
-                   String[] hashtag1 =  foundHash[i].split(" ");
-                    hashValue[i-1] = hashtag1[0];
-                    
-//                    hashValue[i].
-                   
-               }
-              String[] lastHash =  cont.split("#");
-              int a = lastHash.length;
-               if(lastHash[a].contains("#")){
-                   int b = hashValue.length;
-                   hashValue[i] = hashValue[b+1];
-                   
-               }
-               
-           }
-           model.put("hashTag", hashValue);
-                   
-           
-       }
-       
-      
-        
 
         blogPostDao.create(post);
 
@@ -149,17 +127,17 @@ public class BlogController {
 
     }
 
-        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId , Map model){
-        
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId, Map model) {
+
         BlogPost post = blogPostDao.getById(postId);
-        
+
         User author = userDao.get(post.getAuthor().getId());
         post.setAuthor(author);
-        
+
         Category category = categoriesDao.get(post.getCategory().getId());
         post.setCategory(category);
-        
+
         model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
