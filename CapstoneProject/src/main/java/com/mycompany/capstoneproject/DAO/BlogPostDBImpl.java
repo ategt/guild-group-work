@@ -48,6 +48,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ORDER BY id ASC\n"
             + "LIMIT 1;";
 
+    private static final String SQL_GET_DEFAULT_AUTHOR = "SELECT id FROM capstone.user\n"
+            + "ORDER BY id ASC\n"
+            + "LIMIT 1;";
+
     private static final String SQL_GET_BLOGPOST_LIST = "SELECT * FROM post \n"
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
@@ -67,9 +71,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public BlogPost create(BlogPost post) {
 
+        int authorId = 0;
+
+        if (post.getAuthor() == null) {
+            authorId = jdbcTemplate.queryForObject(SQL_GET_DEFAULT_AUTHOR, Integer.class);
+        } else {
+            authorId = post.getAuthor().getId();
+        }
+
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
-                post.getAuthor().getId(),
+                authorId,
                 post.getContent(),
                 post.getPostedOn(),
                 post.getExpireOn(),
@@ -80,12 +92,12 @@ public class BlogPostDBImpl implements BlogPostInterface {
         post.setId(id);
 
         int categoryId = 0;
-        
+
         if (post.getCategory() == null) {
             // Set category to zero, or a default category.
             categoryId = jdbcTemplate.queryForObject(SQL_GET_DEFAULT_CATEGORY, Integer.class);
         } else {
-            categoryId =   post.getCategory().getId();
+            categoryId = post.getCategory().getId();
         }
 
         jdbcTemplate.update(SQL_INSERT_POST_AND_CATEGORY,
@@ -114,7 +126,16 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public void update(BlogPost post) {
 
+        if ( post == null )
+            return;
+        
         if (post.getAuthor() == null) {
+            Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Author not set, update aborted.");
+            return;
+        }
+
+        if (post.getCategory() == null) {
+            Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Category not set, update aborted.");
             return;
         }
 

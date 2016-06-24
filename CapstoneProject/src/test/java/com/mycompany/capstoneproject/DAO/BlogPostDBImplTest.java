@@ -134,10 +134,14 @@ public class BlogPostDBImplTest {
         if (!blogPost1.getTitle().equals(blogPost2.getTitle())) {
             valid = false;
         }
-
-        if (!blogPost1.getSlug().equals(blogPost2.getSlug())) {
+       
+        if ( blogPost1.getSlug() == null && blogPost2.getSlug() == null ) {
+            
+        } else if ( blogPost1.getSlug() == null || blogPost2.getSlug() == null ) {
             valid = false;
-        }
+        } else if (!blogPost1.getSlug().equals(blogPost2.getSlug())) {
+            valid = false;
+        } 
 
         if (!blogPost1.getContent().equals(blogPost2.getContent())) {
             valid = false;
