@@ -97,7 +97,7 @@
 
                                 <div class="list-group list-group">
                                     <h4 class=""> Top Trending #hashtags</h4>
-                                    <c:forEach items="${hashtags}" var="hashtag">
+                                    <c:forEach items="${hashTag}" var="hashtag">
                                         <a class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
 
                                     </c:forEach>
@@ -123,10 +123,7 @@
                             <hr>
 
                             <h4 class="text-center">President</h4>
-                            <h4 class="text-center">CEO</h4>
-                            <h4 class="text-center">Chairman</h4>
-                            <h4 class="text-center">The Board Of Directors</h4>
-                            <h4 class="text-center">Manager</h4>
+                      
 
                             <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
                             <h4 class='text-center'>Patrick Toner</h4>
@@ -146,21 +143,20 @@
 
 
                                     <select class="form-control">
-                                        <option>Featured</option>
-                                        <option>Recently Added</option>
-                                        <option>Next Upcoming Session</option>
+                                        <option>Newest</option>
+                                        <option>Oldest</option>
                                         <option>A-Z</option>
                                         <option>Z-A</option>
                                     </select>
                                 </div>
-                                <div class="col-xs-8">
+<!--                                <div class="col-xs-8">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
                                         <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
                                         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
 
                                     </div>
-                                </div>
+                                </div>-->
 
                             </div>
 
@@ -172,6 +168,12 @@
 
                         <hr>
 
+
+                                <h5 class="text-muted">Created by <a href="#">${post.author.name}</a></h5>
+                                <h5 class="text-muted">Posted on  <a href="#">${post.postedOn}</a></h5>
+                                
+                                <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>
+=======
                         <c:forEach items="${posts}" var="post">
 
                             <div class="row">
@@ -183,6 +185,7 @@
                                     <h5>${post.content}</h5>
 
                                     <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+
 
                                 </div>
                             </div>

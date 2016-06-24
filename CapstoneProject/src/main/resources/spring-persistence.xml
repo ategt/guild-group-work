@@ -50,7 +50,9 @@
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
     
-<!--    <bean id="hashtagDao" class="com.mycompany.capstoneproject.DAO.HashTagInterface">
+    <bean id="hashTagDao" class="com.mycompany.capstoneproject.DAO.HashTagDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
-    </bean>-->
+    </bean>
+    
+<!--.-->
 </beans>

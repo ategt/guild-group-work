@@ -7,6 +7,7 @@ import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
+import com.mycompany.capstoneproject.DTO.HashTag;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -20,15 +21,15 @@ public class HomeController {
 
     private BlogPostInterface blogPostDao;
     private CategoriesInterface categoriesDao;
-//    private HashTagInterface hashTagDao;
+    private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
 
     @Inject
-    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao) {
+    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao) {
         this.blogPostDao = BPDao;
         this.categoriesDao = CDao;
-
+        this.hashTagDao = HDao;
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
@@ -42,6 +43,10 @@ public class HomeController {
         List<Category> categories = categoriesDao.listCategories();
 
         model.put("categories", categories);
+        
+        List<HashTag> hash = hashTagDao.listHashTags();
+        
+        model.put("hashTag", hash);
         
          
 

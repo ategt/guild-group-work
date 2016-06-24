@@ -62,9 +62,9 @@
                         <hr>
                         
 
-                         <c items="${singlePost}" var="post">
+                        <div items="${singlePost}" var="post">
 
-                         <c items="${posts}" var="post">
+                        
 
                             
                                 <div class="row">
@@ -82,7 +82,7 @@
                        
                         <hr>
                             </tr>
-                        </c>
+                        </div>
 
             
                 </hr>

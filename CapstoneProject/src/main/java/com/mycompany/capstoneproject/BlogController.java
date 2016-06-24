@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,6 +60,7 @@ public class BlogController {
         model.put("categories", categories);
         return "blog";
     }
+
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editById(@PathVariable("id") Integer id, Map model) {
@@ -103,6 +106,38 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
+       
+//        Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
+//        Matcher mat = MY_PATTERN.matcher(cont);
+        List<String> hash = new ArrayList<String>();
+       if(cont.contains("#")){
+          String[] foundHash = cont.split("#");
+          String[] hashValue = new String[foundHash.length - 1];
+           
+           for (int i = 1; i < foundHash.length; i++) {
+               if(foundHash[i].contains(" ")){
+                   String[] hashtag1 =  foundHash[i].split(" ");
+                    hashValue[i-1] = hashtag1[0];
+                    
+//                    hashValue[i].
+                   
+               }
+              String[] lastHash =  cont.split("#");
+              int a = lastHash.length;
+               if(lastHash[a].contains("#")){
+                   int b = hashValue.length;
+                   hashValue[i] = hashValue[b+1];
+                   
+               }
+               
+           }
+           model.put("hashTag", hashValue);
+                   
+           
+       }
+       
+      
+        
 
         blogPostDao.create(post);
 
@@ -111,12 +146,18 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId, Map model) {
-
-        BlogPost posts = blogPostDao.getById(postId);
-
-        model.put("singlePost", posts);
+        @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer postId , Map model){
+        
+        BlogPost post = blogPostDao.getById(postId);
+        
+        User author = userDao.get(post.getAuthor().getId());
+        post.setAuthor(author);
+        
+        Category category = categoriesDao.get(post.getCategory().getId());
+        post.setCategory(category);
+        
+        model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
 //
