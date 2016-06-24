@@ -103,9 +103,17 @@ public class BlogController {
         List<HashTag> hashTags = new ArrayList();
         for (String hashTag : str) {
             HashTag newHashTag = new HashTag();
-            newHashTag.setName(hashTag);
+            newHashTag.setName(hashTag.toLowerCase());
             hashTagDao.create(newHashTag);
-            hashTags.add(newHashTag);
+            if(hashTags.contains(newHashTag.getName())){
+                
+            }else{
+                hashTags.add(newHashTag);
+            }
+                
+                
+//          
+            
         }
 
         BlogPost post = new BlogPost();

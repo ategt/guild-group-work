@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BlogPostDBImpl implements BlogPostInterface {
 
     //create
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, category_id, content, date_posted, expires_on, post_on) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
@@ -65,6 +65,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),
                 post.getAuthor().getId(),
+                post.getCategory().getId(),
                 post.getContent(),
                 post.getPostedOn(),
                 post.getExpireOn(),
@@ -109,6 +110,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
                         post.getAuthor().getId(),
+                        post.getCategory().getId(),
                         post.getContent(),
                         post.getPostedOn(),
                         post.getExpireOn(),
@@ -160,13 +162,18 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
 
-            BlogPost post = new BlogPost();
+          BlogPost post = new BlogPost();
             User user = new User();
             user.setId(rs.getInt("user_id"));
+            
+            Category category = new Category();
+            category.setId(rs.getInt("category_id"));
+            
             post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
-            post.setAuthor(user);
+            post.setCategory(category);
             post.setContent(rs.getString("content"));
+            post.setAuthor(user);
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
