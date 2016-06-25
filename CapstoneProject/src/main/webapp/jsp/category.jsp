@@ -27,13 +27,11 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                      <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-
-
-                </ul>    
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/static/">Static Pages</a></li>
                 </ul>    
             </div>
 
@@ -57,9 +55,9 @@
                                 <td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#editCategoryModal">Edit</a></td>
                                 <td><a data-category-id="${cat.id}" class="delete-link">Delete</a></td>
                             </tr>
-                           
+
                         </c:forEach>
-                            
+
                     </table>
                     <form method="POST" class="form-horizontal">
                 </div> 

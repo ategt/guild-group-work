@@ -22,8 +22,6 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                    <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                     <c:forEach items="${staticPages}" var="staticPage">
                     <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
