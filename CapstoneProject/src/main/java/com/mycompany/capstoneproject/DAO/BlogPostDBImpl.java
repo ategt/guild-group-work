@@ -9,9 +9,10 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.User;
+import com.mysql.jdbc.Statement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,6 +60,18 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ON category_post.category_id=category_id\n"
             + "JOIN user\n"
             + "ON user.id=user_id";
+
+    private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
+            + "JOIN category_post \n"
+            + "ON category_post.post_id=post.id \n"
+            + "JOIN category\n"
+            + "ON category_post.category_id=category_id\n"
+            + "JOIN user\n"
+            + "ON user.id=user_id\n"
+            + "ORDER BY date_posted\n"
+            + "LIMIT ?, 3";
+
+    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -126,9 +139,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public void update(BlogPost post) {
 
-        if ( post == null )
+        if (post == null) {
             return;
-        
+        }
+
         if (post.getAuthor() == null) {
             Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Author not set, update aborted.");
             return;
@@ -189,6 +203,20 @@ public class BlogPostDBImpl implements BlogPostInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<BlogPost> listBlogsWithLimit(int pageNumber) {
+        return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST_WITH_LIMIT, new BlogPostMapper(), pageNumber);
+    }
+
+    @Override
+    public Integer getNumOfPosts() {
+
+        List<Integer> count = jdbcTemplate.query(SQL_GET_BLOG_COUNT, new CountMapper());
+        int numOfPosts = count.get(0);
+        return numOfPosts;
+
+    }
+
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
@@ -213,6 +241,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setDateToPostOn(rs.getDate("post_on"));
 
             return post;
+        }
+
+    }
+//
+
+    private static final class CountMapper implements RowMapper<Integer> {
+
+        public Integer mapRow(ResultSet rs, int i) throws SQLException {
+            Integer count = rs.getInt(1);
+
+            return count;
         }
 
     }

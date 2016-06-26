@@ -9,13 +9,16 @@ import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.StaticPage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -37,7 +40,7 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model) {
-        List<BlogPost> posts = blogPostDao.listBlogs();
+        List<BlogPost> posts = blogPostDao.listBlogsWithLimit(3);
         
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -46,7 +49,14 @@ public class HomeController {
         
         List<HashTag> hash = hashTagDao.listHashTags();
         
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count/3);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
         
+        model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
         model.put("posts", posts);
@@ -68,6 +78,12 @@ public class HomeController {
         model.put("category", category);
 
         return "category";
+    }
+    
+    @RequestMapping(value="/home/{pageNumber}", method=RequestMethod.GET)
+    @ResponseBody
+    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
+        return blogPostDao.listBlogsWithLimit(pageNumber);
     }
 
 }
