@@ -20,21 +20,13 @@
     </head>
     <body>
         <div class="container">
-            <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/edit/${blogPost.id}" >
+            <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/blog/edit/" >
 
                 <div class="form-group">
                     <form:label path="id" class="col-sm-3 control-label" >ID:</form:label>
 
                         <div class="col-sm-7">
                         <form:input path="id" style="text-align: center" class="col-sm-9 form-control" type="text" disabled="true" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <form:label path="slug" class="col-sm-3 control-label" >Slug:</form:label>
-
-                        <div class="col-sm-7">
-                        <form:input path="slug" style="text-align: center" class="form-control" type="text" disabled="true" />
                     </div>
                 </div>
 
@@ -50,13 +42,13 @@
                     <form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
 
                         <div class="col-sm-7">
-                        <form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
+                        <form:input path="content" style="text-align: center" class="form-control" type="text" />
                     </div>
                 </div>
 
 
                 <div class="form-group" id="author-input-div">
-                    <form:label path="author" class="col-md-4 control-label">Author: </form:label>
+                    <label path="author" class="col-md-4 control-label">Author: <label>
                         <div class="col-md-8">
                             <select class="btn btn-default dropdown" id="author-input" name="authorId">
                             <c:forEach items="${users}" var="user">
@@ -70,19 +62,21 @@
                 </div>
 
                 <div class="form-group" id="category-input-div">
-                    <form:label path="category" class="col-md-4 control-label"> Category: </form:label>
+                    <label path="category" class="col-md-4 control-label"> Category: </label>
                         <div class="col-md-8">
-                        <form:select class="btn btn-default dropdown" id="category-input" path="category">
+                        <select class="btn btn-default dropdown" id="category-input" name="categoryId">
                             <c:forEach items="${categories}" var="category">
-                                <form:option value="${category.id}" class="form-control">${category.name}</form:option>
+                                <option value="${category.id}" class="form-control">${category.name}</option>
                             </c:forEach>
-                        </form:select>
+                        </select>
                         <!--<input type="text" id="state-input" class="form-control"></input>-->
                     </div>
                     <div id="add-order-validation-category-error" class="validation-errors pull-right">
 
                     </div>
                 </div>
+                    
+                    <input type="submit" value="submit" />
 
             </form:form>
 
@@ -93,19 +87,3 @@
 
     </body>
 </html>
-
-<!--                <div class="form-group">
-<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
-
-    <div class="col-sm-7">
-<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
-</div>
-</div>
-
-<div class="form-group">
-<form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
-
-    <div class="col-sm-7">
-<form:input path="content" style="text-align: center" class="form-control" type="text" id="productName" placeholder="Product Name" />
-</div>
-</div>-->

@@ -50,6 +50,17 @@
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
+
     <bean id="imageDao" class="com.mycompany.capstoneproject.DAO.ImageDAODBImpl">
         <constructor-arg ref="jdbcTemplate"/>
+<<<<<<< HEAD
     </bean>
+=======
+    </bean>
+
+    <bean id="hashtagDao" class="com.mycompany.capstoneproject.DAO.HashTagDaoDBImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+</beans>
+>>>>>>> cc9d3da02a3db13451b08a24eda3341ffa201ba4

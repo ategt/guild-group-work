@@ -21,11 +21,11 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <c:forEach items="${staticPages}" var="staticPage">
-                    <li role="presentation">${staticPage.title}</li>
+                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
+
                 </ul>    
             </div>
 
@@ -72,37 +72,18 @@
                             <hr>
                             <div class="list-group list-group">
                                 <h4 class="">Categories</h4>
+                                
                                 <c:forEach items="${categories}" var="cat">
                                     <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
 
                                 </c:forEach>
 
-                                <!--                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item <span class="label label-primary">New</span></a>
-                                                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>	
-                                                                <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a>
-                                                                <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>	
-                                                                <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
-
                                 <div id="categories" class="collapse">
-
-                                    <!--                                    <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                                                        <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>
-                                                                        <a href="#" class="list-group-item"><span class="badge">25</span> Third item</a> 
-                                                                        <a href="#" class="list-group-item"><span class="badge">14</span> Active item</a>
-                                                                        <a href="#" class="list-group-item"><span class="badge">3</span> Second item</a>-->
+                                    
                                 </div>
 
+                                <!--<button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>-->
 
-                                <button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>
-
-                                <!--                                <hr class="">
-                                                                <h4 class="">Viewing Options</h4>
-                                                                <a href="#" class="list-group-item"><span class="badge">14</span> Upcoming Sessions</a>
-                                
-                                                                <a href="#" class="list-group-item"><span class="badge">3</span> OnDemand</a>
-                                                                <hr class="">	
-                                                                <a href="#" class="list-group-item">Archived Courses</a>
-                                                                <a href="#" class="list-group-item">Courses In Development</a>-->
                             </div>
                         </div>
 
@@ -114,12 +95,16 @@
 
                             <div class="well">
 
-                                <h4>Premium Membership</h4>
-                                <p>Gain unlimited access to our entire course library.</p>
-                                <button class="btn btn-sm btn-warning">Learn more</button>
+                                <div class="list-group list-group">
+                                    <h4 class=""> Top Trending #hashtags</h4>
+                                    <c:forEach items="${hashTag}" var="hashtag">
+                                        <a class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+
+                                    </c:forEach>
+                                </div>
 
                                 <hr>
-                                <p class="text-center ">Already a member? <a href="#">Sign in.</a></p>
+
                             </div>
 
 
@@ -127,7 +112,7 @@
 
                             <div class="well">
 
-                                <h4>Course Catalog</h4>
+                                <h4>Company Catalog</h4>
                                 <p><a href="#"><img src="http://f.tqn.com/y/freebies/1/L/D/S/alloy-catalog.jpg" class="img-responsive"></a></p>
 
                                 <p>Everything you need to know about our warehouse, including mens and womens clothing, inventory, and specials.</p>
@@ -138,10 +123,7 @@
                             <hr>
 
                             <h4 class="text-center">President</h4>
-                            <h4 class="text-center">CEO</h4>
-                            <h4 class="text-center">Chairman</h4>
-                            <h4 class="text-center">The Board Of Directors</h4>
-                            <h4 class="text-center">Manager</h4>
+                      
 
                             <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
                             <h4 class='text-center'>Patrick Toner</h4>
@@ -161,157 +143,58 @@
 
 
                                     <select class="form-control">
-                                        <option>Featured</option>
-                                        <option>Recently Added</option>
-                                        <option>Next Upcoming Session</option>
+                                        <option>Newest</option>
+                                        <option>Oldest</option>
                                         <option>A-Z</option>
                                         <option>Z-A</option>
                                     </select>
                                 </div>
-                                <div class="col-xs-8">
+<!--                                <div class="col-xs-8">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
                                         <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
                                         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
 
                                     </div>
+                                </div>-->
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                        <hr>
+
+
+                                
+                                
+                                
+
+                        <c:forEach items="${posts}" var="post">
+
+                            <div class="row">
+                                <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
                                 </div>
+                                <div class="col-sm-8">
+                                    <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
+                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
+                                    <h5>${post.content}</h5>
 
+                                    <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+                                    <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
+<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
+                                </div>
                             </div>
 
+                            <hr>
+                            </tr>
+                        </c:forEach>
 
 
 
-
-                        </div>
-
-                        <hr>
-
-
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-                                <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-
-                                <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-                                <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-                                </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-
-                            </div>
-                        </div>
-                        <hr><div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-                                <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-
-                                <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-                                <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-                                </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-                                <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-
-                                <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-                                <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-                                </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-                                <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-
-                                <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-                                <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-                                </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-                                <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-
-                                <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-                                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-                                <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-                                </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-
-                            </div>
-                        </div>
-                        <hr>
 
 
 

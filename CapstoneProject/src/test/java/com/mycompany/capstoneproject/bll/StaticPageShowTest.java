@@ -25,23 +25,23 @@ public class StaticPageShowTest {
     
     ApplicationContext ctx;
 
-//    public StaticPageShowTest() {
-//        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
-//    }
-//    
-//    @Before
-//    public void setUp() {
-//    }
-//    
-//    @After
-//    public void tearDown() {
-//    }
-//
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowById() {
+    public StaticPageShowTest() {
+        ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowById() {
 //        System.out.println("showById");
 //        Integer staticPageId = null;
 //        Map<String, Object> model = new HashMap();
@@ -63,14 +63,14 @@ public class StaticPageShowTest {
 //        assertNull(staticPage);
 //        assertNull(staticPageObject);
 //        
-//    }
-//    
-//
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowByIdA() {
+    }
+    
+
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowByIdA() {
 //        System.out.println("showById");
 //        Integer staticPageId = 1;
 //        Map<String, Object> model = new HashMap();
@@ -94,14 +94,14 @@ public class StaticPageShowTest {
 //        
 //        assertEquals(staticPage.getContent(), "TEST");
 //        assertEquals(staticPage.getTitle(), "BOB");
-//        
-//    }
-//    
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowByTitle() {
+        
+    }
+    
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowByTitle() {
 //        System.out.println("showByTitle");
 //        String staticPageTitle = null;
 //        Map<String, Object> model = new HashMap();
@@ -123,13 +123,13 @@ public class StaticPageShowTest {
 //        assertNull(staticPage);
 //        assertNull(staticPageObject);
 //        
-//    }
-//    
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowByTitleC() {
+    }
+    
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowByTitleC() {
 //        System.out.println("showByTitle");
 //        String staticPageTitle = "Billy";
 //        Map<String, Object> model = new HashMap();
@@ -150,14 +150,14 @@ public class StaticPageShowTest {
 //        
 //        assertNull(staticPage);
 //        assertNull(staticPageObject);
-//        
-//    }
-//    
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowByTitleD() {
+        
+    }
+    
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowByTitleD() {
 //        System.out.println("showByTitle");
 //        String staticPageTitle = "";
 //        Map<String, Object> model = new HashMap();
@@ -178,15 +178,15 @@ public class StaticPageShowTest {
 //        
 //        assertNull(staticPage);
 //        assertNull(staticPageObject);
-//        
-//    }
-//    
-//
-//    /**
-//     * Test of showById method, of class StaticPageShow.
-//     */
-//    @Test
-//    public void testShowByTitleB() {
+        
+    }
+    
+
+    /**
+     * Test of showById method, of class StaticPageShow.
+     */
+    @Test
+    public void testShowByTitleB() {
 //        System.out.println("showByTitle");
 //        String staticPageTitle = "BOB";
 //        Map<String, Object> model = new HashMap();
@@ -211,6 +211,6 @@ public class StaticPageShowTest {
 //        assertEquals(staticPage.getContent(), "TEST");
 //        assertEquals(staticPage.getTitle(), "BOB");
 //        
-//    }
+    }
     
 }

@@ -73,46 +73,146 @@ public class BlogController {
 
         BlogPost blogPost = blogPostDao.getById(id);
 
-        List<User> users = userDao.list();
-        
-        
-        model.put("users", users);
+        //List<User> users = userDao.list();
+        BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
 
-        model.put("blogPost", blogPost);
+        if (blogPostCommand == null) {
+            return "unableToEdit";
+        }
+
+        List<Category> categories = categoriesDao.listCategories();
+        model.put("categories", categories);
+
+
+        List<User> users = userDao.list();
+        model.put("users", users);
+        model.put("blogPostCommand", blogPostCommand);
 
         return "editBlog";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
+    @RequestMapping(value = "/edit/", method = RequestMethod.POST)
+    public String submitEditById(@ModelAttribute("blogPostCommand") BlogPostCommand blogPostCommand, Map model) {
+        if (blogPostCommand == null) {
+            return "unableToEdit";
+        }
+
+        int blogPostId = blogPostCommand.getId();
+
+        BlogPost blogPost = blogPostDao.getById(blogPostId);
+        
+        int authorId = blogPostCommand.getAuthorId();
+        
+
+        User user = userDao.get(authorId);
+        
+        blogPost.setAuthor(user);
+ 
+        
+        // Consider resluging.
+        blogPost.setTitle(blogPostCommand.getTitle());
+        
+        // Do something here to recheck for #hashTags.
+        blogPost.setContent(blogPostCommand.getContent());
+        
+        int categoryId = blogPostCommand.getCategoryId();
+        Category category = categoriesDao.get(categoryId);
+        
+        blogPost.setCategory(category);
+        
+        blogPostDao.update(blogPost);
+        
+        //List<User> users = userDao.list();
+        //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
+//        List<Category> categories = categoriesDao.listCategories();
+//        model.put("categories", categories);
+//
+//        List<User> users = userDao.list();
+//        model.put("users", users);
+//        model.put("blogPostCommand", blogPostCommand);
+
+        BlogPost post = blogPostDao.getById(blogPostId);
+        
+        model.put("post", post);
+
+        //model.put("users", users);
+
+        //model.put("blogPost", blogPost);
+
+
+//        List<Category> categories = categoriesDao.listCategories();
+//
+//        model.put("categories", categories);
+        return "showSingleBlog";
+    }
+
+@RequestMapping(value = "/create", method = RequestMethod.POST)
+        public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
+        BlogPost post = convertPostCommandToPost(postCommand);
+
+        blogPostDao.create(post);
+
+        updateHashTags(post);
+
+        model.put("post", post);
+        return "showSingleBlog";
+
+       
+
+    }
+
+    private void updateHashTags(BlogPost post) {
+        List<String> str = hashTagDao.findHashTags(post.getContent());
+        List<HashTag> hashTags = new ArrayList();
+        for (String hashTag : str) {
+            HashTag newHashTag = new HashTag();
+            newHashTag.setName(hashTag.toLowerCase());
+            hashTagDao.create(newHashTag);
+
+            if(hashTags.contains(newHashTag.getName())){
+                
+            }else{
+                hashTags.add(newHashTag);
+            }
+            
+            
+        }
+        
+        
+        for (HashTag hashTag : hashTags) {
+            hashTagDao.updateHashTagPostTable(hashTag, post);
+        }
+    }
+
+    private BlogPost convertPostCommandToPost(BlogPostCommand postCommand) {
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
-
         Date datePosted = new Date();
         Date postExpires = new Date();
         Date postOn = new Date();
-
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
         comments.add(comment);
-
         Image img = new Image();
         img.setUrl("");
-
         List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
         for (String hashTag : str) {
             HashTag newHashTag = new HashTag();
             newHashTag.setName(hashTag.toLowerCase());
             hashTagDao.create(newHashTag);
+
             if(hashTags.contains(newHashTag.getName())){
                 
             }else{
                 hashTags.add(newHashTag);
             }
 
+
         }
+       
+        
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -125,28 +225,51 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
+        return post;
+    }
 
-        blogPostDao.create(post);
-
-
-        blogPostDao.create(post);
-        
-        for (HashTag hashTag : hashTags) {
-            hashTagDao.updateHashTagPostTable(hashTag, post);
+    private BlogPostCommand convertCommandToBlogPost(BlogPost blogPost) {
+        if (blogPost == null) {
+            return null;
         }
 
-        model.put("post", post);
-        return "showSingleBlog";
 
+        BlogPostCommand blogPostCommand = new BlogPostCommand();
+
+        int blogAuthorId;
+
+        if (blogPost.getAuthor() == null) {
+            blogAuthorId = 0;
+        } else {
+            blogAuthorId = blogPost.getAuthor().getId();
+        }
+
+        blogPostCommand.setAuthorId(blogAuthorId);
+
+        int categoryId;
+
+        if (blogPost.getCategory() == null) {
+            categoryId = 0;
+        } else {
+            categoryId = blogPost.getCategory().getId();
+        }
+
+        blogPostCommand.setCategoryId(categoryId);
+
+        blogPostCommand.setContent(blogPost.getContent());
+        blogPostCommand.setId(blogPost.getId());
+        blogPostCommand.setTitle(blogPost.getTitle());
+
+        return blogPostCommand;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer postId, Map model) {
+        public String show(@PathVariable("id") Integer postId, Map model) {
 
         BlogPost post = blogPostDao.getById(postId);
 
-        User author = userDao.get(post.getAuthor().getId());
-        post.setAuthor(author);
+//        User author = userDao.get(post.getAuthor().getId());
+//        post.setAuthor(author);
 
         Category category = categoriesDao.get(post.getCategory().getId());
         post.setCategory(category);
@@ -160,8 +283,8 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public BlogPost getPost(@PathVariable String slug, Integer postId) {
+        @ResponseBody
+        public BlogPost getPost(@PathVariable String slug, Integer postId) {
 
         BlogPost post = blogPostDao.getBySlug(slug);
 

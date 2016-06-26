@@ -6,10 +6,13 @@
 package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.BlogPost;
+import com.mycompany.capstoneproject.DTO.User;
 import java.util.Date;
 import java.util.UUID;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -25,51 +28,51 @@ public class BlogPostDBImplTest {
         ctx = new ClassPathXmlApplicationContext("test-applicationContext.xml");
     }
 
-//    @Before
-//    public void setUp() {
-//    }
-//
-//    @After
-//    public void tearDown() {
-//    }
-//
-//    // TODO add test methods here.
-//    // The methods must be annotated with annotation @Test. For example:
-//    //
-//    // @Test
-//    // public void hello() {}
-//    @Test
-//    public void testGet() {
-////        System.out.println("Get Post");
-////        
-////        Integer id = null;
-////        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
-////        BlogPost expResult = null;
-////        BlogPost result = instance.getById(id);
-////        assertEquals(expResult, result);
-////        
-//    }
-//    @Test
-//    public void testCreate() {
-//        System.out.println("Create Post");
-//        BlogPost post = new BlogPost();
-//        User author = new User();
-//        author.setId(1);        
-//        Date date = new Date();
-//        post.setTitle("Test 1");
-//        post.setAuthor(author);
-//        post.setContent("Testing 1.2.3..");
-//        post.setPostedOn(date);
-//        post.setExpireOn(date);
-//        post.setDateToPostOn(date);
-//        post.setSlug("Test");
-//        
-//        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
-//        BlogPost expResult = post;
-//        BlogPost result = instance.create(post);
-//        assertEquals(expResult, result);
-//        
-//    }
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
+    public void testGet() {
+        System.out.println("Get Post");
+        
+        Integer id = null;
+        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
+        BlogPost expResult = null;
+        BlogPost result = instance.getById(id);
+        assertEquals(expResult, result);
+        
+    }
+    @Test
+    public void testCreate() {
+        System.out.println("Create Post");
+        BlogPost post = new BlogPost();
+        User author = new User();
+        author.setId(1);        
+        Date date = new Date();
+        post.setTitle("Test 1");
+        post.setAuthor(author);
+        post.setContent("Testing 1.2.3..");
+        post.setPostedOn(date);
+        post.setExpireOn(date);
+        post.setDateToPostOn(date);
+        post.setSlug("Test");
+        
+        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
+        BlogPost expResult = post;
+        BlogPost result = instance.create(post);
+        assertEquals(expResult, result);
+        
+    }
 
     @Test
     public void testNullUpdate() {
@@ -131,10 +134,14 @@ public class BlogPostDBImplTest {
         if (!blogPost1.getTitle().equals(blogPost2.getTitle())) {
             valid = false;
         }
-
-        if (!blogPost1.getSlug().equals(blogPost2.getSlug())) {
+       
+        if ( blogPost1.getSlug() == null && blogPost2.getSlug() == null ) {
+            
+        } else if ( blogPost1.getSlug() == null || blogPost2.getSlug() == null ) {
             valid = false;
-        }
+        } else if (!blogPost1.getSlug().equals(blogPost2.getSlug())) {
+            valid = false;
+        } 
 
         if (!blogPost1.getContent().equals(blogPost2.getContent())) {
             valid = false;
