@@ -12,6 +12,8 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
+        
+    <img src="https://img0.etsystatic.com/006/2/5459756/il_fullxfull.384361458_hvev.jpg">
 
     </head>
     <body>

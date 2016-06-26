@@ -164,10 +164,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
+            
+            
+    
 
                BlogPost post = new BlogPost();
             User user = new User();
-            user.setId(rs.getInt("user_id"));
+//            user.setId(rs.getInt("user_id"));
+//            userDao.get(rs.getInt("user_id"));
 
             post.setAuthor(user);
 
