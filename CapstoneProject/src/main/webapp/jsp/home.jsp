@@ -9,7 +9,7 @@
         <title>Hello Controller Page</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-        <link href="homePage.css" rel="stylesheet">
+        <!--<link href="homePage.css" rel="stylesheet">-->
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
@@ -219,7 +219,7 @@
 
                 <c:forEach items="${posts}" var="post">
 
-                    <div class="row">
+                    <div class="row" id="post-div">
                         <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
                         </div>
                         <div class="col-sm-8">
@@ -240,7 +240,7 @@
                 <ul class="pagination pagination-lg pull-right">
                     <li><a href="#">«</a></li>
                         <c:forEach items="${pages}" var="page"> 
-                        <li><a href="${pageContext.request.contextPath}/home?page=${page}">${page}</a></li>
+                        <li><a  href="${pageContext.request.contextPath}/home?page=${page}" class="page">${page}</a></li>
                         </c:forEach>
                     <li><a href="#">»</a></li>
                 </ul>
@@ -250,9 +250,13 @@
 
 
 </div>
+        <script>
+            var contextRoot = "${pageContext.request.contextPath}";
+        </script>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<!--<script src="${pageContext.request.contextPath}/js/paginate.js"></script>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
