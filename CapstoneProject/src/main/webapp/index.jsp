@@ -1,9 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <!--Form validation -->
+<%-- 
+    Document   : homeLogin
+    Created on : Jun 27, 2016, 11:24:26 AM
+    Author     : apprentice
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
     <head>
         <title>Hello Controller Page</title>
@@ -108,114 +111,72 @@
                             <hr>
 
                             <div class="well">
+=======
+<html lang="en">
 
-                                <h4>Company Catalog</h4>
-                                <p><a href="#"><img src="http://f.tqn.com/y/freebies/1/L/D/S/alloy-catalog.jpg" class="img-responsive"></a></p>
+<head>
+	<meta charset="utf-8">
+	<title>Daily UI - Day 1 Sign In</title>
 
-                                <p>Everything you need to know about our warehouse, including mens and womens clothing, inventory, and specials.</p>
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
-                                <!--<button class="btn btn-sm btn-block btn-warning">Download</button>-->
-                            </div>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
 
-                            <hr>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
 
-                            <h4 class="text-center">President</h4>
-                      
+<body>
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo">Capstone <span>Blog</span></span></h1>
+		</div>
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<h2>Log In</h2>
+			</div>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" id="username">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password">
+			<br/>
+			<button type="submit">Sign In</button>
+                        <br>
+                        <br>
+                        <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
+			<br/>
+			<a href="#"><p class="small">Forgot your password?</p></a>
+                        
+                        
+		</div>
+	</div>
+</body>
 
-                            <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
-                            <h4 class='text-center'>Patrick Toner</h4>
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+>>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
 
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-9">
-
-
-                        <div class="well hidden-xs"> 
-
-                            <div class="row">
-
-                                <div class="col-xs-4">
-
-
-                                    <select class="form-control">
-                                        <option>Newest</option>
-                                        <option>Oldest</option>
-                                        <option>A-Z</option>
-                                        <option>Z-A</option>
-                                    </select>
-                                </div>
-<!--                                <div class="col-xs-8">
-                                    <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
-                                        <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
-                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
-
-                                    </div>
-                                </div>-->
-
-                            </div>
-
-
-
-
-
-                        </div>
-
-                        <hr>
-
-
-                                
-                                
-                                
-
-                        <c:forEach items="${posts}" var="post">
-
-                            <div class="row">
-                                <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
-                                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
-                                    <h5>${post.content}</h5>
-
-                                    <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
-                                    <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
-<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
-                                </div>
-                            </div>
-
-                            <hr>
-                            </tr>
-                        </c:forEach>
-
-
-
-
-
-
-                        <ul class="pagination pagination-lg pull-right">
-                            <li><a href="#">«</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    </body>
 </html>
+
 

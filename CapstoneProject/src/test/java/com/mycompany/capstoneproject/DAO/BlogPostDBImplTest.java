@@ -52,6 +52,7 @@ public class BlogPostDBImplTest {
         assertEquals(expResult, result);
         
     }
+<<<<<<< HEAD
 //    @Test
 //    public void testCreate() {
 //        System.out.println("Create Post");
@@ -76,6 +77,32 @@ public class BlogPostDBImplTest {
 
 //    @Test
 //    public void testNullUpdate() {
+=======
+    @Test
+    public void testCreate() {
+        System.out.println("Create Post");
+        BlogPost post = new BlogPost();
+        User author = new User();
+        author.setId(1);        
+        Date date = new Date();
+        post.setTitle("Test 1");
+        post.setAuthor(author);
+        post.setContent("Testing 1.2.3..");
+        post.setPostedOn(date);
+        post.setExpireOn(date);
+        post.setDateToPostOn(date);
+        post.setSlug("Test");
+        
+        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
+        BlogPost expResult = post;
+        BlogPost result = instance.create(post);
+        assertEquals(expResult, result);
+        
+    }
+
+    @Test
+    public void testNullUpdate() {
+>>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
 //        System.out.println("delete");
 //
 //        BlogPostInterface blogPostDao = ctx.getBean("blogPostDao", BlogPostInterface.class);
@@ -101,8 +128,13 @@ public class BlogPostDBImplTest {
 //        //This is a test update with nulls.
 //        // If it makes it to here, it passed.
 //        assertTrue(true);
+<<<<<<< HEAD
 //
 //    }
+=======
+
+    }
+>>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
 
     @Test
     public void testNullGet() {

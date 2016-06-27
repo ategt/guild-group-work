@@ -5,6 +5,7 @@
  */
 package com.mycompany.capstoneproject.controller;
 
+import com.mycompany.capstoneproject.DAO.BlogPostDBImpl;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
 import com.mycompany.capstoneproject.DTO.Category;
 import java.util.Map;
@@ -78,5 +79,7 @@ public class CategoriesController {
 
         return category;
     }
+    
+    
 
 }
