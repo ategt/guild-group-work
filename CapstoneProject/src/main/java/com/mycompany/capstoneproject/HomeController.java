@@ -8,11 +8,22 @@ import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
+import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import javax.swing.ImageIcon;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +48,27 @@ public class HomeController {
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
+    
+     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String homeLogin(Map model) {
+
+      
+
+        return "homeLogin";
+    }
+    
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(Map model) {
+    public String home( Map model) throws IOException {
+        
+       
+        
+        
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(3);
+        for (BlogPost post : posts) {
+           int postId = post.getId();
+           getImage(postId);
+        }
         
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -92,5 +120,42 @@ public class HomeController {
     public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
         return blogPostDao.listBlogsWithLimit(pageNumber);
     }
+    
+    
+       @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE , method = RequestMethod.GET)
+        @ResponseBody
+        public Image getImage(@PathVariable Integer postId) throws MalformedURLException, IOException{
+            
+            BlogPost post = blogPostDao.getById(postId);
+            
+            Image image = post.getImage();
+            
+            
+//            ByteArrayInputStream input = new ByteArrayInputStream();
+            
+          ByteArrayOutputStream output = new ByteArrayOutputStream();
+          
+          
+          
+//          File imgPath = new File();
+          
+            
+            if(image != null){
+                post.setImage(image);
+            }else{
+                Image i = new Image();
+                i.setId(postId);
+                i.setUrl("http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030");
+//                String imageString = i.toString();
+                
+               
+               
+    
+                post.setImage(i);
+                return i;
+            }
+            
+            return image;
+        }
 
 }
