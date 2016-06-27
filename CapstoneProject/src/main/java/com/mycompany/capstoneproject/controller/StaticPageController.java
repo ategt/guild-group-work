@@ -6,19 +6,9 @@
 package com.mycompany.capstoneproject.controller;
 
 import com.mycompany.capstoneproject.DAO.ImageInterface;
-import com.mycompany.capstoneproject.DAO.StaticPageDAODBImpl;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
-import com.mycompany.capstoneproject.DTO.BlogPost;
-import com.mycompany.capstoneproject.DTO.BlogPostCommand;
-import com.mycompany.capstoneproject.DTO.Category;
-import com.mycompany.capstoneproject.DTO.Comment;
-import com.mycompany.capstoneproject.DTO.HashTag;
-import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
-import com.mycompany.capstoneproject.DTO.User;
 import com.mycompany.capstoneproject.bll.StaticPageShow;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -53,12 +43,14 @@ public class StaticPageController {
         return "staticAdmin";
     }
 
-    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer id, Map model) {
 
+        List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = staticPageDao.get(id);
 
         model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
 
         return "staticPageDisplay";
 
@@ -102,14 +94,14 @@ public class StaticPageController {
 
     //this method takes user from main admin page to the edit page for the partiuclar static page clicked on
     //this method is used to create the 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public String create(@ModelAttribute StaticPage staticPage, Map model) {
 
         staticPageDao.create(staticPage);
 
         model.put("staticPage", staticPage);
 
-        return "redirect:/static/";
+        return "redirect:/staticAdmin";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -118,6 +110,14 @@ public class StaticPageController {
         staticPageDao.create(staticPage);
 
         return "adminPanel";
+
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable("id") Integer StaticPageId) {
+
+        staticPageDao.delete(StaticPageId);
 
     }
 

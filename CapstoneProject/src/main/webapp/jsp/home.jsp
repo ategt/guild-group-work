@@ -25,7 +25,7 @@
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                     <c:forEach items="${staticPages}" var="staticPage">
-                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
+                    <li role="presentation"><a href="static/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
 
                 </ul>    

@@ -154,7 +154,7 @@
         </div>
 
     <script>
-        var contextRoot = '${pageContext.request.contextPath}'
+        var contextRoot = '${pageContext.request.contextPath}';
 
     </script>
 
