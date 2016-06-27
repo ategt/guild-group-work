@@ -19,6 +19,7 @@ import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,16 +43,17 @@ public class BlogController {
     private BlogPostInterface blogPostDao;
     private UserInterface userDao;
     private CategoriesInterface categoriesDao;
-    private StaticPageInterface staticPageDao;
+    private StaticPageInterface staticDao;
     private HashTagInterface hashTagDao;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface HDao, StaticPageInterface staticPageDao) {
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface SDao, HashTagInterface HDao) {
+
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
+        this.staticDao = SDao;
         this.hashTagDao = HDao;
-        this.staticPageDao = staticPageDao;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -274,34 +277,53 @@ public class BlogController {
         return post;
     }
 
-//    @RequestMapping(value = "/home/{hashtag}", method = RequestMethod.GET)
-//    public String getPostsByHashTag(@PathVariable String hashTagName, Map model) {
-//
-//        HashTag hashTag = hashTagDao.get(hashTagName);
-//
-//        List<BlogPost> posts = hashTagDao.listBlogs(hashTag);
-//
-//        List<StaticPage> staticPages = staticPageDao.listPages();
-//        StaticPage staticPage = new StaticPage();
-//
-//        List<Category> categories = categoriesDao.listCategories();
-//
-//        List<HashTag> hash = hashTagDao.listHashTags();
-//
-//        Integer count = blogPostDao.getNumOfPosts();
-//        Integer numOfPages = (count / 3);
-//        List<Integer> pages = new ArrayList();
-//        for (int i = 1; i <= numOfPages; i++) {
-//            pages.add(i);
-//        }
-//
-//        model.put("pages", pages);
-//        model.put("staticPage", staticPage);
-//        model.put("staticPages", staticPages);
+    @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
+
+    public String showByCategory(@PathVariable("name") String category, Map model) {
+
+        List<BlogPost> list = blogPostDao.listBlogs();
+
+        List<BlogPost> newArray = new ArrayList();
+
+        BlogPost post = new BlogPost();
+
+        for (BlogPost blogPost : list) {
+
+            if (category.toLowerCase().equals(blogPost.getCategory().getName().toLowerCase())) {
+                newArray.add(blogPost);
+
+            }
+
+        }
+        list = newArray;
+
+        model.put("cat", category);
+
+        model.put("categoryList", newArray);
+
+        List<StaticPage> staticPages = staticDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<HashTag> hash = hashTagDao.listHashTags();
+
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count / 3);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
+
+        model.put("pages", pages);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
 //        model.put("posts", posts);
-//        model.put("categories", categories);
-//        model.put("hashTag", hash);
-//        return "home";
-//    }
+        model.put("categories", categories);
+        model.put("hashTag", hash);
+
+        return "categoryBlogPosts";
+    }
+
 
 }

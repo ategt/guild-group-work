@@ -135,6 +135,15 @@ public class HomeController {
         return image;
     }
 
+//
+//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
+//    public String populateHomePage(@PathVariable("pageNumber") int pageNumber, Map model) {
+//        Integer offset = 3; //hardcoding for second page, will figure out once i get it working
+//        List<BlogPost> blogList = blogPostDao.listBlogsWithLimit(offset);
+//
+//        model.put("blogList", blogList);
+//        return "home";
+//    }
     public Integer getOffset(Integer pageNumber) {
         Integer numOfPosts = 3; //how many posts we want to see on a page
         Integer offset = (pageNumber * numOfPosts) - numOfPosts;

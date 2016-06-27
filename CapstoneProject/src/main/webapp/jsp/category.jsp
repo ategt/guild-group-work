@@ -23,7 +23,7 @@
     </head>
     <body>
     <thead>
-    <img width="1700" height="200" src="http://www.trollkampsport.no/wp-content/uploads/2013/04/header-image-abstract.jpg"/>
+    <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
 </thead> 
 
 
