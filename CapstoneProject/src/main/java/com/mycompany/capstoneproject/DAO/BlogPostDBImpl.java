@@ -204,8 +204,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
     }
 
     @Override
-    public List<BlogPost> listBlogsWithLimit(int pageNumber) {
-                return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST_WITH_LIMIT, new BlogPostMapper(), pageNumber);
+    public List<BlogPost> listBlogsWithLimit(int offset) {
+                return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST_WITH_LIMIT, new BlogPostMapper(), offset);
     }
 
     @Override

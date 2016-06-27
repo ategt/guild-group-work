@@ -39,23 +39,29 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(Map model) {
-        List<BlogPost> posts = blogPostDao.listBlogsWithLimit(3);
-        
+    public String home(Map model, @RequestParam(value = "page", required=false) Integer pageNumber) {
+        Integer offset;
+        if (pageNumber == null) {
+            offset = 0;
+        } else {
+            offset = 3; //hardcoding for second page, will figure out once i get it working
+        }
+        List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
+
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
-        
+
         List<Category> categories = categoriesDao.listCategories();
-        
+
         List<HashTag> hash = hashTagDao.listHashTags();
-        
+
         Integer count = blogPostDao.getNumOfPosts();
-        Integer numOfPages = (count/3);
+        Integer numOfPages = (count / 3);
         List<Integer> pages = new ArrayList();
         for (int i = 1; i <= numOfPages; i++) {
             pages.add(i);
         }
-        
+
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
@@ -79,18 +85,20 @@ public class HomeController {
 
         return "category";
     }
-    
+
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Map model) {
 
-      
-
         return "aboutUs";
     }
-    
-    @RequestMapping(value="/home/{pageNumber}", method=RequestMethod.GET)
-    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
-        return blogPostDao.listBlogsWithLimit(pageNumber);
-    }
+//
+//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
+//    public String populateHomePage(@PathVariable("pageNumber") int pageNumber, Map model) {
+//        Integer offset = 3; //hardcoding for second page, will figure out once i get it working
+//        List<BlogPost> blogList = blogPostDao.listBlogsWithLimit(offset);
+//
+//        model.put("blogList", blogList);
+//        return "home";
+//    }
 
 }
