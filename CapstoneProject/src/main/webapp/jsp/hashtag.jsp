@@ -26,7 +26,7 @@
     </head>
     <body>
     <thead>
-    <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
+    <img width="100%" height="200" src="http://www.trollkampsport.no/wp-content/uploads/2013/04/header-image-abstract.jpg"/>
 </thead> 
 
 
@@ -42,15 +42,14 @@
             </button>
             <a class="navbar-brand" href="#">CAPSTONE</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse navbar-link">
+        <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                 <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
-             
+
                 <c:forEach items="${staticPages}" var="staticPage">
                     <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
@@ -125,7 +124,7 @@
                         <h4 class="">Categories</h4>
 
                         <c:forEach items="${categories}" var="cat">
-                            <a class="list-group-item" href="${pageContext.request.contextPath}/blog/category/${cat.name}"><span class = "badge"></span>${cat.name}</a>
+                            <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
 
                         </c:forEach>
 
@@ -193,8 +192,8 @@
 
 
                             <select class="form-control">
-                                <option>Oldest</option>
                                 <option>Newest</option>
+                                <option>Oldest</option>
                                 <option>A-Z</option>
                                 <option>Z-A</option>
                             </select>

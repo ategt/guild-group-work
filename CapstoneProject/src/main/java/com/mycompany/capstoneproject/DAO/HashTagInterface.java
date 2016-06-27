@@ -19,13 +19,13 @@ public interface HashTagInterface {
     
     public void updateHashTagPostTable(HashTag hashtag, BlogPost post);
 
-    public HashTag get(Integer id);
+    public HashTag get(String name);
 
     public void update(HashTag hashTag);
 
     public void delete(HashTag hashTag);
 
-    public List<HashTag> listBlogs();
+    public List<BlogPost> listBlogs(HashTag hashTag);
 
     public List<HashTag> listHashTags();
 

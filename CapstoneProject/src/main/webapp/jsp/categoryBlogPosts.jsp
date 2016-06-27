@@ -10,7 +10,7 @@
         <title>Hello Controller Page</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-        <!--<link href="homePage.css" rel="stylesheet">-->
+        <link href="homePage.css" rel="stylesheet">
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
@@ -42,7 +42,7 @@
             </button>
             <a class="navbar-brand" href="#">CAPSTONE</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse navbar-link">
+        <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
@@ -50,7 +50,7 @@
                 <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
-             
+
                 <c:forEach items="${staticPages}" var="staticPage">
                     <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
@@ -149,7 +149,8 @@
                         <div class="list-group list-group">
                             <h4 class=""> Top Trending #hashtags</h4>
                             <c:forEach items="${hashTag}" var="hashtag">
-                                <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+                                <a class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+
                             </c:forEach>
                         </div>
 
@@ -198,15 +199,17 @@
                                 <option>A-Z</option>
                                 <option>Z-A</option>
                             </select>
-                        </div>
-                        <!--                                <div class="col-xs-8">
-                                                            <div class="btn-group pull-right">
-                                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
-                                                                <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
-                                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
+                        </div>          
+                                                           
+                        <div class="col-md-8">
+                             <c:forEach items="${cat}" var="cat">
+                                <!--<h3 class=""><span class = "badge"></span>${cat}</h3>-->
+                                <h2 align="center" class="text-muted">${cat}</h2>
+
+                            </c:forEach>                               
+                       
                         
-                                                            </div>
-                                                        </div>-->
+                        </div>
 
                     </div>
 
@@ -218,11 +221,10 @@
 
                 <hr>
 
-                <c:forEach items="${posts}" var="post">
+                <c:forEach items="${categoryList}" var="post">
 
                     <div class="row">
                         <div class="col-sm-4"><img height="1280" width="720" src="${pageContext.request.contextPath}/home/showImage/{id}" class="img-responsive"></a>
-
                         </div>
                         <div class="col-sm-8">
                             <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
@@ -239,26 +241,22 @@
                     </tr>
                 </c:forEach>
 
-                <ul class="pagination pagination-lg pull-right">
+<!--                <ul class="pagination pagination-lg pull-right">
                     <li><a href="#">«</a></li>
                         <c:forEach items="${pages}" var="page"> 
-                        <li><a  href="${pageContext.request.contextPath}/home?page=${page}" class="page">${page}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/home?page=${page}">${page}</a></li>
                         </c:forEach>
                     <li><a href="#">»</a></li>
-                </ul>
+                </ul>-->
             </div>
         </div>
     </div>
 
 
 </div>
-        <script>
-            var contextRoot = "${pageContext.request.contextPath}";
-        </script>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<!--<script src="${pageContext.request.contextPath}/js/paginate.js"></script>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
