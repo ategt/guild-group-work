@@ -205,7 +205,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public List<BlogPost> listBlogsWithLimit(int pageNumber) {
-        return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST_WITH_LIMIT, new BlogPostMapper(), pageNumber);
+                return jdbcTemplate.query(SQL_GET_BLOGPOST_LIST_WITH_LIMIT, new BlogPostMapper(), pageNumber);
     }
 
     @Override
@@ -220,12 +220,20 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
+            
+            
+    
 
             BlogPost post = new BlogPost();
 
             User user = new User();
+//            user.setId(rs.getInt("user_id"));
+//            userDao.get(rs.getInt("user_id"));
+
+
             user.setId(rs.getInt("user_id"));
             user.setName(rs.getString("user.name"));
+
             post.setAuthor(user);
 
             Category category = new Category();
