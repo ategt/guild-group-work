@@ -10,19 +10,13 @@ import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import javax.swing.ImageIcon;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,18 +42,16 @@ public class HomeController {
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
-    
-     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String homeLogin(Map model) {
 
-      
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String homeLogin(Map model) {
 
         return "homeLogin";
     }
-    
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)     
-    public String home(Map model, @RequestParam(value = "page", required=false) Integer pageNumber) {
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
+
         Integer offset;
         if (pageNumber == null) {
             offset = 0;
@@ -67,7 +59,6 @@ public class HomeController {
             offset = getOffset(pageNumber);
         }
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
-
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -89,7 +80,6 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-
         return "home";
     }
 
@@ -113,61 +103,39 @@ public class HomeController {
         return "aboutUs";
     }
 
-    
-    @RequestMapping(value="/home/{pageNumber}", method=RequestMethod.GET)
-    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
+    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
+    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber) {
         return blogPostDao.listBlogsWithLimit(pageNumber);
     }
-    
-    
-       @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE , method = RequestMethod.GET)
-        @ResponseBody
-        public Image getImage(@PathVariable Integer postId) throws MalformedURLException, IOException{
-            
-            BlogPost post = blogPostDao.getById(postId);
-            
-            Image image = post.getImage();
-            
-            
+
+    @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    public Image getImage(@PathVariable Integer postId) throws MalformedURLException, IOException {
+
+        BlogPost post = blogPostDao.getById(postId);
+
+        Image image = post.getImage();
+
 //            ByteArrayInputStream input = new ByteArrayInputStream();
-            
-          ByteArrayOutputStream output = new ByteArrayOutputStream();
-          
-          
-          
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+
 //          File imgPath = new File();
-          
-            
-            if(image != null){
-                post.setImage(image);
-            }else{
-                Image i = new Image();
-                i.setId(postId);
-                i.setUrl("http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030");
+        if (image != null) {
+            post.setImage(image);
+        } else {
+            Image i = new Image();
+            i.setId(postId);
+            i.setUrl("http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030");
 //                String imageString = i.toString();
-                
-               
-               
-    
-                post.setImage(i);
-                return i;
-            }
-            
-            return image;
+
+            post.setImage(i);
+            return i;
         }
 
-//
-//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
-//    public String populateHomePage(@PathVariable("pageNumber") int pageNumber, Map model) {
-//        Integer offset = 3; //hardcoding for second page, will figure out once i get it working
-//        List<BlogPost> blogList = blogPostDao.listBlogsWithLimit(offset);
-//
-//        model.put("blogList", blogList);
-//        return "home";
-//    }
+        return image;
+    }
 
-
-    public Integer getOffset(Integer pageNumber){
+    public Integer getOffset(Integer pageNumber) {
         Integer numOfPosts = 3; //how many posts we want to see on a page
         Integer offset = (pageNumber * numOfPosts) - numOfPosts;
         return offset;
