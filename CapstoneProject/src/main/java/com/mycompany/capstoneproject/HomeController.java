@@ -80,6 +80,15 @@ public class HomeController {
         return "category";
     }
     
+    
+    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
+    public String aboutUs(Map model) {
+
+      
+
+        return "aboutUs";
+    }
+    
     @RequestMapping(value="/home/{pageNumber}", method=RequestMethod.GET)
     @ResponseBody
     public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
