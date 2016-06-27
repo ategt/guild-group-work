@@ -23,8 +23,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +30,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -50,14 +47,13 @@ public class BlogController {
     private HashTagInterface hashTagDao;
 
     @Inject
-
     public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface SDao, HashTagInterface HDao) {
+
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
         this.staticDao = SDao;
         this.hashTagDao = HDao;
-
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -328,5 +324,6 @@ public class BlogController {
 
         return "categoryBlogPosts";
     }
+
 
 }
