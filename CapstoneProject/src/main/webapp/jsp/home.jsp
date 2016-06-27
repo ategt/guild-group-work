@@ -6,13 +6,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+<!--    <head>
         <title>Hello Controller Page</title>
-        <!-- Bootstrap core CSS -->
+         Bootstrap core CSS 
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-        <!--<link href="homePage.css" rel="stylesheet">-->
+        <link href="homePage.css" rel="stylesheet">
 
-        <!-- SWC Icon -->
+         SWC Icon 
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
         <style>
@@ -24,8 +24,8 @@
         </style>
 
     </head>
-    <body>
-<<<<<<< HEAD
+    <body>-->
+<!--
         <div class="container">
             <h1>Capstone</h1>
             <hr/>
@@ -36,9 +36,9 @@
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                     <c:forEach items="${staticPages}" var="staticPage">
-                    <li role="presentation"><a href="static/${staticPage.id}">${staticPage.title}</a></li>
-=======
-    <thead>
+                    <li role="presentation"><a href="static/${staticPage.id}">${staticPage.title}</a></li>-->
+
+<!--    <thead>
     <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
 </thead> 
 
@@ -66,13 +66,16 @@
              
                 <c:forEach items="${staticPages}" var="staticPage">
                     <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
+                    
                     </c:forEach>
+                    
+                    A merge conflict ended here.
             </ul>
         </div>
-        <!--/.nav-collapse -->
+        /.nav-collapse 
     </div>
-</nav>
+</nav>-->
 
 
 

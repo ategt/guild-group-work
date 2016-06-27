@@ -45,8 +45,8 @@
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
-                
-                    <c:forEach items="${staticPages}" var="staticPage">
+
+                <c:forEach items="${staticPages}" var="staticPage">
                     <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
                     </c:forEach>
             </ul>
@@ -171,14 +171,9 @@
           </div>
         </div>
 
-<<<<<<< HEAD
-    <script>
-        var contextRoot = '${pageContext.request.contextPath}';
-=======
-<script>
-    var contextRoot = '${pageContext.request.contextPath}'
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
 
+<script>
+    var contextRoot = '${pageContext.request.contextPath}';
 </script>
 
 

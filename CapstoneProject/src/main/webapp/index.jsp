@@ -6,19 +6,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
+
 <html>
-    <head>
+<!--    <head>
         <title>Hello Controller Page</title>
-        <!-- Bootstrap core CSS -->
+         Bootstrap core CSS 
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- SWC Icon -->
+         SWC Icon 
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
     </head>
-    <body>
-        <div class="container">
+    <body>-->
+<!--        <div class="container">
             <h1>Capstone</h1>
             <hr/>
             <div class="navbar">
@@ -55,15 +55,15 @@
                     <div class="col-md-3">
 
 
-                        <!--<h4 class="">Search</h4>-->
+                        <h4 class="">Search</h4>
 
-                        <!--                        <div class="input-group">
+                                                <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                                                     <div class="input-group-btn">
                                                         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
                                                         </button>
                                                     </div>
-                                                </div>-->
+                                                </div>
                         <button type="button" class="btn btn-default btn-sm btn-block hidden-lg hidden-md" data-toggle="collapse" data-target="#demo">Refine your search <span class="caret"></span>
 
                         </button>
@@ -82,7 +82,7 @@
                                     
                                 </div>
 
-                                <!--<button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>-->
+                                <button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>
 
                             </div>
                         </div>
@@ -110,19 +110,19 @@
 
                             <hr>
 
-                            <div class="well">
-=======
-<html lang="en">
+                            <div class="well">-->
+<!--=======  Merge Conflict!-->
+<!--<html lang="en">-->
 
-<head>
+<!--<head>-->
 	<meta charset="utf-8">
 	<title>Daily UI - Day 1 Sign In</title>
 
-	<!-- Google Fonts -->
+	 Google Fonts 
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
-	<!-- Custom Stylesheet -->
+	 Custom Stylesheet 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -175,7 +175,7 @@
 		$('label[for="password"]').removeClass('selected');
 	});
 </script>
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
 
 </html>
 

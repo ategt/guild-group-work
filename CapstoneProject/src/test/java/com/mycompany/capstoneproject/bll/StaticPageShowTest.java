@@ -40,13 +40,13 @@ public class StaticPageShowTest {
     /**
      * Test of showById method, of class StaticPageShow.
      */
-<<<<<<< HEAD
+
 //    @Test
 //    public void testShowById() {
-=======
+
     @Test
     public void testShowById() {
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
 //        System.out.println("showById");
 //        Integer staticPageId = null;
 //        Map<String, Object> model = new HashMap();
@@ -68,24 +68,24 @@ public class StaticPageShowTest {
 //        assertNull(staticPage);
 //        assertNull(staticPageObject);
 //        
-<<<<<<< HEAD
+
 //    }
 //    
-=======
+
     }
     
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
 
     /**
      * Test of showById method, of class StaticPageShow.
      */
-<<<<<<< HEAD
+
 //    @Test
 //    public void testShowByIdA() {
-=======
+
     @Test
     public void testShowByIdA() {
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
 //        System.out.println("showById");
 //        Integer staticPageId = 1;
 //        Map<String, Object> model = new HashMap();
@@ -109,15 +109,15 @@ public class StaticPageShowTest {
 //        
 //        assertEquals(staticPage.getContent(), "TEST");
 //        assertEquals(staticPage.getTitle(), "BOB");
-<<<<<<< HEAD
+
 //        
 //    }
 //    
-=======
+
         
     }
     
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
     /**
      * Test of showById method, of class StaticPageShow.
      */
@@ -206,13 +206,13 @@ public class StaticPageShowTest {
     /**
      * Test of showById method, of class StaticPageShow.
      */
-<<<<<<< HEAD
+
 //    @Test
 //    public void testShowByTitleB() {
-=======
+
     @Test
     public void testShowByTitleB() {
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
 //        System.out.println("showByTitle");
 //        String staticPageTitle = "BOB";
 //        Map<String, Object> model = new HashMap();
@@ -237,10 +237,10 @@ public class StaticPageShowTest {
 //        assertEquals(staticPage.getContent(), "TEST");
 //        assertEquals(staticPage.getTitle(), "BOB");
 //        
-<<<<<<< HEAD
+
 //    }
-=======
+
     }
->>>>>>> 5c8d3348bb2f8c0c7063782826511c66893b161f
+
     
 }
