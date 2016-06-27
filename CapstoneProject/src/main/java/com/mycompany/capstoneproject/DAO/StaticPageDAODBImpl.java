@@ -12,6 +12,8 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -32,13 +34,13 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public StaticPage create(StaticPage staticPage) {
 
         jdbcTemplate.update(SQL_INSERT_STATIC_PAGE,
                 staticPage.getTitle(),
                 staticPage.getContent(),
                 staticPage.getImage_id());
-        
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
 
@@ -94,7 +96,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
     @Override
     public List<StaticPage> listPages() {
-        
+
         return jdbcTemplate.query(SQL_GET_STATIC_PAGE_LIST, new StaticPageMapper());
 
     }
