@@ -69,6 +69,9 @@ public class ImageDAODBImpl implements ImageInterface {
     //"UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?  WHERE id = ?";
     @Override
     public void update(Image image) {
+        
+        if ( image == null ) return;
+        
         jdbcTemplate.update(SQL_UPDATE_IMAGE,
                 image.getUrl(),
                 image.getImage(),
@@ -82,6 +85,8 @@ public class ImageDAODBImpl implements ImageInterface {
 
     @Override
     public void delete(Image image) {
+        if ( image == null ) return;
+
         jdbcTemplate.update(SQL_DELETE_IMAGE_BY_ID, image.getId());
     }
 

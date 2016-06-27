@@ -53,6 +53,10 @@
     <bean id="userDaoDBImpl" class="com.mycompany.capstoneproject.DAO.UserDaoDBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+
+    <bean id="imageDaoDBImpl" class="com.mycompany.capstoneproject.DAO.ImageDAODBImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
     
     
 
