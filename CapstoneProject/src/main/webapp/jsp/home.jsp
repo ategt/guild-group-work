@@ -6,13 +6,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<!--    <head>
+    <head>
         <title>Hello Controller Page</title>
-         Bootstrap core CSS 
+        <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-        <link href="homePage.css" rel="stylesheet">
+        <!--<link href="homePage.css" rel="stylesheet">-->
 
-         SWC Icon 
+        <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
         <style>
@@ -24,7 +24,7 @@
         </style>
 
     </head>
-    <body>-->
+    <body>
 <!--
         <div class="container">
             <h1>Capstone</h1>
