@@ -189,13 +189,14 @@
                             <hr>
                             </tr>
                         </c:forEach>
-                        
+
                         <ul class="pagination pagination-lg pull-right">
                             <li><a href="#">«</a></li>
-                            <c:forEach items="${pages}" var="page">
-                                <li><a href="#">${page}</a></li>
-                            </c:forEach>
+                                <c:forEach items="${pages}" var="page">
+                                <li><a href="${pageContext.request.contextPath}/${page}">${page}</a></li>
+                                </c:forEach>
                             <li><a href="#">»</a></li>
+
                         </ul>
 
 

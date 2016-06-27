@@ -80,8 +80,7 @@ public class HomeController {
         return "category";
     }
     
-    @RequestMapping(value="/home/{pageNumber}", method=RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value="/{pageNumber}", method=RequestMethod.GET)
     public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber){
         return blogPostDao.listBlogsWithLimit(pageNumber);
     }
