@@ -44,7 +44,7 @@ public class HomeController {
         if (pageNumber == null) {
             offset = 0;
         } else {
-            offset = 3; //hardcoding for second page, will figure out once i get it working
+            offset = getOffset(pageNumber);
         }
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
 
@@ -101,4 +101,9 @@ public class HomeController {
 //        return "home";
 //    }
 
+    public Integer getOffset(Integer pageNumber){
+        Integer numOfPosts = 3; //how many posts we want to see on a page
+        Integer offset = (pageNumber * numOfPosts) - numOfPosts;
+        return offset;
+    }
 }

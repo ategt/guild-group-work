@@ -243,16 +243,7 @@
                         <li><a href="${pageContext.request.contextPath}/home?page=${page}">${page}</a></li>
                         </c:forEach>
                     <li><a href="#">»</a></li>
-
                 </ul>
-
-
-
-
-
-
-
-
             </div>
         </div>
     </div>
