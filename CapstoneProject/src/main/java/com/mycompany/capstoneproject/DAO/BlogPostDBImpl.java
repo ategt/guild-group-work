@@ -37,7 +37,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
             + "JOIN category\n"
-            + "ON category_post.category_id=category_id\n"
+            + "ON category_post.category_id=category.id\n"
             + "JOIN user\n"
             + "ON user.id=user_id AND post.id = ?";
 
@@ -57,7 +57,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
             + "JOIN category\n"
-            + "ON category_post.category_id=category_id\n"
+            + "ON category_post.category_id=category.id\n"
             + "JOIN user\n"
             + "ON user.id=user_id";
 

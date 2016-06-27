@@ -58,6 +58,7 @@ public class BlogController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String blog(Map model) {
+        
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
 
@@ -266,6 +267,8 @@ public class BlogController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
         public String show(@PathVariable("id") Integer postId, Map model) {
 
+         
+            
         BlogPost post = blogPostDao.getById(postId);
 
 //        User author = userDao.get(post.getAuthor().getId());
@@ -290,4 +293,6 @@ public class BlogController {
 
         return post;
     }
+        
+     
 }
