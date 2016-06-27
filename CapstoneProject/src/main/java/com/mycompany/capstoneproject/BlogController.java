@@ -73,7 +73,7 @@ public class BlogController {
 
         BlogPost blogPost = blogPostDao.getById(id);
 
-        //List<User> users = userDao.list();
+        List<User> users = userDao.list();
         BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
 
         if (blogPostCommand == null) {
@@ -84,7 +84,7 @@ public class BlogController {
         model.put("categories", categories);
 
 
-        List<User> users = userDao.list();
+//        List<User> users = userDao.list();
         model.put("users", users);
         model.put("blogPostCommand", blogPostCommand);
 
