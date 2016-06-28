@@ -98,7 +98,7 @@ function handleFileUpload(files, obj)
     for (var i = 0; i < files.length; i++)
     {
         var fd = new FormData();
-        fd.append('file', files[i]);
+        fd.append('uploaded', files[i]);
 
         var status = new createStatusbar(obj); //Using this we can set progress.
         status.setFileNameSize(files[i].name, files[i].size);

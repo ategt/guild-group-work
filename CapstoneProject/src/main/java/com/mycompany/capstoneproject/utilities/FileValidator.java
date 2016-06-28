@@ -5,7 +5,7 @@
  */
 package com.mycompany.capstoneproject.utilities;
 
-import com.mycompany.capstoneproject.DTO.UploadedFile;
+import com.mycompany.capstoneproject.DTO.Uploaded;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -13,11 +13,11 @@ import org.springframework.validation.Validator;
 
 public class FileValidator implements Validator {
 	public boolean supports(Class<?> paramClass) {
-		return UploadedFile.class.equals(paramClass);
+		return Uploaded.class.equals(paramClass);
 	}
 
 	public void validate(Object obj, Errors errors) {
-		UploadedFile uploadedFile = (UploadedFile) obj;
+		Uploaded uploadedFile = (Uploaded) obj;
 		  if (uploadedFile.getFile().getSize() == 0) {
 		   errors.rejectValue("file", "valid.file");
 		  }

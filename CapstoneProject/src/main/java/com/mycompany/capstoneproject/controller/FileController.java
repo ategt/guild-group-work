@@ -7,7 +7,7 @@ package com.mycompany.capstoneproject.controller;
 
 import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DTO.Image;
-import com.mycompany.capstoneproject.DTO.UploadedFile;
+import com.mycompany.capstoneproject.DTO.Uploaded;
 import com.mycompany.capstoneproject.utilities.FileValidator;
 import java.io.File;
 import java.io.FileFilter;
@@ -106,7 +106,7 @@ public class FileController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public String fileUploaded(Model model, @Validated UploadedFile file,
+    public String fileUploaded(Model model, @Validated Uploaded file,
             BindingResult result) {
 
         String filePath = "";
@@ -156,7 +156,7 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean ajaxFileUploaded(Model model, @Validated UploadedFile uploadedFile,
+    public Boolean ajaxFileUploaded(Model model, @Validated Uploaded uploadedFile,
             BindingResult result) {
 
         String filePath = "";
@@ -173,7 +173,7 @@ public class FileController {
         // return returnVal;
     }
 
-    private void ajaxUploadFile(UploadedFile uploadedFile, Model model) {
+    private void ajaxUploadFile(Uploaded uploadedFile, Model model) {
         String filePath;
         InputStream inputStream = null;
         try {
@@ -191,20 +191,7 @@ public class FileController {
 
             filePath = saveFileAsMostRecent(inputStream);
 
-            Image image = new Image();
-
-            byte[] imageData = multipartFile.getBytes();
-
-            String originalName = multipartFile.getOriginalFilename();
-            String contentType = multipartFile.getContentType();
-            Long fileSize = multipartFile.getSize();
-            String multipartFileName = multipartFile.getName();
-
-            image.setImage(imageData);
-
-            image.setOriginalName(originalName);
-
-            imageDao.create(image);
+            addImageToDatabase(multipartFile);
 
             loadRecentInfoIntoModel(model, filePath, multipartFile);
 
@@ -219,6 +206,24 @@ public class FileController {
                 Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private void addImageToDatabase(MultipartFile multipartFile) throws IOException {
+        Image image = new Image();
+
+        byte[] imageData = multipartFile.getBytes();
+
+        String originalName = multipartFile.getOriginalFilename();
+        String contentType = multipartFile.getContentType();
+        Long fileSize = multipartFile.getSize();
+        String multipartFileName = multipartFile.getName();
+
+        image.setImage(imageData);
+        image.setContentType(contentType);
+
+        image.setOriginalName(originalName);
+
+        imageDao.create(image);
     }
 
     private void loadRecentInfoIntoModel(Model model, String filePath, MultipartFile multipartFile) {

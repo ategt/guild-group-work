@@ -26,7 +26,7 @@
     <body> 
 
         <h2>Spring MVC - Uploading a file.. </h2>
-        <form:form method="POST" commandName="file" enctype="multipart/form-data">
+        <form:form method="POST" commandName="uploadedFile" enctype="multipart/form-data">
 
             Upload your file please: 
             <input type="file" name="file" />
