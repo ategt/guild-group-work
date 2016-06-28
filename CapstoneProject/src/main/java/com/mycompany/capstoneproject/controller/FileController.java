@@ -166,70 +166,37 @@ public class FileController {
         return "fileDrop";
     }
 
+    
+    //
+//    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Boolean ajaxFileUploaded(Model model, @Validated Uploaded uploadedFile,
+//            BindingResult result) {
+//
+//        String filePath = "";
+//
+//        //String returnVal = "successFile";
+//        if (result.hasErrors()) {
+//
+//            //returnVal = "fileView";
+//            return false;
+//        } else {
+//            ajaxUploadFile(uploadedFile, model);
+//        }
+//        return true;
+//        // return returnVal;
+//    }
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean ajaxFileUploaded(Model model, @Validated File file,
+    public Boolean ajaxFileUploaded(Model model, @Validated com.mycompany.capstoneproject.DTO.File file,
             BindingResult result) {
 
-        String filePath = "";
-
-        //String returnVal = "successFile";
         if (result.hasErrors()) {
-
-            //returnVal = "fileView";
             return false;
         } else {
-            InputStream inputStream = null;
-            try {
-                MultipartFile multipartFile = file.getFile();
-                //multipartFile.
-                // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
-
-                inputStream = multipartFile.getInputStream();
-
-                java.io.File fileImagesDir = new java.io.File("./uploadedImages");
-                if (!fileImagesDir.exists()) {
-                    fileImagesDir.mkdir();
-                }
-
-                java.io.File outputFile = new java.io.File("test.file");
-                filePath = outputFile.getAbsolutePath();
-                OutputStream outputStream = new FileOutputStream(outputFile);
-                IOUtils.copy(inputStream, outputStream);
-                model.addAttribute("filePath", filePath);
-
-                String originalName = multipartFile.getOriginalFilename();
-                String contentType = multipartFile.getContentType();
-                Long fileSize = multipartFile.getSize();
-                String multipartFileName = multipartFile.getName();
-
-                model.addAttribute("originalName", originalName);
-                model.addAttribute("contentType", contentType);
-                model.addAttribute("fileSize", fileSize);
-                model.addAttribute("multipartFileName", multipartFileName);
-
-                java.io.File saveFile = null;
-                if (fileImagesDir.isDirectory()) {
-                    saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
-                }
-
-                InputStream secondInputStream = multipartFile.getInputStream();
-                IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
-                String savedPath = saveFile.getAbsolutePath();
-                model.addAttribute("savedPath", savedPath);
-
-            } catch (IOException ex) {
-                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    inputStream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            ajaxUploadFile(file, model);
         }
         return true;
-        // return returnVal;
     }
 
 //
@@ -339,35 +306,15 @@ public class FileController {
 //    public String ajaxFilePreUploaded(Model model) {
 //        return "fileDrop";
 //    }
-//
-//    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Boolean ajaxFileUploaded(Model model, @Validated Uploaded uploadedFile,
-//            BindingResult result) {
-//
-//        String filePath = "";
-//
-//        //String returnVal = "successFile";
-//        if (result.hasErrors()) {
-//
-//            //returnVal = "fileView";
-//            return false;
-//        } else {
-//            ajaxUploadFile(uploadedFile, model);
-//        }
-//        return true;
-//        // return returnVal;
-//    }
 
-    private void ajaxUploadFile(Uploaded uploadedFile, Model model) {
+
+    private void ajaxUploadFile(com.mycompany.capstoneproject.DTO.File uploadedFile, Model model) {
         String filePath;
         InputStream inputStream = null;
         try {
             MultipartFile multipartFile = uploadedFile.getFile();
             java.io.File imagesDirectory = new java.io.File("./uploadedImages");
-            //multipartFile.
-            // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
-
+           
             inputStream = multipartFile.getInputStream();
 
             java.io.File fileImagesDir = imagesDirectory;
@@ -409,6 +356,9 @@ public class FileController {
 
         image.setOriginalName(originalName);
 
+        image.setDescription("This image was uploaded with ajax.");
+        image.setSize(fileSize);
+        
         imageDao.create(image);
     }
 
