@@ -18,30 +18,33 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
     </head>
+
     <body>
+
+        <%@ include file="header.jsp" %>
         <div class="container">
             <form:form method="POST" commandName="blogPostCommand" action="${pageContext.request.contextPath}/blog/edit/" >
 
                 <div class="form-group">
-                    <form:label path="id" class="col-sm-3 control-label" >ID:</form:label>
+                    <form:label path="id" class="col-md-4 control-label" >ID:</form:label>
 
-                        <div class="col-sm-7">
-                        <form:input path="id" style="text-align: center" class="col-sm-9 form-control" type="text" disabled="true" />
+                        <div class="col-md-4">
+                        <form:input path="id" style="text-align: center" class="col-md-4 form-control" type="text" disabled="true" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="title" class="col-sm-3 control-label" >Title:</form:label>
+                    <form:label path="title" class="col-md-4 control-label" >Title:</form:label>
 
-                        <div class="col-sm-7">
-                        <form:input path="title" style="text-align: center" class="form-control" type="text" disabled="true" />
+                        <div class="col-md-4">
+                        <form:input path="title" style="text-align: center" class="form-control" type="text"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="content" class="col-sm-3 control-label" >Content:</form:label>
+                    <form:label path="content" class="col-md-4 control-label" >Content:</form:label>
 
-                        <div class="col-sm-7">
+                        <div class="col-md-4">
                         <form:input path="content" style="text-align: center" class="form-control" type="text" />
                     </div>
                 </div>
@@ -49,41 +52,41 @@
 
                 <div class="form-group" id="author-input-div">
                     <label path="author" class="col-md-4 control-label">Author: <label>
-                        <div class="col-md-8">
-                            <select class="btn btn-default dropdown" id="author-input" name="authorId">
-                            <c:forEach items="${users}" var="user">
-                                <option value="${user.id}" class="form-control">${user.name}</option>
-                            </c:forEach>
-                        </select>
-                        <!--<input type="text" id="state-input" class="form-control"></input>-->
-                    </div>
-                    <div id="add-order-validation-category-error" class="validation-errors pull-right">
-                    </div>
-                </div>
+                            <div class="col-md-8">
+                                <select class="btn btn-default dropdown" id="author-input" name="authorId">
+                                    <c:forEach items="${users}" var="user">
+                                        <option value="${user.id}" class="form-control">${user.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <!--<input type="text" id="state-input" class="form-control"></input>-->
+                            </div>
+                            <div id="add-order-validation-category-error" class="validation-errors pull-right">
+                            </div>
+                            </div>
 
-                <div class="form-group" id="category-input-div">
-                    <label path="category" class="col-md-4 control-label"> Category: </label>
-                        <div class="col-md-8">
-                        <select class="btn btn-default dropdown" id="category-input" name="categoryId">
-                            <c:forEach items="${categories}" var="category">
-                                <option value="${category.id}" class="form-control">${category.name}</option>
-                            </c:forEach>
-                        </select>
-                        <!--<input type="text" id="state-input" class="form-control"></input>-->
-                    </div>
-                    <div id="add-order-validation-category-error" class="validation-errors pull-right">
+                            <div class="form-group" id="category-input-div">
+                                <label path="category" class="col-md-4 control-label"> Category: </label>
+                                <div class="col-md-8">
+                                    <select class="btn btn-default dropdown" id="category-input" name="categoryId">
+                                        <c:forEach items="${categories}" var="category">
+                                            <option value="${category.id}" class="form-control">${category.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <!--<input type="text" id="state-input" class="form-control"></input>-->
+                                </div>
+                                <div id="add-order-validation-category-error" class="validation-errors pull-right">
 
-                    </div>
-                </div>
-                    
-                    <input type="submit" value="submit" />
+                                </div>
+                            </div>
 
-            </form:form>
+                            <input type="submit" value="submit" />
 
-        </div>
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+                        </form:form>
 
-    </body>
-</html>
+                        </div>
+                        <!-- Placed at the end of the document so the pages load faster -->
+                        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+                        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
+                        </body>
+                        </html>

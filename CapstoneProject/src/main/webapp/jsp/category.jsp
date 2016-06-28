@@ -28,30 +28,7 @@
 
 
 
-<nav id="navbar-main" class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-
-            </button>
-            <a class="navbar-brand" href="#">CAPSTONE</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li role="presentation" ><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                <li role="presentation" ><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
-
-                <c:forEach items="${staticPages}" var="staticPage">
-                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
-                    </c:forEach>
-            </ul>
-        </div>
-</nav>
+<%@ include file="header.jsp" %>
 
 <div class="container">
     <div class="row">
