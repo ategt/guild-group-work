@@ -10,6 +10,7 @@ import com.mycompany.capstoneproject.DTO.File;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.Uploaded;
 import com.mycompany.capstoneproject.utilities.FileValidator;
+import java.awt.image.BufferedImage;
 import java.io.FileFilter;
 //import java.io.File;
 //import java.io.FileFilter;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -166,7 +168,6 @@ public class FileController {
         return "fileDrop";
     }
 
-    
     //
 //    @RequestMapping(value = "/upload", method = RequestMethod.POST)
 //    @ResponseBody
@@ -306,15 +307,13 @@ public class FileController {
 //    public String ajaxFilePreUploaded(Model model) {
 //        return "fileDrop";
 //    }
-
-
     private void ajaxUploadFile(com.mycompany.capstoneproject.DTO.File uploadedFile, Model model) {
         String filePath;
         InputStream inputStream = null;
         try {
             MultipartFile multipartFile = uploadedFile.getFile();
             java.io.File imagesDirectory = new java.io.File("./uploadedImages");
-           
+
             inputStream = multipartFile.getInputStream();
 
             java.io.File fileImagesDir = imagesDirectory;
@@ -342,24 +341,36 @@ public class FileController {
     }
 
     private void addImageToDatabase(MultipartFile multipartFile) throws IOException {
+        Image image = buildImageFromMultipartFile(multipartFile);
+
+        imageDao.create(image);
+    }
+
+    private Image buildImageFromMultipartFile(MultipartFile multipartFile) throws IOException {
         Image image = new Image();
-
         byte[] imageData = multipartFile.getBytes();
-
         String originalName = multipartFile.getOriginalFilename();
         String contentType = multipartFile.getContentType();
         Long fileSize = multipartFile.getSize();
         String multipartFileName = multipartFile.getName();
-
+        determineHeightAndWidthOfImage(multipartFile, image);
         image.setImage(imageData);
         image.setContentType(contentType);
-
         image.setOriginalName(originalName);
-
         image.setDescription("This image was uploaded with ajax.");
         image.setSize(fileSize);
+        return image;
+    }
+
+    private void determineHeightAndWidthOfImage(MultipartFile multipartFile, Image image) throws IOException {
+        //BufferedImage bimg = ImageIO.read(new File(filename));
+        BufferedImage bimg = ImageIO.read(multipartFile.getInputStream());
         
-        imageDao.create(image);
+        int width = bimg.getWidth();
+        int height = bimg.getHeight();
+        
+        image.setHeight(height);
+        image.setWidth(width);
     }
 
     private void loadRecentInfoIntoModel(Model model, String filePath, MultipartFile multipartFile) {

@@ -45,19 +45,13 @@ public class ImageController {
             throws ServletException, IOException {
 
         Image image = imageDao.get(id);
-        //image.getImage();
 
-        //Item item = itemService.get(itemId);
-        
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        //response.getOutputStream().write(item.getItemImage());
-        
-        
+        response.setContentLengthLong(image.getSize());
+        response.setContentType(image.getContentType());
+
         response.getOutputStream().write(image.getImage());
-
         response.getOutputStream().close();
 
-        //return "fileView";
     }
 
 //    @RequestMapping(value = "/", method = RequestMethod.POST)
