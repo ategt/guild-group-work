@@ -29,7 +29,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
 
     private static final String SQL_INSERT_HASHTAG = "INSERT INTO hashtag (name, number_of_uses) VALUES (?, ?)";
     private static final String SQL_INSERT_HASHTAG_POST = "INSERT INTO hashtag_post (hashtag_id, post_id) VALUES (?, ?);";
-    private static final String SQL_SELECT_HASHTAG = "SELECT * FROM capstone.hashtag WHERE hashtag.name= ?";
+    private static final String SQL_SELECT_HASHTAG = "SELECT * FROM capstone.hashtag WHERE hashtag.name= ? GROUP BY name";
     private static final String SQL_SELECT_NUM_OF_USES = "SELECT hashtag.number_of_uses FROM capstone.hashtag WHERE hashtag.id= ?";
     private static final String SQL_SELECT_POST_WITH_HASHTAG = "SELECT * FROM hashtag \n"
             + "JOIN hashtag_post \n"
@@ -45,6 +45,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     private static final String SQL_UPDATE_HASHTAG = "UPDATE `capstone`.`hashtag` SET `number_of_uses`= ? WHERE `id`=?";
     private static final String SQL_DELETE_HASHTAG = "";
     private static final String SQL_GET_HASHTAG_LIST = "SELECT id, name, number_of_uses FROM hashtag GROUP BY name";
+    private static final String SQL_GET_HASHTAG_NAME_LIST = "SELECT DISTINCT name FROM hashtag";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -117,9 +118,15 @@ public class HashTagDaoDBImpl implements HashTagInterface {
 
     @Override
     public void incrementNumOfUses(HashTag hashtag) {
-        List<Integer> count = jdbcTemplate.query(SQL_SELECT_NUM_OF_USES, new CountMapper());
+        List<Integer> count = jdbcTemplate.query(SQL_SELECT_NUM_OF_USES, new CountMapper(), hashtag.getId());
         int numOfUses = count.get(0);
-        jdbcTemplate.update(SQL_UPDATE_HASHTAG, numOfUses++, hashtag.getId());
+        numOfUses++;
+        jdbcTemplate.update(SQL_UPDATE_HASHTAG, numOfUses, hashtag.getId());
+    }
+
+    @Override
+    public List<String> listHashTagNames() {
+        return jdbcTemplate.query(SQL_GET_HASHTAG_NAME_LIST, new StringMapper());
     }
 
     private static final class HashTagMapper implements RowMapper<HashTag> {
@@ -171,6 +178,16 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             Integer count = rs.getInt(1);
 
             return count;
+        }
+
+    }
+    
+    private static final class StringMapper implements RowMapper<String> {
+
+        public String mapRow(ResultSet rs, int i) throws SQLException {
+            String name = rs.getString("name");
+
+            return name;
         }
 
     }
