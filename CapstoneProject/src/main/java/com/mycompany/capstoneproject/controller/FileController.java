@@ -7,7 +7,9 @@ package com.mycompany.capstoneproject.controller;
 
 import com.mycompany.capstoneproject.DTO.UploadedFile;
 import com.mycompany.capstoneproject.utilities.FileValidator;
+import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -33,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 //import com.javacodegeeks.snippets.enterprise.fileupload.model.File;
 //import com.javacodegeeks.snippets.enterprise.fileupload.validator.FileValidator;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -47,6 +50,17 @@ public class FileController {
         binder.setValidator(validator);
     }
 
+    
+//    @RequestMapping(method = RequestMethod.GET, value="/showimage/{id}")
+//    @ResponseBody
+//    public String getImage(@PathVariable("id") Integer id ) {
+//        
+//        
+//        
+//        return "fileView";
+//    }
+
+    
     @RequestMapping(method = RequestMethod.GET, value="/")
     public String getForm(Model model) {
         java.io.File fileImagesDir = new java.io.File("./uploadedImages");
@@ -117,27 +131,9 @@ public class FileController {
                 filePath = outputFile.getAbsolutePath();
                 OutputStream outputStream = new FileOutputStream(outputFile);
                 IOUtils.copy(inputStream, outputStream);
-                model.addAttribute("filePath", filePath);
+                String originalName = loadRecentInfoIntoModel(model, filePath, multipartFile);
 
-                String originalName = multipartFile.getOriginalFilename();
-                String contentType = multipartFile.getContentType();
-                Long fileSize = multipartFile.getSize();
-                String multipartFileName = multipartFile.getName();
-
-                model.addAttribute("originalName", originalName);
-                model.addAttribute("contentType", contentType);
-                model.addAttribute("fileSize", fileSize);
-                model.addAttribute("multipartFileName", multipartFileName);
-
-                java.io.File saveFile = null;
-                if (fileImagesDir.isDirectory()) {
-                    saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
-                }
-
-                InputStream secondInputStream = multipartFile.getInputStream();
-                IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
-                String savedPath = saveFile.getAbsolutePath();
-                model.addAttribute("savedPath", savedPath);
+                saveFileToFileSystem(fileImagesDir, originalName, multipartFile, model);
 
 
             } catch (IOException ex) {
@@ -172,57 +168,77 @@ public class FileController {
             //returnVal = "fileView";
             return false;
         } else {
-            InputStream inputStream = null;
-            try {
-                MultipartFile multipartFile = uploadedFile.getFile();
-                //multipartFile.
-                // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
-
-                inputStream = multipartFile.getInputStream();
-
-                java.io.File fileImagesDir = new java.io.File("./uploadedImages");
-                if (!fileImagesDir.exists()) {
-                    fileImagesDir.mkdir();
-                }
-
-                java.io.File outputFile = new java.io.File("test.file");
-                filePath = outputFile.getAbsolutePath();
-                OutputStream outputStream = new FileOutputStream(outputFile);
-                IOUtils.copy(inputStream, outputStream);
-                model.addAttribute("filePath", filePath);
-
-                String originalName = multipartFile.getOriginalFilename();
-                String contentType = multipartFile.getContentType();
-                Long fileSize = multipartFile.getSize();
-                String multipartFileName = multipartFile.getName();
-
-                model.addAttribute("originalName", originalName);
-                model.addAttribute("contentType", contentType);
-                model.addAttribute("fileSize", fileSize);
-                model.addAttribute("multipartFileName", multipartFileName);
-
-                java.io.File saveFile = null;
-                if (fileImagesDir.isDirectory()) {
-                    saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
-                }
-
-                InputStream secondInputStream = multipartFile.getInputStream();
-                IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
-                String savedPath = saveFile.getAbsolutePath();
-                model.addAttribute("savedPath", savedPath);
-
-
-            } catch (IOException ex) {
-                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    inputStream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            ajaxUploadFile(uploadedFile, model);
         }
         return true;
        // return returnVal;
+    }
+
+    private void ajaxUploadFile(UploadedFile uploadedFile, Model model) {
+        String filePath;
+        InputStream inputStream = null;
+        try {
+            MultipartFile multipartFile = uploadedFile.getFile();
+            java.io.File imagesDirectory = new java.io.File("./uploadedImages");
+            //multipartFile.
+            // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
+            
+            inputStream = multipartFile.getInputStream();
+            
+            java.io.File fileImagesDir = imagesDirectory;
+            if (!fileImagesDir.exists()) {
+                fileImagesDir.mkdir();
+            }
+            
+            filePath = saveFileAsMostRecent(inputStream);
+            
+            String originalName = loadRecentInfoIntoModel(model, filePath, multipartFile);
+            
+            saveFileToFileSystem(fileImagesDir, originalName, multipartFile, model);
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private String loadRecentInfoIntoModel(Model model, String filePath, MultipartFile multipartFile) {
+        model.addAttribute("filePath", filePath);
+        String originalName = multipartFile.getOriginalFilename();
+        String contentType = multipartFile.getContentType();
+        Long fileSize = multipartFile.getSize();
+        String multipartFileName = multipartFile.getName();
+        model.addAttribute("originalName", originalName);
+        model.addAttribute("contentType", contentType);
+        model.addAttribute("fileSize", fileSize);
+        model.addAttribute("multipartFileName", multipartFileName);
+        return originalName;
+    }
+
+    private String saveFileAsMostRecent(InputStream inputStream) throws IOException, FileNotFoundException {
+        String filePath;
+        java.io.File outputFile = new java.io.File("test.file");
+        filePath = outputFile.getAbsolutePath();
+        OutputStream outputStream = new FileOutputStream(outputFile);
+        IOUtils.copy(inputStream, outputStream);
+        return filePath;
+    }
+
+    private void saveFileToFileSystem(File fileImagesDir, String originalName, MultipartFile multipartFile, Model model) throws IOException {
+        java.io.File saveFile = null;
+        if (fileImagesDir.isDirectory()) {
+            saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
+        }
+        
+        InputStream secondInputStream = multipartFile.getInputStream();
+        IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
+        String savedPath = saveFile.getAbsolutePath();
+        model.addAttribute("savedPath", savedPath);
     }
 }
