@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -99,6 +100,12 @@ public class FileController {
 //					.collect(Collectors.toList())
 //		);
         return "fileView";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/multi/")
+    public String getFormB(Model model) {
+
+        return "imageDropTest";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -187,18 +194,38 @@ public class FileController {
 //        return true;
 //        // return returnVal;
 //    }
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    //{"/", "/{id}"}
+    // @RequestMapping(value = {"/upload/", "/upload/{id}"}, method = RequestMethod.POST)
+    
+    @RequestMapping(value = "/upload/", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean ajaxFileUploaded(Model model, @Validated com.mycompany.capstoneproject.DTO.File file,
+    public Integer ajaxFileUploaded(@PathVariable("id") Optional<Integer> id, Model model, @Validated com.mycompany.capstoneproject.DTO.File file,
             BindingResult result) {
 
-        if (result.hasErrors()) {
-            return false;
-        } else {
-            ajaxUploadFile(file, model);
+        Integer postId = null;
+        Integer returnId = null;
+        
+        if (id.isPresent()) {
+            postId = id.get(); //returns the id
         }
-        return true;
+
+        
+        
+        if (result.hasErrors()) {
+            return 0;
+        } else {
+            Image image = ajaxUploadFile(file, model);
+            if (image != null ){
+                
+                returnId = image.getId();
+                
+                
+            }
+            
+        }
+        return returnId;
     }
+
 
 //
 //    @Autowired
@@ -307,8 +334,9 @@ public class FileController {
 //    public String ajaxFilePreUploaded(Model model) {
 //        return "fileDrop";
 //    }
-    private void ajaxUploadFile(com.mycompany.capstoneproject.DTO.File uploadedFile, Model model) {
+    private Image ajaxUploadFile(com.mycompany.capstoneproject.DTO.File uploadedFile, Model model) {
         String filePath;
+        Image image = null;
         InputStream inputStream = null;
         try {
             MultipartFile multipartFile = uploadedFile.getFile();
@@ -323,7 +351,7 @@ public class FileController {
 
             filePath = saveFileAsMostRecent(inputStream);
 
-            addImageToDatabase(multipartFile);
+            image = addImageToDatabase(multipartFile);
 
             loadRecentInfoIntoModel(model, filePath, multipartFile);
 
@@ -338,12 +366,14 @@ public class FileController {
                 Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        return image;
     }
 
-    private void addImageToDatabase(MultipartFile multipartFile) throws IOException {
+    private Image addImageToDatabase(MultipartFile multipartFile) throws IOException {
         Image image = buildImageFromMultipartFile(multipartFile);
 
-        imageDao.create(image);
+        return imageDao.create(image);
     }
 
     private Image buildImageFromMultipartFile(MultipartFile multipartFile) throws IOException {
@@ -365,10 +395,10 @@ public class FileController {
     private void determineHeightAndWidthOfImage(MultipartFile multipartFile, Image image) throws IOException {
         //BufferedImage bimg = ImageIO.read(new File(filename));
         BufferedImage bimg = ImageIO.read(multipartFile.getInputStream());
-        
+
         int width = bimg.getWidth();
         int height = bimg.getHeight();
-        
+
         image.setHeight(height);
         image.setWidth(width);
     }
