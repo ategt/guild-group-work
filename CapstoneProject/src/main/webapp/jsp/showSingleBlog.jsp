@@ -12,102 +12,136 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-        <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
+    <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
 
-    </head>
-    <body>
-        <div class="container">
-            <h1>Capstone</h1>
-            <hr/>
-            <div class="navbar">
-                <ul class="nav nav-tabs">
-                      <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                    <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
-                    
+</head>
+<body>
+    <div class="container">
+        
+         <nav id="navbar-main" class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
 
-                </ul>    
-            </div>
+            </button>
+            <a class="navbar-brand" href="#">CAPSTONE</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li role="presentation" class="active" ><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
+                    <c:forEach items="${staticPages}" var="staticPage">
+                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
+                    </c:forEach>
+            </ul>
+        </div>
+</nav>
 
-            <div class="row-fluid top30 pagetitle">
+        <div class="row-fluid top30 pagetitle">
 
-                <div class="container">
-
-                    <div class="row">
-
-                        <div class="col-md-12"><h1>Single Blog Post</h1></div>
-
-
-                    </div>
-
-                </div>
-
-
-
-            </div>
             <div class="container">
 
+                <div class="row">
+
+                    <div class="col-md-12"><h1>Single Blog Post</h1></div>
 
 
-
-
-             
-
-
-
-
-
-                        </div>
-
-                        <hr>
-                        
-
-                        <div items="${singlePost}" var="post">
-
-                        
-
-                            
-                                <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3 class="title">${post.title}</h3>
-                                <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${posts.category}</h4>
-                                <h5>${post.content}</h5>
-
-                                <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
-                                 <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
-<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
-
-                            </div>
-                        </div>
-                       
-                        <hr>
-                            </tr>
-                        </div>
-
-            
-                </hr>
-
-
-
-
-
-
-
-                    </div>
                 </div>
+
             </div>
+
+
+
+        </div>
+        <div class="container">
+
+
+
+
+
+
+
+
+
 
 
         </div>
 
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    </body>
+        <hr>
+
+
+        <div items="${singlePost}" var="post">
+
+
+
+
+            <div class="row">
+                <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
+                </div>
+                <div class="col-sm-8">
+                    <h3 class="title">${post.title}</h3>
+                    <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${posts.category}</h4>
+                    <h5>${post.content}</h5>
+
+                    <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+                    <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
+<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
+
+                </div>
+            </div>
+
+            <hr>
+            </tr>
+        </div>
+
+
+        </hr>
+
+
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+             */
+            /*
+             var disqus_config = function () {
+             this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+             this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+             };
+             */
+            (function () {  // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//christevens.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+    </div>
+</div>
+</div>
+
+
+</div>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script id="dsq-count-scr" src="//christevens.disqus.com/count.js" async></script>
+</body>
 </html>
 
 
