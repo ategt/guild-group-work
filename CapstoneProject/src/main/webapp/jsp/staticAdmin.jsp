@@ -10,7 +10,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
+        <!--<link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">-->
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
@@ -115,8 +115,8 @@
                         {title: 'Test template 2', content: 'Test 2'}
                     ],
                     content_css: [
-                        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                        '//www.tinymce.com/css/codepen.min.css'
+                        'http://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                        'http://www.tinymce.com/css/codepen.min.css'
                     ]
                 });
         </script>
