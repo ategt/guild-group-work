@@ -24,10 +24,9 @@ public interface BlogPostInterface {
     public void delete(BlogPost post);
     public List<BlogPost> listBlogs();
     public List<BlogPost> listBlogs(Date date);
-    public List<BlogPost> listByHashTags(HashTag hashTag);
-    public List<BlogPost> listByCategory(Category category);
     public List<BlogPost> listBlogsWithLimit(int pageNumber);
     public Integer getNumOfPosts();
+    public List<BlogPost> listPendingPosts();
     
     
 }
