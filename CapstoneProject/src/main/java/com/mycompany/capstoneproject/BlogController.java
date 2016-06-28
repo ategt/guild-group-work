@@ -264,8 +264,8 @@ public class BlogController {
 
 //        User author = userDao.get(post.getAuthor().getId());
 //        post.setAuthor(author);
-        Category category = categoriesDao.get(post.getCategory().getId());
-        post.setCategory(category);
+//        Category category = categoriesDao.get(post.getCategory().getId());
+//        post.setCategory(category);
 
         model.put("post", post);
 
