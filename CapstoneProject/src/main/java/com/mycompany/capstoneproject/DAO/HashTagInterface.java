@@ -28,6 +28,8 @@ public interface HashTagInterface {
     public List<BlogPost> listBlogs(HashTag hashTag);
 
     public List<HashTag> listHashTags();
+    
+    public List<String> listHashTagNames();
 
     public List<String> findHashTags(String content);
     
