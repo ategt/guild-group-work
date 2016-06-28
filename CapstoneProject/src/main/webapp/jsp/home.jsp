@@ -24,9 +24,9 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                    <c:forEach items="${staticPages}" var="staticPage">
-                    <li role="presentation"><a href="static/${staticPage.id}">${staticPage.title}</a></li>
-                    </c:forEach>
+                        <c:forEach items="${staticPages}" var="staticPage">
+                        <li role="presentation"><a href="static/${staticPage.id}">${staticPage.title}</a></li>
+                        </c:forEach>
 
                 </ul>    
             </div>
@@ -74,14 +74,14 @@
                             <hr>
                             <div class="list-group list-group">
                                 <h4 class="">Categories</h4>
-                                
+
                                 <c:forEach items="${categories}" var="cat">
-                                    <a class="list-group-item"><span class = "badge"></span>${cat.name}</a>
+                                    <a class="list-group-item" href="${pageContext.request.contextPath}/blog/category/${cat.name}"><span class = "badge"></span>${cat.name}</a>
 
                                 </c:forEach>
 
                                 <div id="categories" class="collapse">
-                                    
+
                                 </div>
 
                                 <!--<button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>-->
@@ -100,9 +100,8 @@
                                 <div class="list-group list-group">
                                     <h4 class=""> Top Trending #hashtags</h4>
                                     <c:forEach items="${hashTag}" var="hashtag">
-                                        <a class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
-
-                                    </c:forEach>
+                                        <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+                                        </c:forEach>
                                 </div>
 
                                 <hr>
@@ -125,7 +124,7 @@
                             <hr>
 
                             <h4 class="text-center">President</h4>
-                      
+
 
                             <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
                             <h4 class='text-center'>Patrick Toner</h4>
@@ -151,14 +150,14 @@
                                         <option>Z-A</option>
                                     </select>
                                 </div>
-<!--                                <div class="col-xs-8">
-                                    <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
-                                        <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
-                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
-
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="col-xs-8">
+                                                                    <div class="btn-group pull-right">
+                                                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
+                                                                        <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
+                                                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
+                                
+                                                                    </div>
+                                                                </div>-->
 
                             </div>
 
@@ -171,9 +170,9 @@
                         <hr>
 
 
-                                
-                                
-                                
+
+
+
 
                         <c:forEach items="${posts}" var="post">
 
