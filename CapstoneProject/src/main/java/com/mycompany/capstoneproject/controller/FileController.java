@@ -45,8 +45,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/fileControl")
 public class FileController {
-    
-    
+
+    @Autowired
+    ImageInterface imageDao;
+
     @Autowired
     FileValidator validator;
 
@@ -55,7 +57,7 @@ public class FileController {
         binder.setValidator(validator);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/")
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public String getForm(Model model) {
         java.io.File fileImagesDir = new java.io.File("./uploadedImages");
         if (!fileImagesDir.exists()) {
@@ -82,8 +84,7 @@ public class FileController {
         //images
         model.addAttribute("images", images);
 
-      //  File imageFolder = new File();
-
+        //  File imageFolder = new File();
 //        File rootFolder = new File(Application.ROOT);
 //		List<String> fileNames = Arrays.stream(rootFolder.listFiles())
 //			.map(f -> f.getName())
@@ -98,7 +99,7 @@ public class FileController {
         return "fileView";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value="/")
+    @RequestMapping(method = RequestMethod.POST, value = "/")
     public String fileUploaded(Model model, @Validated File file,
             BindingResult result) {
 
@@ -147,7 +148,6 @@ public class FileController {
                 String savedPath = saveFile.getAbsolutePath();
                 model.addAttribute("savedPath", savedPath);
 
-
             } catch (IOException ex) {
                 Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -162,11 +162,10 @@ public class FileController {
     }
 
     @RequestMapping(value = "/upload/", method = RequestMethod.GET)
-    public String ajaxFilePreUploaded(Model model){
+    public String ajaxFilePreUploaded(Model model) {
         return "fileDrop";
     }
-    
-    
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public Boolean ajaxFileUploaded(Model model, @Validated File file,
@@ -219,7 +218,6 @@ public class FileController {
                 String savedPath = saveFile.getAbsolutePath();
                 model.addAttribute("savedPath", savedPath);
 
-
             } catch (IOException ex) {
                 Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -231,15 +229,12 @@ public class FileController {
             }
         }
         return true;
-       // return returnVal;
+        // return returnVal;
     }
-    
+
 //
 //    @Autowired
 //    FileValidator validator;
-//
-//    @Autowired
-//    ImageInterface imageDao;
 //
 //    @InitBinder
 //    private void initBinder(WebDataBinder binder) {
@@ -363,93 +358,93 @@ public class FileController {
 //        return true;
 //        // return returnVal;
 //    }
-//
-//    private void ajaxUploadFile(Uploaded uploadedFile, Model model) {
-//        String filePath;
-//        InputStream inputStream = null;
-//        try {
-//            MultipartFile multipartFile = uploadedFile.getFile();
-//            java.io.File imagesDirectory = new java.io.File("./uploadedImages");
-//            //multipartFile.
-//            // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
-//
-//            inputStream = multipartFile.getInputStream();
-//
-//            java.io.File fileImagesDir = imagesDirectory;
-//            if (!fileImagesDir.exists()) {
-//                fileImagesDir.mkdir();
-//            }
-//
-//            filePath = saveFileAsMostRecent(inputStream);
-//
-//            addImageToDatabase(multipartFile);
-//
-//            loadRecentInfoIntoModel(model, filePath, multipartFile);
-//
-//            saveFileToFileSystem(fileImagesDir, multipartFile, model);
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                inputStream.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
-//
-//    private void addImageToDatabase(MultipartFile multipartFile) throws IOException {
-//        Image image = new Image();
-//
-//        byte[] imageData = multipartFile.getBytes();
-//
-//        String originalName = multipartFile.getOriginalFilename();
-//        String contentType = multipartFile.getContentType();
-//        Long fileSize = multipartFile.getSize();
-//        String multipartFileName = multipartFile.getName();
-//
-//        image.setImage(imageData);
-//        image.setContentType(contentType);
-//
-//        image.setOriginalName(originalName);
-//
-//        imageDao.create(image);
-//    }
-//
-//    private void loadRecentInfoIntoModel(Model model, String filePath, MultipartFile multipartFile) {
-//        model.addAttribute("filePath", filePath);
-//        String originalName = multipartFile.getOriginalFilename();
-//        String contentType = multipartFile.getContentType();
-//        Long fileSize = multipartFile.getSize();
-//        String multipartFileName = multipartFile.getName();
-//        model.addAttribute("originalName", originalName);
-//        model.addAttribute("contentType", contentType);
-//        model.addAttribute("fileSize", fileSize);
-//        model.addAttribute("multipartFileName", multipartFileName);
-//        //return originalName;
-//    }
-//
-//    private String saveFileAsMostRecent(InputStream inputStream) throws IOException, FileNotFoundException {
-//        String filePath;
-//        java.io.File outputFile = new java.io.File("test.file");
-//        filePath = outputFile.getAbsolutePath();
-//        OutputStream outputStream = new FileOutputStream(outputFile);
-//        IOUtils.copy(inputStream, outputStream);
-//        return filePath;
-//    }
-//
-//    private void saveFileToFileSystem(File fileImagesDir, MultipartFile multipartFile, Model model) throws IOException {
-//        String originalName = multipartFile.getOriginalFilename();
-//
-//        java.io.File saveFile = null;
-//        if (fileImagesDir.isDirectory()) {
-//            saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
-//        }
-//
-//        InputStream secondInputStream = multipartFile.getInputStream();
-//        IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
-//        String savedPath = saveFile.getAbsolutePath();
-//        model.addAttribute("savedPath", savedPath);
-//    }
+
+    private void ajaxUploadFile(Uploaded uploadedFile, Model model) {
+        String filePath;
+        InputStream inputStream = null;
+        try {
+            MultipartFile multipartFile = uploadedFile.getFile();
+            java.io.File imagesDirectory = new java.io.File("./uploadedImages");
+            //multipartFile.
+            // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
+
+            inputStream = multipartFile.getInputStream();
+
+            java.io.File fileImagesDir = imagesDirectory;
+            if (!fileImagesDir.exists()) {
+                fileImagesDir.mkdir();
+            }
+
+            filePath = saveFileAsMostRecent(inputStream);
+
+            addImageToDatabase(multipartFile);
+
+            loadRecentInfoIntoModel(model, filePath, multipartFile);
+
+            saveFileToFileSystem(fileImagesDir, multipartFile, model);
+
+        } catch (IOException ex) {
+            Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void addImageToDatabase(MultipartFile multipartFile) throws IOException {
+        Image image = new Image();
+
+        byte[] imageData = multipartFile.getBytes();
+
+        String originalName = multipartFile.getOriginalFilename();
+        String contentType = multipartFile.getContentType();
+        Long fileSize = multipartFile.getSize();
+        String multipartFileName = multipartFile.getName();
+
+        image.setImage(imageData);
+        image.setContentType(contentType);
+
+        image.setOriginalName(originalName);
+
+        imageDao.create(image);
+    }
+
+    private void loadRecentInfoIntoModel(Model model, String filePath, MultipartFile multipartFile) {
+        model.addAttribute("filePath", filePath);
+        String originalName = multipartFile.getOriginalFilename();
+        String contentType = multipartFile.getContentType();
+        Long fileSize = multipartFile.getSize();
+        String multipartFileName = multipartFile.getName();
+        model.addAttribute("originalName", originalName);
+        model.addAttribute("contentType", contentType);
+        model.addAttribute("fileSize", fileSize);
+        model.addAttribute("multipartFileName", multipartFileName);
+        //return originalName;
+    }
+
+    private String saveFileAsMostRecent(InputStream inputStream) throws IOException, FileNotFoundException {
+        String filePath;
+        java.io.File outputFile = new java.io.File("test.file");
+        filePath = outputFile.getAbsolutePath();
+        OutputStream outputStream = new FileOutputStream(outputFile);
+        IOUtils.copy(inputStream, outputStream);
+        return filePath;
+    }
+
+    private void saveFileToFileSystem(java.io.File fileImagesDir, MultipartFile multipartFile, Model model) throws IOException {
+        String originalName = multipartFile.getOriginalFilename();
+
+        java.io.File saveFile = null;
+        if (fileImagesDir.isDirectory()) {
+            saveFile = new java.io.File(fileImagesDir.getAbsolutePath() + "/" + originalName);
+        }
+
+        InputStream secondInputStream = multipartFile.getInputStream();
+        IOUtils.copy(secondInputStream, new FileOutputStream(saveFile));
+        String savedPath = saveFile.getAbsolutePath();
+        model.addAttribute("savedPath", savedPath);
+    }
 }
