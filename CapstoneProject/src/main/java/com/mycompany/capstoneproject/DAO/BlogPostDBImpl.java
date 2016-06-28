@@ -26,7 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
@@ -88,15 +89,19 @@ public class BlogPostDBImpl implements BlogPostInterface {
         } else {
             authorId = post.getAuthor().getId();
         }
+        post.setStatus("LIVE");
 
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
+                
+                
                 post.getTitle(),
                 authorId,
                 post.getContent(),
                 post.getPostedOn(),
                 post.getExpireOn(),
                 post.getDateToPostOn(),
-                post.getSlug());
+                post.getSlug(),
+                post.getStatus());
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
@@ -146,6 +151,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
         if (post.getId() > 0) {
 
             try {
+                post.setStatus("LIVE");
+                
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
                         post.getAuthor().getId(),
@@ -154,7 +161,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getPostedOn(),
                         post.getExpireOn(),
                         post.getDateToPostOn(),
-                        post.getId()
+                        post.getId(),
+                        post.getStatus()
                 );
 
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
@@ -200,6 +208,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     }
 
+    @Override
+    public List<BlogPost> listPendingPosts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
@@ -226,6 +239,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
+            post.setStatus("LIVE");
 
             return post;
         }

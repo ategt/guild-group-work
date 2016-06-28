@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -12,12 +14,35 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
+    <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
+
 </head>
 <body>
     <div class="container">
+        
+         <nav id="navbar-main" class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
 
-        <%@ include file="header.jsp" %>
-
+            </button>
+            <a class="navbar-brand" href="#">CAPSTONE</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li role="presentation" class="active" ><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
+                    <c:forEach items="${staticPages}" var="staticPage">
+                    <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
+                    </c:forEach>
+            </ul>
+        </div>
+</nav>
 
         <div class="row-fluid top30 pagetitle">
 
@@ -118,7 +143,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script id="dsq-count-scr" src="//christevens.disqus.com/count.js" async></script>
+        <script id="dsq-count-scr" src="//christevens.disqus.com/count.js" async></script>
 </body>
 </html>
 
