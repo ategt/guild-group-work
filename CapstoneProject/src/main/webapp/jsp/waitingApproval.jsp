@@ -47,7 +47,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-12"><h1>Pats Warehouse and Stuff</h1></div>
+                        <div class="col-md-12"><h1>Posts Waiting Approval</h1></div>
 
 
                     </div>
@@ -80,70 +80,14 @@
 
                         </button>
 
-                        <div id="demo" class="collapse in">
-                            <hr>
-                            <div class="list-group list-group">
-                                <h4 class="">Categories</h4>
-
-                                <c:forEach items="${categories}" var="cat">
-                                    <a class="list-group-item" href="${pageContext.request.contextPath}/blog/category/${cat.name}"><span class = "badge"></span>${cat.name}</a>
-
-                                </c:forEach>
-
-                                <div id="categories" class="collapse">
-
-                                </div>
-
-                                <!--<button class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#categories">More <span class="caret"></span></button>-->
-
-                            </div>
-                        </div>
+                       
 
 
 
-                        <div class="hidden-sm hidden-xs">
-
-                            <hr>
-
-                            <div class="well">
-
-                                <div class="list-group list-group">
-                                    <h4 class=""> Top Trending #hashtags</h4>
-                                    <c:forEach items="${hashTag}" var="hashtag">
-                                        <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
-                                        </c:forEach>
-                                </div>
-
-                                <hr>
-
-                            </div>
-
-
-                            <hr>
-
-                            <div class="well">
-
-                                <h4>Company Catalog</h4>
-                                <p><a href="#"><img src="http://f.tqn.com/y/freebies/1/L/D/S/alloy-catalog.jpg" class="img-responsive"></a></p>
-
-                                <p>Everything you need to know about our warehouse, including mens and womens clothing, inventory, and specials.</p>
-
-                                <!--<button class="btn btn-sm btn-block btn-warning">Download</button>-->
-                            </div>
-
-                            <hr>
-
-                            <h4 class="text-center">President</h4>
-
-
-                            <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
-                            <h4 class='text-center'>Patrick Toner</h4>
-
-
-                        </div>
+                      
 
                     </div>
-                    <div class="col-md-9">
+                    <!--<div class="col-md-9">-->
 
 
                         <div class="well hidden-xs"> 
@@ -156,33 +100,14 @@
                                     <select class="form-control">
                                         <option>Newest</option>
                                         <option>Oldest</option>
-                                        <option>A-Z</option>
-                                        <option>Z-A</option>
+                                        <option>Approved</option>
+                                        <option>Unapproved</option>
+                                        <option>Denied</option>
                                     </select>
                                 </div>
-                                <!--                                <div class="col-xs-8">
-                                                                    <div class="btn-group pull-right">
-                                                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
-                                                                        <button type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list"></span></button>
-                                                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span></button>
-                                
-                                                                    </div>
-                                                                </div>-->
-
                             </div>
-
-
-
-
-
                         </div>
-
                         <hr>
-
-
-
-
-
 
                         <c:forEach items="${posts}" var="post">
 
@@ -196,8 +121,7 @@
 
                                     <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
                                     <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
-<!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
-                                          <h4 align="right" >Status: ${post.status}</h4>
+                                    <h4 align="right" >Status:${post.status} </h4>
                                 </div>
                             </div>
 
@@ -205,11 +129,6 @@
                             </tr>
 
                         </c:forEach>
-
-
-
-
-
 
                         <ul class="pagination pagination-lg pull-right">
                             <li><a href="#">«</a></li>

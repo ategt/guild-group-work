@@ -21,7 +21,7 @@
 
 
 
- <nav id="navbar-main" class="navbar navbar-inverse">
+<nav id="navbar-main" class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,7 +44,7 @@
             </ul>
         </div>
 </nav>
-                    
+
 <div class="container">
     <form method="POST" action="./create" class="form-horizontal">
 
@@ -96,7 +96,10 @@
                 <textarea id="content-input" name="content" class="form-control"></textarea>
             </div>
         </div>
-        <input id="create-submit" type="submit" class="btn btn-default center-block"/>
+        <!--<input id="create-submit" type="submit" class="btn btn-default center-block"/>-->
+
+        <input id="create-submit" type="submit" class="btn btn-default"></input>
+        <a href="showUnapprovedPost" id="create-submit-approval" type="submit" class="btn btn-danger">Submit for Approval</a>
     </form>
 </div>
 

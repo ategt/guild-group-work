@@ -138,11 +138,26 @@ public class BlogController {
         return "showSingleBlog";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/showUnapprovedPost", method = RequestMethod.POST)
     public String create(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
-
+        post.setStatus("Waiting Approval"); 
         blogPostDao.create(post);
+        
+
+        updateHashTags(post);
+
+        model.put("post", post);
+        return "showUnapprovedPost";
+
+    }
+    
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
+        BlogPost post = convertPostCommandToPost(postCommand);
+        post.setStatus("LIVE"); 
+        blogPostDao.create(post);
+        
 
         updateHashTags(post);
 
