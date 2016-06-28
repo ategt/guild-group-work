@@ -13,6 +13,7 @@ public class HashTag {
     
     private int id;
     private String name;
+    private int numOfUses;
 
     public int getId() {
         return id;
@@ -29,6 +30,15 @@ public class HashTag {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getNumOfUses() {
+        return numOfUses;
+    }
+
+    public void setNumOfUses(int numOfUses) {
+        this.numOfUses = numOfUses;
+    }
+    
     
     
     
