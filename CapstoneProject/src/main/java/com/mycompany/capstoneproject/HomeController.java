@@ -102,11 +102,11 @@ public class HomeController {
 
         return "aboutUs";
     }
-
-    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
-    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber) {
-        return blogPostDao.listBlogsWithLimit(pageNumber);
-    }
+//
+//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
+//    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber) {
+//        return blogPostDao.listBlogsWithLimit(pageNumber);
+//    }
 
     @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE, method = RequestMethod.GET)
     @ResponseBody

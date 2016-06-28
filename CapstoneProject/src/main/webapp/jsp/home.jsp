@@ -212,11 +212,9 @@
 
                         <ul class="pagination pagination-lg pull-right">
                             <li><a href="#">«</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                                <c:forEach items="${pages}" var="page"> 
+                                <li><a  href="${pageContext.request.contextPath}/home?page=${page}" class="page">${page}</a></li>
+                                </c:forEach>
                             <li><a href="#">»</a></li>
                         </ul>
 

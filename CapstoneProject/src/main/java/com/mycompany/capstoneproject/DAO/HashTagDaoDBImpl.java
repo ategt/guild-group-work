@@ -44,7 +44,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             + "ON user.id=user_id";
     private static final String SQL_UPDATE_HASHTAG = "UPDATE `capstone`.`hashtag` SET `number_of_uses`= ? WHERE `id`=?";
     private static final String SQL_DELETE_HASHTAG = "";
-    private static final String SQL_GET_HASHTAG_LIST = "SELECT * FROM hashtag";
+    private static final String SQL_GET_HASHTAG_LIST = "SELECT id, name, number_of_uses FROM hashtag GROUP BY name";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -130,6 +130,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
 
             hashtag.setId(rs.getInt("id"));
             hashtag.setName(rs.getString("name"));
+            hashtag.setNumOfUses(rs.getInt("number_of_uses"));
 
             return hashtag;
         }
