@@ -7,7 +7,7 @@ package com.mycompany.capstoneproject.DTO;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class UploadedFile {
+public class File {
 		 
 		MultipartFile file;
 		
