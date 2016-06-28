@@ -154,20 +154,20 @@ public class BlogController {
     }
 
     private void updateHashTags(BlogPost post) {
-        List<String> str = hashTagDao.findHashTags(post.getContent());
-        List<HashTag> hashTags = new ArrayList();
-        for (String hashTag : str) {
-            HashTag newHashTag = new HashTag();
-            newHashTag.setName(hashTag.toLowerCase());
-            hashTagDao.create(newHashTag);
-
-            if (hashTags.contains(newHashTag.getName())) {
-
-            } else {
-                hashTags.add(newHashTag);
-            }
-
-        }
+//        List<String> str = hashTagDao.findHashTags(post.getContent());
+        List<HashTag> hashTags = post.getHashTag();
+//        for (String hashTag : str) {
+//            HashTag newHashTag = new HashTag();
+//            newHashTag.setName(hashTag.toLowerCase());
+//            hashTagDao.create(newHashTag);
+//
+//            if (hashTags.contains(newHashTag.getName())) {
+//
+//            } else {
+//                hashTags.add(newHashTag);
+//            }
+//
+//        }
 
         for (HashTag hashTag : hashTags) {
             hashTagDao.updateHashTagPostTable(hashTag, post);
@@ -188,19 +188,28 @@ public class BlogController {
         img.setUrl("");
         List<String> str = hashTagDao.findHashTags(postCommand.getContent());
         List<HashTag> hashTags = new ArrayList();
+        List<HashTag> existingHashTags = hashTagDao.listHashTags();
         for (String hashTag : str) {
             HashTag newHashTag = new HashTag();
             newHashTag.setName(hashTag.toLowerCase());
-            hashTagDao.create(newHashTag);
-
-            if (hashTags.contains(newHashTag.getName())) {
-
-            } else {
+            if(!existingHashTags.contains(newHashTag.getName())){
+                hashTagDao.create(newHashTag);
                 hashTags.add(newHashTag);
+            }else{
+                HashTag existingHashTag = hashTagDao.get(newHashTag.getName());
+                existingHashTag.setNumOfUses(existingHashTag.getNumOfUses() + 1);
+                hashTagDao.incrementNumOfUses(newHashTag);
             }
+            
+
+//            if (hashTags.contains(newHashTag.getName())) {
+//
+//            } else {
+                
+//            }
 
         }
-
+        
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());

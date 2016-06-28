@@ -27,9 +27,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class HashTagDaoDBImpl implements HashTagInterface {
 
-    private static final String SQL_INSERT_HASHTAG = "INSERT INTO hashtag (name) VALUES (?)";
+    private static final String SQL_INSERT_HASHTAG = "INSERT INTO hashtag (name, number_of_uses) VALUES (?, ?)";
     private static final String SQL_INSERT_HASHTAG_POST = "INSERT INTO hashtag_post (hashtag_id, post_id) VALUES (?, ?);";
     private static final String SQL_SELECT_HASHTAG = "SELECT * FROM capstone.hashtag WHERE hashtag.name= ?";
+    private static final String SQL_SELECT_NUM_OF_USES = "SELECT hashtag.number_of_uses FROM capstone.hashtag WHERE hashtag.id= ?";
     private static final String SQL_SELECT_POST_WITH_HASHTAG = "SELECT * FROM hashtag \n"
             + "JOIN hashtag_post \n"
             + "ON hashtag_post.hashtag_id=hashtag.id \n"
@@ -41,7 +42,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             + "ON category_post.category_id=category.id \n"
             + "JOIN user \n"
             + "ON user.id=user_id";
-    private static final String SQL_UPDATE_HASHTAG = "";
+    private static final String SQL_UPDATE_HASHTAG = "UPDATE `capstone`.`hashtag` SET `number_of_uses`= ? WHERE `id`=?";
     private static final String SQL_DELETE_HASHTAG = "";
     private static final String SQL_GET_HASHTAG_LIST = "SELECT * FROM hashtag";
 
@@ -55,9 +56,19 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public HashTag create(HashTag hashTag) {
-        jdbcTemplate.update(SQL_INSERT_HASHTAG, hashTag.getName());
+//        List<HashTag> existingHashTags = jdbcTemplate.query(SQL_GET_HASHTAG_LIST, new HashTagMapper());
+//
+//        if (existingHashTags.contains(hashTag)) {
+//
+//            List<Integer> count = jdbcTemplate.query(SQL_SELECT_NUM_OF_USES, new CountMapper());
+//            int numOfUses = count.get(0);
+//            jdbcTemplate.update(SQL_UPDATE_HASHTAG, numOfUses++, hashTag.getId());
+//        } else {
+        jdbcTemplate.update(SQL_INSERT_HASHTAG, hashTag.getName(), 1);
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         hashTag.setId(id);
+//        }
+
         return hashTag;
     }
 
@@ -88,7 +99,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         List<String> strs = new ArrayList<String>();
         while (mat.find()) {
             //System.out.println(mat.group(1));
-            strs.add("#" + mat.group(1));
+            strs.add(mat.group(1));
         }
 
         return strs;
@@ -102,6 +113,13 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     @Override
     public void updateHashTagPostTable(HashTag hashtag, BlogPost post) {
         jdbcTemplate.update(SQL_INSERT_HASHTAG_POST, hashtag.getId(), post.getId());
+    }
+
+    @Override
+    public void incrementNumOfUses(HashTag hashtag) {
+        List<Integer> count = jdbcTemplate.query(SQL_SELECT_NUM_OF_USES, new CountMapper());
+        int numOfUses = count.get(0);
+        jdbcTemplate.update(SQL_UPDATE_HASHTAG, numOfUses++, hashtag.getId());
     }
 
     private static final class HashTagMapper implements RowMapper<HashTag> {
@@ -143,6 +161,15 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             post.setDateToPostOn(rs.getDate("post_on"));
 
             return post;
+        }
+    }
+
+    private static final class CountMapper implements RowMapper<Integer> {
+
+        public Integer mapRow(ResultSet rs, int i) throws SQLException {
+            Integer count = rs.getInt(1);
+
+            return count;
         }
 
     }
