@@ -18,6 +18,7 @@ public class Image {
     private int width;
     private int height;
     private String description;
+    private String contentType;
 
     public int getId() {
         return id;
@@ -42,12 +43,6 @@ public class Image {
         return image;
     }
 
-    /**
-     * @param image the image to set
-     */
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
     /**
      * @return the originalName
@@ -103,5 +98,26 @@ public class Image {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the contentType
+     */
+    public String getContentType() {
+        return contentType;
+    }
+
+    /**
+     * @param contentType the contentType to set
+     */
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

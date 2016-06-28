@@ -104,6 +104,10 @@ public class ImageDAODBImplTest {
             valid = false;
         }
 
+        if (!image1.getContentType().equals(image2.getContentType())) {
+            valid = false;
+        }
+
         if (!image1.getUrl().equals(image2.getUrl())) {
             valid = false;
         }
@@ -145,6 +149,7 @@ public class ImageDAODBImplTest {
         image.setWidth(0);
         image.setHeight(0);
         image.setDescription(description);
+        image.setContentType("image/jpeg");
 
         return image;
     }
