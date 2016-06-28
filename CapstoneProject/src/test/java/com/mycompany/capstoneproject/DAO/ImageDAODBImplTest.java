@@ -20,6 +20,30 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * @author apprentice
  */
+
+///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//package com.mycompany.capstoneproject.DAO;
+//
+//import com.mycompany.capstoneproject.DTO.Image;
+//import java.util.Arrays;
+//import java.util.List;
+//import java.util.UUID;
+//import org.junit.After;
+//import org.junit.Before;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
+//
+///**
+// *
+// * @author apprentice
+// */
+
 //public class ImageDAODBImplTest {
 //
 //    ApplicationContext ctx;
