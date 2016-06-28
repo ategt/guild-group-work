@@ -161,7 +161,7 @@ public class FileController {
     
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean ajaxFileUploaded(Model model, @Validated UploadedFile file,
+    public Boolean ajaxFileUploaded(Model model, @Validated UploadedFile uploadedFile,
             BindingResult result) {
 
         String filePath = "";
@@ -174,7 +174,7 @@ public class FileController {
         } else {
             InputStream inputStream = null;
             try {
-                MultipartFile multipartFile = file.getFile();
+                MultipartFile multipartFile = uploadedFile.getFile();
                 //multipartFile.
                 // IOUtils.copy(byteArrayInputStream, new FileOutputStream(outputFileName));
 
