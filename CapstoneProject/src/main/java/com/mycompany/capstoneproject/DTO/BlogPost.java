@@ -13,6 +13,7 @@ import java.util.List;
  * @author apprentice
  */
 public class BlogPost {
+
     private int id;
     private String slug;
     private Category category;
@@ -25,7 +26,16 @@ public class BlogPost {
     private Date postedOn;
     private Date expireOn;
     private Date dateToPostOn;
+    private String status;
+    
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;

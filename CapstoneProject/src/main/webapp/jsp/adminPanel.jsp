@@ -19,6 +19,38 @@
     <body>
 
         <%@ include file="header.jsp" %>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="pending-articles">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="demo" class="collapse in">
+                        <hr>
+                        <div class="list-group list-group">
+                            <h4 class="">Admin</h4>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Pending Posts</a>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Edit Posts</a>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Edit Static Pages</a>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Manage Users</a>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Manage Categories</a>
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Manage Hashtags</a>
+
+                            <a class="list-group-item" href="#"><span class = "badge"></span>Pending Posts</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10" id="admin-div">
+                    <h1>testing</h1>
+                </div>
+            </div>
+        </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

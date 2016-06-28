@@ -48,6 +48,46 @@ public class HomeController {
 
         return "homeLogin";
     }
+    
+    
+    @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
+    public String postsWaitingApproval(Map model) {
+        
+//         Integer offset;
+//        if (pageNumber == null) {
+//            offset = 0;
+//        } else {
+//            offset = getOffset(pageNumber);
+//        }
+//        
+           List<BlogPost> posts = blogPostDao.listBlogs();
+
+        List<StaticPage> staticPages = staticPageDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<HashTag> hash = hashTagDao.listHashTags();
+
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count / 3);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
+
+        model.put("pages", pages);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        model.put("posts", posts);
+        model.put("categories", categories);
+        model.put("hashTag", hash);
+       
+
+        return "waitingApproval";
+    }
+    
+    
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
