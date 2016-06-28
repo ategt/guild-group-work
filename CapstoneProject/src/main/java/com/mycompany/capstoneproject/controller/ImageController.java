@@ -44,7 +44,6 @@ public class ImageController {
     public void getImage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
             throws ServletException, IOException {
 
-        
         Image image = imageDao.get(0);
         image.getImage();
 

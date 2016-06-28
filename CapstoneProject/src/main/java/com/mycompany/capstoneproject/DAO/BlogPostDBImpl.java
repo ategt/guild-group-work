@@ -121,15 +121,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public BlogPost getById(Integer id) {
 
-        if (id == null) {
-            return null;
-        }
-
-        try {
             return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
-        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
-            return null;
-        }
 
         //return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
     }

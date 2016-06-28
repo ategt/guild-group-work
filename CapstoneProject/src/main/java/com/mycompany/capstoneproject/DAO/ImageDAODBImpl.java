@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class ImageDAODBImpl implements ImageInterface {
 
-    private static final String SQL_INSERT_IMAGE = "INSERT INTO capstone.image (url, image, original_name, width, height, description) VALUES (?, ?, ?, ?, ?, ?);";
-    private static final String SQL_UPDATE_IMAGE = "UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?  WHERE id = ?";
+    private static final String SQL_INSERT_IMAGE = "INSERT INTO capstone.image (url, image, original_name, width, height, description, content_type) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private static final String SQL_UPDATE_IMAGE = "UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?, content_type = ?  WHERE id = ?";
     private static final String SQL_GET_IMAGE_BY_ID = "SELECT * FROM capstone.image WHERE id = ?";
     private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM capstone.image WHERE id =?";
     private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM capstone.image";
@@ -47,7 +47,8 @@ public class ImageDAODBImpl implements ImageInterface {
                 image.getOriginalName(),
                 image.getWidth(),
                 image.getHeight(),
-                image.getDescription());
+                image.getDescription(),
+                image.getContentType());
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
 
@@ -79,6 +80,7 @@ public class ImageDAODBImpl implements ImageInterface {
                 image.getWidth(),
                 image.getHeight(),
                 image.getDescription(),
+                image.getContentType(),
                 image.getId());
 
     }
@@ -110,6 +112,7 @@ public class ImageDAODBImpl implements ImageInterface {
             image.setWidth(rs.getInt("width"));
             image.setHeight(rs.getInt("height"));
             image.setDescription(rs.getString("description"));
+            image.setContentType(rs.getString("content_type"));
             
             return image;
         }
