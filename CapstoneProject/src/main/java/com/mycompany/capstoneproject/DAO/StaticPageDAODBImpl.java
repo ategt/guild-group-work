@@ -15,14 +15,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+
 /**
  *
  * @author apprentice
  */
 public class StaticPageDAODBImpl implements StaticPageInterface {
 
-    private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id) VALUES (?, ?, ?);";
+    private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id) VALUES (?, ?, ?)";
     private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=? WHERE id=?";
+    private static final String SQL_DELETE_STATIC_PAGE = "DELETE FROM capstone.static_page where id = ?";
     private static final String SQL_GET_STATIC_PAGE_LIST = "SELECT * FROM capstone.static_page";
     private JdbcTemplate jdbcTemplate;
 
@@ -53,6 +55,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     private static final String GET_STATIC_PAGE_BY_ID = "SELECT * FROM static_page WHERE id = ?;";
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public StaticPage get(Integer id) {
         if (id == null) {
             return null;
@@ -67,6 +70,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     private static final String GET_STATIC_PAGE_BY_TITLE = "SELECT * FROM static_page WHERE title = ?;";
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public StaticPage getByTitle(String title) {
         if (title == null) {
             return null;
@@ -79,6 +83,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void update(StaticPage staticPage) {
 
         jdbcTemplate.update(SQL_UPDATE_STATIC_PAGE,
@@ -90,11 +95,15 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     }
 
     @Override
-    public void delete(StaticPage staticPage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void delete(Integer id) {
+
+        jdbcTemplate.update(SQL_DELETE_STATIC_PAGE, id);
+
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<StaticPage> listPages() {
 
         return jdbcTemplate.query(SQL_GET_STATIC_PAGE_LIST, new StaticPageMapper());
@@ -112,9 +121,9 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
             staticPage.setTitle(rs.getString("title"));
             staticPage.setContent(rs.getString("content"));
-
-            Long imageId = rs.getLong("image_id");
-
+            
+            staticPage.setImage_id(rs.getInt("image_id"));
+            
             // either use the image Dao or talk to someone about SQL joins.
             // It would be nice if this code could work.
             /*

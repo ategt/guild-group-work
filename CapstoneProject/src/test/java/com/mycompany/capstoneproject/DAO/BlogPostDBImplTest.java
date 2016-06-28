@@ -44,20 +44,44 @@ public class BlogPostDBImplTest {
     @Test
     public void testGet() {
         System.out.println("Get Post");
-        
+
         Integer id = null;
         BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
         BlogPost expResult = null;
         BlogPost result = instance.getById(id);
         assertEquals(expResult, result);
-        
+
     }
+
+//    @Test
+//    public void testCreate() {
+//        System.out.println("Create Post");
+//        BlogPost post = new BlogPost();
+//        User author = new User();
+//        author.setId(1);        
+//        Date date = new Date();
+//        post.setTitle("Test 1");
+//        post.setAuthor(author);
+//        post.setContent("Testing 1.2.3..");
+//        post.setPostedOn(date);
+//        post.setExpireOn(date);
+//        post.setDateToPostOn(date);
+//        post.setSlug("Test");
+//        
+//        BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
+//        BlogPost expResult = post;
+//        BlogPost result = instance.create(post);
+//        assertEquals(expResult, result);
+//        
+//    }
+//    @Test
+//    public void testNullUpdate() {
     @Test
     public void testCreate() {
         System.out.println("Create Post");
         BlogPost post = new BlogPost();
         User author = new User();
-        author.setId(1);        
+        author.setId(1);
         Date date = new Date();
         post.setTitle("Test 1");
         post.setAuthor(author);
@@ -66,12 +90,12 @@ public class BlogPostDBImplTest {
         post.setExpireOn(date);
         post.setDateToPostOn(date);
         post.setSlug("Test");
-        
+
         BlogPostInterface instance = ctx.getBean("blogPostDao", BlogPostInterface.class);
         BlogPost expResult = post;
         BlogPost result = instance.create(post);
         assertEquals(expResult, result);
-        
+
     }
 
     @Test
@@ -134,14 +158,14 @@ public class BlogPostDBImplTest {
         if (!blogPost1.getTitle().equals(blogPost2.getTitle())) {
             valid = false;
         }
-       
-        if ( blogPost1.getSlug() == null && blogPost2.getSlug() == null ) {
-            
-        } else if ( blogPost1.getSlug() == null || blogPost2.getSlug() == null ) {
+
+        if (blogPost1.getSlug() == null && blogPost2.getSlug() == null) {
+
+        } else if (blogPost1.getSlug() == null || blogPost2.getSlug() == null) {
             valid = false;
         } else if (!blogPost1.getSlug().equals(blogPost2.getSlug())) {
             valid = false;
-        } 
+        }
 
         if (!blogPost1.getContent().equals(blogPost2.getContent())) {
             valid = false;

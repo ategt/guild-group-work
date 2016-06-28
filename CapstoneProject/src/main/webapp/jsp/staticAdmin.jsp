@@ -10,7 +10,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
+        <!--<link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">-->
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
@@ -23,11 +23,12 @@
             <hr/>
             <div class="navbar">
                 <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/">Home</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/static/">Static Pages</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
 
                 </ul>    
             </div>
@@ -37,7 +38,7 @@
 
                 <div class="col-md-6">
 
-                    <table class="table table-bordered table-hover" id="address-table">
+                    <table class="table table-bordered table-hover" id="static-page-table">
                         <thead>
                             <tr>
                                 <th>Page Title</th>
@@ -46,10 +47,10 @@
                             </tr>
                         </thead>
                         <c:forEach items="${staticPages}" var="staticPage">
-                            <tr id="address-row-${staticPage.id}">
-                                <td><a data-address-id="${staticPage.id}" data-toggle="modal" data-target="#showAddressModal">${staticPage.title}</a></td>
-                                <td><a data-address-id="${staticPage.id}" data-toggle="modal" data-target="#editAddressModal">Edit</a></td>
-                                <td><a data-address-id="${staticPageid}" class="delete-link">Delete</a></td>
+                            <tr id="static-page-row-${staticPage.id}">
+                                <td><a href="${staticPage.id}">${staticPage.title}</a></td>
+                                <td><a data-static-page-id="${staticPage.id}" data-toggle="modal" data-target="#editAddressModal">Edit</a></td>
+                                <td><a data-static-page-id="${staticPage.id}" class="delete-link">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -57,7 +58,7 @@
 
                 <div class="col-md-6">
 
-                    <form method="POST" action="./create" class="form-horizontal">
+                    <form method="POST" action="static/" class="form-horizontal">
 
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Page Title: </label>
@@ -85,32 +86,39 @@
             </div>
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
+
+        <script>
+                var contextRoot = '${pageContext.request.contextPath}';
+
+        </script>
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/staticPage.js"></script>
+
         <script>
-            tinymce.init({
-                selector: 'textarea',
-                height: 500,
-                theme: 'modern',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen',
-                    'insertdatetime media nonbreaking save table contextmenu directionality',
-                    'emoticons template paste textcolor colorpicker textpattern imagetools'
-                ],
-                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                toolbar2: 'print preview media | forecolor backcolor emoticons',
-                image_advtab: true,
-                templates: [
-                    {title: 'Test template 1', content: 'Test 1'},
-                    {title: 'Test template 2', content: 'Test 2'}
-                ],
-                content_css: [
-                    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ]
-            });
+                tinymce.init({
+                    selector: 'textarea',
+                    height: 500,
+                    theme: 'modern',
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                        'searchreplace wordcount visualblocks visualchars code fullscreen',
+                        'insertdatetime media nonbreaking save table contextmenu directionality',
+                        'emoticons template paste textcolor colorpicker textpattern imagetools'
+                    ],
+                    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                    toolbar2: 'print preview media | forecolor backcolor emoticons',
+                    image_advtab: true,
+                    templates: [
+                        {title: 'Test template 1', content: 'Test 1'},
+                        {title: 'Test template 2', content: 'Test 2'}
+                    ],
+                    content_css: [
+                        'http://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                        'http://www.tinymce.com/css/codepen.min.css'
+                    ]
+                });
         </script>
 
     </body>

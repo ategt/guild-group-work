@@ -56,7 +56,7 @@
 
     </bean>
 
-    
+    <bean id="fileValidator" class="com.mycompany.capstoneproject.utilities.FileValidator" />
 
     <bean id="hashtagDao" class="com.mycompany.capstoneproject.DAO.HashTagDaoDBImpl">
         <constructor-arg ref="jdbcTemplate"/>

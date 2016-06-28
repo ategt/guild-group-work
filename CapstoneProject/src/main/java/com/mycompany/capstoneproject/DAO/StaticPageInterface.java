@@ -18,7 +18,7 @@ public interface StaticPageInterface {
     public StaticPage get(Integer id);
     public StaticPage getByTitle(String title);
     public void update(StaticPage stat);
-    public void delete(StaticPage stat);
+    public void delete(Integer id);
     public List<StaticPage> listPages();
     
 }
