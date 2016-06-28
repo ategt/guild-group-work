@@ -132,9 +132,9 @@ public class FileController {
                 filePath = outputFile.getAbsolutePath();
                 OutputStream outputStream = new FileOutputStream(outputFile);
                 IOUtils.copy(inputStream, outputStream);
-                String originalName = loadRecentInfoIntoModel(model, filePath, multipartFile);
+                loadRecentInfoIntoModel(model, filePath, multipartFile);
 
-                saveFileToFileSystem(fileImagesDir, originalName, multipartFile, model);
+                saveFileToFileSystem(fileImagesDir, multipartFile, model);
 
             } catch (IOException ex) {
                 Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
