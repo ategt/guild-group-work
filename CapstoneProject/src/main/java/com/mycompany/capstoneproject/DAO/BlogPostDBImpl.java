@@ -136,7 +136,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
 
-        //return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostWithCategoryMapper(), id);
     }
 
     @Override
@@ -209,7 +208,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public Integer getNumOfPosts() {
-
         List<Integer> count = jdbcTemplate.query(SQL_GET_BLOG_COUNT, new CountMapper());
         int numOfPosts = count.get(0);
         return numOfPosts;
