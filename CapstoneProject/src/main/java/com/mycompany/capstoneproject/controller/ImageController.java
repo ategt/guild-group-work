@@ -90,6 +90,25 @@ public class ImageController {
 
     
     
+    @RequestMapping(method = RequestMethod.GET, value = "/imagetestb")
+    public String imagePickerTestB(Map model) {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
+        
+        return "pickerTestB";
+    }
+
+    
+    
     
     
     

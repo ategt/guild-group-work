@@ -67,6 +67,19 @@ public class BlogController {
         return "blog";
     }
 
+    @RequestMapping(value = "/imagetest", method = RequestMethod.GET)
+    public String blogImageTest(Map model) {
+
+        List<Category> categories = categoriesDao.listCategories();
+        Category category = new Category();
+
+        List<User> users = userDao.list();
+        model.put("users", users);
+        model.put("category", category);
+        model.put("categories", categories);
+        return "blogImageTest";
+    }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editById(@PathVariable("id") Integer id, Map model) {
 
@@ -284,7 +297,6 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
-
     public String showByCategory(@PathVariable("name") String category, Map model) {
 
         List<BlogPost> list = blogPostDao.listBlogs();
