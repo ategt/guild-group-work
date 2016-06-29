@@ -73,9 +73,8 @@ public class BlogController {
         BlogPost blogPost = blogPostDao.getById(id);
 
         List<User> users = userDao.list();
-        BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
 
-        if (blogPostCommand == null) {
+        if (blogPost == null) {
             return "unableToEdit";
         }
 
@@ -84,7 +83,7 @@ public class BlogController {
 
 //        List<User> users = userDao.list();
         model.put("users", users);
-        model.put("blogPostCommand", blogPostCommand);
+        model.put("blogPost", blogPost);
 
         return "editBlog";
     }
