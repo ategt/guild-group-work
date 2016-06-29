@@ -56,6 +56,33 @@ public class StaticPageController {
 
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String create(@ModelAttribute StaticPage staticPage, Map model) {
+
+        staticPageDao.create(staticPage);
+
+        model.put("staticPage", staticPage);
+
+        return "redirect:/static/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editSubmit(@ModelAttribute StaticPage staticPage) {
+
+        staticPageDao.create(staticPage);
+
+        return "adminPanel";
+
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable("id") Integer StaticPageId) {
+
+        staticPageDao.delete(StaticPageId);
+
+    }
+
     @RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
     public String showbyid(@PathVariable("id") Integer staticPageId, Map model) {
 
@@ -90,35 +117,6 @@ public class StaticPageController {
     public String showByJustTitle(@PathVariable("title") String title, Map model) {
 
         return StaticPageShow.showByTitle(title, model, staticPageDao);
-    }
-
-    //this method takes user from main admin page to the edit page for the partiuclar static page clicked on
-    //this method is used to create the 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String create(@ModelAttribute StaticPage staticPage, Map model) {
-
-        staticPageDao.create(staticPage);
-
-        model.put("staticPage", staticPage);
-
-        return "redirect:/staticAdmin";
-    }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editSubmit(@ModelAttribute StaticPage staticPage) {
-
-        staticPageDao.create(staticPage);
-
-        return "adminPanel";
-
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public void delete(@PathVariable("id") Integer StaticPageId) {
-
-        staticPageDao.delete(StaticPageId);
-
     }
 
 }
