@@ -126,7 +126,7 @@ data-target="#editDetailModal"-->
                     
                     
 
-                    //console.log(selectedValues);
+                    console.log(selectedValues);
 
 //                    $(selectedValues).each(function (index, element) {
 //                        var e = element;
