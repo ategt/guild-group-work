@@ -149,8 +149,6 @@
             <artifactId>spring-security-web</artifactId>
             <version>4.1.0.RELEASE</version>
         </dependency>
-<<<<<<< HEAD
-=======
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -166,8 +164,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>4.1.0.RELEASE</version>
         </dependency>
-
->>>>>>> 4be6bf679173b92a8f0c022403660210f4bc5ea1
     </dependencies>
 
     <build>
