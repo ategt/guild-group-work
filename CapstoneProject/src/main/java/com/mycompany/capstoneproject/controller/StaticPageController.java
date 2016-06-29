@@ -63,7 +63,7 @@ public class StaticPageController {
 
         model.put("staticPage", staticPage);
 
-        return "redirect:/staticAdmin";
+        return "redirect:/static/";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
