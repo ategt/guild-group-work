@@ -25,7 +25,7 @@
                 <div class="col-md-12">
                     <div id="pending-articles">
                         <c:forEach items="${pendingPosts}" var="post">
-                            <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
+                            <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a></h3>
                             </c:forEach>
                     </div>
                 </div>
