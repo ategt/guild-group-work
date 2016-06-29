@@ -22,32 +22,19 @@
 
             <div class="row">
                 <div class="picker masonry">
-                    <select multiple="multiple" class="image-picker show-html">
-
+                    <select multiple="multiple" style="width: 300px; height: 150px;" class="image-picker show-html">
                         <c:forEach items="${imageIdList}" var="imageId">
-
                             <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${imageId}</option>
-
                         </c:forEach>
-
                     </select>
                 </div>
             </div>
             <hr />
             <div class="row">
-
-
-
                 <c:forEach items="${imageIdList}" var="imageId">
-
                     <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath}/image/showimage/${imageId}" />
-
                 </c:forEach>
-
-
             </div>
-
-
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
