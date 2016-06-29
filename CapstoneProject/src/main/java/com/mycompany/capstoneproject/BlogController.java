@@ -119,9 +119,13 @@ public class BlogController {
 
         // Consider resluging.
         blogPost.setTitle(blogPostCommand.getTitle());
+        blogPost.setSlug(blogPostCommand.getTitle());
 
         // Do something here to recheck for #hashTags.
         blogPost.setContent(blogPostCommand.getContent());
+
+        List<HashTag> hashTags = searchThroughContentForHashTags(blogPostCommand.getContent());
+        blogPost.setHashTag(hashTags);
 
         int categoryId = blogPostCommand.getCategoryId();
         Category category = categoriesDao.get(categoryId);
@@ -150,14 +154,11 @@ public class BlogController {
         return "showSingleBlog";
     }
 
-
-    
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
-        post.setStatus("Pending"); 
+        post.setStatus("Pending");
         blogPostDao.create(post);
-        
 
         updateHashTags(post);
 
@@ -174,7 +175,7 @@ public class BlogController {
                 HashTag newHashTag = new HashTag();
                 newHashTag.setName(hashTag.toLowerCase());
                 hashTags.add(newHashTag);
-            }else{
+            } else {
                 HashTag hash = hashTagDao.get(hashTag);
                 hashTags.add(hash);
             }
@@ -197,28 +198,29 @@ public class BlogController {
         comments.add(comment);
         Image img = new Image();
         img.setUrl("");
-        List<String> str = hashTagDao.findHashTags(postCommand.getContent());
-        List<HashTag> hashTags = new ArrayList();
-        List<String> existingHashTags = hashTagDao.listHashTagNames();
-
-        for (String hashTag : str) {
-
-            if (!existingHashTags.contains(hashTag)) {
-                HashTag newHashTag = new HashTag();
-                newHashTag.setName(hashTag.toLowerCase());
-                hashTagDao.create(newHashTag);
-                hashTags.add(newHashTag);
-            } else {
-                HashTag existingHashTag = hashTagDao.get(hashTag);
-                existingHashTag.setNumOfUses(existingHashTag.getNumOfUses() + 1);
-                hashTagDao.incrementNumOfUses(existingHashTag);
-            }
-
-//            if (hashTags.contains(newHashTag.getName())) {
+        
+        List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
+//        List<HashTag> hashTags = new ArrayList();
+//        List<String> existingHashTags = hashTagDao.listHashTagNames();
 //
+//        for (String hashTag : str) {
+//
+//            if (!existingHashTags.contains(hashTag)) {
+//                HashTag newHashTag = new HashTag();
+//                newHashTag.setName(hashTag.toLowerCase());
+//                hashTagDao.create(newHashTag);
+//                hashTags.add(newHashTag);
 //            } else {
+//                HashTag existingHashTag = hashTagDao.get(hashTag);
+//                existingHashTag.setNumOfUses(existingHashTag.getNumOfUses() + 1);
+//                hashTagDao.incrementNumOfUses(existingHashTag);
 //            }
-        }
+//
+////            if (hashTags.contains(newHashTag.getName())) {
+////
+////            } else {
+////            }
+//        }
 
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
@@ -278,7 +280,6 @@ public class BlogController {
 //        post.setAuthor(author);
 //        Category category = categoriesDao.get(post.getCategory().getId());
 //        post.setCategory(category);
-
         model.put("post", post);
 
 //        List<Category> categories = categoriesDao.listCategories();
@@ -341,6 +342,30 @@ public class BlogController {
         model.put("hashTag", hash);
 
         return "categoryBlogPosts";
+    }
+
+    public List<HashTag> searchThroughContentForHashTags(String content) {
+        List<String> str = hashTagDao.findHashTags(content);
+        List<HashTag> hashTags = new ArrayList();
+        List<String> existingHashTags = hashTagDao.listHashTagNames();
+
+        for (String hashTag : str) {
+
+            if (!existingHashTags.contains(hashTag)) {
+                HashTag newHashTag = new HashTag();
+                newHashTag.setName(hashTag.toLowerCase());
+                hashTagDao.create(newHashTag);
+                hashTags.add(newHashTag);
+            } else {
+                HashTag existingHashTag = hashTagDao.get(hashTag);
+                existingHashTag.setNumOfUses(existingHashTag.getNumOfUses() + 1);
+                hashTagDao.incrementNumOfUses(existingHashTag);
+                hashTags.add(existingHashTag);
+            }
+
+        }
+        
+        return hashTags;
     }
 
 }

@@ -65,6 +65,9 @@ public class AdminPanelController {
         
         List<User> users = userDao.list();
         
+        List<BlogPost> posts = blogPostDao.listBlogs();
+        
+        model.put("posts", posts);
         model.put("users", users);
         model.put("categories", categories);
         model.put("hashtags", hashTags);
