@@ -12,18 +12,22 @@
 <table class="table table-bordered table-hover" id="user-table">
 
     <tr>
-        <th>Name</th>
-        <th>Use</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Date Posted</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
 
-    <c:forEach items="${hashtags}" var="hashtag">
-        <tr id="user-row-${hashtag.id}">
-            <td>${hashtag.name}</td>
-            <td>${hashtag.numOfUses}</td>
-            <td><a data-user-id="${hashtag.id}">Edit</a></td>
-            <td><a data-user-id="${hashtag.id}" class="delete-link">Delete</a></td>
+    <c:forEach items="${posts}" var="post">
+        <tr id="user-row-${post.id}">
+            <td>${post.title}</td>
+            <td>${post.user.name}</td>
+            <td>${post.category}</td>
+            <td><fmt:formatDate pattern="MM/dd/yyyy" value="${post.postedOn}"/></td>
+            <td><a data-user-id="${post.id}">Edit</a></td>
+            <td><a data-user-id="${post.id}" class="delete-link">Delete</a></td>
         </tr>
     </c:forEach>
 

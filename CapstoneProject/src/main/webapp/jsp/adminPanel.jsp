@@ -28,7 +28,7 @@
                         <div class="list-group list-group">
                             <h4 class="">Admin</h4>
                             <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/pendingPosts.jsp')">Pending Posts</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/editBlog.jsp')">Edit Posts</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/posts.jsp')">Edit Posts</button>
                             <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/staticPageEditSkeleton.jsp')">Edit Static Pages</button>
                             <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/users.jsp')">Manage Users</button>
                             <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/category.jsp')">Manage Categories</button>
