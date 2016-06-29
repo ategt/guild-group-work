@@ -107,7 +107,8 @@
         <!--<input id="create-submit" type="submit" class="btn btn-default center-block"/>-->
 
         <input id="create-submit" type="submit" class="btn btn-default"></input>
-        <a href="showUnapprovedPost" id="create-submit-approval" type="submit" class="btn btn-danger">Submit for Approval</a>
+        <a href="blog/showUnapprovedPost"id="create-submit" type="submit" class="btn btn-default">Submit for approval</a>
+        <!--<a href="creat" id="create-submit-approval" type="submit" class="btn btn-danger">Submit for Approval</a>-->
     </form>
 </div>
 

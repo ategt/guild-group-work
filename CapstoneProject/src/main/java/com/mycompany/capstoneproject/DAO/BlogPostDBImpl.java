@@ -59,6 +59,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN user\n"
             + "ON user.id=user_id";
 
+    private static final String SQL_GET_PENDING_POSTS = "SELECT * FROM post \n"
+            + "JOIN category_post \n"
+            + "ON category_post.post_id=post.id\n"
+            + "JOIN category\n"
+            + "ON category_post.category_id=category.id\n"
+            + "JOIN user\n"
+            + "ON user.id=user_id AND status = 'Pending'";
+
     private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id \n"
@@ -70,6 +78,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "LIMIT ?, 3";
 
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
+    
 
     private JdbcTemplate jdbcTemplate;
 
@@ -89,11 +98,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
         } else {
             authorId = post.getAuthor().getId();
         }
-        post.setStatus("LIVE");
+
+        post.setStatus("Pending");
 
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
-                
-                
                 post.getTitle(),
                 authorId,
                 post.getContent(),
@@ -151,7 +159,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
         if (post.getId() > 0) {
 
             try {
-                post.setStatus("LIVE");
+                post.setStatus("Pending");
                 
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
@@ -210,7 +218,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public List<BlogPost> listPendingPosts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SQL_GET_PENDING_POSTS, new BlogPostMapper());
     }
 
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
@@ -239,7 +247,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
-            post.setStatus("LIVE");
+            post.setStatus(rs.getString("status"));
+
 
             return post;
         }
