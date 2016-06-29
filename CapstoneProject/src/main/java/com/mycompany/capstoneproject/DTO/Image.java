@@ -19,6 +19,7 @@ public class Image {
     private int height;
     private String description;
     private String contentType;
+    private Long size;
 
     public int getId() {
         return id;
@@ -119,5 +120,19 @@ public class Image {
      */
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    /**
+     * @return the size
+     */
+    public Long getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(Long size) {
+        this.size = size;
     }
 }

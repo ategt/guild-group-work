@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class ImageDAODBImpl implements ImageInterface {
 
-    private static final String SQL_INSERT_IMAGE = "INSERT INTO capstone.image (url, image, original_name, width, height, description, content_type) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    private static final String SQL_UPDATE_IMAGE = "UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?, content_type = ?  WHERE id = ?";
+    private static final String SQL_INSERT_IMAGE = "INSERT INTO capstone.image (url, image, original_name, width, height, description, content_type, image_size) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String SQL_UPDATE_IMAGE = "UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?, content_type = ? , image_size = ?  WHERE id = ?";
     private static final String SQL_GET_IMAGE_BY_ID = "SELECT * FROM capstone.image WHERE id = ?";
     private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM capstone.image WHERE id =?";
     private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM capstone.image";
@@ -48,7 +48,8 @@ public class ImageDAODBImpl implements ImageInterface {
                 image.getWidth(),
                 image.getHeight(),
                 image.getDescription(),
-                image.getContentType());
+                image.getContentType(),
+                image.getSize());
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
 
@@ -81,6 +82,7 @@ public class ImageDAODBImpl implements ImageInterface {
                 image.getHeight(),
                 image.getDescription(),
                 image.getContentType(),
+                image.getSize(),
                 image.getId());
 
     }
@@ -113,6 +115,7 @@ public class ImageDAODBImpl implements ImageInterface {
             image.setHeight(rs.getInt("height"));
             image.setDescription(rs.getString("description"));
             image.setContentType(rs.getString("content_type"));
+            image.setSize(rs.getLong("image_size"));
             
             return image;
         }
