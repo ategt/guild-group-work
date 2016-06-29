@@ -1,1 +1,1 @@
-mysqldump -u 'root' -p capstone > "sqlSchema-"`date +"%d-%m-%Y"`.sql
+mysqldump -u 'root' -p capstone > capstone.sql
