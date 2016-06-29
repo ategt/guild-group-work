@@ -22,7 +22,7 @@ public class UserDaoDBImpl implements UserInterface {
 
     private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined) VALUES (?, ?, ?, ?, ?, ? )";
     private static final String SQL_UPDATE_USER = "UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ? WHERE id = ?";
-    private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id =?";
+    private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id = ?";
     private static final String SQL_GET_USER = "SELECT * FROM user WHERE id =?";
     private static final String SQL_GET_USER_LIST = "SELECT * FROM user";
 
