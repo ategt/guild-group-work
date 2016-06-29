@@ -43,7 +43,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             + "JOIN user \n"
             + "ON user.id=user_id";
     private static final String SQL_UPDATE_HASHTAG = "UPDATE `capstone`.`hashtag` SET `number_of_uses`= ? WHERE `id`=?";
-    private static final String SQL_DELETE_HASHTAG = "";
+    private static final String SQL_DELETE_HASHTAG = "DELETE FROM `capstone`.`hashtag` WHERE `id`= ?";
     private static final String SQL_GET_HASHTAG_LIST = "SELECT id, name, number_of_uses FROM hashtag GROUP BY name";
     private static final String SQL_GET_HASHTAG_NAME_LIST = "SELECT DISTINCT name FROM hashtag";
 
@@ -85,7 +85,10 @@ public class HashTagDaoDBImpl implements HashTagInterface {
 
     @Override
     public void delete(HashTag hashTag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (hashTag == null) {
+            return;
+        }
+        jdbcTemplate.update(SQL_DELETE_HASHTAG, hashTag.getId());
     }
 
     @Override
@@ -181,7 +184,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         }
 
     }
-    
+
     private static final class StringMapper implements RowMapper<String> {
 
         public String mapRow(ResultSet rs, int i) throws SQLException {

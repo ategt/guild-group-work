@@ -138,7 +138,7 @@ public class BlogController {
         return "showSingleBlog";
     }
 
-  
+
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {

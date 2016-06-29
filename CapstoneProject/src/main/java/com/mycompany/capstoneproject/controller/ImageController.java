@@ -11,7 +11,9 @@ import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.Image;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,22 +46,61 @@ public class ImageController {
     public void getImage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
             throws ServletException, IOException {
 
-        Image image = imageDao.get(0);
-        image.getImage();
+        Image image = imageDao.get(id);
 
-        //Item item = itemService.get(itemId);
-        
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        //response.getOutputStream().write(item.getItemImage());
-        
-        
+        response.setContentLengthLong(image.getSize());
+        response.setContentType(image.getContentType());
+
         response.getOutputStream().write(image.getImage());
-
         response.getOutputStream().close();
 
-        //return "fileView";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/imagelist")
+    @ResponseBody
+    public List<Integer> getAllImages() {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> intList =  images.stream().map(Image::getId).collect(Collectors.toList());
+        
+        return intList;
+    }
+
+    
+    
+    
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/imagetest")
+    public String imagePickerTest(Map model) {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
+        
+        return "pickerTest";
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //    @RequestMapping(value = "/", method = RequestMethod.POST)
 //    @ResponseBody
 //    public Category create(@Valid @RequestBody Category category) {
