@@ -89,7 +89,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
         } else {
             authorId = post.getAuthor().getId();
         }
-        post.setStatus("LIVE");
+        post.setStatus("Pending");
 
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 
@@ -150,7 +150,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
         if (post.getId() > 0) {
 
             try {
-                post.setStatus("LIVE");
+                post.setStatus("Pending");
                 
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
@@ -244,7 +244,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setPostedOn(rs.getDate("date_posted"));
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
-            post.setStatus("LIVE");
+            post.setStatus("Pending");
 
             return post;
         }

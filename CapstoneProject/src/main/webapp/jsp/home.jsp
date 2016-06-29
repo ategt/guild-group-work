@@ -180,11 +180,11 @@
                                 </div>
 
                         </div>
-                    </div>
+                    
 
 
-                    <hr>
-                    </tr>
+                                </hr>
+                    
 
                 </c:forEach>
 
