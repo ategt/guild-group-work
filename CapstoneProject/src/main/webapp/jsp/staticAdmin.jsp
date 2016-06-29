@@ -18,23 +18,11 @@
     </head>
     <body>
 
-        <div class="container">
-            <h1>Admin Panel</h1>
-            <hr/>
-            <div class="navbar">
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/categories" class="">Categories</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/" class="">Log In</a></li>
+        <%@ include file="header.jsp" %>
 
-                </ul>    
-            </div>
+        <div class="container">
 
             <div class="row">
-
 
                 <div class="col-md-6">
 
@@ -58,7 +46,7 @@
 
                 <div class="col-md-6">
 
-                    <form method="POST" action="static/" class="form-horizontal">
+                    <form method="POST" action="" class="form-horizontal">
 
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Page Title: </label>
@@ -88,7 +76,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
 
         <script>
-                var contextRoot = '${pageContext.request.contextPath}';
+            var contextRoot = '${pageContext.request.contextPath}';
 
         </script>
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
@@ -97,28 +85,28 @@
         <script src="${pageContext.request.contextPath}/js/staticPage.js"></script>
 
         <script>
-                tinymce.init({
-                    selector: 'textarea',
-                    height: 500,
-                    theme: 'modern',
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                        'searchreplace wordcount visualblocks visualchars code fullscreen',
-                        'insertdatetime media nonbreaking save table contextmenu directionality',
-                        'emoticons template paste textcolor colorpicker textpattern imagetools'
-                    ],
-                    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                    toolbar2: 'print preview media | forecolor backcolor emoticons',
-                    image_advtab: true,
-                    templates: [
-                        {title: 'Test template 1', content: 'Test 1'},
-                        {title: 'Test template 2', content: 'Test 2'}
-                    ],
-                    content_css: [
-                        'http://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                        'http://www.tinymce.com/css/codepen.min.css'
-                    ]
-                });
+            tinymce.init({
+                selector: 'textarea',
+                height: 500,
+                theme: 'modern',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools'
+                ],
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons',
+                image_advtab: true,
+                templates: [
+                    {title: 'Test template 1', content: 'Test 1'},
+                    {title: 'Test template 2', content: 'Test 2'}
+                ],
+                content_css: [
+                    'http://fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                    'http://www.tinymce.com/css/codepen.min.css'
+                ]
+            });
         </script>
 
     </body>

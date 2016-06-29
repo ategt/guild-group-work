@@ -7,62 +7,56 @@
 $(document).ready(function () {
 
 
-    $('#create-submit').on('click', function (e) {
-
-        e.preventDefault();
-
-        $('#add-contact-validation-errors').empty();
-        var staticPageData = JSON.stringify({
-            name: $('#name-input').val()
-
-        });
-
-
-        $.ajax({
-            url: contextRoot + "/static/",
-            type: 'POST',
-            data: staticPageData,
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Accept", "application/json");
-                xhr.setRequestHeader("Content-Type", "application/json");
-
-            },
-            success: function (data, status) {
-
-                console.log(data);
-
-
-                var tableRow = buildCategoryRow(data);
-//              console.log(tableRow);
-
-                $('#static-page-table').append($(tableRow));
-
-
-                $('#name-input').val('');
-
-
-            },
-            error: function (data, status) {
-
-                var errors = data.responseJSON.errors;
-
-                console.log(errors);
-
-                $.each(errors, function (index, error) {
-
-                    $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
-
-                });
-
-            }
-
-        });
-
-
-
-
-    });
+//    $('#create-submit').on('click', function (e) {
+//
+//        e.preventDefault();
+//
+//        $('#add-contact-validation-errors').empty();
+//        var staticPageData = JSON.stringify({
+//            name: $('#name-input').val()
+//
+//        });
+//
+//
+//        $.ajax({
+//            url: contextRoot + "/static/",
+//            type: 'POST',
+//            data: staticPageData,
+//            dataType: 'json',
+//            beforeSend: function (xhr) {
+//                xhr.setRequestHeader("Accept", "application/json");
+//                xhr.setRequestHeader("Content-Type", "application/json");
+//
+//            },
+//            success: function (data, status) {
+//
+//                console.log(data);
+//
+//
+//                var tableRow = buildCategoryRow(data);
+////              console.log(tableRow);
+//
+//                $('#static-page-table').append($(tableRow));
+//
+//
+//                $('#name-input').val('');
+//
+//
+//            },
+//            error: function (data, status) {
+//
+//                var errors = data.responseJSON.errors;
+//
+//                console.log(errors);
+//
+//                $.each(errors, function (index, error) {
+//
+//                    $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
+//
+//                });
+//            }
+//        });
+//    });
 
 
     function buildCategoryRow(data) {
