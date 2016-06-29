@@ -28,7 +28,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post \n"
@@ -39,7 +38,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN user\n"
             + "ON user.id=user_id AND post.id = ?";
 
-    private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ? WHERE id = ?";
+    private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ? WHERE id = ?";
 
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
@@ -163,12 +162,12 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
                         post.getAuthor().getId(),
-                        post.getCategory().getId(),
                         post.getContent(),
                         post.getPostedOn(),
                         post.getExpireOn(),
                         post.getDateToPostOn(),
                         post.getId(),
+                        post.getSlug(),
                         post.getStatus()
                 );
 
