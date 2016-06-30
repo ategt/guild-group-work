@@ -7,6 +7,9 @@
 
 
     <b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+        
+    <b:bean id="myAuthenticationSuccessHandler"
+                class="com.mycompany.capstoneproject.utilities.MySimpleUrlAuthenticationSuccessHandler" />
     
     <http pattern="/login" security="none"/>
     <!--<http pattern="/" security="none"/>-->
@@ -17,7 +20,8 @@
         <form-login login-processing-url="/j_spring_security_check"
                     login-page="/login"
                     authentication-failure-url="/login?login_error=1"
-        />
+                    authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
+       
         
         <intercept-url pattern="/blog/" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/waitingApproval" access="ROLE_ADMIN"/>
@@ -31,6 +35,7 @@
         <logout logout-url="/logout" logout-success-url="/"/>
         
     </http>
+
     
     <authentication-manager>
         
