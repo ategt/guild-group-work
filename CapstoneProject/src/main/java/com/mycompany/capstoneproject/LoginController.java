@@ -23,6 +23,6 @@ public class LoginController {
 
         model.put("loginError", loginError);
 
-        return "/";
+        return "login";
     }
 }
