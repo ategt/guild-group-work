@@ -15,8 +15,6 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
-    <!--Custom Stylesheet--> 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/homeLogin.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
@@ -32,7 +30,15 @@
             <div class="box-header">
                 <h2>Log In</h2>
             </div>
+            <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+                <label for="username">Username</label><br/>
+                <input type="text" name="username" id="login-username"/><br/>
+                <label for="password">Password</label><br/>
+                <input type="password" name="password" id="login-password"/><br/>
+<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                <input type="submit" value="Login"/>
 
+<!--<<<<<<< HEAD
             <label for="username">Username</label>
             <br/>
             <input type="text" id="username" name="username">
@@ -48,6 +54,11 @@
                     </c:if>
             <br>
             <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
+=======
+            </form>
+
+            <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
+>>>>>>> 64fd5d8bffafc02d93c6e548e2da4e8786de601b-->
             <br/>
             <a data-toggle="modal" data-target="#showAccountModal"><p class="small">Create an Account</p></a>
 
@@ -58,50 +69,6 @@
 
 
 
-    <!--<div id="showAccountModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-    
-             Modal content
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Create Account</h4>
-              </div>
-              <div class="modal-body">
-    
-                    <table class="table table-bordered" id="show-category-table">
-    
-                         <tr>
-                            <th>Username:</th>
-                            <td>
-                                <input type="text" id="user-name"/>
-                            </td>
-                        </tr>
-                         <tr>
-                            <th>Password:</th>
-                            <td>
-                                <input type="text" id="user-password"/>
-                            </td>
-                        </tr>
-                         <tr>
-                            <th>Email:</th>
-                            <td>
-                                <input type="text" id="user-email"/>
-                            </td>
-                        </tr>
-    
-                    </table>
-    
-    
-    
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-    
-          </div>
-        </div>-->
 
     <div class="login-box1 animated1 fadeInUp1">
         <div class="box-header">
@@ -119,39 +86,20 @@
         <br/>
         <input type="email" id="create-email">
         <br/>
-        <input id="create-submit" type="submit"></input>
+        <input id="create-account" type="submit"></input>
 
 
 
     </div>
-</div>
-
-</body>
-<script>
-//    $(document).ready(function () {
-//        $('#logo').addClass('animated fadeInDown');
-//        $("input:text:visible:first").focus();
-//    });
-//    $('#username').focus(function () {
-//        $('label[for="username"]').addClass('selected');
-//    });
-//    $('#username').blur(function () {
-//        $('label[for="username"]').removeClass('selected');
-//    });
-//    $('#password').focus(function () {
-//        $('label[for="password"]').addClass('selected');
-//    });
-//    $('#password').blur(function () {
-//        $('label[for="password"]').removeClass('selected');
-//    });
-</script>
 
 
-            <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+
+
+<!--            <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
                     
                     Username: <input type="text" name="username"/><br/>
                     Password: <input type="password" name="password"/><br/>
-<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="submit" value="Login"/>
                     
                     <c:if test="${loginError == 1}">
@@ -165,8 +113,8 @@
 
 
         </div>
-    </div>
-</body>
+    </div>-->
+
 
 <!--
 --><script>
@@ -176,26 +124,13 @@
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/createUsers.js"></script><!--
-=======
-        $(document).ready(function () {
-        $('#logo').addClass('animated fadeInDown');
-        $("input:text:visible:first").focus();
-        });
-        $('#username').focus(function() {
-                $('label[for="username"]').addClass('selected');
-        });
-        $('#username').blur(function() {
-                $('label[for="username"]').removeClass('selected');
-        });
-        $('#password').focus(function() {
-                $('label[for="password"]').addClass('selected');
-        });
-        $('#password').blur(function() {
-                $('label[for="password"]').removeClass('selected');
-        });
-</script>-->
+<script src="${pageContext.request.contextPath}/js/createUsers.js"></script>
 
+
+
+
+
+<!----></body>
 
 
 

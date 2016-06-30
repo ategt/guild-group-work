@@ -8,7 +8,7 @@
 $(document).ready(function () {
 
 
-    $('#create-submit').on('click', function (e) {
+    $('#create-account').on('click', function (e) {
 
         e.preventDefault();
 
