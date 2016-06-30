@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.capstoneproject.controller;
+package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
@@ -64,6 +64,16 @@ public class StaticPageController {
         model.put("staticPage", staticPage);
 
         return "redirect:/static/";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") Integer id, Map model) {
+
+        StaticPage staticPage = staticPageDao.get(id);
+
+        model.put("staticPage", staticPage);
+
+        return "staticPageEdit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)

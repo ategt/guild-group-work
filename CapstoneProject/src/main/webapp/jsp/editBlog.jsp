@@ -15,12 +15,12 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-
+<%@ include file="header.jsp" %>
     </head>
 
     <body>
 
-        <%@ include file="header.jsp" %>
+        
 
         <div class="container">
             <form:form method="POST" action="./" class="form-horizontal">

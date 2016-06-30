@@ -86,6 +86,18 @@ p.small {
 	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
 	text-align: center;
 }
+.login-box1 {
+	background-color: white;
+	max-width: 340px;
+	margin: 10px;
+	position: static;
+        right: 500px;
+
+	border-radius: 5px;
+	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+	text-align: center;
+        width: 300px;
+}
 
 .login-box .box-header {
 	background-color: #665851;
@@ -142,6 +154,61 @@ p.small {
 	opacity: 0.7;
 	transition: 0.5s;
 }
+.login-box1 .box-header {
+	background-color: #665851;
+	margin-top: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.login-box1 label {
+	font-weight: 700;
+	font-size: .8em;
+	color: #888;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+.login-box1 input {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #888;
+}
+
+.login-box1 input:focus {
+	outline: none;
+	border-color: #665851;
+	transition: 0.5s;
+	color: #665851;
+}
+
+.login-box1 button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: #665851;
+	cursor:pointer;
+	outline: none;
+}
+
+.login-box1 button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+.login-box1 button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
 
 .selected {
 	color: #665851!important;
@@ -155,6 +222,10 @@ p.small {
 }
 
 .login-box {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+}
+.login-box1 {
   -webkit-animation-duration: 1s;
   -webkit-animation-delay: 1s;
 }
@@ -179,6 +250,12 @@ Copyright (c) 2015 Daniel Eden
 */
 
 .animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated1 {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;

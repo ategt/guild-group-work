@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject.DAO;
 import com.mycompany.capstoneproject.DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,9 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class UserDaoDBImpl implements UserInterface {
 
-    private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined) VALUES (?, ?, ?, ?, ?, ? )";
-    private static final String SQL_UPDATE_USER = "UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ? WHERE id = ?";
-    private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id =?";
+    private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined , enabled) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_USER_AUTHORITY = "INSERT INTO `capstone`.`authorities` (`type`, `user_id`) VALUES (?, ?);";
+    private static final String SQL_UPDATE_USER = "UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ?, enabled = ? WHERE id = ?";
+    private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id = ?";
     private static final String SQL_GET_USER = "SELECT * FROM user WHERE id =?";
     private static final String SQL_GET_USER_LIST = "SELECT * FROM user";
 
@@ -39,6 +41,11 @@ public class UserDaoDBImpl implements UserInterface {
         if (user == null) {
             return null;
         }
+        
+        Date date = new Date();
+        
+        user.setJoinedOn(date);
+        user.setRole("ROLE_USER");
 
         jdbcTemplate.update(SQL_INSERT_USER,
                 user.getName(),
@@ -46,11 +53,17 @@ public class UserDaoDBImpl implements UserInterface {
                 user.getPassword(),
                 user.getEmail(),
                 user.getNumOfComments(),
-                user.getJoinedOn());
+                user.getJoinedOn(),
+                user.getEnabled());
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         user.setId(id);
+        
+        jdbcTemplate.update(SQL_INSERT_USER_AUTHORITY,
+                user.getRole(),
+                user.getId());
+        
         return user;
 
     }
@@ -82,7 +95,8 @@ public class UserDaoDBImpl implements UserInterface {
                     user.getEmail(),
                     user.getNumOfComments(),
                     user.getJoinedOn(),
-                    user.getId());
+                    user.getId(),
+                    user.getEnabled());
         }
     }
 
@@ -114,6 +128,7 @@ public class UserDaoDBImpl implements UserInterface {
             user.setNumOfComments(rs.getInt("num_of_comments"));
             user.setPassword(rs.getString("password"));
             user.setRole(rs.getString("role"));
+            user.setEnabled(rs.getInt("enabled"));
 
             return user;
         }

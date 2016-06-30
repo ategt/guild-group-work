@@ -16,11 +16,11 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutUs.css">
-
+<%@ include file="header.jsp" %>
     </head>
     <body>
 
-        <%@ include file="header.jsp" %>
+        
 
 
 
