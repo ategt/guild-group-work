@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,21 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
+        <style>
 
+            #dragandrophandler
+            {
+                border:3px solid black;
+                width:400px;
+                height:400px;
+                /*color:#92AAB0;*/
+                /*text-align:left;vertical-align:middle;*/
+                padding:10px 10px 10px 10px;
+                margin-bottom:10px;
+                /*font-size:200%;*/
+            }
+
+        </style>
     </head>
     <body>
         <div class="container">
@@ -45,8 +60,17 @@
                     </div>
 
               </div>
-              <div class="modal-footer">
+              <div class="image-admin-footer">
 
+                   <form:form method="POST" commandName="file" enctype="multipart/form-data">
+
+                Click Here To Upload An Image To The Server:
+                <input type="file" class="btn btn-default" name="file" />
+                <input type="submit" class="btn btn-default" value="upload" />
+                <form:errors path="file" cssStyle="color: #ff0000;" />
+
+            </form:form>
+                  
                 <button type="button" class="delete-selected-images btn btn-default" >Delete Selected</button>
                 <!--<button type="button" class="submit-from-detail-button btn btn-default" data-dismiss="modal">Submit</button>-->
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
@@ -70,8 +94,10 @@
 
             </div>
 
-
-
+            <div id="dragandrophandler">
+            </div>
+            <br><br>
+            <div id="status1"></div>
 
         </div>
 
@@ -82,6 +108,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/dropfile.js"></script>
         <script>
 
             $(document).ready(function ()
