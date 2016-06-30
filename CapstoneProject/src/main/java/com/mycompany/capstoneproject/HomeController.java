@@ -129,7 +129,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String category(Map model) {
 
         List<Category> categories = categoriesDao.listCategories();
