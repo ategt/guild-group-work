@@ -43,13 +43,83 @@
                         <br>
                         <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
 			<br/>
-			<a href="#"><p class="small">Forgot your password?</p></a>
+			<a data-toggle="modal" data-target="#showAccountModal"><p class="small">Create an Account</p></a>
                         
                         
 		</div>
 	</div>
-</body>
 
+
+
+<!--<div id="showAccountModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+             Modal content
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Account</h4>
+              </div>
+              <div class="modal-body">
+
+                <table class="table table-bordered" id="show-category-table">
+
+                     <tr>
+                        <th>Username:</th>
+                        <td>
+                            <input type="text" id="user-name"/>
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>Password:</th>
+                        <td>
+                            <input type="text" id="user-password"/>
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>Email:</th>
+                        <td>
+                            <input type="text" id="user-email"/>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>-->
+        
+        <div class="login-box1 animated1 fadeInUp1">
+			<div class="box-header">
+				<h2>Create Account</h2>
+			</div>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" id="username">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password">
+			<br/>
+			<label for="email">Email</label>
+			<br/>
+			<input type="email" id="email">
+			<br/>
+			<button type="submit">Create</button>
+
+                        
+                        
+		</div>
+	</div>
+
+</body>
 <script>
 	$(document).ready(function () {
     	$('#logo').addClass('animated fadeInDown');

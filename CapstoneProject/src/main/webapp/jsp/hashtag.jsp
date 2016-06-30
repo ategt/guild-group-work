@@ -9,7 +9,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
 
 
 <div class="well">
@@ -22,7 +21,6 @@
     <hr>
 </div>
 
-=======
 <table class="table table-bordered table-hover" id="user-table">
 
     <tr>
@@ -43,5 +41,4 @@
 
 </table>
 
->>>>>>> 77d254cf193e2a0ba64b2a00635232ccb7baa21a
 

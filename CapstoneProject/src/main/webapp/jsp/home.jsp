@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <!--Form validation -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
     <head>
         <title>Hello Controller Page</title>
@@ -13,11 +13,11 @@
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
-
+<%@ include file="header.jsp" %>
     </head>
 
     <body>
-        <%@ include file="header.jsp" %>
+        
 
         <div class="row-fluid top30 pagetitle">
             <div class="container">
@@ -60,7 +60,8 @@
                                 <h4 class=""> Top Trending #hashtags</h4>
                                 <c:forEach items="${hashTag}" var="hashtag">
                                 <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
-
+                                </c:forEach>
+                                
                         <div class="list-group list-group">
                             <h4 class=""> Top Trending #hashtags</h4>
                             <c:forEach items="${hashTag}" var="hashtag">
@@ -84,6 +85,7 @@
                         <p><a href="#"><img class="center-block" height='200' width='200' src="http://3t7bol18ef963l8x6yzv7ja1.wpengine.netdna-cdn.com/wp-content/uploads/Patrick_400.jpg"></a></p>
                         <h4 class='text-center'>Patrick Toner</h4>
                     </div>
+                </div>
                 </div>
                 
                 <div class="col-md-9">

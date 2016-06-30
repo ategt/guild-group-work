@@ -12,7 +12,7 @@
     <img width="100%" height="200" src="http://www.sandbergmaskin.no/wp-content/uploads/2014/06/Light-Wood-Background-slider.jpg"/>
 </head>
 <body>
-    <nav id="navbar-main" class="navbar navbar-inverse">
+    <nav id="navbar-main" class="navbar navbar-inverse" id="primary">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
