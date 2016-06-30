@@ -8,19 +8,25 @@
 
     <b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     
-    <http pattern="/" security="none"/>
+    <http pattern="/login" security="none"/>
     <!--<http pattern="/" security="none"/>-->
     <http pattern="/css/**" security="none"/>
     <http pattern="/js/**" security="none"/>
     <http auto-config="true" use-expressions="false">
         <csrf disabled="true"/>
         <form-login login-processing-url="/j_spring_security_check"
-                    login-page="/"
-                    authentication-failure-url="/login_error=1"
+                    login-page="/login"
+                    authentication-failure-url="/login?login_error=1"
         />
         
-        <intercept-url pattern="/" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/contact/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/waitingApproval" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/imagetest" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/edit/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/blog/create" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/adminPanel/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/categories" access="ROLE_ADMIN"/>
         
         <logout logout-url="/logout" logout-success-url="/"/>
         
@@ -29,12 +35,12 @@
     <authentication-manager>
         
         <authentication-provider>
-            <password-encoder ref="encoder"/>
+            <!--<password-encoder ref="encoder"/>-->
             <jdbc-user-service id="userService" data-source-ref="dataSource"
-                               users-by-username-query="select username, password, enabled from user where username=?"
-                               authorities-by-username-query="select u.username, a.authority
+                               users-by-username-query="select name, password, enabled from user where name=?"
+                               authorities-by-username-query="select u.name, a.type
                                                               from authorities a inner join user u on a.user_id = u.id
-                                                              where u.username = ?"
+                                                              where u.name = ?"
             />
             
         </authentication-provider>

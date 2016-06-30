@@ -42,13 +42,6 @@ public class HomeController {
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String homeLogin(Map model) {
-
-        return "homeLogin";
-    }
-    
     
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
