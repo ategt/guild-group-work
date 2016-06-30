@@ -7,6 +7,7 @@ package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.BlogPost;
 import com.mycompany.capstoneproject.DTO.Category;
+import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status, thumb_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
@@ -38,7 +39,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN user\n"
             + "ON user.id=user_id AND post.id = ?";
 
-    private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ? WHERE id = ?";
+    private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
 
     private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
 
@@ -47,6 +48,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "LIMIT 1;";
 
     private static final String SQL_GET_DEFAULT_AUTHOR = "SELECT id FROM capstone.user\n"
+            + "ORDER BY id ASC\n"
+            + "LIMIT 1;";
+
+    private static final String SQL_GET_DEFAULT_IMAGE = "SELECT id FROM capstone.image\n"
             + "ORDER BY id ASC\n"
             + "LIMIT 1;";
 
@@ -78,9 +83,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
     
-
     private JdbcTemplate jdbcTemplate;
-
+    
     @Inject
     public BlogPostDBImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -98,6 +102,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
             authorId = post.getAuthor().getId();
         }
 
+        int imageId = 0;
+        
+        if (post.getImage() == null) {
+            imageId = jdbcTemplate.queryForObject(SQL_GET_DEFAULT_IMAGE, Integer.class);
+        } else {
+            imageId = post.getImage().getId();
+        }
+
         post.setStatus("Pending");
 
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
@@ -108,7 +120,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 post.getExpireOn(),
                 post.getDateToPostOn(),
                 post.getSlug(),
-                post.getStatus());
+                post.getStatus(),
+                imageId);
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
@@ -168,8 +181,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getDateToPostOn(),
                         post.getId(),
                         post.getSlug(),
-                        post.getStatus()
-                );
+                        post.getImage().getId(),
+                        post.getStatus());
 
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
                 Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,6 +258,30 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
             post.setStatus(rs.getString("status"));
+            
+            
+//            Image image = new Image();
+//
+//            image.setId(rs.getInt("image.id"));
+//
+//            image.setUrl(rs.getString("image.url"));
+//            image.setImage(rs.getBytes("image.image"));
+//            image.setOriginalName(rs.getString("image.original_name"));
+//            image.setWidth(rs.getInt("image.width"));
+//            image.setHeight(rs.getInt("image.height"));
+//            image.setDescription(rs.getString("image.description"));
+//            image.setContentType(rs.getString("image.content_type"));
+//            image.setSize(rs.getLong("image.image_size"));
+//            
+            
+            
+            
+            
+            //int imageId = rs.getInt("thumb_image");
+            
+            //Image image = imageDao.get(imageId);
+            
+            //post.setImage(image);
 
 
             return post;

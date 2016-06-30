@@ -216,6 +216,9 @@ public class BlogController {
         Image img = new Image();
         img.setUrl("");
         
+        int thumgId = postCommand.getThumbId();
+        Image thumbImage = imageDao.get(thumgId);
+        
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
 //        List<HashTag> hashTags = new ArrayList();
 //        List<String> existingHashTags = hashTagDao.listHashTagNames();
@@ -251,6 +254,7 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
+        post.setImage(thumbImage);
         return post;
     }
 

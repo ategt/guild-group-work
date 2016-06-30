@@ -16,6 +16,7 @@ public class BlogPostCommand {
     private String content;
     private int authorId;
     private int id;
+    private int thumbId;
 
     public int getCategoryId() {
         return categoryId;
@@ -61,6 +62,20 @@ public class BlogPostCommand {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the thumbId
+     */
+    public int getThumbId() {
+        return thumbId;
+    }
+
+    /**
+     * @param thumbId the thumbId to set
+     */
+    public void setThumbId(int thumbId) {
+        this.thumbId = thumbId;
     }
 
 }
