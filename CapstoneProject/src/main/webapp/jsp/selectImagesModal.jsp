@@ -1,9 +1,3 @@
-<%-- 
-    Document   : selectImagesModal
-    Created on : Jun 29, 2016, 11:05:47 AM
-    Author     : apprentice
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="selectImagesModal" class="modal fade" role="dialog">
@@ -106,4 +100,3 @@
 
 
 </script>
-
