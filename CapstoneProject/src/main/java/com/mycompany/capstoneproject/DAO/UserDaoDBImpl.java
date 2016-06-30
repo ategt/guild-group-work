@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDaoDBImpl implements UserInterface {
 
     private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined , enabled) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_USER_AUTHORITY = "INSERT INTO `capstone`.`authorities` (`type`, `user_id`) VALUES (?, ?);";
     private static final String SQL_UPDATE_USER = "UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ?, enabled = ? WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id = ?";
     private static final String SQL_GET_USER = "SELECT * FROM user WHERE id =?";
@@ -44,7 +45,7 @@ public class UserDaoDBImpl implements UserInterface {
         Date date = new Date();
         
         user.setJoinedOn(date);
-        user.setRole("User");
+        user.setRole("ROLE_USER");
 
         jdbcTemplate.update(SQL_INSERT_USER,
                 user.getName(),
@@ -58,6 +59,11 @@ public class UserDaoDBImpl implements UserInterface {
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         user.setId(id);
+        
+        jdbcTemplate.update(SQL_INSERT_USER_AUTHORITY,
+                user.getRole(),
+                user.getId());
+        
         return user;
 
     }
