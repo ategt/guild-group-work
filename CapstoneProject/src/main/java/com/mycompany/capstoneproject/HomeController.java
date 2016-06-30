@@ -43,6 +43,14 @@ public class HomeController {
         this.userDao = UDao;
     }
     
+    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
+    public String aboutUs(Map model) {
+
+        return "aboutUs";
+    }
+    
+
+    
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
         
@@ -116,7 +124,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String category(Map model) {
 
         List<Category> categories = categoriesDao.listCategories();

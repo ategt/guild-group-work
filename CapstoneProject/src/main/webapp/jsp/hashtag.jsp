@@ -9,6 +9,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
+<div class="well">
+    <div class="list-group list-group">
+    <h4 class=""> Top Trending #hashtags</h4>
+      <c:forEach items="${hashTag}" var="hashtag">
+      <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+      </c:forEach>
+    </div>
+    <hr>
+</div>
+
 <table class="table table-bordered table-hover" id="user-table">
 
     <tr>
