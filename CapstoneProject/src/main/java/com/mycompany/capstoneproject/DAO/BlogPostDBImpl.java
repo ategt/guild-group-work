@@ -34,6 +34,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final String SQL_GET_BLOGPOST = "SELECT * FROM post \n"
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
+            + "LEFT JOIN image\n"
+            + "ON post.thumb_image=image.id\n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "JOIN user\n"
@@ -60,12 +62,16 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ON category_post.post_id=post.id\n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
+            + "LEFT JOIN image\n"
+            + "ON post.thumb_image=image.id\n"
             + "JOIN user\n"
             + "ON user.id=user_id";
 
     private static final String SQL_GET_PENDING_POSTS = "SELECT * FROM post \n"
             + "JOIN category_post \n"
             + "ON category_post.post_id=post.id\n"
+            + "LEFT JOIN image\n"
+            + "ON post.thumb_image=image.id\n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "JOIN user\n"
@@ -76,15 +82,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ON category_post.post_id=post.id \n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
+            + "LEFT JOIN image\n"
+            + "ON post.thumb_image=image.id\n"
             + "JOIN user\n"
             + "ON user.id=user_id\n"
             + "ORDER BY date_posted\n"
             + "LIMIT ?, 3";
 
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
-    
+
     private JdbcTemplate jdbcTemplate;
-    
+
     @Inject
     public BlogPostDBImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -103,7 +111,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
         }
 
         int imageId = 0;
-        
+
         if (post.getImage() == null) {
             imageId = jdbcTemplate.queryForObject(SQL_GET_DEFAULT_IMAGE, Integer.class);
         } else {
@@ -171,7 +179,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
             try {
                 post.setStatus("Pending");
-                
+
                 jdbcTemplate.update(SQL_UPDATE_BLOGPOST,
                         post.getTitle(),
                         post.getAuthor().getId(),
@@ -258,31 +266,23 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
             post.setStatus(rs.getString("status"));
-            
-            
-//            Image image = new Image();
-//
-//            image.setId(rs.getInt("image.id"));
-//
-//            image.setUrl(rs.getString("image.url"));
-//            image.setImage(rs.getBytes("image.image"));
-//            image.setOriginalName(rs.getString("image.original_name"));
-//            image.setWidth(rs.getInt("image.width"));
-//            image.setHeight(rs.getInt("image.height"));
-//            image.setDescription(rs.getString("image.description"));
-//            image.setContentType(rs.getString("image.content_type"));
-//            image.setSize(rs.getLong("image.image_size"));
-//            
-            
-            
-            
-            
-            //int imageId = rs.getInt("thumb_image");
-            
-            //Image image = imageDao.get(imageId);
-            
-            //post.setImage(image);
 
+            Image image = new Image();
+
+            image.setId(rs.getInt("image.id"));
+
+            image.setUrl(rs.getString("image.url"));
+            image.setImage(rs.getBytes("image.image"));
+            image.setOriginalName(rs.getString("image.original_name"));
+            image.setWidth(rs.getInt("image.width"));
+            image.setHeight(rs.getInt("image.height"));
+            image.setDescription(rs.getString("image.description"));
+            image.setContentType(rs.getString("image.content_type"));
+            image.setSize(rs.getLong("image.image_size"));
+
+            //int imageId = rs.getInt("thumb_image");
+            //Image image = imageDao.get(imageId);
+            post.setImage(image);
 
             return post;
         }

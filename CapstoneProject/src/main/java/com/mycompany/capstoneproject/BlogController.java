@@ -181,7 +181,6 @@ public class BlogController {
 
         model.put("post", post);
         return "showSingleBlog";
-
     }
 
     private void updateHashTags(BlogPost post) {
