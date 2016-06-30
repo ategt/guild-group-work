@@ -20,8 +20,6 @@
               </div>
               <div class="modal-body">
 
-
-
                 <div class="picker masonry">
                     <select multiple="multiple" style="width: 500px; height: 150px;" id="modal-image-picker" class="image-picker show-html">
                         <c:forEach items="${imageIdList}" var="imageId">
@@ -30,12 +28,9 @@
                     </select>
                 </div>
 
-
-
               </div>
               <div class="modal-footer">
-                <!--<button type=\"button\" data-dvd-id=\"" + data.id + "\" class=\"edit-from-detail-button btn btn-default\" data-dismiss=\"modal\">Edit</button>-->
-
+                  
                 <button type="button" class="submit-from-detail-button btn btn-default" data-dismiss="modal">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -89,12 +84,6 @@
             $(".image_picker_image").height(width);
 
         });
-
-
-//        $('#edit-contact-button').on('click', function (e) {
-//
-//
-//        });
 
     });
 
