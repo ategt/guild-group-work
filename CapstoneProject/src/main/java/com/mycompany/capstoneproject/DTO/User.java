@@ -19,6 +19,16 @@ public class User {
     private String role;
     private int numOfComments;
     private Date joinedOn;
+    int enabled = 1;
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+    
 
     public int getId() {
         return id;

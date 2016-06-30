@@ -8,6 +8,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic Static Page</title>
+        <!-- Bootstrap core CSS -->
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
+
+        <!-- SWC Icon -->
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutUs.css">
+<%@ include file="header.jsp" %>
+    </head>
+    <body>
+        
+        <div class="col-md-2">
+        </div>
+            <div class="col-md-8">
 <table class="table table-striped" id='category-table'>
     <tr>
         <th>Name</th>
@@ -28,7 +48,7 @@
 </table>
 <form method="POST" class="form-horizontal">
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="name" class="col-md-4 control-label"> Name:</label>
             <div class="col-md-8">
@@ -48,6 +68,9 @@
 
     <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
 </form>
+                
+            </div>
+        
 
 
 
@@ -118,4 +141,16 @@
 
           </div>
         </div>-->
+        
+          <script>
+                var contextRoot = '${pageContext.request.contextPath}';
 
+            </script>
+        
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/categories.js"></script>
+
+
+        </body>
+</html>
