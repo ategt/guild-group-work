@@ -106,4 +106,53 @@ public class ImageController {
         
         return "pickerTestB";
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/imageadmin")
+    public String imageAdmin(Map model) {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
+        
+        return "imageAdmin";
+    }
+    
+    
+        
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable("id") Integer contactId) {
+        
+        Image image = imageDao.get(contactId);
+        
+        imageDao.delete(image);
+        
+    }
+    
+    
+//    @RequestMapping(method = RequestMethod.DELETE, value = "/")
+//    @ResponseBody
+//    public String imageDelete(@RequestBody()  , Map model) {
+//
+//        List<Image> images = imageDao.list();
+//
+//        List<Integer> imageIdList =  images.stream()
+//                .filter(a -> a != null)
+//                .filter(a -> a.getDescription() != null)
+//                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+//                .map(Image::getId)
+//                .collect(Collectors.toList());
+//        
+//        model.put("imageIdList", imageIdList);
+//        
+//        return "imagesAdmin";
+//    }
+    
 }
