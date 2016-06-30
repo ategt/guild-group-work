@@ -7,7 +7,7 @@ package com.mycompany.capstoneproject.bll;
 
 import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DTO.Image;
-import com.mycompany.capstoneproject.controller.FileController;
+import com.mycompany.capstoneproject.FileController;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
