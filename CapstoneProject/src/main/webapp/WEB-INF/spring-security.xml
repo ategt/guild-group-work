@@ -23,9 +23,7 @@
                     authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
        
         
-        <intercept-url pattern="/home" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/home" access="ROLE_AUTHOR"/>
-        <intercept-url pattern="/home" access="ROLE_USER"/>
+        <intercept-url pattern="/home" access="ROLE_ADMIN,ROLE_AUTHOR,ROLE_USER"/>
         <intercept-url pattern="/blog/" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/waitingApproval" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/imagetest" access="ROLE_ADMIN"/>
