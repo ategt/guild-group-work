@@ -137,17 +137,6 @@ public class HomeController {
         return "category";
     }
 
-    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
-    public String aboutUs(Map model) {
-
-        return "aboutUs";
-    }
-//
-//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
-//    public List<BlogPost> populateHomePage(@PathVariable("pageNumber") int pageNumber) {
-//        return blogPostDao.listBlogsWithLimit(pageNumber);
-//    }
-
     @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public Image getImage(@PathVariable Integer postId) throws MalformedURLException, IOException {

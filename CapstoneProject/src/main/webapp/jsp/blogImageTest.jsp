@@ -1,3 +1,4 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -72,7 +73,16 @@
 
             </form>
 
-                <button class="btn btn-default add-image-button" value="Add Image" >Add Image</button>
+            <button class="btn btn-default add-image-button" value="Add Image" >Add Image</button>
+
+            <div class="image-size">
+                <select class="btn btn-default dropdown" id="image-size-input" name="image-size-input">
+                    <option value="0">Native</option>
+                    <option value="1">Large</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Small</option>
+                </select>
+            </div>
 
         </div>
 
@@ -114,9 +124,26 @@
 
             $(document).on('click', '.add-image-button', function (e) {
 
+                var imageSize = $('#image-size-input').val();
+
+                console.log(imageSize);
 
                 var sr = "http://localhost:8080/CapstoneProject/image/showimage/248";
-                tinymce.activeEditor.insertContent('<img alt="Added Image" src="' + sr + '"/>');
+                var imgLink = '<img alt="Added Image" src="' + sr + '"/>';
+                if (imageSize == 0) {
+
+                } else if (imageSize == 3) {
+                    imgLink = '<img style="width: 50px;heigth: 50px;" alt="Added Image" src="' + sr + '"/>';
+                } else if (imageSize == 2) {
+                    imgLink = '<img style="width: 150px;heigth: 150px;" alt="Added Image" src="' + sr + '"/>';
+                } else if (imageSize == 1) {
+                    imgLink = '<img style="width: 300px;heigth: 300px;" alt="Added Image" src="' + sr + '"/>';
+
+                }
+
+
+
+                tinymce.activeEditor.insertContent(imgLink);
 
             });
         });
