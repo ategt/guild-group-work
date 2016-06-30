@@ -77,7 +77,7 @@
 
               </div>
             </div>
-
+<!--
 
             <br />
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectImagesModal">Show Modal</button>
@@ -92,7 +92,7 @@
             </div>
             <div class="image-container" >
 
-            </div>
+            </div>-->
 
             <div id="dragandrophandler">
             </div>
@@ -108,7 +108,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/dropfile.js"></script>
+        <script src="${pageContext.request.contextPath}/js/admindropfile.js"></script>
         <script>
 
             $(document).ready(function ()

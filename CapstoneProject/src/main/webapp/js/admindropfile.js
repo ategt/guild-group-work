@@ -4,7 +4,6 @@
 
 function sendFileToServer(formData, status)
 {
-    //var uploadURL = "http://hayageek.com/examples/jquery/drag-drop-file-upload/upload.php"; //Upload URL
     var uploadURL = contextRoot + "/image/upload/"; //Upload URL
     var extraData = {}; //Extra Data.
     var jqXHR = $.ajax({
@@ -34,6 +33,43 @@ function sendFileToServer(formData, status)
             status.setProgress(100);
 
             $("#status1").append("File upload Done<br>");
+
+            var imageUrl = '<option data-img-src="' + contextRoot + '/image/showimage/' + data + '" value="' + data + '">' + contextRoot + '/image/showimage/' + data + '</option>';
+
+            console.log(imageUrl);
+                $('#admin-image-picker')
+                        .append(imageUrl);
+                        
+                        $("select").imagepicker({hide_select: false});
+                        
+                         var imageSize = $('#image-preview-size').val();
+
+                    var width = 50;
+                    var height = 50;
+
+                    if (imageSize == 1) {
+                        width = 50;
+                        height = 50;
+                    } else if (imageSize == 2) {
+                        width = 100;
+                        height = 100;
+                    } else if (imageSize == 3) {
+                        width = 150;
+                        height = 150;
+                    } else if (imageSize == 4) {
+                        width = 200;
+                        height = 200;
+                    }
+
+                    $(".image_picker_image").width(height);
+                    $(".image_picker_image").height(width);
+
+                    
+//                    $("<option></option>")
+//                                .attr("value", key)
+//                                .text(value));
+            
+
         },
         error: function (data, status) {
             //var errors = data.responseJSON.errors;

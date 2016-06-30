@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -163,6 +164,27 @@ public class ImageController {
 
         }
         return returnVal;
+    }
+
+    @RequestMapping(value = "/upload/", method = RequestMethod.POST)
+    @ResponseBody
+    public Integer ajaxFileUploaded(Model model, @Validated com.mycompany.capstoneproject.DTO.File file,
+            BindingResult result) {
+
+        Integer returnId = null;
+
+        if (result.hasErrors()) {
+            return 0;
+        } else {
+            Image image = imageServices.ajaxUploadFile(file, model);
+            if (image != null) {
+
+                returnId = image.getId();
+
+            }
+
+        }
+        return returnId;
     }
 
 //    @RequestMapping(method = RequestMethod.DELETE, value = "/")
