@@ -14,7 +14,15 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--        <script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <style>
+            #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+            #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+            #sortable li span { position: absolute; margin-left: -1.3em; }
+        </style>
     </head>
     <body>
 
@@ -72,11 +80,34 @@
                     </form>
                 </div>
             </div>
+
+
         </div>
+
+                    <ul id="sortable">
+                        <c:forEach items="${staticPages}" var="staticPage">
+                            <li id="${staticPage.id}" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>${staticPage.title}</li>
+                        </c:forEach>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+                    </ul>
+
+
+
         <!-- Placed at the end of the document so the pages load faster -->
 
         <script>
             var contextRoot = '${pageContext.request.contextPath}';
+
+            $(function () {
+                $("#sortable").sortable();
+                $("#sortable").disableSelection();
+            });
 
         </script>
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
