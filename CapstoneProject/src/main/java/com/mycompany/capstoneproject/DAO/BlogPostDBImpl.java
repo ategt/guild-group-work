@@ -166,9 +166,9 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getPostedOn(),
                         post.getExpireOn(),
                         post.getDateToPostOn(),
-                        post.getId(),
                         post.getSlug(),
-                        post.getStatus()
+                        post.getStatus(),
+                        post.getId()
                 );
 
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
