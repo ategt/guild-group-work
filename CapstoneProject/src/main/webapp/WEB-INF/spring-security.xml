@@ -33,7 +33,7 @@
         <intercept-url pattern="/blog/create" access="ROLE_ADMIN"/>
         <intercept-url pattern="/adminPanel/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/categories" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/category" access="ROLE_ADMIN"/>
         
         <logout logout-url="/logout" logout-success-url="/login"/>
         
