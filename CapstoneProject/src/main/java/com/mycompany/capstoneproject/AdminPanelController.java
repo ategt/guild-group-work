@@ -65,6 +65,9 @@ public class AdminPanelController {
         
         List<User> users = userDao.list();
         
+        List<BlogPost> posts = blogPostDao.listBlogs();
+        
+        model.put("posts", posts);
         model.put("users", users);
         model.put("categories", categories);
         model.put("hashtags", hashTags);
@@ -74,77 +77,6 @@ public class AdminPanelController {
         
         return "adminPanel";
     }
-    
-//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-//    public String editById(@PathVariable("id") Integer id, Map model) {
-//
-//        BlogPost blogPost = blogPostDao.getById(id);
-//
-//        List<User> users = userDao.list();
-//        BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
-//
-//        if (blogPostCommand == null) {
-//            return "unableToEdit";
-//        }
-//
-//        List<Category> categories = categoriesDao.listCategories();
-//        model.put("categories", categories);
-//
-////        List<User> users = userDao.list();
-//        model.put("users", users);
-//        model.put("blogPostCommand", blogPostCommand);
-//
-//        return "editBlog";
-//    }
-//
-//    @RequestMapping(value = "/edit/", method = RequestMethod.POST)
-//    public String submitEditById(@ModelAttribute("blogPostCommand") BlogPostCommand blogPostCommand, Map model) {
-//        if (blogPostCommand == null) {
-//            return "unableToEdit";
-//        }
-//
-//        int blogPostId = blogPostCommand.getId();
-//
-//        BlogPost blogPost = blogPostDao.getById(blogPostId);
-//
-//        int authorId = blogPostCommand.getAuthorId();
-//
-//        User user = userDao.get(authorId);
-//
-//        blogPost.setAuthor(user);
-//
-//        // Consider resluging.
-//        blogPost.setTitle(blogPostCommand.getTitle());
-//
-//        // Do something here to recheck for #hashTags.
-//        blogPost.setContent(blogPostCommand.getContent());
-//
-//        int categoryId = blogPostCommand.getCategoryId();
-//        Category category = categoriesDao.get(categoryId);
-//
-//        blogPost.setCategory(category);
-//
-//        blogPostDao.update(blogPost);
-//
-//        //List<User> users = userDao.list();
-//        //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
-////        List<Category> categories = categoriesDao.listCategories();
-////        model.put("categories", categories);
-////
-////        List<User> users = userDao.list();
-////        model.put("users", users);
-////        model.put("blogPostCommand", blogPostCommand);
-//        BlogPost post = blogPostDao.getById(blogPostId);
-//
-//        model.put("post", post);
-//
-//        //model.put("users", users);
-//        //model.put("blogPost", blogPost);
-////        List<Category> categories = categoriesDao.listCategories();
-////
-////        model.put("categories", categories);
-//        return "showSingleBlog";
-//    }
 
 }
 

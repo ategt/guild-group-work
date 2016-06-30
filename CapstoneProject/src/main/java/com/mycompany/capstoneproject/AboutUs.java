@@ -128,29 +128,5 @@ public class AboutUs {
         return "aboutUs";
     }
 
-
-//    @RequestMapping(value = "/create", method = RequestMethod.POST)
-//    public String create(@ModelAttribute BlogPost post) {
-//
-//        blogPostDao.create(post);
-//        return "redirect:/";
-//    }
-
-//}
-
 }
-
-
-//>>>>>>> 709a1dec2faf502d1bb15c3c4811067239900088
-////    @RequestMapping(value = "/create", method = RequestMethod.POST)
-////    public String create(@ModelAttribute BlogPost post) {
-////
-////        blogPostDao.create(post);
-////        return "redirect:/";
-////    }
-//<<<<<<< HEAD
-////}
-//=======
-//}
-//>>>>>>> 709a1dec2faf502d1bb15c3c4811067239900088
 

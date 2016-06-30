@@ -90,61 +90,20 @@ public class ImageController {
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Category create(@Valid @RequestBody Category category) {
-//
-//        return imageDao.create(category);
-//
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    @ResponseBody
-//    public void delete(@PathVariable("id") Integer categoryId) {
-//
-//        Category category = categoryDAO.get(categoryId);
-//
-//        categoryDAO.delete(category);
-//
-//    }
-//
-//    @RequestMapping(value = "/editCategory/{id}", method = RequestMethod.GET)
-//    public String edit(@PathVariable("id") Integer categoryId, Map model) {
-//
-//        Category category = categoryDAO.get(categoryId);
-//
-//        model.put("category", category);
-//
-//        return "editCategory";
-//    }
-//
-//    @RequestMapping(value = "/", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public Category editSubmit(@Valid @RequestBody Category category) {
-//
-//        categoryDAO.update(category);
-//
-//        return category;
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Category show(@PathVariable("id") Integer categoryId) {
-//
-//        Category category = categoryDAO.get(categoryId);
-//
-//        return category;
-//    }
-//    
+    @RequestMapping(method = RequestMethod.GET, value = "/imagetestb")
+    public String imagePickerTestB(Map model) {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
+        
+        return "pickerTestB";
+    }
 }

@@ -49,6 +49,28 @@
 
 
 
+<<<<<<< HEAD
+=======
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="demo" class="collapse in">
+                        <div class="list-group list-group">
+                            <h4 class="">Admin</h4>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/pendingPosts.jsp')">Pending Posts</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/posts.jsp')">Edit Posts</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/staticPageEditSkeleton.jsp')">Edit Static Pages</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/users.jsp')">Manage Users</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/category.jsp')">Manage Categories</button>
+                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/hashtag.jsp')">Manage Hashtags</button>
+
+                            <!--<a class="list-group-item" href="#"><span class = "badge"></span>Pending Posts</a>-->
+
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 77d254cf193e2a0ba64b2a00635232ccb7baa21a
                 <div class="container">
 
                     <div class="col-md-12" id="admin-div">
