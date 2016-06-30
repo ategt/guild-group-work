@@ -5,6 +5,8 @@
  */
 
 
+/* global contextRoot */
+
 $(document).ready(function () {
 
 

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : homeLogin
-    Created on : Jun 27, 2016, 11:24:26 AM
-    Author     : apprentice
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -25,7 +19,7 @@
             <h1 id="title" class="hidden"><span id="logo">Capstone <span>Blog</span></span></h1>
         </div>
 
-        <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+<!--        <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
             <div class="login-box animated ">
                 <div class="box-header">
                     <h2>Log In</h2>
@@ -35,8 +29,8 @@
                     <input type="text" name="username" id="login-username"/><br/>
                     <label for="password">Password</label><br/>
                     <input type="password" name="password" id="login-password"/><br/>
-    <!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-                    <input type="submit" value="Login"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="submit" value="Login"/>-->
 
                     <!--<<<<<<< HEAD
                                 <label for="username">Username</label>
@@ -60,7 +54,7 @@
                                 <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
                     >>>>>>> 64fd5d8bffafc02d93c6e548e2da4e8786de601b-->
                     <br/>
-                    <a href="${pageContext.request.contextPath}/createAccount"><p class="small">Create an Account</p></a>
+                    <a href="${pageContext.request.contextPath}/account"><p class="small">Create an Account</p></a>
 
 
             </div>
@@ -70,7 +64,7 @@
 
 
 
-<!--<div class="login-box1 animated1 fadeInUp1">
+<div class="login-box1 animated1 fadeInUp1">
     <div class="box-header">
         <h2>Create Account</h2>
     </div>
@@ -88,9 +82,12 @@
     <br/>
     <input id="create-account" type="submit"></input>
 
+   <a href="${pageContext.request.contextPath}/"><p class="small">Already Have an Account?</p></a>
 
 
-</div>-->
+</div>
+    
+   
 
 
 
