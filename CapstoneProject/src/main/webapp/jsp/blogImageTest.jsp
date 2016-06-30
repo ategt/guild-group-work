@@ -89,10 +89,106 @@
 
     </div>
 
+    <%@ include file="selectImagesModal.jsp" %>
+    <%@ include file="selectSingleImageModal.jsp" %>
+
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    
+    
+    
+<script src="${pageContext.request.contextPath}/js/image-picker/image-picker.js"></script>
+
+<script>
+    $("select").imagepicker({hide_select: false});
+
+    $(document).ready(function ()
+    {
+        $(".image_picker_image").width(50);
+        $(".image_picker_image").height(50);
+
+        $(".image-preview-size").change(function () {
+
+            var imageSize = $('#image-preview-size').val();
+
+            var width = 50;
+            var height = 50;
+
+            if (imageSize == 1) {
+                width = 50;
+                height = 50;
+            } else if (imageSize == 2) {
+                width = 100;
+                height = 100;
+            } else if (imageSize == 3) {
+                width = 150;
+                height = 150;
+            } else if (imageSize == 4) {
+                width = 200;
+                height = 200;
+            }
+
+            $(".image_picker_image").width(height);
+            $(".image_picker_image").height(width);
+
+        });
+
+    });
+
+
+</script>
+
+<script>
+    $("select").imagepicker({hide_select: false});
+
+    $(document).ready(function ()
+    {
+        $(".image_picker_image").width(50);
+        $(".image_picker_image").height(50);
+
+        $(document).on('click', '.submit-from-detail-button', function (e) {
+
+            e.preventDefault();
+
+            var selectedValues = $('#modal-image-picker').val();
+            console.log(selectedValues);
+
+
+        });
+
+        $(".image-preview-size").change(function () {
+
+            var imageSize = $('#image-preview-size').val();
+
+            var width = 50;
+            var height = 50;
+
+            if (imageSize == 1) {
+                width = 50;
+                height = 50;
+            } else if (imageSize == 2) {
+                width = 100;
+                height = 100;
+            } else if (imageSize == 3) {
+                width = 150;
+                height = 150;
+            } else if (imageSize == 4) {
+                width = 200;
+                height = 200;
+            }
+
+            $(".image_picker_image").width(height);
+            $(".image_picker_image").height(width);
+
+        });
+
+    });
+
+
+</script>
     <script>
         tinymce.init({
             selector: 'textarea',
