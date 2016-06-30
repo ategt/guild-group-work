@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login(@RequestParam(name = "login_error", required = false) Integer loginError, Map model) {
 
         model.put("loginError", loginError);
 
-        return "login";
+        return "index";
     }
 }

@@ -32,34 +32,17 @@
             </div>
 
             <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
-                <label for="username">Username</label>
-                <br/>
-                <input type="text" name="username"/>
-                <br/>
-                <label for="password">Password</label>
-                <br/>
-                <input type="password" name="password">
-                <br/>
-                <button type="submit">Sign In</button>
-                <br>
-                <br>
-                <c:if test="${loginError == 1}">
-                    <div>Error logging in</div>
-                </c:if>
-
-            </form>
-                    <!--            <label for="username">Username</label>
-                                <br/>
-                                <input type="text" name="username"/>
-                                <br/>
-                                <label for="password">Password</label>
-                                <br/>
-                                <input type="password" name="password">
-                                <br/>
-                                <button type="submit">Sign In</button>
-                                <br>
-                                <br>-->
-            <!--<a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>-->
+                    
+                    Username: <input type="text" name="username"/><br/>
+                    Password: <input type="password" name="password"/><br/>
+<!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                    <input type="submit" value="Login"/>
+                    
+                    <c:if test="${loginError == 1}">
+                        <div>Error logging in</div>
+                    </c:if>
+                    
+                </form>
             <br/>
             <a href="#"><p class="small">Forgot your password?</p></a>
 
@@ -67,25 +50,6 @@
         </div>
     </div>
 </body>
-<!--
-<script>
-        $(document).ready(function () {
-        $('#logo').addClass('animated fadeInDown');
-        $("input:text:visible:first").focus();
-        });
-        $('#username').focus(function() {
-                $('label[for="username"]').addClass('selected');
-        });
-        $('#username').blur(function() {
-                $('label[for="username"]').removeClass('selected');
-        });
-        $('#password').focus(function() {
-                $('label[for="password"]').addClass('selected');
-        });
-        $('#password').blur(function() {
-                $('label[for="password"]').removeClass('selected');
-        });
-</script>-->
 
 
 </html>
