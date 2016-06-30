@@ -28,6 +28,9 @@
                     authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
        
         
+        <intercept-url pattern="/home" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/home" access="ROLE_AUTHOR"/>
+        <intercept-url pattern="/home" access="ROLE_USER"/>
         <intercept-url pattern="/blog/" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/waitingApproval" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/imagetest" access="ROLE_ADMIN"/>
@@ -37,7 +40,7 @@
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/categories" access="ROLE_ADMIN"/>
         
-        <logout logout-url="/logout" logout-success-url="/"/>
+        <logout logout-url="/logout" logout-success-url="/login"/>
         
     </http>
 
