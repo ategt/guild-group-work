@@ -21,42 +21,37 @@
 
         <div class="container">
 
-            <div class="row">
-                <div class="col-lg-2">Title:</div>
-                <div class="col-lg-10">${staticPage.title}</div>
+
+            <div class="col-md-6">
+
+                <form method="POST" action="" class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="title" class="col-md-4 control-label">Page Title: </label>
+                        <div class="col-md-8">
+                            <input type="text" id="title-input" name="title" class="form-control" value="${staticPage.title}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title" class="col-md-4 control-label">Image Id: </label>
+                        <div class="col-md-8">
+                            <input type="text" id="image-id" name="image_id" class="form-control" value="${staticPage.image_id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content" class="col-md-4 control-label"> Content:</label>
+                        <div class="col-md-8">
+                            <textarea id="content-input" name="content" class="form-control">${staticPage.content}</textarea>
+                        </div>
+                    </div>
+                    <input id="create-submit" type="submit" class="btn btn-default center-block"/>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-lg-2">Content:</div>
-                <div class="col-lg-10">${staticPage.content}</div>
-            </div>
+
         </div>
-        <div class="col-md-6">
 
-            <form method="POST" action="" class="form-horizontal">
-
-                <div class="form-group">
-                    <label for="title" class="col-md-4 control-label">Page Title: </label>
-                    <div class="col-md-8">
-                        <input type="text" id="title-input" name="title" class="form-control" value="${staticPage.title}"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="title" class="col-md-4 control-label">Image Id: </label>
-                    <div class="col-md-8">
-                        <input type="text" id="image-id" name="image_id" class="form-control" value="${staticPage.image_id}"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="content" class="col-md-4 control-label"> Content:</label>
-                    <div class="col-md-8">
-                        <textarea id="content-input" name="content" class="form-control">${staticPage.content}</textarea>
-                    </div>
-                </div>
-                <input id="create-submit" type="submit" class="btn btn-default center-block"/>
-            </form>
-        </div>
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>

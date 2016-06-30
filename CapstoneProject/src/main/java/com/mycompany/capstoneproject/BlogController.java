@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject;
 import com.mycompany.capstoneproject.DAO.BlogPostInterface;
 import com.mycompany.capstoneproject.DAO.CategoriesInterface;
 import com.mycompany.capstoneproject.DAO.HashTagInterface;
+import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DAO.UserInterface;
 import com.mycompany.capstoneproject.DTO.BlogPost;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,15 +45,18 @@ public class BlogController {
     private CategoriesInterface categoriesDao;
     private StaticPageInterface staticDao;
     private HashTagInterface hashTagDao;
+    private ImageInterface imageDao;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface SDao, HashTagInterface HDao) {
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface SDao, HashTagInterface HDao, ImageInterface imageDao) {
 
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
         this.staticDao = SDao;
         this.hashTagDao = HDao;
+        this.imageDao = imageDao;
+       
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -70,6 +75,18 @@ public class BlogController {
     @RequestMapping(value = "/imagetest", method = RequestMethod.GET)
     public String blogImageTest(Map model) {
 
+        
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
+        
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
 
