@@ -151,23 +151,8 @@ public class BlogController {
 
         blogPostDao.update(blogPost);
 
-        //List<User> users = userDao.list();
-        //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
-//        List<Category> categories = categoriesDao.listCategories();
-//        model.put("categories", categories);
-//
-//        List<User> users = userDao.list();
-//        model.put("users", users);
-//        model.put("blogPostCommand", blogPostCommand);
-        BlogPost post = blogPostDao.getById(blogPostId);
+        model.put("post", blogPost);
 
-        model.put("post", post);
-
-        //model.put("users", users);
-        //model.put("blogPost", blogPost);
-//        List<Category> categories = categoriesDao.listCategories();
-//
-//        model.put("categories", categories);
         return "showSingleBlog";
     }
 

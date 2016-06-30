@@ -187,11 +187,12 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getPostedOn(),
                         post.getExpireOn(),
                         post.getDateToPostOn(),
-                        post.getId(),
                         post.getSlug(),
+                        post.getStatus(),
                         post.getImage().getId(),
-                        post.getStatus());
-
+                        post.getId());
+                
+//title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
                 Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
