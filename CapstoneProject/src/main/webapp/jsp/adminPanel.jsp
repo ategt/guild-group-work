@@ -26,17 +26,17 @@
 
                 <nav >
                     <ul>
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/pendingPosts.jsp')">Pending Posts</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/pendingPosts')">Pending Posts</a>
                        
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/editBlog.jsp')">Edit Posts</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/editPosts')">Edit Posts</a>
                        
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/staticPageEditSkeleton.jsp')">Edit Static Pages</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/staticPages')">Edit Static Pages</a>
                         
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/users.jsp')">Manage Users</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/users')">Manage Users</a>
                       
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/category.jsp')">Manage Categories</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/categories')">Manage Categories</a>
                        
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/jsp/hashtag.jsp')">Manage Hashtags</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/hashtags')">Manage Hashtags</a>
                         <a class="padded" class="btn btn-success" href="${pageContext.request.contextPath}/home">Home</a>
                     </ul></nav>
 
@@ -54,40 +54,7 @@
                     </div>
                     
                     <div class="com-md-2"></div>
-                   
-
-
-
-
-
-        <!--<div class="container">-->
-            
-<!--            <div class="row">
-                <div class="col-md-2">
-                    <div id="demo" class="collapse in">
-                        <div class="list-group list-group">
-                            <h4 class="">Admin</h4>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/pendingPosts.jsp')">Pending Posts</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/posts.jsp')">Edit Posts</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/staticPageEditSkeleton.jsp')">Edit Static Pages</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/users.jsp')">Manage Users</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/category.jsp')">Manage Categories</button>
-                            <button type="button" class="btn btn-primary" onclick="changeContent('${pageContext.request.contextPath}/jsp/hashtag.jsp')">Manage Hashtags</button>
-
-                            <a class="list-group-item" href="#"><span class = "badge"></span>Pending Posts</a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-
-                    <div class="col-md-12" id="admin-div">
-
-                    </div>
-                </div>
-            </div>-->
-        <!--</div>-->
+                  
 
     </div>
     <script>

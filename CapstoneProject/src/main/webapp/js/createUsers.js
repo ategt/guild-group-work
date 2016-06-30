@@ -44,9 +44,9 @@ $(document).ready(function () {
 //                $('#category-table').append($(tableRow));
 
 
-                $('#create-username').val(""),
-                        $('#create-password').val(""),
-                        $('#create-email').val("");
+                $('#create-username').text(""),
+                        $('#create-password').text(""),
+                        $('#create-email').text("");
 
 
             },
