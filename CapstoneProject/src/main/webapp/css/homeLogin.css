@@ -89,14 +89,13 @@ p.small {
 .login-box1 {
 	background-color: white;
 	max-width: 340px;
-	margin: 10px;
-	position: static;
-        right: 500px;
-
+	margin: 0 auto;
+	position: relative;
+        top: 80px;
+	padding-bottom: 30px;
 	border-radius: 5px;
 	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
 	text-align: center;
-        width: 300px;
 }
 
 .login-box .box-header {

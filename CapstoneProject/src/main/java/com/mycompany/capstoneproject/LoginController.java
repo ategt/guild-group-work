@@ -30,4 +30,14 @@ public class LoginController {
     }
     
     
+    @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
+    public String createAccount() {
+
+
+        return "createAccount";
+    }
+    
+    
+    
+    
 }
