@@ -79,9 +79,9 @@ public class StaticPageController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute StaticPage staticPage) {
 
-        staticPageDao.create(staticPage);
+        staticPageDao.update(staticPage);
 
-        return "adminPanel";
+        return "staticAdmin";
 
     }
 
