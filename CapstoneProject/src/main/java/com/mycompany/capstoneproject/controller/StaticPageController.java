@@ -66,6 +66,16 @@ public class StaticPageController {
         return "redirect:/static/";
     }
 
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") Integer id, Map model) {
+
+        StaticPage staticPage = staticPageDao.get(id);
+
+        model.put("staticPage", staticPage);
+
+        return "staticPageEdit";
+    }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute StaticPage staticPage) {
 
