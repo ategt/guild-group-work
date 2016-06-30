@@ -34,12 +34,12 @@ $(document).ready(function () {
             success: function (data, status) {
 
                 console.log(data);
-
-
-                var tableRow = buildCategoryRow(data);
-//              console.log(tableRow);
-
-                $('#category-table').append($(tableRow));
+//
+//
+//                var tableRow = buildCategoryRow(data);
+////              console.log(tableRow);
+//
+//                $('#category-table').append($(tableRow));
 
 
                 $('#create-username').val(""),

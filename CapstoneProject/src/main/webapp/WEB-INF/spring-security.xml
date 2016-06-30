@@ -18,7 +18,7 @@
     <http auto-config="true" use-expressions="false">
         <csrf disabled="true"/>
         <form-login login-processing-url="/j_spring_security_check"
-                    login-page="/login"
+                    login-page="/"
                     authentication-failure-url="/login?login_error=1"
                     authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
        
@@ -35,7 +35,7 @@
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/categories" access="ROLE_ADMIN"/>
         
-        <logout logout-url="/logout" logout-success-url="/login"/>
+        <logout logout-url="/logout" logout-success-url="/"/>
         
     </http>
 

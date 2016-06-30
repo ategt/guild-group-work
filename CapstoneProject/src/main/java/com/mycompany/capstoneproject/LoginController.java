@@ -21,12 +21,12 @@ public class LoginController {
    
     
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam(name = "login_error", required = false) Integer loginError, Map model) {
 
         model.put("loginError", loginError);
 
-        return "index";
+        return "login";
     }
     
     

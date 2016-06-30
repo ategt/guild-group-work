@@ -26,6 +26,8 @@
         <div class="top">
             <h1 id="title" class="hidden"><span id="logo">Capstone <span>Blog</span></span></h1>
         </div>
+        
+         <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
         <div class="login-box animated fadeInUp">
             <div class="box-header">
                 <h2>Log In</h2>
@@ -33,14 +35,17 @@
 
             <label for="username">Username</label>
             <br/>
-            <input type="text" id="login-username">
+            <input type="text" id="username" name="username">
             <br/>
             <label for="password">Password</label>
             <br/>
-            <input type="password" id="login-password">
+            <input type="password" id="password" name="password">
             <br/>
             <button type="submit">Sign In</button>
             <br>
+            <c:if test="${loginError == 1}">
+                        <div>Error logging in</div>
+                    </c:if>
             <br>
             <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>
             <br/>
@@ -49,6 +54,7 @@
 
         </div>
     </div>
+            </form>
 
 
 
@@ -140,7 +146,6 @@
 //    });
 </script>
 
-=======
 
             <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
                     
@@ -156,23 +161,22 @@
                 </form>
             <br/>
             <a href="#"><p class="small">Forgot your password?</p></a>
->>>>>>> 1ee2f071ea2b157b486bd0911a653ca837e43400
+
 
 
         </div>
     </div>
 </body>
-<<<<<<< HEAD
-=======
+
 <!--
-<script>
-<<<<<<< HEAD
+--><script>
+
     var contextRoot = '${pageContext.request.contextPath}';
 
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/createUsers.js"></script>
+<script src="${pageContext.request.contextPath}/js/createUsers.js"></script><!--
 =======
         $(document).ready(function () {
         $('#logo').addClass('animated fadeInDown');
@@ -191,7 +195,7 @@
                 $('label[for="password"]').removeClass('selected');
         });
 </script>-->
->>>>>>> 1bef6a11e568b74f32fa5646f1728ad954c6db75
+
 
 
 
