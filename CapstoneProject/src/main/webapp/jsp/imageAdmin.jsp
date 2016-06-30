@@ -20,7 +20,19 @@
 
             #dragandrophandler
             {
-                border:3px solid black;
+                /*border:3px solid black;*/
+                /*width:400px;*/
+                /*height:400px;*/
+                /*color:#92AAB0;*/
+                /*text-align:left;vertical-align:middle;*/
+                /*padding:10px 10px 10px 10px;*/
+                /*margin-bottom:10px;*/
+                /*font-size:200%;*/
+            }
+
+
+            #status1
+            {
                 width:400px;
                 height:400px;
                 /*color:#92AAB0;*/
@@ -28,64 +40,67 @@
                 padding:10px 10px 10px 10px;
                 margin-bottom:10px;
                 /*font-size:200%;*/
+                overflow: scroll;
             }
+
+
 
         </style>
     </head>
     <body>
         <div class="container">
-
-            <div class="image-admin-panel">
+            <div id="dragandrophandler">
+                <div class="image-admin-panel">
               <div class="image-admin-header">
                 <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
                 <h4 class="modal-title">Select Images</h4>
-                    <br />
-                    Preview Image Size:
-                    <select id="image-preview-size" class="image-preview-size form-control">
-                        <option value="1" selected="selected">50x50</option>
-                        <option value="2">100x100</option>
-                        <option value="3">150x150</option>
-                        <option value="4">200x200</option>
-                        <!--<option value="0">Native</option>-->
-                    </select>
+                        <br />
+                        Preview Image Size:
+                        <select id="image-preview-size" class="image-preview-size form-control">
+                            <option value="1" selected="selected">50x50</option>
+                            <option value="2">100x100</option>
+                            <option value="3">150x150</option>
+                            <option value="4">200x200</option>
+                            <!--<option value="0">Native</option>-->
+                        </select>
               </div>
               <div class="image-admin-body">
 
-                    <div class="picker">
-                        <select multiple="multiple" style="width: 500px; height: 150px;" id="admin-image-picker" class="image-picker show-html">
-                            <c:forEach items="${imageIdList}" var="imageId">
-                                <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+                        <div class="picker">
+                            <select multiple="multiple" style="width: 500px; height: 150px;" id="admin-image-picker" class="image-picker show-html">
+                                <c:forEach items="${imageIdList}" var="imageId">
+                                    <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
 
               </div>
               <div class="image-admin-footer">
 
-                   <form:form method="POST" commandName="file" enctype="multipart/form-data">
+                        <form:form method="POST" commandName="file" enctype="multipart/form-data">
 
-                Click Here To Upload An Image To The Server:
-                <input type="file" class="btn btn-default" name="file" />
-                <input type="submit" class="btn btn-default" value="upload" />
-                <form:errors path="file" cssStyle="color: #ff0000;" />
+                            Click Here To Upload An Image To The Server:
+                            <input type="file" class="btn btn-default" name="file" />
+                            <input type="submit" class="btn btn-default" value="upload" />
+                            <form:errors path="file" cssStyle="color: #ff0000;" />
 
-            </form:form>
-                  
+                        </form:form>
+
                 <button type="button" class="delete-selected-images btn btn-default" >Delete Selected</button>
                 <!--<button type="button" class="submit-from-detail-button btn btn-default" data-dismiss="modal">Submit</button>-->
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
 
               </div>
             </div>
-<!--
-
-            <br />
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectImagesModal">Show Modal</button>
-            <br />
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Show Single Modal</button>
-
-            <hr />
-            <div class="row">
+                <!--
+                
+                            <br />
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectImagesModal">Show Modal</button>
+                            <br />
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Show Single Modal</button>
+                
+                            <hr />
+                            <div class="row">
                 <c:forEach items="${imageIdList}" var="imageId">
                     <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath}/image/showimage/${imageId}" />
                 </c:forEach>
@@ -94,13 +109,13 @@
 
             </div>-->
 
-            <div id="dragandrophandler">
+                <div id="dragandrophandler-old">
+                </div>
+                <br><br>
+                <div id="status1"></div>
+
             </div>
-            <br><br>
-            <div id="status1"></div>
-
         </div>
-
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
         </script>

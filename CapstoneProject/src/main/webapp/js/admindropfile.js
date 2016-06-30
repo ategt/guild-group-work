@@ -87,9 +87,11 @@ function createStatusbar(obj)
     var row = "odd";
     if (rowCount % 2 == 0)
         row = "even";
-    this.statusbar = $("<div class='statusbar " + row + "'></div>");
+    //this.statusbar = $("<div class='statusbar " + row + "'></div>");
+    this.statusbar = $("#status1").appendTo($("<div class='statusbar " + row + "'></div>"));
     this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
     this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
+    //this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
     this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
     this.abort = $("<div class='abort'>Abort</div>").appendTo(this.statusbar);
     obj.after(this.statusbar);
