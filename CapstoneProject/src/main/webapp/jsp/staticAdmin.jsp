@@ -15,6 +15,11 @@
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
+        <style>
+            #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+            #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+            #sortable li span { position: absolute; margin-left: -1.3em; }
+        </style>
     </head>
     <body>
 
@@ -27,17 +32,15 @@
                 <div class="col-md-6">
 
                     <table class="table table-bordered table-hover" id="static-page-table">
-                        <thead>
                             <tr>
                                 <th>Page Title</th>
                                 <th><span class="glyphicon glyphicon-edit"></span> Edit</th>
                                 <th><i class="glyphicon glyphicon-remove"></i> Delete</th>
                             </tr>
-                        </thead>
                         <c:forEach items="${staticPages}" var="staticPage">
                             <tr id="static-page-row-${staticPage.id}">
                                 <td><a href="${staticPage.id}">${staticPage.title}</a></td>
-                                <td><a data-static-page-id="${staticPage.id}" data-toggle="modal" data-target="#editAddressModal">Edit</a></td>
+                                <td><a href="edit/${staticPage.id}">Edit</a></td>
                                 <td><a data-static-page-id="${staticPage.id}" class="delete-link">Delete</a></td>
                             </tr>
                         </c:forEach>
@@ -72,7 +75,11 @@
                     </form>
                 </div>
             </div>
+
+
         </div>
+
+
         <!-- Placed at the end of the document so the pages load faster -->
 
         <script>

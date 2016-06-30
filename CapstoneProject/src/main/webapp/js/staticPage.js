@@ -169,7 +169,6 @@ $(document).ready(function () {
     $(document).on('click', '.delete-link', function (e) {
 
         e.preventDefault();
-        alert('got here!');
         var staticPageId = $(e.target).data('static-page-id');
 
         $.ajax({
@@ -177,10 +176,8 @@ $(document).ready(function () {
             url: contextRoot + '/static/' + staticPageId,
             success: function (data, status) {
                 $('#static-page-row-' + staticPageId).remove();
-                alert('success!');
             },
             error: function (data, status) {
-                alert:('error');
             }
 
         });

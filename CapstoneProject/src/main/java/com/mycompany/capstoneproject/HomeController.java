@@ -43,6 +43,7 @@ public class HomeController {
         this.userDao = UDao;
     }
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeLogin(Map model) {
 
@@ -55,6 +56,7 @@ public class HomeController {
         return "aboutUs";
     }
     
+
     
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {

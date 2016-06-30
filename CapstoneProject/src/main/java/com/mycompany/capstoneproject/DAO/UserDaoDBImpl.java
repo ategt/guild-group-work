@@ -121,7 +121,7 @@ public class UserDaoDBImpl implements UserInterface {
             user.setName(rs.getString("name"));
             user.setNumOfComments(rs.getInt("num_of_comments"));
             user.setPassword(rs.getString("password"));
-            user.setRole(rs.getString("User"));
+            user.setRole(rs.getString("role"));
             user.setEnabled(rs.getInt("enabled"));
 
             return user;
