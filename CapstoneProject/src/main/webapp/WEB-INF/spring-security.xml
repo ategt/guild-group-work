@@ -32,6 +32,8 @@
         <intercept-url pattern="/adminPanel/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/category" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/image/imageadmin" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/publish/**" access="ROLE_ADMIN"/>
         
         <logout logout-url="/logout" logout-success-url="/"/>
         

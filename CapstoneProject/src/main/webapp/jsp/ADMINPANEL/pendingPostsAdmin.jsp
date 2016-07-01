@@ -35,7 +35,10 @@
                                 <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
                                 <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
                                 <div align="right">
-                                <button >Publish</button>
+                                    <form action="${pageContext.request.contextPath}/blog/publish/${post.id}" method="POST">
+                                        <input type="submit" value="Publish"/>
+                                    </form>
+                                
                                 </div>
                                 <h4 align="right" >Status: ${post.status}</h4>
                             
