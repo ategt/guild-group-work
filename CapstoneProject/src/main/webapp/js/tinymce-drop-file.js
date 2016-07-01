@@ -40,60 +40,6 @@ function sendFileToServer(formData, status)
 
             tinymce.activeEditor.insertContent(imageLink);
 
-//
-//        var selectedValues = $('#modal-image-picker').val();
-//        console.log(selectedValues);
-//
-//        var imageSize = $('#image-size-input').val();
-//
-//        console.log(imageSize);
-//
-//        var imageLinkCum = "";
-//        var imageLink = "";
-//        $(selectedValues).each(function (index, value) {
-//            //imageLink = '<img src="${pageContext.request.contextPath}/image/showimage/' + value + '" />';
-//            imageLink = '<img ' + determineImageSize(imageSize) + ' src="' + contextRoot + '/image/showimage/' + value + '" />';
-//            imageLinkCum += imageLink + "<br />";
-//            console.log(imageLinkCum);
-//        }
-//        );
-//
-//        tinymce.activeEditor.insertContent(imageLinkCum);
-//
-//
-//
-//            var imageUrl = '<option data-img-src="' + contextRoot + '/image/showimage/' + data + '" value="' + data + '">' + contextRoot + '/image/showimage/' + data + '</option>';
-//
-//            console.log(imageUrl);
-//            $('#admin-image-picker')
-//                    .append(imageUrl);
-//
-//            $("select").imagepicker({hide_select: false});
-//
-//            var imageSize = $('#image-preview-size').val();
-//
-//            var width = 50;
-//            var height = 50;
-//
-//            if (imageSize == 1) {
-//                width = 50;
-//                height = 50;
-//            } else if (imageSize == 2) {
-//                width = 100;
-//                height = 100;
-//            } else if (imageSize == 3) {
-//                width = 150;
-//                height = 150;
-//            } else if (imageSize == 4) {
-//                width = 200;
-//                height = 200;
-//            }
-//
-//            $(".image_picker_image").width(height);
-//            $(".image_picker_image").height(width);
-//
-
-
         },
         error: function (data, status) {
             //var errors = data.responseJSON.errors;
