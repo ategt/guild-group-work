@@ -35,73 +35,20 @@
                     <input type="text" name="username" id="login-username"/><br/>
                     <label for="password">Password</label><br/>
                     <input type="password" name="password" id="login-password"/><br/>
-    <!--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
                     <input type="submit" value="Login"/>
-
-
-                    <c:if test="${loginError == 1}">
-                        <div>Error logging in</div>
-                    </c:if>
-
                     <br/>
                     <a href="${pageContext.request.contextPath}/createAccount"><p class="small">Create an Account</p></a>
 
-
-            </div>
-    </div>
-</form>
-
-
-
-
-<!--<div class="login-box1 animated1 fadeInUp1">
-    <div class="box-header">
-        <h2>Create Account</h2>
-    </div>
-    <label for="username">Username</label>
-    <br/>
-    <input type="text" id="create-username">
-    <br/>
-    <label for="password">Password</label>
-    <br/>
-    <input type="password" id="create-password">
-    <br/>
-    <label for="email">Email</label>
-    <br/>
-    <input type="email" id="create-email">
-    <br/>
-    <input id="create-account" type="submit"></input>
-
-
-
-</div>-->
-
-
-
-
-<!--            <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
-                    
-                    Username: <input type="text" name="username"/><br/>
-                    Password: <input type="password" name="password"/><br/>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <input type="submit" value="Login"/>
-                    
                     <c:if test="${loginError == 1}">
                         <div>Error logging in</div>
                     </c:if>
-                    
-                </form>
-            <br/>
-            <a href="#"><p class="small">Forgot your password?</p></a>
 
 
+            </div>
+            </div>
+</form>
 
-        </div>
-    </div>-->
-
-
-<!--
---><script>
+<script>
 
     var contextRoot = '${pageContext.request.contextPath}'
 

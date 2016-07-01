@@ -54,10 +54,6 @@ public class ImageController {
     @Autowired
     private ImageServices imageServices;
 
-//    @Inject
-//    public ImageController(ImageInterface imageDao) {
-//        this.imageDao = imageDao;
-//    }
     @RequestMapping(method = RequestMethod.GET, value = "/showimage/{id}")
     @ResponseBody
     public void getImage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
