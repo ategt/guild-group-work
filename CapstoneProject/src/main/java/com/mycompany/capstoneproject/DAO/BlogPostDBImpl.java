@@ -92,7 +92,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
 
-    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.project";
+    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.post";
     
     private JdbcTemplate jdbcTemplate;
 

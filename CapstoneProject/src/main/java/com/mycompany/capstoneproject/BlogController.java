@@ -57,7 +57,7 @@ public class BlogController {
         this.staticDao = SDao;
         this.hashTagDao = HDao;
         this.imageDao = imageDao;
-       
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -76,18 +76,17 @@ public class BlogController {
     @RequestMapping(value = "/imagetest", method = RequestMethod.GET)
     public String blogImageTest(Map model) {
 
-        
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList =  images.stream()
+        List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
                 .filter(a -> a.getDescription() != null)
                 .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
-        
+
         model.put("imageIdList", imageIdList);
-        
+
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
 
@@ -108,16 +107,16 @@ public class BlogController {
         if (blogPost == null) {
             return "unableToEdit";
         }
-        
+
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList =  images.stream()
+        List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
                 .filter(a -> a.getDescription() != null)
                 .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
-        
+
         model.put("imageIdList", imageIdList);
 
         List<Category> categories = categoriesDao.listCategories();
@@ -160,6 +159,9 @@ public class BlogController {
         Category category = categoriesDao.get(categoryId);
 
         blogPost.setCategory(category);
+
+        Image thumbImage = imageDao.get(blogPostCommand.getThumbId());
+        blogPost.setImage(thumbImage);
 
         blogPostDao.update(blogPost);
 
@@ -211,10 +213,10 @@ public class BlogController {
         comments.add(comment);
         Image img = new Image();
         img.setUrl("");
-        
+
         int thumgId = postCommand.getThumbId();
         Image thumbImage = imageDao.get(thumgId);
-        
+
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
 //        List<HashTag> hashTags = new ArrayList();
 //        List<String> existingHashTags = hashTagDao.listHashTagNames();
@@ -382,30 +384,34 @@ public class BlogController {
             }
 
         }
-        
+
         return hashTags;
     }
 
-    public String createSlug(String title){
-       String slug = title.replace(" ", "-");
-       List<String> slugs = blogPostDao.listSlugs();
-       Integer numOfRepeats = 0;
-       
+    public String createSlug(String title) {
+        String slug = title.replace(" ", "-");
+        List<String> slugs = blogPostDao.listSlugs();
+        Integer numOfRepeats = 0;
+
+        slugs = slugs.stream()
+                .filter(s -> s != null)
+                .collect(Collectors.toList());
+
         for (String str : slugs) {
             String[] strArray = str.split("_"); //split between slug and number of repeats
             String myTitle = strArray[0];       //grab slug
-            if(myTitle.equals(slug)){           //find number of times slug repeat
+            if (myTitle.equals(slug)) {           //find number of times slug repeat
                 numOfRepeats++;
             }
         }
         for (String str : slugs) {
-            String[] strArray = str.split("_"); 
-            String myTitle = strArray[0];       
-            if(myTitle.equals(slug)){           
+            String[] strArray = str.split("_");
+            String myTitle = strArray[0];
+            if (myTitle.equals(slug)) {
                 slug = slug + "_" + numOfRepeats;
             }
         }
-        
+
         return slug;
 
     }

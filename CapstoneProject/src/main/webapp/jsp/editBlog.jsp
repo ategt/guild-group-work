@@ -35,7 +35,7 @@
                 <div class="col-md-2 text-center">
                     <div class="row">
                         <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
-
+                            <img style="max-width: 200px;max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/${blogPost.image.id}" class="img-responsive">
                         </div>
 
                         <div class="text-center">
@@ -73,7 +73,8 @@
                                 <input type="text" id="edit-title-input" name="title" class="form-control" value="${blogPost.title}"></input>
                             </div>
                         </div>
-                        <input type="hidden" id="thumbId" name="thumbId" />
+                            
+                        <input type="hidden" id="thumbId" name="thumbId" value="${blogPost.image.id}" />
 
                         <div class="form-group" id="author-input-div">
                             <label for="author" class="col-md-4 control-label">Author </label>
