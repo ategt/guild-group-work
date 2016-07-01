@@ -169,6 +169,41 @@ public class AdminPanelController {
 
     }
     
+     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") Integer orderId, Map model , User u){
+ 
+
+        Integer id = u.getId();
+        String username = u.getName();
+        String password = u.getPassword();
+        String email = u.getEmail();
+        String role = u.getRole();
+        Integer enabled = u.getEnabled();
+
+        User user = new User();
+
+        user.setId(id);
+        user.setName(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setRole(role);
+        user.setEnabled(enabled);
+        
+        userDao.update(user);
+
+       User users = userDao.get(orderId);
+
+        
+
+        model.put("users", users);
+
+       
+        
+        
+
+        return "ADMINPANEL/usersAdmin";
+    }
+    
       @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String categories(Map model) {
         
