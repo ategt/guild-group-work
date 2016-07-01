@@ -183,6 +183,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
             Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Category not set, update aborted.");
             return;
         }
+        
+        Integer imageId;
+        
+        if ( post.getImage() == null ) {
+            imageId = null;
+        } else {
+            imageId = post.getImage().getId();
+        }
 
         if (post.getId() > 0) {
 
@@ -198,7 +206,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getDateToPostOn(),
                         post.getSlug(),
                         post.getStatus(),
-                        post.getImage().getId(),
+                        imageId,
                         post.getId());
 
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
