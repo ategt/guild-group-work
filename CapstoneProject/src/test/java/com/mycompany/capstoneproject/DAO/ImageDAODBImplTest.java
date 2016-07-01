@@ -344,67 +344,69 @@ public class ImageDAODBImplTest {
         assertTrue(isImageEqual(sortedImage, image));
 
     }
-
-    /**
-     * Test of list method, of class ImageDAODBImpl.
-     */
-    @Test
-    public void testGetDefaultImage() {
-        System.out.println("DefaultImage");
-        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-
-        Image image = instance.getDefaultThumb();
-
-        assertNotNull(image);
-
-        assertTrue(image.getId() > 0);
-
-    }
-    /**
-     * Test of list method, of class ImageDAODBImpl.
-     */
-    @Test
-    public void testSetDefaultImage() {
-        System.out.println("DefaultImage");
-        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-
-        instance.setDefaultThumb(null);
-
-        // If it makes it here, it passed.
-        assertTrue(true);
-
-    }
-
-    /**
-     * Test of list method, of class ImageDAODBImpl.
-     */
-    @Test
-    public void testSetAndGetDefaultImage() {
-        System.out.println("DefaultImage");
-        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-
-        Image image = instance.getDefaultThumb();
-
-        int oldId = image.getId();
-
-        List<Image> imageList = instance.list();
-        int imageListSize = imageList.size();
-
-        Image imageA = instance.get(imageListSize - 1);
-
-        instance.setDefaultThumb(imageA);
-
-        Image imageB = instance.getDefaultThumb();
-
-        //int oldId = image.getId();
-        assertTrue(isImageEqual(imageB, imageA));
-
-        instance.setDefaultThumb(image);
-
-        Image imageC = instance.getDefaultThumb();
-
-        assertTrue(isImageEqual(image, imageC));
-
-    }
+//
+//    /**
+//     * Test of list method, of class ImageDAODBImpl.
+//     */
+//    @Test
+//    public void testGetDefaultImage() {
+//        System.out.println("DefaultImage");
+//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+//
+//        Image image = instance.getDefaultThumb();
+//
+//        assertNotNull(image);
+//
+//        assertTrue(image.getId() > 0);
+//
+//    }
+//    /**
+//     * Test of list method, of class ImageDAODBImpl.
+//     */
+//    @Test
+//    public void testSetDefaultImage() {
+//        System.out.println("DefaultImage");
+//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+//
+//        instance.setDefaultThumb(null);
+//
+//        // If it makes it here, it passed.
+//        assertTrue(true);
+//
+//    }
+//
+//    /**
+//     * Test of list method, of class ImageDAODBImpl.
+//     */
+//    @Test
+//    public void testSetAndGetDefaultImage() {
+//        System.out.println("DefaultImage");
+//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+//
+//        Image image = instance.getDefaultThumb();
+//
+//        thumb
+//        
+//        
+//        
+//        List<Image> imageList = instance.list();
+//        int imageListSize = imageList.size();
+//
+//        Image imageA = instance.get(imageListSize - 1);
+//
+//        instance.setDefaultThumb(imageA);
+//
+//        Image imageB = instance.getDefaultThumb();
+//
+//        //int oldId = image.getId();
+//        assertTrue(isImageEqual(imageB, imageA));
+//
+//        instance.setDefaultThumb(image);
+//
+//        Image imageC = instance.getDefaultThumb();
+//
+//        assertTrue(isImageEqual(image, imageC));
+//
+//    }
 
 }
