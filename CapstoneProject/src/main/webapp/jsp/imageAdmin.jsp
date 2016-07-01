@@ -30,7 +30,6 @@
                 /*font-size:200%;*/
             }
 
-
             #status1
             {
                 width:400px;
@@ -50,8 +49,6 @@
                 padding:10px 10px 10px 10px;
                 margin-bottom:10px;
             }
-
-
 
         </style>
     </head>
@@ -78,35 +75,43 @@
                                     <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
                                 </c:forEach>
                             </select>
+
                         </div>
 
               </div>
               <div class="image-admin-footer">
 
-                        <form:form method="POST" commandName="file" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form:form method="POST" commandName="file" enctype="multipart/form-data">
 
-                            Click Here To Upload An Image To The Server:
-                            <input type="file" class="btn btn-default" name="file" />
-                            <input type="submit" class="btn btn-default" value="upload" />
-                            <form:errors path="file" cssStyle="color: #ff0000;" />
+                                    Click Here To Upload An Image To The Server:
+                                    <input type="file" class="btn btn-default" name="file" />
+                                    <input type="submit" class="btn btn-default" value="upload" />
+                                    <form:errors path="file" cssStyle="color: #ff0000;" />
 
-                        </form:form>
-
-                <button type="button" class="delete-selected-images btn btn-default" >Delete Selected</button>
-
+                                </form:form>
+                            </div>
+                            <div class="col-md-6">
+                <button type="button" class="delete-selected-images btn btn-default" >Delete Selected Images From The Database</button>
+                            </div>
+                        </div>
               </div>
             </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="status1"></div>
+                    </div>
+                    <div class="col-md-6">
 
-                <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
-                    <img style="max-width: 150px; max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/0" />
+                        <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
+                            <img style="max-width: 150px; max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/0" />
+                        </div>
+
+
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
+                    </div>
                 </div>
-
-
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
-
-                <br><br>
-                <div id="status1"></div>
-
             </div>
         </div>
         <script>
@@ -123,7 +128,7 @@
         <script src="${pageContext.request.contextPath}/js/image-picker-admin.js"></script>
 
 
-        
+
     </body>
 </html>
 
