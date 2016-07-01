@@ -25,6 +25,11 @@ public class ImageDAODBImpl implements ImageInterface {
     private static final String SQL_GET_IMAGE_BY_ID = "SELECT * FROM capstone.image WHERE id = ?";
     private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM capstone.image WHERE id =?";
     private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM capstone.image";
+    //private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT default_thumb FROM capstone.image_preferences ORDER BY id ASC LIMIT 1";
+    private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT image.* FROM capstone.image\n" +
+                                                                    "JOIN image_preferences\n" +
+                                                                    "ON image_preferences.default_thumb=image.id\n" +
+                                                                    "ORDER BY image_preferences.id ASC LIMIT 1;";
 
     // # id, url, image, original_name, width, height, description
     private JdbcTemplate jdbcTemplate;
@@ -63,6 +68,15 @@ public class ImageDAODBImpl implements ImageInterface {
     public Image get(int id) {
         try {
             return jdbcTemplate.queryForObject(SQL_GET_IMAGE_BY_ID, new ImageMapper(), id);
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Image getDefaultThumb() {
+        try {
+            return jdbcTemplate.queryForObject(SQL_GET_IMAGE_THUMB_DEFAULT, new ImageMapper());
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
             return null;
         }
