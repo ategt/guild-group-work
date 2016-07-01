@@ -42,18 +42,16 @@ public class HomeController {
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
-    
+
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Map model) {
 
         return "aboutUs";
     }
-    
 
-    
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
-        
+
 //         Integer offset;
 //        if (pageNumber == null) {
 //            offset = 0;
@@ -61,7 +59,7 @@ public class HomeController {
 //            offset = getOffset(pageNumber);
 //        }
 //        
-           List<BlogPost> posts = blogPostDao.listBlogs();
+        List<BlogPost> posts = blogPostDao.listBlogs();
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -83,12 +81,9 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-       
 
         return "waitingApproval";
     }
-    
-    
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
@@ -101,7 +96,7 @@ public class HomeController {
         }
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
 
-        List<StaticPage> staticPages = staticPageDao.listPages();
+        List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
 
         List<Category> categories = categoriesDao.listCategories();
