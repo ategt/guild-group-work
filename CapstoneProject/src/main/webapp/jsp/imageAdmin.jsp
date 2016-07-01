@@ -92,6 +92,8 @@
 
               </div>
             </div>
+                
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
                 <!--
                 
                             <br />
@@ -133,6 +135,26 @@
                     e.preventDefault();
                     var selectedValue = $('#modal-single-image-picker').val();
                     console.log("Single Select: " + selectedValue);
+
+                        //var contactId = $(e.target).data('contact-id');
+
+                        $.ajax({
+                            type: "PUT",
+                            url: contextRoot + "/image/defaultimage/" + value,
+                            async: true,
+                            success: function (data, status) {
+                                console.log("Data: " + data);
+                                console.log("Status: " + status);
+                                //$('#contact-row-'+ contactId).remove();
+                            },
+                            error: function (data, status) {
+                                console.log("Failed - Data: " + data);
+                                console.log("Failed - Status: " + status);
+
+                            }
+                        });
+                    
+                    
                     var imageLink = '"<img src="${pageContext.request.contextPath}/image/showimage/' + selectedValue + '" />';
                     $(".image-container").html(imageLink);
                 });
@@ -198,7 +220,7 @@
 
 
         <%--<%@ include file="selectImagesModal.jsp" %>--%>
-        <%--<%@ include file="selectSingleImageModal.jsp" %>--%>
+        <%@ include file="selectSingleImageModal.jsp" %>
 
 
 
@@ -304,6 +326,7 @@
 
 
                 });
+                
 
                 function determineImageSize(imageSize) {
                     var imgLink = "";

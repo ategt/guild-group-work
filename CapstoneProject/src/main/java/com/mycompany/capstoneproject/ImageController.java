@@ -194,22 +194,20 @@ public class ImageController {
         }
         return returnId;
     }
+    
+    @RequestMapping(value = "/defaultimage/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Integer setDefaultImage(@PathVariable("id") Integer id) {
 
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/")
-//    @ResponseBody
-//    public String imageDelete(@RequestBody()  , Map model) {
-//
-//        List<Image> images = imageDao.list();
-//
-//        List<Integer> imageIdList =  images.stream()
-//                .filter(a -> a != null)
-//                .filter(a -> a.getDescription() != null)
-//                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-//                .map(Image::getId)
-//                .collect(Collectors.toList());
-//        
-//        model.put("imageIdList", imageIdList);
-//        
-//        return "imagesAdmin";
-//    }
+        Image defaultImage = imageDao.get(id);
+        
+        imageDao.setDefaultThumb(defaultImage);
+        
+        Image returnedImage = imageDao.getDefaultThumb();
+        
+        int returnedImageId = returnedImage.getId();
+
+        return returnedImageId;
+    }
+
 }
