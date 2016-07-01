@@ -25,7 +25,7 @@
          <c:forEach items="${pendingPosts}" var="post">
 
                         <div class="row">
-                            <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
+                            <div class="col-sm-4"><a href="#" class=""><img style="max-width: 200px;max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/${post.image.id}" class="img-responsive"></a>
                             </div>
                             <div class="col-sm-8">
                                 

@@ -108,11 +108,21 @@ public class BlogController {
         if (blogPost == null) {
             return "unableToEdit";
         }
+        
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList =  images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        
+        model.put("imageIdList", imageIdList);
 
         List<Category> categories = categoriesDao.listCategories();
-        model.put("categories", categories);
 
-//        List<User> users = userDao.list();
+        model.put("categories", categories);
         model.put("users", users);
         model.put("blogPost", blogPost);
 

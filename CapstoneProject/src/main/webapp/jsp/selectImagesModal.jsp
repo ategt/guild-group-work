@@ -10,7 +10,7 @@
                 <h4 class="modal-title">Select Images</h4>
                 <br />
                 Preview Image Size:
-                <select id="image-preview-size" class="image-preview-size form-control">
+                <select id="multi-image-preview-size" class="image-preview-size form-control">
                     <option value="1" selected="selected">50x50</option>
                     <option value="2">100x100</option>
                     <option value="3">150x150</option>
