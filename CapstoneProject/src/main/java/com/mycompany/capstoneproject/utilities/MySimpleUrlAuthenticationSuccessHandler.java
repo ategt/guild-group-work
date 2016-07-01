@@ -74,7 +74,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         } else if (isAdmin) {
             return "/adminPanel/";
         } else if (isAuthor) {
-//            return "/*author jsp*/";
+            return "";
         } else {
             throw new IllegalStateException();
         }
