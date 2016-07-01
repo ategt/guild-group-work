@@ -98,7 +98,7 @@ public class ImageDAODBImplTest {
 
         boolean valid = true;
 
-         if (image1.getDescription() == null && image2.getDescription() == null) {
+        if (image1.getDescription() == null && image2.getDescription() == null) {
 
         } else if (image1.getDescription() == null || image2.getDescription() == null) {
             valid = false;
@@ -360,6 +360,7 @@ public class ImageDAODBImplTest {
         assertTrue(image.getId() > 0);
 
     }
+
     /**
      * Test of list method, of class ImageDAODBImpl.
      */
@@ -385,7 +386,16 @@ public class ImageDAODBImplTest {
 
         Image image = instance.getDefaultThumb();
 
-//        int oldId = image.getId();
+
+        if (image == null) {
+            List<Image> imageList = instance.list();
+            int imageListSize = imageList.size();
+
+            Image imageZ = instance.get(imageListSize - 1);
+            
+            instance.setDefaultThumb(imageZ);
+        }
+
 
         List<Image> imageList = instance.list();
         int imageListSize = imageList.size();

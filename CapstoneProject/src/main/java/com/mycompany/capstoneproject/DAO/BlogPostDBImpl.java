@@ -311,7 +311,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
             return count;
         }
-
     }
 
     private static final class SlugMapper implements RowMapper<String> {

@@ -26,6 +26,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author apprentice
  */
 public class UserDaoDBImplTest {
+//
 
     ApplicationContext ctx;
 
@@ -240,7 +241,8 @@ public class UserDaoDBImplTest {
             valid = false;
         }
 
-        if (!user1.getJoinedOn().equals(user2.getJoinedOn())) {
+
+        if ( !isSameDay(user1.getJoinedOn(), user2.getJoinedOn()) ) {
             valid = false;
         }
 
@@ -255,43 +257,55 @@ public class UserDaoDBImplTest {
         return valid;
     }
 
+    private static boolean isSameDay(java.util.Date date1, java.util.Date date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyyMMdd");
+
+        if (date1 == null || date2 == null) {
+            return false;
+        }
+        return fmt.format(date1).equals(fmt.format(date2));
+    }
+
     /**
      * Test of update method, of class UserDaoDBImpl.
      */
-    @Test
-    public void testUpdate() {
-        System.out.println("update");
-        User user = null;
-        UserDaoDBImpl instance = null;
-        instance.update(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of delete method, of class UserDaoDBImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        User user = null;
-        UserDaoDBImpl instance = null;
-        instance.delete(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of list method, of class UserDaoDBImpl.
-     */
-    @Test
-    public void testList() {
-        System.out.println("list");
-        UserDaoDBImpl instance = null;
-        List<User> expResult = null;
-        List<User> result = instance.list();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testUpdate() {
+//        System.out.println("update");
+//        User user = null;
+//        UserDaoDBImpl instance = null;
+//        instance.update(user);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of delete method, of class UserDaoDBImpl.
+//     */
+//    @Test
+//    public void testDelete() {
+//        System.out.println("delete");
+//        User user = null;
+//        UserDaoDBImpl instance = null;
+//        instance.delete(user);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of list method, of class UserDaoDBImpl.
+//     */
+//    @Test
+//    public void testList() {
+//        System.out.println("list");
+//        UserDaoDBImpl instance = null;
+//        List<User> expResult = null;
+//        List<User> result = instance.list();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 }

@@ -98,31 +98,12 @@ public class ImageDAODBImpl implements ImageInterface {
             jdbcTemplate.update(SQL_UPDATE_IMAGE_THUMB_DEFAULT,
                     image.getId(),
                     id);
-            //return jdbcTemplate.queryForObject(SQL_GET_IMAGE_THUMB_DEFAULT, new ImageMapper());
+
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
             jdbcTemplate.update(SQL_CREATE_IMAGE_THUMB_DEFAULT,
                             image.getId());
         }
 
-//        if ( id != null ) {
-//        
-//         jdbcTemplate.update(SQL_UPDATE_IMAGE_THUMB_DEFAULT,
-//                            image.getId(),
-//                            id);
-//        } else {
-//            
-//            jdbcTemplate.update(SQL_CREATE_IMAGE_THUMB_DEFAULT,
-//                            image.getId());
-//        }
-//        
-//        
-//        jdbcTemplate.update(SQL_INSERT_IMAGE,
-//                image.getUrl(),
-//        
-//            return jdbcTemplate.queryForObject(SQL_GET_IMAGE_THUMB_DEFAULT, new ImageMapper());
-//        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
-//            return null;
-//        }
     }
 
     //"UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?  WHERE id = ?";

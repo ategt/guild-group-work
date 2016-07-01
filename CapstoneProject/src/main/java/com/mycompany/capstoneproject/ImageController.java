@@ -95,18 +95,22 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                //.filter(a -> a.getDescription() != null)
-                .filter(a -> a.getUrl() != null)
-                //.filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
         return "pickerTest";
+    }
+
+    private List<Integer> filterTestFiles(List<Image> images) {
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                //.filter(a -> a.getUrl() == null || !a.getUrl().toLowerCase().contains("patsdresses.com"))
+                .filter(a -> a.getDescription() != null )
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        return imageIdList;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/imagetestb")
@@ -114,12 +118,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getUrl() != null)
-                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
@@ -131,12 +130,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getUrl() != null)
-                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
