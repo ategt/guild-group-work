@@ -44,7 +44,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
 
-    private static final String SQL_DELETE_BLOGPOST = "UPDATE `capstone`.`post` SET `expired`=1 WHERE `id`=?';";
+    private static final String SQL_DELETE_BLOGPOST = "UPDATE `capstone`.`post` SET `expired`=1 WHERE `id`=? ";
 
     private static final String SQL_GET_DEFAULT_CATEGORY = "SELECT id FROM capstone.category\n"
             + "ORDER BY id ASC\n"
@@ -132,8 +132,9 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 post.getDateToPostOn(),
                 post.getSlug(),
                 post.getStatus(),
-                0,
-                imageId);
+                imageId,
+                post.getExpired()
+                );
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
@@ -279,7 +280,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             post.setExpireOn(rs.getDate("expires_on"));
             post.setDateToPostOn(rs.getDate("post_on"));
             post.setStatus(rs.getString("status"));
-
+            post.setExpired(rs.getInt("expired"));
             Image image = new Image();
 
             image.setId(rs.getInt("image.id"));
