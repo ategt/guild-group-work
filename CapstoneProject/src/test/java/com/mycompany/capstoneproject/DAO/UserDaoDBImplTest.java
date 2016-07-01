@@ -6,8 +6,14 @@
 package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.User;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -195,8 +201,7 @@ public class UserDaoDBImplTest {
         int numberOfComments = 3;
         int id = 5;
 
-        Date dateJoined = new Date();
-
+        Date dateJoined = new Date(114, 11, 31);
         user.setId(id);
 
         user.setEmail(email);
@@ -235,6 +240,7 @@ public class UserDaoDBImplTest {
         if (!user1.getRole().equals(user2.getRole())) {
             valid = false;
         }
+
 
         if ( !isSameDay(user1.getJoinedOn(), user2.getJoinedOn()) ) {
             valid = false;

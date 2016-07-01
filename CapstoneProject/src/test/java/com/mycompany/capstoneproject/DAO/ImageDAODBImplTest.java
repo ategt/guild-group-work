@@ -386,6 +386,7 @@ public class ImageDAODBImplTest {
 
         Image image = instance.getDefaultThumb();
 
+
         if (image == null) {
             List<Image> imageList = instance.list();
             int imageListSize = imageList.size();
@@ -394,6 +395,7 @@ public class ImageDAODBImplTest {
             
             instance.setDefaultThumb(imageZ);
         }
+
 
         List<Image> imageList = instance.list();
         int imageListSize = imageList.size();
