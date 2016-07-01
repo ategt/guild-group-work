@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
@@ -136,7 +137,8 @@ public class BlogController {
 
         // Consider resluging.
         blogPost.setTitle(blogPostCommand.getTitle());
-        blogPost.setSlug(blogPostCommand.getTitle());
+        String slug = createSlug(blogPost.getTitle());
+        blogPost.setSlug(slug);
 
         // Do something here to recheck for #hashTags.
         blogPost.setContent(blogPostCommand.getContent());
@@ -151,23 +153,8 @@ public class BlogController {
 
         blogPostDao.update(blogPost);
 
-        //List<User> users = userDao.list();
-        //BlogPostCommand blogPostCommand = convertCommandToBlogPost(blogPost);
-//        List<Category> categories = categoriesDao.listCategories();
-//        model.put("categories", categories);
-//
-//        List<User> users = userDao.list();
-//        model.put("users", users);
-//        model.put("blogPostCommand", blogPostCommand);
-        BlogPost post = blogPostDao.getById(blogPostId);
+        model.put("post", blogPost);
 
-        model.put("post", post);
-
-        //model.put("users", users);
-        //model.put("blogPost", blogPost);
-//        List<Category> categories = categoriesDao.listCategories();
-//
-//        model.put("categories", categories);
         return "showSingleBlog";
     }
 
@@ -181,7 +168,6 @@ public class BlogController {
 
         model.put("post", post);
         return "showSingleBlog";
-
     }
 
     private void updateHashTags(BlogPost post) {
@@ -215,6 +201,9 @@ public class BlogController {
         comments.add(comment);
         Image img = new Image();
         img.setUrl("");
+        
+        int thumgId = postCommand.getThumbId();
+        Image thumbImage = imageDao.get(thumgId);
         
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
 //        List<HashTag> hashTags = new ArrayList();
@@ -251,6 +240,8 @@ public class BlogController {
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
+        post.setImage(thumbImage);
+        post.setExpired(0);
         return post;
     }
 
@@ -385,4 +376,27 @@ public class BlogController {
         return hashTags;
     }
 
+    public String createSlug(String title){
+       String slug = title.replace(" ", "-");
+       List<String> slugs = blogPostDao.listSlugs();
+       Integer numOfRepeats = 0;
+       
+        for (String str : slugs) {
+            String[] strArray = str.split("_"); //split between slug and number of repeats
+            String myTitle = strArray[0];       //grab slug
+            if(myTitle.equals(slug)){           //find number of times slug repeat
+                numOfRepeats++;
+            }
+        }
+        for (String str : slugs) {
+            String[] strArray = str.split("_"); 
+            String myTitle = strArray[0];       
+            if(myTitle.equals(slug)){           
+                slug = slug + "_" + numOfRepeats;
+            }
+        }
+        
+        return slug;
+
+    }
 }

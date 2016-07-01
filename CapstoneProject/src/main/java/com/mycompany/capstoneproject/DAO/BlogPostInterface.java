@@ -27,6 +27,7 @@ public interface BlogPostInterface {
     public List<BlogPost> listBlogsWithLimit(int pageNumber);
     public Integer getNumOfPosts();
     public List<BlogPost> listPendingPosts();
+    public List<String> listSlugs();
     
     
 }

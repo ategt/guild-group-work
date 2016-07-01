@@ -27,8 +27,16 @@ public class BlogPost {
     private Date expireOn;
     private Date dateToPostOn;
     private String status;
-    
+    private Integer expired;
 
+    public Integer getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Integer expired) {
+        this.expired = expired;
+    }
+    
     public String getStatus() {
         return status;
     }

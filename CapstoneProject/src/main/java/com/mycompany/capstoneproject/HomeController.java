@@ -10,6 +10,7 @@ import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
+import com.mycompany.capstoneproject.DTO.User;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -48,7 +49,43 @@ public class HomeController {
 
         return "aboutUs";
     }
+    
+    
+    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+    public String adminPanel(Map model) {
+        
+        
+     
+        List<BlogPost> posts = blogPostDao.listBlogs();
 
+        List<StaticPage> staticPages = staticPageDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<HashTag> hash = hashTagDao.listHashTags();
+
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count / 3);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
+
+        model.put("pages", pages);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        model.put("posts", posts);
+        model.put("categories", categories);
+        model.put("hashTag", hash);
+       
+        
+        
+        
+
+        return "adminPanel";
+    }
+ 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
 
@@ -174,4 +211,25 @@ public class HomeController {
         Integer offset = (pageNumber * numOfPosts) - numOfPosts;
         return offset;
     }
+    
+        @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteUser(@PathVariable("id") Integer userId) {
+
+//               List<Product> products = productDao.listProduct();
+//        
+//        model.put("products", products);
+//        
+//        
+//        List<State> states = stateDao.listStates();
+//        
+//        model.put("states", states);
+        User user = userDao.get(userId);
+        
+        userDao.delete(user);
+
+
+    }
+    
+     
 }
