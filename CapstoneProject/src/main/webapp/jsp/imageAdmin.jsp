@@ -35,12 +35,20 @@
             {
                 width:400px;
                 height:400px;
-                /*color:#92AAB0;*/
-                /*text-align:left;vertical-align:middle;*/
                 padding:10px 10px 10px 10px;
                 margin-bottom:10px;
-                /*font-size:200%;*/
                 overflow: scroll;
+            }
+
+            .thumb-container
+            {
+                border:3px solid black;
+                width:150px;
+                height:200px;
+                color:red;
+                text-align:center;vertical-align:middle;
+                padding:10px 10px 10px 10px;
+                margin-bottom:10px;
             }
 
 
@@ -92,7 +100,12 @@
 
               </div>
             </div>
-                
+
+                <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
+                    <img style="max-width: 150px; max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/0" />
+                </div>
+
+
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
                 <!--
                 
@@ -136,25 +149,29 @@
                     var selectedValue = $('#modal-single-image-picker').val();
                     console.log("Single Select: " + selectedValue);
 
-                        //var contactId = $(e.target).data('contact-id');
+                    //var contactId = $(e.target).data('contact-id');
+                    //$('#thumbId').val(selectedValue);
 
-                        $.ajax({
-                            type: "PUT",
-                            url: contextRoot + "/image/defaultimage/" + value,
-                            async: true,
-                            success: function (data, status) {
-                                console.log("Data: " + data);
-                                console.log("Status: " + status);
-                                //$('#contact-row-'+ contactId).remove();
-                            },
-                            error: function (data, status) {
-                                console.log("Failed - Data: " + data);
-                                console.log("Failed - Status: " + status);
+                    $.ajax({
+                        type: "PUT",
+                        url: contextRoot + "/image/defaultimage/" + selectedValue,
+                        async: true,
+                        success: function (data, status) {
+                            console.log("Data: " + data);
+                            console.log("Status: " + status);
+                            //$('#contact-row-'+ contactId).remove();
 
-                            }
-                        });
-                    
-                    
+                            $('#thumb-container').html('<img style="max-width: 150px; max-height: 200px;" src="' + contextRoot + '/image/showimage/' + data + '" />');
+
+                        },
+                        error: function (data, status) {
+                            console.log("Failed - Data: " + data);
+                            console.log("Failed - Status: " + status);
+
+                        }
+                    });
+
+
                     var imageLink = '"<img src="${pageContext.request.contextPath}/image/showimage/' + selectedValue + '" />';
                     $(".image-container").html(imageLink);
                 });
@@ -326,7 +343,7 @@
 
 
                 });
-                
+
 
                 function determineImageSize(imageSize) {
                     var imgLink = "";
