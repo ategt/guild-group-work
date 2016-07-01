@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject.DAO;
 import com.mycompany.capstoneproject.DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -126,7 +127,8 @@ public class UserDaoDBImpl implements UserInterface {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setNumOfComments(rs.getInt("num_of_comments"));
-            user.setJoinedOn(rs.getTimestamp("date_joined"));
+            Date date = rs.getTimestamp("date_joined");
+            user.setJoinedOn(date);
             user.setEnabled(rs.getInt("enabled"));
 
             return user;

@@ -6,8 +6,14 @@
 package com.mycompany.capstoneproject.DAO;
 
 import com.mycompany.capstoneproject.DTO.User;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +27,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class UserDaoDBImplTest {
 //
+
     ApplicationContext ctx;
 
     public UserDaoDBImplTest() {
@@ -97,9 +104,9 @@ public class UserDaoDBImplTest {
         User expResult = user;
         User result = instance.create(user);
         assertEquals(expResult, result);
-        
-        assertTrue( user.getId() > 1 );
-        
+
+        assertTrue(user.getId() > 1);
+
     }
 
     /**
@@ -167,25 +174,25 @@ public class UserDaoDBImplTest {
     /**
      * Test of get method, of class UserDaoDBImpl.
      */
-//    @Test
-//    public void testGetC() {
-//        System.out.println("get");
-//        
-//        UserInterface instance = ctx.getBean("userDaoDBImpl", UserInterface.class);
-//        
-//        User user = userFactory();
-//        
-//        User expResult = user;
-//        User returnedUser = instance.create(user);
-//        int id = returnedUser.getId();
-//        
-//        User result = instance.get(id);
-//        assertTrue(isUserEqual(result, expResult));
-//
-//    }
+    @Test
+    public void testGetC() {
+        System.out.println("get");
 
-    private User userFactory(){
-         User user = new User();
+        UserInterface instance = ctx.getBean("userDaoDBImpl", UserInterface.class);
+
+        User user = userFactory();
+
+        User expResult = user;
+        User returnedUser = instance.create(user);
+        int id = returnedUser.getId();
+
+        User result = instance.get(id);
+        assertTrue(isUserEqual(result, expResult));
+
+    }
+
+    private User userFactory() {
+        User user = new User();
 
         String name = "Billy Bob";
         String role = "Gretal";
@@ -194,8 +201,7 @@ public class UserDaoDBImplTest {
         int numberOfComments = 3;
         int id = 5;
 
-        Date dateJoined = new Date();
-
+        Date dateJoined = new Date(114, 11, 31);
         user.setId(id);
 
         user.setEmail(email);
@@ -207,7 +213,7 @@ public class UserDaoDBImplTest {
 
         return user;
     }
-    
+
     private static Boolean isUserEqual(User user1, User user2) {
         if (user1 == null && user2 == null) {
             return true;
@@ -235,21 +241,32 @@ public class UserDaoDBImplTest {
             valid = false;
         }
 
-        if (user1.getJoinedOn() != (user2.getJoinedOn())) {
+
+        if ( !isSameDay(user1.getJoinedOn(), user2.getJoinedOn()) ) {
             valid = false;
         }
 
-        if (user1.getId()!= user2.getId()) {
+        if (user1.getId() != user2.getId()) {
             valid = false;
         }
 
-        if (user1.getNumOfComments()!= user2.getNumOfComments()) {
+        if (user1.getNumOfComments() != user2.getNumOfComments()) {
             valid = false;
         }
 
-        
-        
         return valid;
+    }
+
+    private static boolean isSameDay(java.util.Date date1, java.util.Date date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyyMMdd");
+
+        if (date1 == null || date2 == null) {
+            return false;
+        }
+        return fmt.format(date1).equals(fmt.format(date2));
     }
 
     /**
