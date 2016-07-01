@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -386,12 +387,16 @@ public class ImageDAODBImplTest {
 
         Image image = instance.getDefaultThumb();
 
-
         if (image == null) {
             List<Image> imageList = instance.list();
-            int imageListSize = imageList.size();
+            
+            List<Image> filteredImageList = imageList.stream()
+                                            .filter(a -> a != null)
+                                            .collect(Collectors.toList());
+                    
+            int filteredImageListSize = filteredImageList.size();
 
-            Image imageZ = instance.get(imageListSize - 1);
+            Image imageZ = filteredImageList.get(filteredImageListSize - 1);
             
             instance.setDefaultThumb(imageZ);
         }
