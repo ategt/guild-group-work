@@ -1,10 +1,4 @@
-<%-- 
-    Document   : header
-    Created on : Jun 28, 2016, 3:07:47 PM
-    Author     : apprentice
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>

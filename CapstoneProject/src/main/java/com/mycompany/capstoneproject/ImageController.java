@@ -66,18 +66,7 @@ public class ImageController {
         Image image = null;
 
         if (id == 0) {
-            List<Image> images = imageDao.list();
-
-            List<Integer> imageIdList = images.stream()
-                    .filter(a -> a != null)
-                    .filter(a -> a.getDescription() != null)
-                    .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                    .map(Image::getId)
-                    .collect(Collectors.toList());
-            
-            Integer firstId = imageIdList.get(0);
-            image = imageDao.get(firstId);
-            
+            image = imageDao.getDefaultThumb();
         } else {
             image = imageDao.get(id);
         }

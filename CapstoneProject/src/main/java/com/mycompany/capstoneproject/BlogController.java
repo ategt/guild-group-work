@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
@@ -136,7 +137,8 @@ public class BlogController {
 
         // Consider resluging.
         blogPost.setTitle(blogPostCommand.getTitle());
-        blogPost.setSlug(blogPostCommand.getTitle());
+        String slug = createSlug(blogPost.getTitle());
+        blogPost.setSlug(slug);
 
         // Do something here to recheck for #hashTags.
         blogPost.setContent(blogPostCommand.getContent());
@@ -239,6 +241,7 @@ public class BlogController {
         post.setExpireOn(postExpires);
         post.setDateToPostOn(postOn);
         post.setImage(thumbImage);
+        post.setExpired(0);
         return post;
     }
 
@@ -373,4 +376,27 @@ public class BlogController {
         return hashTags;
     }
 
+    public String createSlug(String title){
+       String slug = title.replace(" ", "-");
+       List<String> slugs = blogPostDao.listSlugs();
+       Integer numOfRepeats = 0;
+       
+        for (String str : slugs) {
+            String[] strArray = str.split("_"); //split between slug and number of repeats
+            String myTitle = strArray[0];       //grab slug
+            if(myTitle.equals(slug)){           //find number of times slug repeat
+                numOfRepeats++;
+            }
+        }
+        for (String str : slugs) {
+            String[] strArray = str.split("_"); 
+            String myTitle = strArray[0];       
+            if(myTitle.equals(slug)){           
+                slug = slug + "_" + numOfRepeats;
+            }
+        }
+        
+        return slug;
+
+    }
 }
