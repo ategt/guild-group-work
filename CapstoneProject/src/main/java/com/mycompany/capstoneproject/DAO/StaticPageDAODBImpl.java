@@ -15,15 +15,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 /**
  *
  * @author apprentice
  */
 public class StaticPageDAODBImpl implements StaticPageInterface {
 
-    private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id) VALUES (?, ?, ?)";
-    private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=? WHERE id=?";
+    private static final String SQL_INSERT_STATIC_PAGE = "INSERT INTO capstone.static_page (title, content, image_id, tab_position) VALUES (?, ?, ?, ?)";
+    private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=?, tab_position=? WHERE id=?";
     private static final String SQL_DELETE_STATIC_PAGE = "DELETE FROM capstone.static_page where id = ?";
     private static final String SQL_GET_STATIC_PAGE_LIST = "SELECT * FROM capstone.static_page";
     private static final String SQL_GET_STATIC_PAGE_LIST_BY_POSITION = "SELECT * FROM capstone.static_page ORDER BY tab_position";
@@ -40,10 +39,15 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public StaticPage create(StaticPage staticPage) {
 
+        Integer tabPosition = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM capstone.static_page", Integer.class) + 1;
+
+        staticPage.setTab_position(tabPosition);
+
         jdbcTemplate.update(SQL_INSERT_STATIC_PAGE,
                 staticPage.getTitle(),
                 staticPage.getContent(),
-                staticPage.getImage_id());
+                staticPage.getImage_id(),
+                staticPage.getTab_position());
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);  //gets next unique id
 
@@ -91,6 +95,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
                 staticPage.getTitle(),
                 staticPage.getContent(),
                 staticPage.getImage_id(),
+                staticPage.getTab_position(),
                 staticPage.getId());
 
     }
@@ -130,9 +135,10 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
 
             staticPage.setTitle(rs.getString("title"));
             staticPage.setContent(rs.getString("content"));
-            
+
             staticPage.setImage_id(rs.getInt("image_id"));
-            
+            staticPage.setTab_position(rs.getInt("tab_position"));
+
             // either use the image Dao or talk to someone about SQL joins.
             // It would be nice if this code could work.
             /*
