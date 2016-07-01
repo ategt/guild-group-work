@@ -385,7 +385,7 @@ public class ImageDAODBImplTest {
 
         Image image = instance.getDefaultThumb();
 
-        int oldId = image.getId();
+//        int oldId = image.getId();
 
         List<Image> imageList = instance.list();
         int imageListSize = imageList.size();
