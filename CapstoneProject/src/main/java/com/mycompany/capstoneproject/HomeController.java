@@ -219,20 +219,16 @@ public class HomeController {
     
         @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteUser(@PathVariable("id") Integer userId) {
+    public User softDeleteUser(@PathVariable("id") Integer userId) {
 
-//               List<Product> products = productDao.listProduct();
-//        
-//        model.put("products", products);
-//        
-//        
-//        List<State> states = stateDao.listStates();
-//        
-//        model.put("states", states);
+
         User user = userDao.get(userId);
         
-        userDao.delete(user);
-
+        user.setEnabled(0);
+        
+        userDao.update(user);
+        
+        return user;
 
     }
     

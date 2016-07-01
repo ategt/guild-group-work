@@ -18,6 +18,7 @@ import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -144,8 +145,16 @@ public class AdminPanelController {
     public String users(Map model) {
         
         List<User> users = userDao.list();
+        
+        List<User> activeUsers = new ArrayList();
+        
+          for (User user : users) {
+              if(user.getEnabled() == 1){
+                  activeUsers.add(user);
+              }
+          }
  
-        model.put("users", users);
+        model.put("users", activeUsers);
         
         return "ADMINPANEL/usersAdmin";
     }
@@ -169,7 +178,7 @@ public class AdminPanelController {
 
     }
     
-     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+     @RequestMapping(value = "/adminPanel/", method = RequestMethod.PUT)
     public String edit(@PathVariable("id") Integer orderId, Map model , User u){
  
 
