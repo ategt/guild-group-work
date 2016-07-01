@@ -94,6 +94,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.project";
     
+    private static final String SQL_PUBLISH_POST = "UPDATE `capstone`.`post` SET `status`='published' WHERE `id`= ?";
+    
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -253,6 +255,15 @@ public class BlogPostDBImpl implements BlogPostInterface {
         return jdbcTemplate.query(SQL_GET_SLUG_LIST, new SlugMapper());
     }
 
+    @Override
+    public BlogPost publish(BlogPost post) {
+        
+        jdbcTemplate.update(SQL_PUBLISH_POST, post.getId());
+        
+        return post;
+        
+    }
+
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {
@@ -311,7 +322,6 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
             return count;
         }
-
     }
 
     private static final class SlugMapper implements RowMapper<String> {

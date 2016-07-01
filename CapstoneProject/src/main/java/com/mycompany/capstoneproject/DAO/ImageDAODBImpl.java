@@ -26,10 +26,15 @@ public class ImageDAODBImpl implements ImageInterface {
     private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM capstone.image WHERE id =?";
     private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM capstone.image";
     //private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT default_thumb FROM capstone.image_preferences ORDER BY id ASC LIMIT 1";
-    private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT image.* FROM capstone.image\n" +
-                                                                    "JOIN image_preferences\n" +
-                                                                    "ON image_preferences.default_thumb=image.id\n" +
-                                                                    "ORDER BY image_preferences.id ASC LIMIT 1;";
+    private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT image.* FROM capstone.image\n"
+            + "JOIN image_preferences\n"
+            + "ON image_preferences.default_thumb=image.id\n"
+            + "ORDER BY image_preferences.id ASC LIMIT 1;";
+
+    private static final String SQL_CREATE_IMAGE_THUMB_DEFAULT = "INSERT INTO capstone.image_preferences (default_thumb) VALUES (?)";
+    private static final String SQL_UPDATE_IMAGE_THUMB_DEFAULT = "UPDATE capstone.image_preferences SET default_thumb = ? WHERE id = ?;";
+    private static final String SQL_GET_IMAGE_DEFAULT_ID = "SELECT id FROM capstone.image_preferences\n"
+            + "ORDER BY image_preferences.id ASC LIMIT 1;";
 
     // # id, url, image, original_name, width, height, description
     private JdbcTemplate jdbcTemplate;
@@ -82,12 +87,33 @@ public class ImageDAODBImpl implements ImageInterface {
         }
     }
 
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void setDefaultThumb(Image image) {
+
+        if (image == null) return;
+        
+        try {
+            Integer id = jdbcTemplate.queryForObject(SQL_GET_IMAGE_DEFAULT_ID, Integer.class);
+            jdbcTemplate.update(SQL_UPDATE_IMAGE_THUMB_DEFAULT,
+                    image.getId(),
+                    id);
+
+        } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
+            jdbcTemplate.update(SQL_CREATE_IMAGE_THUMB_DEFAULT,
+                            image.getId());
+        }
+
+    }
+
     //"UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?  WHERE id = ?";
     @Override
     public void update(Image image) {
-        
-        if ( image == null ) return;
-        
+
+        if (image == null) {
+            return;
+        }
+
         jdbcTemplate.update(SQL_UPDATE_IMAGE,
                 image.getUrl(),
                 image.getImage(),
@@ -103,7 +129,9 @@ public class ImageDAODBImpl implements ImageInterface {
 
     @Override
     public void delete(Image image) {
-        if ( image == null ) return;
+        if (image == null) {
+            return;
+        }
 
         jdbcTemplate.update(SQL_DELETE_IMAGE_BY_ID, image.getId());
     }
@@ -112,7 +140,7 @@ public class ImageDAODBImpl implements ImageInterface {
     public List<Image> list() {
         return jdbcTemplate.query(SQL_GET_IMAGE_LIST, new ImageMapper());
     }
-    
+
     private static final class ImageMapper implements RowMapper<Image> {
 
         @Override
@@ -130,7 +158,7 @@ public class ImageDAODBImpl implements ImageInterface {
             image.setDescription(rs.getString("description"));
             image.setContentType(rs.getString("content_type"));
             image.setSize(rs.getLong("image_size"));
-            
+
             return image;
         }
 

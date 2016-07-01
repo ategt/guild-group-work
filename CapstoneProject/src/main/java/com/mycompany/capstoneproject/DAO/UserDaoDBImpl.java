@@ -8,6 +8,7 @@ package com.mycompany.capstoneproject.DAO;
 import com.mycompany.capstoneproject.DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,9 +42,9 @@ public class UserDaoDBImpl implements UserInterface {
         if (user == null) {
             return null;
         }
-        
+
         Date date = new Date();
-        
+
         user.setJoinedOn(date);
         user.setRole("ROLE_USER");
 
@@ -59,11 +60,11 @@ public class UserDaoDBImpl implements UserInterface {
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         user.setId(id);
-        
+
         jdbcTemplate.update(SQL_INSERT_USER_AUTHORITY,
                 user.getRole(),
                 user.getId());
-        
+
         return user;
 
     }
@@ -121,13 +122,13 @@ public class UserDaoDBImpl implements UserInterface {
             User user = new User();
 
             user.setId(rs.getInt("id"));
-
-            user.setEmail(rs.getString("email"));
-            user.setJoinedOn(rs.getDate("date_joined"));
             user.setName(rs.getString("name"));
-            user.setNumOfComments(rs.getInt("num_of_comments"));
-            user.setPassword(rs.getString("password"));
             user.setRole(rs.getString("role"));
+            user.setPassword(rs.getString("password"));
+            user.setEmail(rs.getString("email"));
+            user.setNumOfComments(rs.getInt("num_of_comments"));
+            Date date = rs.getTimestamp("date_joined");
+            user.setJoinedOn(date);
             user.setEnabled(rs.getInt("enabled"));
 
             return user;

@@ -27,6 +27,7 @@
             </tr>
 
             <c:forEach items="${users}" var="user">
+              
                 <tr id="user-row-${user.id}">
                     <td>${user.name}</td>
                     <td>${user.email}</td>
@@ -35,7 +36,10 @@
                     <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
                     <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>
                 </tr>
+       
             </c:forEach>
+                
+        </table>
                 
                 
                 
@@ -94,7 +98,7 @@
             </div>
 
           </div>
-        </div>-->
+        </div>
 
 
 

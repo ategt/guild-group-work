@@ -37,38 +37,34 @@ function sendFileToServer(formData, status)
             var imageUrl = '<option data-img-src="' + contextRoot + '/image/showimage/' + data + '" value="' + data + '">' + contextRoot + '/image/showimage/' + data + '</option>';
 
             console.log(imageUrl);
-                $('#admin-image-picker')
-                        .append(imageUrl);
-                        
-                        $("select").imagepicker({hide_select: false});
-                        
-                         var imageSize = $('#image-preview-size').val();
+            $('#admin-image-picker')
+                    .append(imageUrl);
 
-                    var width = 50;
-                    var height = 50;
+            $("select").imagepicker({hide_select: false});
 
-                    if (imageSize == 1) {
-                        width = 50;
-                        height = 50;
-                    } else if (imageSize == 2) {
-                        width = 100;
-                        height = 100;
-                    } else if (imageSize == 3) {
-                        width = 150;
-                        height = 150;
-                    } else if (imageSize == 4) {
-                        width = 200;
-                        height = 200;
-                    }
+            var imageSize = $('#image-preview-size').val();
 
-                    $(".image_picker_image").width(height);
-                    $(".image_picker_image").height(width);
+            var width = 50;
+            var height = 50;
 
-                    
-//                    $("<option></option>")
-//                                .attr("value", key)
-//                                .text(value));
-            
+            if (imageSize == 1) {
+                width = 50;
+                height = 50;
+            } else if (imageSize == 2) {
+                width = 100;
+                height = 100;
+            } else if (imageSize == 3) {
+                width = 150;
+                height = 150;
+            } else if (imageSize == 4) {
+                width = 200;
+                height = 200;
+            }
+
+            $(".image_picker_image").width(height);
+            $(".image_picker_image").height(width);
+
+
 
         },
         error: function (data, status) {
@@ -161,13 +157,16 @@ $(document).ready(function ()
     obj.on('drop', function (e)
     {
 
-        $(this).css('border', '2px dotted #0B85A1');
+        $(this).css('border', '2px hidden #0B85A1');
         e.preventDefault();
+
         var files = e.originalEvent.dataTransfer.files;
 
         //We need to send dropped files to Server
         handleFileUpload(files, obj);
+
     });
+
     $(document).on('dragenter', function (e)
     {
         e.stopPropagation();
@@ -177,12 +176,13 @@ $(document).ready(function ()
     {
         e.stopPropagation();
         e.preventDefault();
-        obj.css('border', '2px dotted #0B85A1');
+        obj.css('border', '2px hidden #0B85A1');
     });
     $(document).on('drop', function (e)
     {
         e.stopPropagation();
         e.preventDefault();
+
     });
 
 });

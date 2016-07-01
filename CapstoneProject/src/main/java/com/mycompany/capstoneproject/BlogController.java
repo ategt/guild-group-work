@@ -399,4 +399,11 @@ public class BlogController {
         return slug;
 
     }
+    
+    @RequestMapping(value="/publish/{id}", method=RequestMethod.POST)
+    public String publishPost(@PathVariable("id") Integer postId){
+        BlogPost post = blogPostDao.getById(postId);
+        blogPostDao.publish(post);
+        return "adminPanel";
+    }
 }

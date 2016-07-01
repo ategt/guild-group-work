@@ -54,10 +54,6 @@ public class ImageController {
     @Autowired
     private ImageServices imageServices;
 
-//    @Inject
-//    public ImageController(ImageInterface imageDao) {
-//        this.imageDao = imageDao;
-//    }
     @RequestMapping(method = RequestMethod.GET, value = "/showimage/{id}")
     @ResponseBody
     public void getImage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
@@ -95,16 +91,22 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
         return "pickerTest";
+    }
+
+    private List<Integer> filterTestFiles(List<Image> images) {
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                //.filter(a -> a.getUrl() == null || !a.getUrl().toLowerCase().contains("patsdresses.com"))
+                .filter(a -> a.getDescription() != null )
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        return imageIdList;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/imagetestb")
@@ -112,12 +114,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
@@ -129,12 +126,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        List<Integer> imageIdList = filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
@@ -192,22 +184,20 @@ public class ImageController {
         }
         return returnId;
     }
+    
+    @RequestMapping(value = "/defaultimage/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Integer setDefaultImage(@PathVariable("id") Integer id) {
 
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/")
-//    @ResponseBody
-//    public String imageDelete(@RequestBody()  , Map model) {
-//
-//        List<Image> images = imageDao.list();
-//
-//        List<Integer> imageIdList =  images.stream()
-//                .filter(a -> a != null)
-//                .filter(a -> a.getDescription() != null)
-//                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-//                .map(Image::getId)
-//                .collect(Collectors.toList());
-//        
-//        model.put("imageIdList", imageIdList);
-//        
-//        return "imagesAdmin";
-//    }
+        Image defaultImage = imageDao.get(id);
+        
+        imageDao.setDefaultThumb(defaultImage);
+        
+        Image returnedImage = imageDao.getDefaultThumb();
+        
+        int returnedImageId = returnedImage.getId();
+
+        return returnedImageId;
+    }
+
 }
