@@ -6,7 +6,7 @@
     <head>
         <title>Basic Static Page</title>
         <!-- Bootstrap core CSS -->
-        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">-->
 
         <!-- Custom styles for this template -->
         <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
@@ -19,13 +19,13 @@
     </head>
     <body>
         
-        <div class="col-md-2">
+<!--        <div class="col-md-2">
         </div>
-            <div class="col-md-8">
-<table class="table table-striped" id='category-table'>
+            <div class="col-md-8">-->
+<table class="table table-bordered table-hover" id="user-table">
     <tr>
         <th>Name</th>
-        <th>Edit</th>
+        <!--<th>Edit</th>-->
         <th>Delete</th>
     </tr>    
 
@@ -33,7 +33,7 @@
         <tr id="category-row-${cat.id}">
             <!--<td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#showCategoryModal">${cat.name}</a></td>-->
             <td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#showCategoryModal">${cat.name}</a></td>
-            <td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#editCategoryModal">Edit</a></td>
+            <!--<td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#editCategoryModal">Edit</a></td>-->
             <td><a data-category-id="${cat.id}" class="delete-link">Delete</a></td>
         </tr>
 
@@ -42,25 +42,26 @@
 </table>
 <form method="POST" class="form-horizontal">
 
-    <div class="col-md-4">
+    <!--<div class="col-md-2">-->
         <div class="form-group">
             <label for="name" class="col-md-4 control-label"> Name:</label>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <input type="text" id="name-input" class="form-control"/>
             </div>
         </div>  
     </div>
 
 
-    <div style="height:160; width:370px; padding-left: 50px;" class="alert alert-info pull-right">
-        <strong>Please fill out ALL of the fields!</strong> 
+<!--    <div style="height:160; width:370px; padding-left: 50px;" class="alert alert-info pull-right">
+        <strong>Please fill out ALL of the fields!</strong> -->
 
 
         <div id="add-contact-validation-errors">
         </div> 
     </div>
-
+    <center>
     <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
+    </center>
 </form>
                 
             </div>

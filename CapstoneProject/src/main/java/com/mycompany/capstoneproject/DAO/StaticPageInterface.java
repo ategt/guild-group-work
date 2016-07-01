@@ -20,5 +20,6 @@ public interface StaticPageInterface {
     public void update(StaticPage stat);
     public void delete(Integer id);
     public List<StaticPage> listPages();
+    public List<StaticPage> listPagesByPosition();
     
 }

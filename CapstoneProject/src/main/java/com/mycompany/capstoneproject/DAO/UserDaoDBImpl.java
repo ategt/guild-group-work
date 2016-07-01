@@ -95,8 +95,8 @@ public class UserDaoDBImpl implements UserInterface {
                     user.getEmail(),
                     user.getNumOfComments(),
                     user.getJoinedOn(),
-                    user.getId(),
-                    user.getEnabled());
+                    user.getEnabled(),
+                    user.getId());
         }
     }
 

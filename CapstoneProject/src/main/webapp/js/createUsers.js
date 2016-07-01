@@ -44,25 +44,19 @@ $(document).ready(function () {
 //                $('#category-table').append($(tableRow));
 
 
-                $('#create-username').text(""),
-                        $('#create-password').text(""),
-                        $('#create-email').text("");
+                $('#create-username').val(""),
+                        $('#create-password').val(""),
+                        $('#create-email').val("");
+                
+                window.location.href = "http://localhost:8080/CapstoneProject/home"
 
 
             },
             error: function (data, status) {
 
-                var errors = data.responseJSON.errors;
-
-                console.log(errors);
-
-                $.each(errors, function (index, error) {
-
-                    $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
-
-                });
-
             }
+            
+            
 
         });
 

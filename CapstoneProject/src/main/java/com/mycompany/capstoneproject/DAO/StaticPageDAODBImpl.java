@@ -26,6 +26,7 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     private static final String SQL_UPDATE_STATIC_PAGE = "UPDATE capstone.static_page SET title=?, content=?, image_id=? WHERE id=?";
     private static final String SQL_DELETE_STATIC_PAGE = "DELETE FROM capstone.static_page where id = ?";
     private static final String SQL_GET_STATIC_PAGE_LIST = "SELECT * FROM capstone.static_page";
+    private static final String SQL_GET_STATIC_PAGE_LIST_BY_POSITION = "SELECT * FROM capstone.static_page ORDER BY tab_position";
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -107,6 +108,14 @@ public class StaticPageDAODBImpl implements StaticPageInterface {
     public List<StaticPage> listPages() {
 
         return jdbcTemplate.query(SQL_GET_STATIC_PAGE_LIST, new StaticPageMapper());
+
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<StaticPage> listPagesByPosition() {
+
+        return jdbcTemplate.query(SQL_GET_STATIC_PAGE_LIST_BY_POSITION, new StaticPageMapper());
 
     }
 
