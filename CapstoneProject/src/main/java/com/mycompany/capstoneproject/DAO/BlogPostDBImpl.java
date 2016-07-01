@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BlogPostDBImpl implements BlogPostInterface {
 
-    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status, thumb_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_BLOGPOST = "INSERT INTO post (title, user_id, content, date_posted, expires_on, post_on, slug, status, thumb_image, expired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     private static final String SQL_INSERT_POST_AND_CATEGORY = "INSERT INTO category_post(category_id, post_id) VALUES(?, ?)";
 
@@ -43,7 +44,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
 
-    private static final String SQL_DELETE_BLOGPOST = "DELETE FROM post where id = ?";
+    private static final String SQL_DELETE_BLOGPOST = "UPDATE `capstone`.`post` SET `expired`=1 WHERE `id`=?';";
 
     private static final String SQL_GET_DEFAULT_CATEGORY = "SELECT id FROM capstone.category\n"
             + "ORDER BY id ASC\n"
@@ -79,7 +80,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
             + "JOIN category_post \n"
-            + "ON category_post.post_id=post.id \n"
+            + "ON category_post.post_id=post.id AND post.expired = 0 \n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "LEFT JOIN image\n"
@@ -91,6 +92,8 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
 
+    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.project";
+    
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -129,6 +132,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 post.getDateToPostOn(),
                 post.getSlug(),
                 post.getStatus(),
+                0,
                 imageId);
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -154,7 +158,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public BlogPost getById(Integer id) {
 
-        return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
+        try {
+            return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
 
     }
 
@@ -191,8 +199,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getStatus(),
                         post.getImage().getId(),
                         post.getId());
-                
-//title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
+
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
                 Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -238,6 +245,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public List<BlogPost> listPendingPosts() {
         return jdbcTemplate.query(SQL_GET_PENDING_POSTS, new BlogPostMapper());
+    }
+
+    @Override
+    public List<String> listSlugs() {
+        return jdbcTemplate.query(SQL_GET_SLUG_LIST, new SlugMapper());
     }
 
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
@@ -297,6 +309,16 @@ public class BlogPostDBImpl implements BlogPostInterface {
             Integer count = rs.getInt(1);
 
             return count;
+        }
+
+    }
+
+    private static final class SlugMapper implements RowMapper<String> {
+
+        public String mapRow(ResultSet rs, int i) throws SQLException {
+            String slug = rs.getString("slug");
+
+            return slug;
         }
 
     }
