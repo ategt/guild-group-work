@@ -17,7 +17,7 @@ $(document).ready(function(){
         
          $.ajax({
            
-            url:contextRoot + "/adminPanel/" + userId,
+            url:contextRoot + "/adminPanel/edit",
             type: 'GET' ,
             dataType: 'json',
             beforeSend: function(xhr){

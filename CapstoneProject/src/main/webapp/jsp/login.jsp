@@ -44,7 +44,7 @@
 
 <!--            <a href="${pageContext.request.contextPath}/home/"/><button type="submit">Continue As A Guest</button></a>-->
             <br/>
-            <a data-toggle="modal" data-target="#showAccountModal" id="create-account">Create an Account</a>
+              <a href="${pageContext.request.contextPath}/createAccount"><p class="small">Create an Account</p></a>
 
 
         </div>
@@ -53,7 +53,7 @@
 
 
 
-    <div class="login-box1 animated1 fadeInUp1">
+<!--    <div class="login-box1 animated1 fadeInUp1">
         <div class="box-header">
             <h2>Create Account</h2>
         </div>
@@ -73,7 +73,7 @@
 
 
 
-    </div>
+    </div>-->
 
 
 </body>
