@@ -23,4 +23,7 @@ public interface ImageInterface {
     public void delete(Image image);
 
     public List<Image> list();
+
+    public Image getDefaultThumb();
+
 }
