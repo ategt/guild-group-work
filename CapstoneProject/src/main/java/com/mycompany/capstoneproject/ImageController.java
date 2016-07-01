@@ -63,7 +63,24 @@ public class ImageController {
     public void getImage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
             throws ServletException, IOException {
 
-        Image image = imageDao.get(id);
+        Image image = null;
+
+        if (id == 0) {
+            List<Image> images = imageDao.list();
+
+            List<Integer> imageIdList = images.stream()
+                    .filter(a -> a != null)
+                    .filter(a -> a.getDescription() != null)
+                    .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                    .map(Image::getId)
+                    .collect(Collectors.toList());
+            
+            Integer firstId = imageIdList.get(0);
+            image = imageDao.get(firstId);
+            
+        } else {
+            image = imageDao.get(id);
+        }
 
         response.setContentLengthLong(image.getSize());
         response.setContentType(image.getContentType());

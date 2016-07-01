@@ -20,8 +20,6 @@
 
     <body>
 
-        
-
         <div class="container">
             <form:form method="POST" action="./" class="form-horizontal">
                 <input type="hidden" name="id" value="${blogPost.id}"/>
