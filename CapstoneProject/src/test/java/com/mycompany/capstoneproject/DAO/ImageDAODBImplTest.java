@@ -1,4 +1,3 @@
-
 /**
  *
  * To change this license header, choose License Headers in Project Properties.
@@ -99,19 +98,35 @@ public class ImageDAODBImplTest {
 
         boolean valid = true;
 
-        if (!image1.getDescription().equals(image2.getDescription())) {
+         if (image1.getDescription() == null && image2.getDescription() == null) {
+
+        } else if (image1.getDescription() == null || image2.getDescription() == null) {
+            valid = false;
+        } else if (!image1.getDescription().equals(image2.getDescription())) {
             valid = false;
         }
 
-        if (!image1.getOriginalName().equals(image2.getOriginalName())) {
+        if (image1.getOriginalName() == null && image2.getOriginalName() == null) {
+
+        } else if (image1.getOriginalName() == null || image2.getOriginalName() == null) {
+            valid = false;
+        } else if (!image1.getOriginalName().equals(image2.getOriginalName())) {
             valid = false;
         }
 
-        if (!image1.getContentType().equals(image2.getContentType())) {
+        if (image1.getContentType() == null && image2.getContentType() == null) {
+
+        } else if (image1.getContentType() == null || image2.getContentType() == null) {
+            valid = false;
+        } else if (!image1.getContentType().equals(image2.getContentType())) {
             valid = false;
         }
 
-        if (!image1.getUrl().equals(image2.getUrl())) {
+        if (image1.getUrl() == null && image2.getUrl() == null) {
+
+        } else if (image1.getUrl() == null || image2.getUrl() == null) {
+            valid = false;
+        } else if (!image1.getUrl().equals(image2.getUrl())) {
             valid = false;
         }
 
@@ -135,11 +150,9 @@ public class ImageDAODBImplTest {
         if (!Objects.equals(image1.getSize(), image2.getSize())) {
             valid = false;
         }
-            
-            return valid;
-        }
 
-    
+        return valid;
+    }
 
     private Image imageFactory() {
         Image image = new Image();
@@ -329,6 +342,68 @@ public class ImageDAODBImplTest {
                 .get();
 
         assertTrue(isImageEqual(sortedImage, image));
+
+    }
+
+    /**
+     * Test of list method, of class ImageDAODBImpl.
+     */
+    @Test
+    public void testGetDefaultImage() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        assertNotNull(image);
+
+        assertTrue(image.getId() > 0);
+
+    }
+    /**
+     * Test of list method, of class ImageDAODBImpl.
+     */
+    @Test
+    public void testSetDefaultImage() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        instance.setDefaultThumb(null);
+
+        // If it makes it here, it passed.
+        assertTrue(true);
+
+    }
+
+    /**
+     * Test of list method, of class ImageDAODBImpl.
+     */
+    @Test
+    public void testSetAndGetDefaultImage() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        int oldId = image.getId();
+
+        List<Image> imageList = instance.list();
+        int imageListSize = imageList.size();
+
+        Image imageA = instance.get(imageListSize - 1);
+
+        instance.setDefaultThumb(imageA);
+
+        Image imageB = instance.getDefaultThumb();
+
+        //int oldId = image.getId();
+        assertTrue(isImageEqual(imageB, imageA));
+
+        instance.setDefaultThumb(image);
+
+        Image imageC = instance.getDefaultThumb();
+
+        assertTrue(isImageEqual(image, imageC));
 
     }
 

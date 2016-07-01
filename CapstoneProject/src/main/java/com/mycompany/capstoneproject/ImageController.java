@@ -97,8 +97,10 @@ public class ImageController {
 
         List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                //.filter(a -> a.getDescription() != null)
+                .filter(a -> a.getUrl() != null)
+                //.filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
 
@@ -114,8 +116,8 @@ public class ImageController {
 
         List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getUrl() != null)
+                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
 
@@ -131,8 +133,8 @@ public class ImageController {
 
         List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getUrl() != null)
+                .filter(a -> !a.getUrl().toLowerCase().contains("http://swc.patsdresses.com/"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
 
