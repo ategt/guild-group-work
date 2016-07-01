@@ -67,6 +67,8 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
+
     
     
     <link rel="stylesheet" href="./material.min.css">

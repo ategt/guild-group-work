@@ -43,7 +43,7 @@ public class HomeController {
         this.staticPageDao = SPDao;
         this.userDao = UDao;
     }
-    
+
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Map model) {
 
@@ -85,12 +85,10 @@ public class HomeController {
 
         return "adminPanel";
     }
-    
-
-    
+ 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
-        
+
 //         Integer offset;
 //        if (pageNumber == null) {
 //            offset = 0;
@@ -98,7 +96,7 @@ public class HomeController {
 //            offset = getOffset(pageNumber);
 //        }
 //        
-           List<BlogPost> posts = blogPostDao.listBlogs();
+        List<BlogPost> posts = blogPostDao.listBlogs();
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -120,12 +118,9 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-       
 
         return "waitingApproval";
     }
-    
-    
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
@@ -138,7 +133,7 @@ public class HomeController {
         }
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
 
-        List<StaticPage> staticPages = staticPageDao.listPages();
+        List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
 
         List<Category> categories = categoriesDao.listCategories();
@@ -219,20 +214,16 @@ public class HomeController {
     
         @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteUser(@PathVariable("id") Integer userId) {
+    public User softDeleteUser(@PathVariable("id") Integer userId) {
 
-//               List<Product> products = productDao.listProduct();
-//        
-//        model.put("products", products);
-//        
-//        
-//        List<State> states = stateDao.listStates();
-//        
-//        model.put("states", states);
+
         User user = userDao.get(userId);
         
-        userDao.delete(user);
-
+        user.setEnabled(0);
+        
+        userDao.update(user);
+        
+        return user;
 
     }
     

@@ -34,7 +34,7 @@ public class StaticPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String admin(Map model) {
-        List<StaticPage> staticPages = staticPageDao.listPages();
+        List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
 
         model.put("staticPage", staticPage);

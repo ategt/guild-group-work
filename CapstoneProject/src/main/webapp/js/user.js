@@ -8,70 +8,10 @@
 $(document).ready(function(){
    
     
-//    $('#create-submit').on('click', function(e) {
-//        
-//        e.preventDefault();
-//        
-//        $('#add-contact-validation-errors').empty();
-//        var userData = JSON.stringify( {
-//          
-//            name:$('#name-input').val(),
-//            role:$('#name-input').val(),
-//            email:$('#name-input').val(),
-//            enabled:$('#name-input').val()
-//            
-//         
-//        });
-//        
-//        
-//        $.ajax({
-//           
-//           
-//           url:contextRoot + "/user/",
-//           type: 'POST',
-//           data: userData,
-//           dataType: 'json',
-//           beforeSend:function(xhr){
-//               xhr.setRequestHeader("Accept", "application/json");
-//               xhr.setRequestHeader("Content-Type", "application/json");
-//                       
-//           },
-//           
-//           success: function(data, status){
-//              
-//              console.log(data);
-//              
-//              
-//              var tableRow = buildUserRow(data);
-////              console.log(tableRow);
-//              
-//              $('#user-table').append($(tableRow));
-//              
-//              
-//            $('#name-input').val('');
-//   
-//              
-//           },
-//           error: function(data, status){
-//               
-//               var errors = data.responseJSON.errors;
-//               
-//               console.log(errors);
-//               
-//               $.each(errors , function(index , error){
-//                  
-//                  $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
-//                   
-//               });
-//               
-//           }
-//                   
-//        });
-        
        
         
         
-    });   
+       
     
     
     function buildUserRow(data){
@@ -83,36 +23,7 @@ $(document).ready(function(){
                 </tr>  ";
     }
     
-//    $('#showUserModal').on('show.bs.modal' , function(e){
-//       
-//        var link = $(e.relatedTarget);
-//        
-//        var userId = link.data('user-id');
-//        
-//        console.log(userId);
-//        
-//        $.ajax({
-//           
-//            url:contextRoot + "/user/" + userId,
-//            type: 'GET' ,
-//            dataType: 'json',
-//            beforeSend: function(xhr){
-//              
-//              xhr.setRequestHeader("Accept", "application/json");
-//                
-//            },
-//            success: function(data , status){
-//              
-//              $('#user-name').text(data.user);
-//             
-//            },
-//            error: function(data , status){
-//                alert('error');
-//            }
-//            
-//        });
-//        
-//    });
+
     
     $('#editUserModal').on('show.bs.modal' , function(e){
        
@@ -124,7 +35,7 @@ $(document).ready(function(){
         
          $.ajax({
            
-            url:contextRoot + "/user/" + userId,
+            url:contextRoot + "/adminPanel/",
             type: 'GET' ,
             dataType: 'json',
             beforeSend: function(xhr){
@@ -154,16 +65,20 @@ $(document).ready(function(){
           var userData = JSON.stringify( {
           
           
-            id:$('#edit-id').val(),
-            name:$('#edit-user-name').val()
-
+              id:$('#edit-id').val(),
+              name:$('#edit-user-name').text(),
+              name:$('#edit-user-password').text(),
+              email:$('#edit-user-email').val(),
+              role:$('#edit-user-role').val(),
+              
+              
         });
         
         
         $.ajax({
            
            
-           url:contextRoot + "/user/",
+           url:contextRoot + "/adminPanel/",
             
            type: 'PUT',
            data: userData,
@@ -179,9 +94,9 @@ $(document).ready(function(){
             $('#editUserModal').modal('hide');
            
             
-            var tableRow = buildUserRow(data);
+//            var tableRow = buildUserRow(data);
             
-            $('#user-row-' + data.id).replaceWith($(tableRow));
+//            $('#user-row-' + data.id).replaceWith($(tableRow));
             
             
     },
@@ -211,6 +126,6 @@ $(document).ready(function(){
        });
         
     });
-
+});
 
 //});
