@@ -19,11 +19,15 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
@@ -435,5 +439,22 @@ public class BlogController {
         BlogPost post = blogPostDao.getById(postId);
         blogPostDao.publish(post);
         return "adminPanel";
+    }
+    
+    public void automaticallyPublishScheduledPosts(){
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDay = new Date();
+        try {
+            currentDay = format.parse(date.toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(BlogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+        for (BlogPost pendingPost : pendingPosts) {
+            if(pendingPost.getDateToPostOn().equals(currentDay)){
+                blogPostDao.publish(pendingPost);
+            }
+        }
     }
 }
