@@ -14,9 +14,15 @@ import com.mycompany.capstoneproject.DTO.User;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -124,7 +130,9 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
-
+        
+        automaticallyPublishScheduledPosts();
+        
         Integer offset;
         if (pageNumber == null) {
             offset = 0;
@@ -227,5 +235,21 @@ public class HomeController {
 
     }
     
+    public void automaticallyPublishScheduledPosts(){
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDay = new Date();
+        try {
+            currentDay = format.parse(date.toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(BlogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+        for (BlogPost pendingPost : pendingPosts) {
+            if(pendingPost.getDateToPostOn().equals(currentDay)){
+                blogPostDao.publish(pendingPost);
+            }
+        }
+    }
      
 }

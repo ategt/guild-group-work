@@ -441,20 +441,5 @@ public class BlogController {
         return "adminPanel";
     }
     
-    public void automaticallyPublishScheduledPosts(){
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date currentDay = new Date();
-        try {
-            currentDay = format.parse(date.toString());
-        } catch (ParseException ex) {
-            Logger.getLogger(BlogController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
-        for (BlogPost pendingPost : pendingPosts) {
-            if(pendingPost.getDateToPostOn().equals(currentDay)){
-                blogPostDao.publish(pendingPost);
-            }
-        }
-    }
+    
 }
