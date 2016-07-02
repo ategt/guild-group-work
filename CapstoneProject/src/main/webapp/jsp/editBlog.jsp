@@ -24,6 +24,12 @@
                 height: 200px;
             }
 
+            .drop-area {
+                width: 300px;
+                height: 300px;
+                border: 2px solid black;
+            }
+
         </style>
 
         <%@ include file="header.jsp" %>
@@ -43,6 +49,7 @@
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal" >Set Thumbnail Image</button>
                             </div>
                         </div>
+                        <br />
                         <div class="row">
                             <div class="col-md-12 text-center">
 
@@ -62,6 +69,12 @@
                                         <option value="3">Small</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="drop-area">
+                                Drag and Drop Files here to Add them to the Editor Or Click the button above to add images from our database.
                             </div>
                         </div>
                     </div>
