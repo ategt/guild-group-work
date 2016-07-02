@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -90,6 +91,21 @@ public class StaticPageController {
     public void delete(@PathVariable("id") Integer StaticPageId) {
 
         staticPageDao.delete(StaticPageId);
+
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Integer> orderStatic(@RequestParam("positionArray") List<Integer> positionArray) {
+
+        for (int i=0; i < positionArray.size(); i++ ) {
+
+            StaticPage staticPage = staticPageDao.get(positionArray.get(i));
+            staticPage.setTab_position(i + 1);
+            staticPageDao.update(staticPage);
+            
+        }
+        return positionArray;
 
     }
 

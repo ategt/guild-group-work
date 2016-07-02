@@ -30,7 +30,7 @@
                        
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/editPosts')">Edit Posts</a>
                        
-                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/staticPages')">Edit Static Pages</a>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/static/')">Edit Static Pages</a>
                         
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/users')">Manage Users</a>
                       
