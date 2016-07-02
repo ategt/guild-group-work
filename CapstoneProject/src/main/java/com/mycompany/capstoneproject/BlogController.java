@@ -217,7 +217,6 @@ public class BlogController {
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
         Date datePosted = new Date();
-        Date postExpires = new Date();
 
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
@@ -265,7 +264,7 @@ public class BlogController {
         post.setImage(img);
         post.setHashTag(hashTags);
         post.setPostedOn(datePosted);
-        post.setExpireOn(postExpires);
+        post.setExpireOn(postCommand.getExpireOn());
         post.setDateToPostOn(postCommand.getPublishOn());
         post.setImage(thumbImage);
         post.setExpired(0);

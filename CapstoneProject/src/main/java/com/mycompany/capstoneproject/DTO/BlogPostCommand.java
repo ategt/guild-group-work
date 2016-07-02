@@ -26,7 +26,19 @@ public class BlogPostCommand {
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
     private Date publishOn;
+    
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
+    private Date expireOn;
 
+    public Date getExpireOn() {
+        return expireOn;
+    }
+
+    public void setExpireOn(Date expireOn) {
+        this.expireOn = expireOn;
+    }
+    
     public Date getPublishOn() {
         return publishOn;
     }
