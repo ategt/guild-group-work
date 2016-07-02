@@ -5,7 +5,10 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -19,14 +22,17 @@ public class BlogPostCommand {
     private int authorId;
     private int id;
     private int thumbId;
-    private Date date;
+    
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
+    private Date publishOn;
 
     public Date getPublishOn() {
-        return date;
+        return publishOn;
     }
 
     public void setPublishOn(Date publishOn) {
-        this.date = publishOn;
+        this.publishOn = publishOn;
     }
 
     public int getCategoryId() {

@@ -19,6 +19,7 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,10 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +62,13 @@ public class BlogController {
         this.hashTagDao = HDao;
         this.imageDao = imageDao;
 
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -174,6 +185,7 @@ public class BlogController {
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
         post.setStatus("pending");
+
         blogPostDao.create(post);
 
         updateHashTags(post);
@@ -206,7 +218,7 @@ public class BlogController {
         Category category = categoriesDao.get(postCommand.getCategoryId());
         Date datePosted = new Date();
         Date postExpires = new Date();
-        
+
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
@@ -240,6 +252,9 @@ public class BlogController {
 ////            }
 //        }
 
+        if (postCommand.getPublishOn() == null) {
+            postCommand.setPublishOn(new Date());
+        }
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -415,9 +430,9 @@ public class BlogController {
         return slug;
 
     }
-    
-    @RequestMapping(value="/publish/{id}", method=RequestMethod.POST)
-    public String publishPost(@PathVariable("id") Integer postId){
+
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.POST)
+    public String publishPost(@PathVariable("id") Integer postId) {
         BlogPost post = blogPostDao.getById(postId);
         blogPostDao.publish(post);
         return "adminPanel";

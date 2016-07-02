@@ -52,8 +52,7 @@
                 <div class="form-group" id='date-input-div'>
                     <label for="date" class="col-md-4 control-label">Publish On: </label>
                     <div class="col-md-8">
-                        <input name="date" type="date" id="date-input" class="form-control"></input>
-                    </div>
+                        <input type="date" path="publishOn" class= "date" name = "publishOn" value = "<fmt:formatDate value="${cForm.publishOn}" pattern="yyyy-MM-dd" />"/>                    </div>
                     <div id="add-validation-date-error" class="validation-errors pull-right"></div>
                 </div>
                 <div class="form-group">
