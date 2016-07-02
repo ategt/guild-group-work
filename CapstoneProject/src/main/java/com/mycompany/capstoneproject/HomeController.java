@@ -40,7 +40,7 @@ public class HomeController {
     private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
-
+    
     @Inject
     public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao) {
         this.blogPostDao = BPDao;
@@ -149,12 +149,8 @@ public class HomeController {
 
         List<HashTag> hash = hashTagDao.listHashTags();
 
-        Integer count = blogPostDao.getNumOfPosts();
-        Integer numOfPages = (count / 3);
-        List<Integer> pages = new ArrayList();
-        for (int i = 1; i <= numOfPages; i++) {
-            pages.add(i);
-        }
+        Integer numOfPosts = blogPostDao.getNumOfPostsPerPage();
+        List<Integer> pages = getPages(numOfPosts);
 
         model.put("pages", pages);
         model.put("staticPage", staticPage);
@@ -263,5 +259,20 @@ public class HomeController {
             }
         }
     }
+    
+    @RequestMapping(value="/setNumberOfPosts", method=RequestMethod.POST)
+    public void setNumberOfPostsPerPage(Integer number){
+        blogPostDao.setNumOfPostsPerPage(number);
+    }
      
+    public List<Integer> getPages(Integer number){
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count / number);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
+        
+        return pages;
+    }
 }
