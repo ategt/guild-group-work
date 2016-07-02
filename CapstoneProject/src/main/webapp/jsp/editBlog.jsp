@@ -41,6 +41,7 @@
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div class="row">
+                            <h3><u>ThumbNail</u></h3>
                             <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
                                 <img style="max-width: 200px;max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/${blogPost.image.id}" class="img-responsive">
                             </div>
