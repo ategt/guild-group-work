@@ -80,7 +80,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
             + "JOIN category_post \n"
-            + "ON category_post.post_id=post.id AND post.expired = 0 \n"
+            + "ON category_post.post_id=post.id AND post.expired = 0 AND post.status = 'published' \n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "LEFT JOIN image\n"
@@ -90,7 +90,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ORDER BY date_posted\n"
             + "LIMIT ?, 3";
 
-    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
+    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post WHERE post.status = 'published' AND post.expired = '0'";
 
     private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.post";
     
