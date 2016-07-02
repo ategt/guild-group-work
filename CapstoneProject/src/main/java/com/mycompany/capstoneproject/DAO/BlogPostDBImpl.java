@@ -272,6 +272,18 @@ public class BlogPostDBImpl implements BlogPostInterface {
         
     }
 
+    @Override
+    public void setNumOfPostsPerPage(Integer number) {
+        Integer numberOfPosts = 3; //hardcoding this until adam is done with the admin panel. 
+                                   //I want to add a feature that allows the admin to 
+                                   //input how many posts per page they want
+    }
+
+    @Override
+    public Integer getNumOfPostsPerPage() {
+        return 3; //hardcoding for now
+    }
+
     private static final class BlogPostMapper implements RowMapper<BlogPost> {
 
         public BlogPost mapRow(ResultSet rs, int i) throws SQLException {

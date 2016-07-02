@@ -40,7 +40,7 @@ public class HomeController {
     private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
-
+    
     @Inject
     public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao) {
         this.blogPostDao = BPDao;
@@ -132,6 +132,7 @@ public class HomeController {
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
         
         automaticallyPublishScheduledPosts();
+        automaticallyRemoveExpiredPosts();
         
         Integer offset;
         if (pageNumber == null) {
@@ -148,12 +149,8 @@ public class HomeController {
 
         List<HashTag> hash = hashTagDao.listHashTags();
 
-        Integer count = blogPostDao.getNumOfPosts();
-        Integer numOfPages = (count / 3);
-        List<Integer> pages = new ArrayList();
-        for (int i = 1; i <= numOfPages; i++) {
-            pages.add(i);
-        }
+        Integer numOfPosts = blogPostDao.getNumOfPostsPerPage();
+        List<Integer> pages = getPages(numOfPosts);
 
         model.put("pages", pages);
         model.put("staticPage", staticPage);
@@ -238,18 +235,44 @@ public class HomeController {
     public void automaticallyPublishScheduledPosts(){
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date currentDay = new Date();
-        try {
-            currentDay = format.parse(date.toString());
-        } catch (ParseException ex) {
-            Logger.getLogger(BlogController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String currentDay = format.format(date);
+    
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
         for (BlogPost pendingPost : pendingPosts) {
-            if(pendingPost.getDateToPostOn().equals(currentDay)){
+            String pendingPostDate = format.format(pendingPost.getDateToPostOn());
+            if(pendingPostDate.equals(currentDay)){
                 blogPostDao.publish(pendingPost);
             }
         }
     }
+    
+    public void automaticallyRemoveExpiredPosts(){
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDay = format.format(date);
+    
+        List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
+        for (BlogPost post : allBlogPosts) {
+            String postExpiresOn = format.format(post.getExpireOn());
+            if(postExpiresOn.equals(currentDay)){
+                blogPostDao.delete(post);
+            }
+        }
+    }
+    
+    @RequestMapping(value="/setNumberOfPosts", method=RequestMethod.POST)
+    public void setNumberOfPostsPerPage(Integer number){
+        blogPostDao.setNumOfPostsPerPage(number);
+    }
      
+    public List<Integer> getPages(Integer number){
+        Integer count = blogPostDao.getNumOfPosts();
+        Integer numOfPages = (count / number);
+        List<Integer> pages = new ArrayList();
+        for (int i = 1; i <= numOfPages; i++) {
+            pages.add(i);
+        }
+        
+        return pages;
+    }
 }
