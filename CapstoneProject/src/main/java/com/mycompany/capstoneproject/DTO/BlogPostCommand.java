@@ -5,6 +5,8 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
+import java.util.Date;
+
 /**
  *
  * @author apprentice
@@ -17,6 +19,15 @@ public class BlogPostCommand {
     private int authorId;
     private int id;
     private int thumbId;
+    private Date date;
+
+    public Date getPublishOn() {
+        return date;
+    }
+
+    public void setPublishOn(Date publishOn) {
+        this.date = publishOn;
+    }
 
     public int getCategoryId() {
         return categoryId;

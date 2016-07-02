@@ -173,7 +173,7 @@ public class BlogController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
-        post.setStatus("Pending");
+        post.setStatus("pending");
         blogPostDao.create(post);
 
         updateHashTags(post);
@@ -206,7 +206,7 @@ public class BlogController {
         Category category = categoriesDao.get(postCommand.getCategoryId());
         Date datePosted = new Date();
         Date postExpires = new Date();
-        Date postOn = new Date();
+        
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
@@ -251,7 +251,7 @@ public class BlogController {
         post.setHashTag(hashTags);
         post.setPostedOn(datePosted);
         post.setExpireOn(postExpires);
-        post.setDateToPostOn(postOn);
+        post.setDateToPostOn(postCommand.getPublishOn());
         post.setImage(thumbImage);
         post.setExpired(0);
         return post;
