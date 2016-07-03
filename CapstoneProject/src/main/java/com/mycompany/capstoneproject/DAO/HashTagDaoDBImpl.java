@@ -133,13 +133,6 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         return jdbcTemplate.query(SQL_GET_HASHTAG_NAME_LIST, new StringMapper());
     }
 
-    @Override
-    public Integer getTotalNumberOfHashTags() {
-        List<Integer> count = jdbcTemplate.query(SQL_GET_HASHTAG_COUNT, new CountMapper());
-        int numOfHashTags = count.get(0);
-        return numOfHashTags;
-    }
-
     private static final class HashTagMapper implements RowMapper<HashTag> {
 
         public HashTag mapRow(ResultSet rs, int i) throws SQLException {

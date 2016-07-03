@@ -34,7 +34,5 @@ public interface HashTagInterface {
     public List<String> findHashTags(String content);
     
     public void incrementNumOfUses(HashTag hashtag);
-    
-    public Integer getTotalNumberOfHashTags();
 
 }
