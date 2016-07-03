@@ -77,4 +77,7 @@ public class HashTagController {
         return "home";
     }
 
+//    public List<HashTag> trendingHashTags(){
+//        
+//    }
 }
