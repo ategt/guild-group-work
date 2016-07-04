@@ -16,18 +16,18 @@
     </head>
     <body>
         <div class="container">
-            
-            
+
+
             <div class="row" style="margin: 40px 40px 40px 40px;">
             </div>
             <div class="text-center">
                 <h1>The Monkey Tasked With Finding That Post Came Back Empty Handed!</h1>
             </div>
-            
+
             <div class="row" style="margin: 40px 40px 40px 40px;">
             </div>
             <hr/>
-            
+
             <div class="row" style="margin: 40px 40px 40px 40px;">
             </div>
             <div class="text-center">

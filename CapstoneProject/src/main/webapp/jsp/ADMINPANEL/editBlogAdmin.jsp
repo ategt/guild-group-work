@@ -19,11 +19,10 @@
 
     <body>
 
-        
-
         <div class="container">
-            <form:form method="POST" action="./" class="form-horizontal">
-                <input type="hidden" name="id" value="${blogPost.id}"/>
+            
+        <form:form method="POST" action="./" class="form-horizontal">
+            <input type="hidden" name="id" value="${blogPost.id}"/>
                 <div class="form-group">
                     <label for="title" class="col-md-4 control-label">Title: </label>
                     <div class="col-md-8">

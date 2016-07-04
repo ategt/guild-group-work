@@ -138,26 +138,8 @@
                             contentType: false,
                             success: function (data, status) {
                                 console.log(data);
-//                                var tableRow = buildCategoryRow(data);
-//                                //              console.log(tableRow);
-//
-//                                $('#static-page-table').append($(tableRow));
-//
-//
-//                                $('#name-input').val('');
-
-
                             },
                             error: function (data, status) {
-//                                var errors = data.responseJSON.errors;
-//
-//                                console.log(errors);
-//
-//                                $.each(errors, function (index, error) {
-//
-//                                    $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
-//
-//                                });
                             }
                         });
                     }

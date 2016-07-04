@@ -61,7 +61,6 @@
                             <option value="2">100x100</option>
                             <option value="3">150x150</option>
                             <option value="4">200x200</option>
-                            <!--<option value="0">Native</option>-->
                         </select>
               </div>
               <div class="image-admin-body">
@@ -92,17 +91,9 @@
 
               </div>
             </div>
-                
+
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
-                <!--
-                
-                            <br />
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectImagesModal">Show Modal</button>
-                            <br />
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Show Single Modal</button>
-                
-                            <hr />
-                            <div class="row">
+
                 <c:forEach items="${imageIdList}" var="imageId">
                     <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath}/image/showimage/${imageId}" />
                 </c:forEach>
@@ -111,12 +102,11 @@
 
             </div>-->
 
-                <div id="dragandrophandler-old">
-                </div>
-                <br><br>
-                <div id="status1"></div>
-
+            <div id="dragandrophandler-old">
             </div>
+            <br><br>
+            <div id="status1"></div>
+
         </div>
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
@@ -136,25 +126,25 @@
                     var selectedValue = $('#modal-single-image-picker').val();
                     console.log("Single Select: " + selectedValue);
 
-                        //var contactId = $(e.target).data('contact-id');
+                    //var contactId = $(e.target).data('contact-id');
 
-                        $.ajax({
-                            type: "PUT",
-                            url: contextRoot + "/image/defaultimage/" + value,
-                            async: true,
-                            success: function (data, status) {
-                                console.log("Data: " + data);
-                                console.log("Status: " + status);
-                                //$('#contact-row-'+ contactId).remove();
-                            },
-                            error: function (data, status) {
-                                console.log("Failed - Data: " + data);
-                                console.log("Failed - Status: " + status);
+                    $.ajax({
+                        type: "PUT",
+                        url: contextRoot + "/image/defaultimage/" + value,
+                        async: true,
+                        success: function (data, status) {
+                            console.log("Data: " + data);
+                            console.log("Status: " + status);
+                            //$('#contact-row-'+ contactId).remove();
+                        },
+                        error: function (data, status) {
+                            console.log("Failed - Data: " + data);
+                            console.log("Failed - Status: " + status);
 
-                            }
-                        });
-                    
-                    
+                        }
+                    });
+
+
                     var imageLink = '"<img src="${pageContext.request.contextPath}/image/showimage/' + selectedValue + '" />';
                     $(".image-container").html(imageLink);
                 });
@@ -326,7 +316,7 @@
 
 
                 });
-                
+
 
                 function determineImageSize(imageSize) {
                     var imgLink = "";

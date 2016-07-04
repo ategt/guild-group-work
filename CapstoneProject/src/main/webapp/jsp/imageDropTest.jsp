@@ -18,7 +18,7 @@
                 margin-bottom:10px;
                 /*font-size:200%;*/
             }
-            
+
             .image-drop
             {
                 border:2px dotted black;
@@ -92,13 +92,6 @@
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/enhanceddropfile.js"></script>
-        <script >
-
-           // $('image-holder-1').css("background-image", "url(" + contextRoot + "/image/showimage/265)");
-            //http://localhost:8080/CapstoneProject/image/showimage/265
-
-
-        </script>
 
     </body>
 </html>

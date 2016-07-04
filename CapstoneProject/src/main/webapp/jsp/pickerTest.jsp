@@ -49,9 +49,6 @@
             {
                 $(".image_picker_image").width(150);
                 $(".image_picker_image").height(150);
-                
-                //$('#myimage').width(700); // Units are assumed to be pixels
-                //$('#myimage').height(700);
 
             });
         </script>

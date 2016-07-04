@@ -11,7 +11,7 @@
 
         <!-- Custom styles for this template -->
         <!--<link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">-->
-        
+
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
@@ -36,15 +36,15 @@
                 <div class="col-sm-6 text-right">File Type: </div>
                 <div class="col-sm-6 text-left">${contentType}</div>
             </div>
-            
+
             <div class="row">
                 <div class="text-center">
                     <h1><a href="${pageContext.request.contextPath}/image/imageadmin">Click Here To Return To The Image Admin Page</a></h1>
                 </div>
             </div>        
-            
-              
-            
+
+
+
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>

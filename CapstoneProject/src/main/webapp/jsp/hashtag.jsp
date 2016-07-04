@@ -13,10 +13,10 @@
 
 <div class="well">
     <div class="list-group list-group">
-    <h4 class=""> Top Trending #hashtags</h4>
-      <c:forEach items="${hashTag}" var="hashtag">
-      <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
-      </c:forEach>
+        <h4 class=""> Top Trending #hashtags</h4>
+        <c:forEach items="${hashTag}" var="hashtag">
+            <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+            </c:forEach>
     </div>
     <hr>
 </div>

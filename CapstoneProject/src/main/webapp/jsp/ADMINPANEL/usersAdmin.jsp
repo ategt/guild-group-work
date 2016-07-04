@@ -27,7 +27,7 @@
             </tr>
 
             <c:forEach items="${users}" var="user">
-              
+
                 <tr id="user-row-${user.id}">
                     <td>${user.name}</td>
                     <td>${user.email}</td>
@@ -36,17 +36,17 @@
                     <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
                     <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>
                 </tr>
-       
+
             </c:forEach>
-                
+
         </table>
-                
-                
-                
-                <div id="editUserModal" class="modal fade" role="dialog">
+
+
+
+        <div id="editUserModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
 
-            
+
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -54,41 +54,41 @@
               </div>
               <div class="modal-body">
 
-                <table class="table table-bordered" id="edit-user-table">
+                        <table class="table table-bordered" id="edit-user-table">
 
-                    <input type="hidden" id="edit-id"/>
+                            <input type="hidden" id="edit-id"/>
 
-                    <tr>
-                        <th>Username:</th>
-                        <td>
-                            <input type="text" id="edit-user-name"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Password:</th>
-                        <td>
-                            <input type="password" id="edit-user-password"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email:</th>
-                        <td>
-                            <input type="text" id="edit-user-email"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Role:</th>
-                        <td>
-                            <select id="edit-user-role">
-                                <option>ROLE_USER</option>
-                                <option>ROLE_MANAGER</option>
-                                <option>ROLE_ADMIN</option>
-                            </select>
-                            <!--<input type="text" id="edit-user-role"/>-->
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>Username:</th>
+                                <td>
+                                    <input type="text" id="edit-user-name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password:</th>
+                                <td>
+                                    <input type="password" id="edit-user-password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>
+                                    <input type="text" id="edit-user-email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Role:</th>
+                                <td>
+                                    <select id="edit-user-role">
+                                        <option>ROLE_USER</option>
+                                        <option>ROLE_AUTHOR</option>
+                                        <option>ROLE_ADMIN</option>
+                                    </select>
+                                    <!--<input type="text" id="edit-user-role"/>-->
+                                </td>
+                            </tr>
 
-                </table>
+                        </table>
 
               </div>
               <div class="modal-footer">
@@ -102,20 +102,20 @@
 
 
 
-        </table>
-        <script>
+    </table>
+    <script>
         var contextRoot = '${pageContext.request.contextPath}';
-        </script>
+    </script>
 
-        <script src="${pageContext.request.contextPath}/js/user.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
-
-
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
 
 
-    </body>
+
+
+</body>
 
 
 

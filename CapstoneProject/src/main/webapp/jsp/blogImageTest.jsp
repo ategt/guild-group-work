@@ -16,14 +16,14 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
         <style>
-            
+
             #thumb-container {
                 width: 150px;
                 height: 200px;
             }
-            
-            </style>
-        
+
+        </style>
+
     </head>
     <body>
 
@@ -43,11 +43,11 @@
                         <div class="text-center">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal" >Set Thumbnail Image</button>
                         </div>
-                         <input type="hidden" id="thumbId" name="thumbId" />
+                        <input type="hidden" id="thumbId" name="thumbId" />
                     </div>
 
                     <div class="col-md-10">
-                       
+
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Title: </label>
                             <div class="col-md-8">
@@ -123,8 +123,8 @@
 
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
-            </script>
-        
+        </script>
+
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
