@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CreateUserController {
 
     private UserInterface createUserDAO;
-    private User createUser;
+
 
     @Inject
     public CreateUserController(UserInterface dao) {
@@ -46,9 +46,9 @@ public class CreateUserController {
     @ResponseBody
     public void delete(@PathVariable("id") Integer createUserId) {
 
-        User createUser = createUserDAO.get(createUserId);
+        User user = createUserDAO.get(createUserId);
 
-        createUserDAO.delete(createUser);
+        createUserDAO.delete(user);
 
     }
 
