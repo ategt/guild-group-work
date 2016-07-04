@@ -39,7 +39,7 @@
         </div>
         <br><br>
         <div id="status1"></div>
-        
+
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
         </script>

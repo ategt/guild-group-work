@@ -30,7 +30,7 @@
 
               </div>
               <div class="modal-footer">
-                  
+
                 <button type="button" class="submit-from-detail-button btn btn-default" data-dismiss="modal">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
