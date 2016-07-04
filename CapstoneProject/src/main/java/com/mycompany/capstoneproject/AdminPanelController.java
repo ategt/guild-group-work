@@ -69,7 +69,7 @@ public class AdminPanelController {
         this.hashTagDao = hashTagDao;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/old", method = RequestMethod.GET)
     public String admin(Map model) {
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -94,8 +94,8 @@ public class AdminPanelController {
 
         return "adminPanel";
     }
-    
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String adminTest(Map model) {
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -154,11 +154,18 @@ public class AdminPanelController {
         List<Category> categories = categoriesDao.listCategories();
 
         List<User> users = userDao.list();
+        List<User> activeUsers = new ArrayList();
+
+        for (User user : users) {
+            if (user.getEnabled() == 1) {
+                activeUsers.add(user);
+            }
+        }
 
         List<BlogPost> posts = blogPostDao.listBlogs();
 
+        model.put("users", activeUsers);
         model.put("posts", posts);
-        model.put("users", users);
         model.put("categories", categories);
         model.put("hashtags", hashTags);
         model.put("pendingPosts", pendingPosts);
@@ -199,14 +206,6 @@ public class AdminPanelController {
     @ResponseBody
     public void delete(@PathVariable("id") Integer userId) {
 
-//               List<Product> products = productDao.listProduct();
-//        
-//        model.put("products", products);
-//        
-//        
-//        List<State> states = stateDao.listStates();
-//        
-//        model.put("states", states);
         User user = userDao.get(userId);
 
         userDao.delete(user);
@@ -250,32 +249,14 @@ public class AdminPanelController {
 
         return "ADMINPANEL/categoryAdmin";
     }
-    
-    
-      @RequestMapping(value = "/images", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/images", method = RequestMethod.GET)
     public String images(Map model) {
-        
-       
-        
+
         return "imageAdmin";
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-       @Autowired
+
+    @Autowired
     private ImageInterface imageDao;
 
     @Autowired
@@ -329,7 +310,7 @@ public class AdminPanelController {
         List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
                 //.filter(a -> a.getUrl() == null || !a.getUrl().toLowerCase().contains("patsdresses.com"))
-                .filter(a -> a.getDescription() != null )
+                .filter(a -> a.getDescription() != null)
                 .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
@@ -411,21 +392,20 @@ public class AdminPanelController {
         }
         return returnId;
     }
-    
+
     @RequestMapping(value = "/defaultimage/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public Integer setDefaultImage(@PathVariable("id") Integer id) {
 
         Image defaultImage = imageDao.get(id);
-        
+
         imageDao.setDefaultThumb(defaultImage);
-        
+
         Image returnedImage = imageDao.getDefaultThumb();
-        
+
         int returnedImageId = returnedImage.getId();
 
         return returnedImageId;
     }
-    
-    
+
 }

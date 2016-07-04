@@ -396,7 +396,6 @@
                             <div class="box-header" data-original-title>
                                 <h2><i class="halflings-icon user"></i><span class="break"></span>Users</h2>
                                 <div class="box-icon">
-                                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                     <!--                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>-->
                                 </div>
@@ -896,7 +895,7 @@
 
 
     <script src="${pageContext.request.contextPath}/js/categories.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/custom.js"></script>
     <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
     <script src="${pageContext.request.contextPath}/js/user.js"></script>
 

@@ -1,18 +1,28 @@
 $(document).on('click', '.delete-link-user', function (e) {
 
-    e.preventDefault();
+    $(document).ready(function () {
 
-    var userId = $(e.target).data('user-id');
+        $(document).on('click', '.delete-link-user', function (e) {
 
-    $.ajax({
-        type: 'DELETE',
-        url: contextRoot + "/user/" + userId,
-        success: function (data, status) {
-            $('#user-row-' + userId).remove();
-        },
-        error: function (data, status) {
+            e.preventDefault();
 
-        }
+            var userId = $(e.target).data('user-id');
+
+            $.ajax({
+                type: 'DELETE',
+                url: contextRoot + '/adminPanel/user/' + userId,
+                success: function (data, status) {
+                    $('#user-row-' + userId).remove();
+                },
+                error: function (data, status) {
+                    alert:('error');
+                }
+
+            });
+
+
+        });
+
     });
 
 });

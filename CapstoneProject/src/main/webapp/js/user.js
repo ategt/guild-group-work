@@ -1,8 +1,14 @@
-$(document).ready(function () {
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-    alert(' user.js loaded!!');
 
-    $('#editUserModal').on('show.bs.modal', function (e) {
+$(document).ready(function(){
+      
+      $('#editUserModal').on('show.bs.modal' , function(e){
+       
 
         var link = $(e.relatedTarget);
 
