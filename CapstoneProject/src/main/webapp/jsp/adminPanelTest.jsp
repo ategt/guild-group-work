@@ -437,26 +437,26 @@
                                             </tr>
 
                                         </c:forEach>
-<!--                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>
-                                            <td class="center">
-                                                <a class="btn btn-success" href="#">
-                                                    <i class="halflings-icon white zoom-in"></i>  
-                                                </a>
-                                                <a class="btn btn-info" href="#">
-                                                    <i class="halflings-icon white edit"></i>  
-                                                </a>
-                                                <a class="btn btn-danger" href="#">
-                                                    <i class="halflings-icon white trash"></i> 
-                                                </a>
-                                            </td>
-                                        </tr>-->
-                                        
+                                        <!--                                        <tr>
+                                                                                    <td>Dennis Ji</td>
+                                                                                    <td class="center">2012/01/01</td>
+                                                                                    <td class="center">Member</td>
+                                                                                    <td class="center">
+                                                                                        <span class="label label-success">Active</span>
+                                                                                    </td>
+                                                                                    <td class="center">
+                                                                                        <a class="btn btn-success" href="#">
+                                                                                            <i class="halflings-icon white zoom-in"></i>  
+                                                                                        </a>
+                                                                                        <a class="btn btn-info" href="#">
+                                                                                            <i class="halflings-icon white edit"></i>  
+                                                                                        </a>
+                                                                                        <a class="btn btn-danger" href="#">
+                                                                                            <i class="halflings-icon white trash"></i> 
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>-->
+
                                     </tbody>
                                 </table>            
                             </div>
@@ -892,8 +892,6 @@
         <script>
             var contextRoot = '${pageContext.request.contextPath}';
         </script>
-        <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
-        <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
         <script src="${pageContext.request.contextPath}/js/jquery-1.9.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery-migrate-1.0.0.min.js"></script>
@@ -949,6 +947,11 @@
         <script src="${pageContext.request.contextPath}/js/retina.js"></script>
 
         <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+        
+        <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
+        <script src="${pageContext.request.contextPath}/js/user.js"></script>
+
+        
         <!-- end: JavaScript-->
 
     </body>
