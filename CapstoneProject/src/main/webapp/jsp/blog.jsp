@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form-group" id='author-input-div'>
-                    <label for="author" class="col-md-4 control-label">Author </label>
+                    <label for="author" class="col-md-4 control-label">Author: </label>
                     <div class="col-md-8">
                         <select class="btn btn-default dropdown" id="author-input" name="authorId">
                             <c:forEach items="${users}" var="user">
@@ -47,7 +47,19 @@
                         </select>
                         <!--<input type="text" id="state-input" class="form-control"></input>-->
                     </div>
-                    <div id="add-order-validation-category-error" class="validation-errors pull-right"></div>
+                    <div id="add-validation-category-error" class="validation-errors pull-right"></div>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="col-md-4 control-label">Publish On: </label>
+                    <div class="col-md-8">
+                        <input type="date" path="publishOn" class= "date" name = "publishOn" value = "<fmt:formatDate value="${cForm.publishOn}" pattern="yyyy-MM-dd" />"/>                    </div>
+                    <div id="add-validation-date-error" class="validation-errors pull-right"></div>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="col-md-4 control-label">Expiration Date: </label>
+                    <div class="col-md-8">
+                        <input type="date" path="expireOn" class= "date" name = "expireOn" value = "<fmt:formatDate value="${cForm.expireOn}" pattern="yyyy-MM-dd" />"/>                    </div>
+                    <div id="add-validation-date-error" class="validation-errors pull-right"></div>
                 </div>
                 <div class="form-group">
                     <label for="content" class="col-md-4 control-label"> Content:</label>

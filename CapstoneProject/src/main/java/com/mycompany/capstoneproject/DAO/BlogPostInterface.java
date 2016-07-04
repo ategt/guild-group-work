@@ -28,6 +28,8 @@ public interface BlogPostInterface {
     public Integer getNumOfPosts();
     public List<BlogPost> listPendingPosts();
     public List<String> listSlugs();
-    
+    public BlogPost publish(BlogPost post);
+    public void setNumOfPostsPerPage(Integer number);
+    public Integer getNumOfPostsPerPage();
     
 }

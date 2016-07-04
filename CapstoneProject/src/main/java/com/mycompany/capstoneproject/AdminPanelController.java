@@ -93,7 +93,7 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
         
-        return "adminPanel";
+        return "adminPanelTest";
     }
     
     

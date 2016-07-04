@@ -19,14 +19,22 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +65,14 @@ public class BlogController {
         this.staticDao = SDao;
         this.hashTagDao = HDao;
         this.imageDao = imageDao;
-       
+
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -76,18 +91,17 @@ public class BlogController {
     @RequestMapping(value = "/imagetest", method = RequestMethod.GET)
     public String blogImageTest(Map model) {
 
-        
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList =  images.stream()
+        List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null)
                 .filter(a -> a.getDescription() != null)
                 .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
                 .map(Image::getId)
                 .collect(Collectors.toList());
-        
+
         model.put("imageIdList", imageIdList);
-        
+
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
 
@@ -109,10 +123,20 @@ public class BlogController {
             return "unableToEdit";
         }
 
-        List<Category> categories = categoriesDao.listCategories();
-        model.put("categories", categories);
+        List<Image> images = imageDao.list();
 
-//        List<User> users = userDao.list();
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+
+        model.put("imageIdList", imageIdList);
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        model.put("categories", categories);
         model.put("users", users);
         model.put("blogPost", blogPost);
 
@@ -151,6 +175,9 @@ public class BlogController {
 
         blogPost.setCategory(category);
 
+        Image thumbImage = imageDao.get(blogPostCommand.getThumbId());
+        blogPost.setImage(thumbImage);
+
         blogPostDao.update(blogPost);
 
         model.put("post", blogPost);
@@ -161,7 +188,8 @@ public class BlogController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
-        post.setStatus("Pending");
+        post.setStatus("pending");
+
         blogPostDao.create(post);
 
         updateHashTags(post);
@@ -193,18 +221,17 @@ public class BlogController {
         User author = userDao.get(postCommand.getAuthorId());
         Category category = categoriesDao.get(postCommand.getCategoryId());
         Date datePosted = new Date();
-        Date postExpires = new Date();
-        Date postOn = new Date();
+
         Comment comment = new Comment();
         comment.setComment("This test is dope, yo");
         List<Comment> comments = new ArrayList();
         comments.add(comment);
         Image img = new Image();
         img.setUrl("");
-        
+
         int thumgId = postCommand.getThumbId();
         Image thumbImage = imageDao.get(thumgId);
-        
+
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
 //        List<HashTag> hashTags = new ArrayList();
 //        List<String> existingHashTags = hashTagDao.listHashTagNames();
@@ -228,6 +255,9 @@ public class BlogController {
 ////            }
 //        }
 
+        if (postCommand.getPublishOn() == null) {
+            postCommand.setPublishOn(new Date());
+        }
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         post.setSlug(postCommand.getTitle());
@@ -238,8 +268,8 @@ public class BlogController {
         post.setImage(img);
         post.setHashTag(hashTags);
         post.setPostedOn(datePosted);
-        post.setExpireOn(postExpires);
-        post.setDateToPostOn(postOn);
+        post.setExpireOn(postCommand.getExpireOn());
+        post.setDateToPostOn(postCommand.getPublishOn());
         post.setImage(thumbImage);
         post.setExpired(0);
         return post;
@@ -372,31 +402,44 @@ public class BlogController {
             }
 
         }
-        
+
         return hashTags;
     }
 
-    public String createSlug(String title){
-       String slug = title.replace(" ", "-");
-       List<String> slugs = blogPostDao.listSlugs();
-       Integer numOfRepeats = 0;
-       
+    public String createSlug(String title) {
+        String slug = title.replace(" ", "-");
+        List<String> slugs = blogPostDao.listSlugs();
+        Integer numOfRepeats = 0;
+
+        slugs = slugs.stream()
+                .filter(s -> s != null)
+                .collect(Collectors.toList());
+
         for (String str : slugs) {
             String[] strArray = str.split("_"); //split between slug and number of repeats
             String myTitle = strArray[0];       //grab slug
-            if(myTitle.equals(slug)){           //find number of times slug repeat
+            if (myTitle.equals(slug)) {           //find number of times slug repeat
                 numOfRepeats++;
             }
         }
         for (String str : slugs) {
-            String[] strArray = str.split("_"); 
-            String myTitle = strArray[0];       
-            if(myTitle.equals(slug)){           
+            String[] strArray = str.split("_");
+            String myTitle = strArray[0];
+            if (myTitle.equals(slug)) {
                 slug = slug + "_" + numOfRepeats;
             }
         }
-        
+
         return slug;
 
     }
+
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.POST)
+    public String publishPost(@PathVariable("id") Integer postId) {
+        BlogPost post = blogPostDao.getById(postId);
+        blogPostDao.publish(post);
+        return "adminPanel";
+    }
+    
+    
 }

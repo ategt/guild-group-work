@@ -43,10 +43,11 @@
                         <div class="text-center">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal" >Set Thumbnail Image</button>
                         </div>
+                         <input type="hidden" id="thumbId" name="thumbId" />
                     </div>
 
                     <div class="col-md-10">
-                        <input type="hidden" id="thumbId" name="thumbId" />
+                       
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Title: </label>
                             <div class="col-md-8">
@@ -189,8 +190,6 @@
 
                     console.log(imageSize);
 
-                    //var sr = "http://localhost:8080/CapstoneProject/image/showimage/248";
-
                     var imageLinkCum = "";
                     var imageLink = "";
                     $(selectedValues).each(function (index, value) {
@@ -201,24 +200,7 @@
                     }
                     );
 
-
-                    //var imgLink = '<img alt="Image From Database" src="' + sr + '"/>';
-                    //                if (imageSize == 0) {
-                    //
-                    //                } else if (imageSize == 3) {
-                    //                    imgLink = '<img style="width: 50px;heigth: 50px;" alt="Added Image" src="' + sr + '"/>';
-                    //                } else if (imageSize == 2) {
-                    //                    imgLink = '<img style="width: 150px;heigth: 150px;" alt="Added Image" src="' + sr + '"/>';
-                    //                } else if (imageSize == 1) {
-                    //                    imgLink = '<img style="width: 300px;heigth: 300px;" alt="Added Image" src="' + sr + '"/>';
-                    //
-                    //                }
-
-
-
                     tinymce.activeEditor.insertContent(imageLinkCum);
-
-
 
                 });
 
@@ -237,33 +219,6 @@
                     return imgLink;
                 }
 
-                //        $(".image-preview-size").change(function () {
-                //
-                //            var imageSize = $('#image-preview-size').val();
-                //
-                //            var width = 50;
-                //            var height = 50;
-                //
-                //            if (imageSize == 1) {
-                //                width = 50;
-                //                height = 50;
-                //            } else if (imageSize == 2) {
-                //                width = 100;
-                //                height = 100;
-                //            } else if (imageSize == 3) {
-                //                width = 150;
-                //                height = 150;
-                //            } else if (imageSize == 4) {
-                //                width = 200;
-                //                height = 200;
-                //            }
-                //
-                //            $(".image_picker_image").width(height);
-                //            $(".image_picker_image").height(width);
-                //
-                //        });
-
-
                 $(document).on('click', '.submit-from-single-detail-button', function (e) {
 
                     e.preventDefault();
@@ -273,14 +228,7 @@
                     console.log(selectedValue);
 
                     $('#thumbId').val(selectedValue);
-
                     $('#thumb-container').html('<img style="max-width: 150px; max-height: 200px;" src="' + contextRoot + '/image/showimage/' + selectedValue + '" />');
-
-                    //var imageSize = $('#image-size-input').val();
-
-                    //console.log(imageSize);
-
-
 
 
                 });

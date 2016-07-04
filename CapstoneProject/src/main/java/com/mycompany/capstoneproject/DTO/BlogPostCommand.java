@@ -5,6 +5,11 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  *
  * @author apprentice
@@ -17,6 +22,30 @@ public class BlogPostCommand {
     private int authorId;
     private int id;
     private int thumbId;
+    
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
+    private Date publishOn;
+    
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
+    private Date expireOn;
+
+    public Date getExpireOn() {
+        return expireOn;
+    }
+
+    public void setExpireOn(Date expireOn) {
+        this.expireOn = expireOn;
+    }
+    
+    public Date getPublishOn() {
+        return publishOn;
+    }
+
+    public void setPublishOn(Date publishOn) {
+        this.publishOn = publishOn;
+    }
 
     public int getCategoryId() {
         return categoryId;

@@ -80,7 +80,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
             + "JOIN category_post \n"
-            + "ON category_post.post_id=post.id AND post.expired = 0 \n"
+            + "ON category_post.post_id=post.id AND post.expired = 0 AND post.status = 'published' \n"
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "LEFT JOIN image\n"
@@ -90,9 +90,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ORDER BY date_posted\n"
             + "LIMIT ?, 3";
 
-    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post";
+    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post WHERE post.status = 'published' AND post.expired = '0'";
 
-    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.project";
+    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.post";
+    
+    private static final String SQL_PUBLISH_POST = "UPDATE `capstone`.`post` SET `status`='published' WHERE `id`= ?";
     
     private JdbcTemplate jdbcTemplate;
 
@@ -183,6 +185,14 @@ public class BlogPostDBImpl implements BlogPostInterface {
             Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Category not set, update aborted.");
             return;
         }
+        
+        Integer imageId;
+        
+        if ( post.getImage() == null ) {
+            imageId = null;
+        } else {
+            imageId = post.getImage().getId();
+        }
 
         if (post.getId() > 0) {
 
@@ -198,7 +208,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                         post.getDateToPostOn(),
                         post.getSlug(),
                         post.getStatus(),
-                        post.getImage().getId(),
+                        imageId,
                         post.getId());
 
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
@@ -251,6 +261,27 @@ public class BlogPostDBImpl implements BlogPostInterface {
     @Override
     public List<String> listSlugs() {
         return jdbcTemplate.query(SQL_GET_SLUG_LIST, new SlugMapper());
+    }
+
+    @Override
+    public BlogPost publish(BlogPost post) {
+        
+        jdbcTemplate.update(SQL_PUBLISH_POST, post.getId());
+        
+        return post;
+        
+    }
+
+    @Override
+    public void setNumOfPostsPerPage(Integer number) {
+        Integer numberOfPosts = 3; //hardcoding this until adam is done with the admin panel. 
+                                   //I want to add a feature that allows the admin to 
+                                   //input how many posts per page they want
+    }
+
+    @Override
+    public Integer getNumOfPostsPerPage() {
+        return 3; //hardcoding for now
     }
 
     private static final class BlogPostMapper implements RowMapper<BlogPost> {

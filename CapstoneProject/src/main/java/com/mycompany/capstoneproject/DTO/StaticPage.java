@@ -15,6 +15,7 @@ public class StaticPage {
     private String title;
     private int image_id;
     private String content;
+    private int tab_position;
 
     public int getId() {
         return id;
@@ -47,6 +48,14 @@ public class StaticPage {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getTab_position() {
+        return tab_position;
+    }
+
+    public void setTab_position(int tab_position) {
+        this.tab_position = tab_position;
     }
 
 }

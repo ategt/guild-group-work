@@ -78,20 +78,6 @@
                 </div>
             </div>
 
-
-            <ul>
-                <li id="1" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-                <li id="2" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-                <li id="3" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-                <li id="4" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-                <li id="5" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-                <li id="6" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-                <li id="7" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-            </ul>
-
-
-
-
         </div>
 
 
@@ -134,19 +120,54 @@
         </script>
 
         <script>
+
             $(function () {
                 $("#sortable").sortable({
                     cursor: 'move',
                     opacity: 0.65,
                     stop: function (event, ui) {
-                        var data = $(this).sortable('toArray', {attribute: 'sort-id'});
-                        console.log(data);
-                    },
-                    change: function (event, ui) {
+                        var staticPagePositions = $(this).sortable('toArray', {attribute: 'sort-id'});
+                        console.log(staticPagePositions);
+                        var fd = new FormData();
+                        fd.append('positionArray', staticPagePositions);
+                        $.ajax({
+                            url: contextRoot + "/static/order",
+                            type: 'POST',
+                            data: fd,
+                            processData: false,
+                            contentType: false,
+                            success: function (data, status) {
+                                console.log(data);
+//                                var tableRow = buildCategoryRow(data);
+//                                //              console.log(tableRow);
+//
+//                                $('#static-page-table').append($(tableRow));
+//
+//
+//                                $('#name-input').val('');
 
-//ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
 
+                            },
+                            error: function (data, status) {
+//                                var errors = data.responseJSON.errors;
+//
+//                                console.log(errors);
+//
+//                                $.each(errors, function (index, error) {
+//
+//                                    $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
+//
+//                                });
+                            }
+                        });
                     }
+//                    change: function (event, ui) {
+//
+////ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
+//
+//
+//
+//                    }
                 });
 
 
