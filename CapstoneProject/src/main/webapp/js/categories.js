@@ -73,7 +73,6 @@ $(document).ready(function(){
         var strVar="";
         return "<tr id='category-row-" + data.id + "'>  \n\
                 <td><a data-category-id='" + data.id +"' data-toggle='modal' data-target='#showCategoryModal'>" + data.name + "</a></td>  \n\
-                <td> <a data-category-id='" + data.id +"' data-toggle='modal' data-target='#editCategoryModal'>Edit</a>  </td>   \n\
                 <td> <a data-category-id='" + data.id +"' class='delete-link'>Delete</a>  </td>   \n\
                 </tr>  ";
     }

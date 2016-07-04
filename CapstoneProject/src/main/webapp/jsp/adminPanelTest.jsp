@@ -475,470 +475,433 @@
                                 </div>
                             </div>
                             <div class="box-content">
-                                <table class="table">
+                                <!--<table class="table">-->
 
-                                    <table class="table table-bordered table-hover" id="user-table">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Delete</th>
-                                        </tr>    
+                                <table class="table table-bordered table-hover" id="category-table">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Delete</th>
+                                    </tr>    
 
 
-                                        <c:forEach items="${categories}" var="cat">
-                                            <tr id="category-row-${cat.id}">  
-                                                <td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#showCategoryModal">${cat.name}</a></td>
-                                                <td><a data-category-id="${cat.id}" class="delete-link">Delete</a></td>
-                                            </tr>
+                                    <c:forEach items="${categories}" var="cat">
+                                        <tr id="category-row-${cat.id}">  
+                                            <td><a data-category-id="${cat.id}" data-toggle="modal" data-target="#showCategoryModal">${cat.name}</a></td>
+                                            <td><a data-category-id="${cat.id}" class="delete-link">Delete</a></td>
+                                        </tr>
 
-                                        </c:forEach>
-                                        </tbody>
-                                    </table> 
+                                    </c:forEach>
+                                    </tbody>
+                                </table> 
 
-                                    <form method="POST" class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="name" class="col-md-4 control-label"> Name:</label>
-                                            <div class="col-md-6">
-                                                <input type="text" id="name-input" class="form-control"/>
-                                            </div>
-                                        </div>  
-
-                                        <div id="add-contact-validation-errors">
-                                        </div> 
+                                <form method="POST" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="name" class="col-md-4 control-label"> Name:</label>
+                                        <div class="col-md-6">
+                                            <input type="text" id="name-input" class="form-control"/>
                                         </div>
+                                    </div>  
 
-                                        <center>
-                                            <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
-                                        </center>
-                                    </form>
-                                    <div class="pagination pagination-centered">
-                                        <ul>
-                                            <li><a href="#">Prev</a></li>
-                                            <li class="active">
-                                                <a href="#">1</a>
-                                            </li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>
-                                    </div>     
+                                    <div id="add-contact-validation-errors">
+                                    </div> 
                             </div>
-                        </div><!--/span-->
 
-                        <div class="box span6">
-                            <div class="box-header">
-                                <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Striped Table</h2>
-                                <div class="box-icon">
-                                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                </div>
+                            <center>
+                                <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
+                            </center>
+                            </form>
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div><!--/span-->
+
+                    <div class="box span6">
+                        <div class="box-header">
+                            <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Hashtags</h2>
+                            <div class="box-icon">
+                                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                             </div>
-                            <div class="box-content">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>                                          
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-important">Banned</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Admin</td>
-                                            <td class="center">
-                                                <span class="label">Inactive</span>
-                                            </td>                                        
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/03/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-warning">Pending</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/21</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                        
-                                        </tr>                                   
-                                    </tbody>
-                                </table>  
-                                <div class="pagination pagination-centered">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>     
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-bordered table-hover"  id="user-table">
+
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Uses</th>
+                                </tr>
+
+                                <c:forEach items="${hashtags}" var="hashtag">
+                                    <tr id="user-row-${hashtag.id}">
+                                        <td>${hashtag.name}</td>
+                                        <td>${hashtag.numOfUses}</td>
+                                    </tr>
+                                </c:forEach>
+
+                            </table> 
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div><!--/span-->
+                </div><!--/row-->
+
+                <div class="row-fluid sortable">	
+                    <div class="box span6">
+                        <div class="box-header">
+                            <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Bordered Table</h2>
+                            <div class="box-icon">
+                                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                             </div>
-                        </div><!--/span-->
-                    </div><!--/row-->
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Date registered</th>
+                                        <th>Role</th>
+                                        <th>Status</th>                                          
+                                    </tr>
+                                </thead>   
+                                <tbody>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-important">Banned</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Admin</td>
+                                        <td class="center">
+                                            <span class="label">Inactive</span>
+                                        </td>                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/03/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-warning">Pending</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/21</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                        
+                                    </tr>                                   
+                                </tbody>
+                            </table>  
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div><!--/span-->
 
-                    <div class="row-fluid sortable">	
-                        <div class="box span6">
-                            <div class="box-header">
-                                <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Bordered Table</h2>
-                                <div class="box-icon">
-                                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                </div>
+                    <div class="box span6">
+                        <div class="box-header">
+                            <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Condensed Table</h2>
+                            <div class="box-icon">
+                                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                             </div>
-                            <div class="box-content">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>                                          
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-important">Banned</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Admin</td>
-                                            <td class="center">
-                                                <span class="label">Inactive</span>
-                                            </td>                                        
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/03/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-warning">Pending</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/21</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                        
-                                        </tr>                                   
-                                    </tbody>
-                                </table>  
-                                <div class="pagination pagination-centered">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>     
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Date registered</th>
+                                        <th>Role</th>
+                                        <th>Status</th>                                          
+                                    </tr>
+                                </thead>   
+                                <tbody>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-important">Banned</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Admin</td>
+                                        <td class="center">
+                                            <span class="label">Inactive</span>
+                                        </td>                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/03/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-warning">Pending</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/21</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                        
+                                    </tr>                                   
+                                </tbody>
+                            </table>  
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div><!--/span-->
+
+                </div><!--/row-->
+
+                <div class="row-fluid sortable">	
+                    <div class="box span12">
+                        <div class="box-header">
+                            <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Combined All Table</h2>
+                            <div class="box-icon">
+                                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                             </div>
-                        </div><!--/span-->
-
-                        <div class="box span6">
-                            <div class="box-header">
-                                <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Condensed Table</h2>
-                                <div class="box-icon">
-                                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                </div>
-                            </div>
-                            <div class="box-content">
-                                <table class="table table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>                                          
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-important">Banned</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Admin</td>
-                                            <td class="center">
-                                                <span class="label">Inactive</span>
-                                            </td>                                        
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/03/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-warning">Pending</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/21</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                        
-                                        </tr>                                   
-                                    </tbody>
-                                </table>  
-                                <div class="pagination pagination-centered">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>     
-                            </div>
-                        </div><!--/span-->
-
-                    </div><!--/row-->
-
-                    <div class="row-fluid sortable">	
-                        <div class="box span12">
-                            <div class="box-header">
-                                <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Combined All Table</h2>
-                                <div class="box-icon">
-                                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                </div>
-                            </div>
-                            <div class="box-content">
-                                <table class="table table-bordered table-striped table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>                                          
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-important">Banned</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/02/01</td>
-                                            <td class="center">Admin</td>
-                                            <td class="center">
-                                                <span class="label">Inactive</span>
-                                            </td>                                        
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/03/01</td>
-                                            <td class="center">Member</td>
-                                            <td class="center">
-                                                <span class="label label-warning">Pending</span>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Dennis Ji</td>
-                                            <td class="center">2012/01/21</td>
-                                            <td class="center">Staff</td>
-                                            <td class="center">
-                                                <span class="label label-success">Active</span>
-                                            </td>                                        
-                                        </tr>                                   
-                                    </tbody>
-                                </table>  
-                                <div class="pagination pagination-centered">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>     
-                            </div>
-                        </div><!--/span-->
-                    </div><!--/row-->
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Date registered</th>
+                                        <th>Role</th>
+                                        <th>Status</th>                                          
+                                    </tr>
+                                </thead>   
+                                <tbody>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-important">Banned</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/02/01</td>
+                                        <td class="center">Admin</td>
+                                        <td class="center">
+                                            <span class="label">Inactive</span>
+                                        </td>                                        
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/03/01</td>
+                                        <td class="center">Member</td>
+                                        <td class="center">
+                                            <span class="label label-warning">Pending</span>
+                                        </td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td>Dennis Ji</td>
+                                        <td class="center">2012/01/21</td>
+                                        <td class="center">Staff</td>
+                                        <td class="center">
+                                            <span class="label label-success">Active</span>
+                                        </td>                                        
+                                    </tr>                                   
+                                </tbody>
+                            </table>  
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div><!--/span-->
+                </div><!--/row-->
 
 
-                </div><!--/.fluid-container-->
+            </div><!--/.fluid-container-->
 
-                <!-- end: Content -->
-            </div><!--/#content.span10-->
-        </div><!--/fluid-row-->
+            <!-- end: Content -->
+        </div><!--/#content.span10-->
+    </div><!--/fluid-row-->
 
-        <div class="modal hide fade" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-                <p>Here settings can be configured...</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
-            </div>
+    <div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Settings</h3>
         </div>
+        <div class="modal-body">
+            <p>Here settings can be configured...</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <a href="#" class="btn btn-primary">Save changes</a>
+        </div>
+    </div>
 
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-        <footer>
+    <footer>
 
-            <p>
-                <span style="text-align:left;float:left">&copy; 2013 <a href="http://jiji262.github.io/Bootstrap_Metro_Dashboard/" alt="Bootstrap_Metro_Dashboard">Bootstrap Metro Dashboard</a></span>
+        <p>
+            <span style="text-align:left;float:left">&copy; 2013 <a href="http://jiji262.github.io/Bootstrap_Metro_Dashboard/" alt="Bootstrap_Metro_Dashboard">Bootstrap Metro Dashboard</a></span>
 
-            </p>
+        </p>
 
-        </footer>
+    </footer>
 
-        <!-- start: JavaScript-->
-        <script>
-            var contextRoot = '${pageContext.request.contextPath}';
-        </script>
+    <!-- start: JavaScript-->
+    <script>
+        var contextRoot = '${pageContext.request.contextPath}';
+    </script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery-1.9.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery-migrate-1.0.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-migrate-1.0.0.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.0.custom.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.ui.touch-punch.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.ui.touch-punch.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/modernizr.js"></script>
+    <script src="${pageContext.request.contextPath}/js/modernizr.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 
-        <script src='${pageContext.request.contextPath}/js/fullcalendar.min.js'></script>
+    <script src='${pageContext.request.contextPath}/js/fullcalendar.min.js'></script>
 
-        <script src='${pageContext.request.contextPath}/js/jquery.dataTables.min.js'></script>
+    <script src='${pageContext.request.contextPath}/js/jquery.dataTables.min.js'></script>
 
-        <script src="${pageContext.request.contextPath}/js/excanvas.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.flot.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.flot.pie.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.flot.stack.js"></script>
-        <script src="${pageContext.request.contextPath}/js/jquery.flot.resize.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/excanvas.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.flot.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.flot.pie.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.flot.stack.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.flot.resize.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.chosen.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.chosen.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.cleditor.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.cleditor.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.noty.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.noty.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.elfinder.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.elfinder.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.iphone.toggle.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.iphone.toggle.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.uploadify-3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.uploadify-3.1.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.gritter.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.gritter.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.imagesloaded.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.imagesloaded.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.masonry.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.masonry.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.knob.modified.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.knob.modified.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/jquery.sparkline.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.sparkline.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/counter.js"></script>
+    <script src="${pageContext.request.contextPath}/js/counter.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/retina.js"></script>
+    <script src="${pageContext.request.contextPath}/js/retina.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/custom.js"></script>
-        
+    <script src="${pageContext.request.contextPath}/js/custom.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/categories.js"></script>
 
-        <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
-        <script src="${pageContext.request.contextPath}/js/user.js"></script>
+    <script src="${pageContext.request.contextPath}/js/categories.js"></script>
 
-        
-        <!-- end: JavaScript-->
+    <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
-    </body>
+
+    <!-- end: JavaScript-->
+
+</body>
 </html>

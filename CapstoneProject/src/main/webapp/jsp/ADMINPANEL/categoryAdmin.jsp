@@ -19,7 +19,7 @@
     </head>
     <body>
         
-        <table class="table table-bordered table-hover" id="user-table">
+        <table class="table table-bordered table-hover" id="category-table">
         <tr>
             <th>Name</th>
             <th>Delete</th>
