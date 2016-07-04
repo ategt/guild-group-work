@@ -81,7 +81,7 @@
                         <td>
                             <select id="edit-user-role">
                                 <option>ROLE_USER</option>
-                                <option>ROLE_MANAGER</option>
+                                <option>ROLE_AUTHOR</option>
                                 <option>ROLE_ADMIN</option>
                             </select>
                             <!--<input type="text" id="edit-user-role"/>-->

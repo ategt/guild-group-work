@@ -19,8 +19,8 @@
                 <ul class="nav navbar-nav">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
-                    <li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/category" class="">Categories</a></li>
+                    <!--<li role="presentation" ><a href="${pageContext.request.contextPath}/blog/">New Blog Post</a></li>-->
+                    <!--<li role="presentation"><a href="${pageContext.request.contextPath}/category" class="">Categories</a></li>-->
                     <li role="presentation" ><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
                     
                     <c:forEach items="${staticPages}" var="staticPage">

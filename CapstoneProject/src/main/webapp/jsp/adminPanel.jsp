@@ -37,7 +37,11 @@
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/categories')">Manage Categories</a>
                        
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/hashtags')">Manage Hashtags</a>
+                        
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/images')">Images</a>
+                        
                         <a class="padded" class="btn btn-success" href="${pageContext.request.contextPath}/home">Home</a>
+                    
                     </ul></nav>
 
                 <section>  
