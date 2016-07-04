@@ -46,6 +46,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     private static final String SQL_DELETE_HASHTAG = "DELETE FROM `capstone`.`hashtag` WHERE `id`= ?";
     private static final String SQL_GET_HASHTAG_LIST = "SELECT id, name, number_of_uses FROM hashtag GROUP BY name";
     private static final String SQL_GET_HASHTAG_NAME_LIST = "SELECT DISTINCT name FROM hashtag";
+    private static final String SQL_GET_HASHTAG_COUNT = "SELECT COUNT(*) AS total FROM capstone.hashtag_post";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -194,4 +195,5 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         }
 
     }
+
 }
