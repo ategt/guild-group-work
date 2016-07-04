@@ -5,19 +5,16 @@
  */
 
 $(document).ready(function(){
-    
-    alert('js file loaded!');
-    
+        
     $(document).on('click' , '.delete-link-user' , function(e){
        
        e.preventDefault();
-       alert('got here!');
        
        var userId = $(e.target).data('user-id');
        
        $.ajax({
           type:'DELETE',
-          url: contextRoot + '/user/' + userId,
+          url: contextRoot + '/adminPanel/user/' + userId,
           success: function(data , status){
                 $('#user-row-' + userId).remove();
           },

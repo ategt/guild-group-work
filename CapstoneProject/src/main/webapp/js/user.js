@@ -6,9 +6,7 @@
 
 
 $(document).ready(function(){
-   
-   alert(' user.js loaded!!');
-   
+      
       $('#editUserModal').on('show.bs.modal' , function(e){
        
         var link = $(e.relatedTarget);
