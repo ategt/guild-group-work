@@ -31,10 +31,10 @@
 
 
     </head>
+
     <body>
         <div class="container">
             <div id="dragandrophandler">
-                <%@ include file="header.jsp" %>
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div class="row">
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-10">
 
-                        <form method="POST" action="./create" class="form-horizontal">
+                        <form method="POST" action="${pageContext.request.contextPath}/blog/create" class="form-horizontal">
                             <div class="form-group">
                                 <label for="title" class="col-md-4 control-label">Title: </label>
                                 <div class="col-md-8">

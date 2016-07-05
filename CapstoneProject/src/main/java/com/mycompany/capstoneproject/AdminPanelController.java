@@ -124,7 +124,7 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "adminPanel";
+        return "ADMINPANEL/adminPanel";
     }
 
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)

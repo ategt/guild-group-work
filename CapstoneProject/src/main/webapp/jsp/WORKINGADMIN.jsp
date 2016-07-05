@@ -26,6 +26,8 @@
 
                 <nav >
                     <ul>
+                        <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/blog/')">Create Post</a>
+                        
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/pendingPosts')">Pending Posts</a>
                        
                         <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/editPosts')">Edit Posts</a>
