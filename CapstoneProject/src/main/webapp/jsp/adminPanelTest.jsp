@@ -28,6 +28,7 @@
         <link id="bootstrap-style" href="${pageContext.request.contextPath}/css/bootstrap.ap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link id="base-style" href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+        <link id="base-style" href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet">
         <link id="base-style-responsive" href="${pageContext.request.contextPath}/css/style-responsive.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
         <link href="https://opensource.keycdn.com/fontawesome/4.6.3/font-awesome.min.css" rel="stylesheet">
@@ -251,12 +252,12 @@
                                         </div>
                                     </div>  
 
-                                    <div id="add-contact-validation-errors">
+                                    <div id="add-category-validation-errors" class="error-message">
                                     </div> 
                             </div>
 
                             <center>
-                                <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
+                                <input id="create-category-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
                             </center>
                             </form>
                             <div class="pagination pagination-centered">
@@ -393,7 +394,7 @@
                                         </div>
                                     </div>  
 
-                                    <div id="add-contact-validation-errors">
+                                    <div id="add-category-validation-errors" class="error-message">
                                     </div> 
                             </div>
 
@@ -787,7 +788,7 @@
 
 
         <script src="${pageContext.request.contextPath}/js/categories.js"></script>
-        <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+        <!--<script src="${pageContext.request.contextPath}/js/custom.js"></script>-->
         <script src="${pageContext.request.contextPath}/js/adminPanelTest.js"></script>
         <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
