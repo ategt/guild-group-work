@@ -25,7 +25,8 @@
         <!-- end: Mobile Specific -->
 
         <!-- start: CSS -->
-        <link id="bootstrap-style" href="${pageContext.request.contextPath}/css/bootstrap.ap.min.css" rel="stylesheet">
+        <!--<link id="bootstrap-style" href="${pageContext.request.contextPath}/css/bootstrap.ap.min.css" rel="stylesheet">-->
+        <link id="bootstrap-style" href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link id="base-style" href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link id="base-style" href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet">
@@ -128,11 +129,11 @@
                 <div id="content" class="span10"><!--
 
 
-                    <ul class="breadcrumb">
+-->                    <ul class="breadcrumb">
 
-                    </ul>
+                    </ul><!--
 
-                    <div class="row-fluid sortable">		
+-->                    <div class="row-fluid sortable">		
                         <div class="box span12">
 
                             <div class="box-header" data-original-title>
@@ -144,7 +145,7 @@
                             </div>
                             <div class="box-content">
                                 <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                                    <thead>
+<!--                                    <thead>
                                         <tr>
                                             <th>Username</th>
                                             <th>Email</th>
@@ -153,7 +154,7 @@
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
-                                    </thead>   
+                                    </thead>   -->
                                     <tbody>
                                         <c:forEach items="${users}" var="user">
 
@@ -173,12 +174,12 @@
                                                         <i class="halflings-icon white trash"></i> 
                                                     </a>
                                                 </td>
-                                                <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
-                                                <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>
+<!--                                                <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                                                <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>-->
                                             </tr>
 
                                         </c:forEach>
-                                                                                <tr>
+<!--                                                                                <tr>
                                                                                     <td>Dennis Ji</td>
                                                                                     <td class="center">2012/01/01</td>
                                                                                     <td class="center">Member</td>
@@ -196,14 +197,14 @@
                                                                                             <i class="halflings-icon white trash"></i> 
                                                                                         </a>
                                                                                     </td>
-                                                                                </tr>
+                                                                                </tr>-->
 
                                     </tbody>
                                 </table>            
                             </div>
-                        </div>/span
+                        </div>
 
-                    </div>/row-->
+                    </div>
 
 
 
@@ -386,6 +387,7 @@
                                             <td><a data-category-id="${staticPage.id}" class="delete-link">Edit</a></td>
                                             <td><a data-category-id="${staticPage.id}" class="delete-link">Delete</a></td>
                                         </tr>
+                                    </c:forEach>
 
             <div class="box span6">
                 <div class="box-header">
@@ -427,7 +429,7 @@
                 </div>
             </div><!--/span-->
 
-        </div><!--/span-->
+<!--        </div>/span
 
         <div class="row-fluid sortable">
             <div class="box span6">
@@ -440,7 +442,7 @@
                     </div>
                 </div>
                 <div class="box-content">
-                    <!--<table class="table">-->
+                    <table class="table">
 
                     <table class="table table-bordered table-hover" id="category-table">
                         <tr>
@@ -490,7 +492,7 @@
                         <li><a href="#">Next</a></li>
                     </ul>
                 </div>     
-            </div>
+            </div>-->
             <!--                        
                                     <div class="box span6">
                                         <div class="box-header">
@@ -509,30 +511,7 @@
                                                     <th>Uses</th>
                                                 </tr>
             
-            <c:forEach items="${hashtags}" var="hashtag">
-                <tr id="user-row-${hashtag.id}">
-                    <td>${hashtag.name}</td>
-                    <td>${hashtag.numOfUses}</td>
-                </tr>
-            </c:forEach>
-
-        </table> 
-        <div class="pagination pagination-centered">
-            <ul>
-                <li><a href="#">Prev</a></li>
-                <li class="active">
-                    <a href="#">1</a>
-                </li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">Next</a></li>
-            </ul>
-        </div>     
-    </div>
-</div>/span
-
-</div>/span-->
+           
 
             <!--                    <div class="row-fluid sortable">	
                                     <div class="box span6">
@@ -847,152 +826,7 @@
                         </div>/span
                     </div>/row-->
 
-                                        <div class="box-content">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Username</th>
-                                                        <th>Date registered</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>                                          
-                                                    </tr>
-                                                </thead>   
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/01/01</td>
-                                                        <td class="center">Member</td>
-                                                        <td class="center">
-                                                            <span class="label label-success">Active</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/02/01</td>
-                                                        <td class="center">Staff</td>
-                                                        <td class="center">
-                                                            <span class="label label-important">Banned</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/02/01</td>
-                                                        <td class="center">Admin</td>
-                                                        <td class="center">
-                                                            <span class="label">Inactive</span>
-                                                        </td>                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/03/01</td>
-                                                        <td class="center">Member</td>
-                                                        <td class="center">
-                                                            <span class="label label-warning">Pending</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/01/21</td>
-                                                        <td class="center">Staff</td>
-                                                        <td class="center">
-                                                            <span class="label label-success">Active</span>
-                                                        </td>                                        
-                                                    </tr>                                   
-                                                </tbody>
-                                            </table>  
-                                            <div class="pagination pagination-centered">
-                                                <ul>
-                                                    <li><a href="#">Prev</a></li>
-                                                    <li class="active">
-                                                        <a href="#">1</a>
-                                                    </li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#">4</a></li>
-                                                    <li><a href="#">Next</a></li>
-                                                </ul>
-                                            </div>     
-                                        </div>
-                                    </div>/span
-            
-                                    <div class="box span6">
-                                        <div class="box-header">
-                                            <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Condensed Table</h2>
-                                            <div class="box-icon">
-                                                <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                                                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="box-content">
-                                            <table class="table table-condensed">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Username</th>
-                                                        <th>Date registered</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>                                          
-                                                    </tr>
-                                                </thead>   
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/01/01</td>
-                                                        <td class="center">Member</td>
-                                                        <td class="center">
-                                                            <span class="label label-success">Active</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/02/01</td>
-                                                        <td class="center">Staff</td>
-                                                        <td class="center">
-                                                            <span class="label label-important">Banned</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/02/01</td>
-                                                        <td class="center">Admin</td>
-                                                        <td class="center">
-                                                            <span class="label">Inactive</span>
-                                                        </td>                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/03/01</td>
-                                                        <td class="center">Member</td>
-                                                        <td class="center">
-                                                            <span class="label label-warning">Pending</span>
-                                                        </td>                                       
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dennis Ji</td>
-                                                        <td class="center">2012/01/21</td>
-                                                        <td class="center">Staff</td>
-                                                        <td class="center">
-                                                            <span class="label label-success">Active</span>
-                                                        </td>                                        
-                                                    </tr>                                   
-                                                </tbody>
-                                            </table>  
-                                            <div class="pagination pagination-centered">
-                                                <ul>
-                                                    <li><a href="#">Prev</a></li>
-                                                    <li class="active">
-                                                        <a href="#">1</a>
-                                                    </li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#">4</a></li>
-                                                    <li><a href="#">Next</a></li>
-                                                </ul>
-                                            </div>     
-                                        </div>
-                                    </div>/span
-            
-                                </div>/row-->
+                                 
 
             <!--                    <div class="row-fluid sortable">	
                                     <div class="box span12">
