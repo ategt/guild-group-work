@@ -87,6 +87,14 @@ public class StaticPageController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String create(@ModelAttribute StaticPage staticPage, Map model) {
 
+        int oldImageId = staticPage.getImage_id();
+        
+        if (oldImageId == 0){
+           Image image = imageDao.getDefaultThumb();
+            int imageId = image.getId();
+            staticPage.setImage_id(imageId);
+        }
+        
         staticPageDao.create(staticPage);
 
         model.put("staticPage", staticPage);

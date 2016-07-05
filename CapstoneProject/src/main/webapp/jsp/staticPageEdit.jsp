@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-10">
 
                         <form method="POST" action="" class="form-horizontal">
 
