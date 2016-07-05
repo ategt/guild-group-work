@@ -247,6 +247,10 @@ public class BlogController {
 
         int thumgId = postCommand.getThumbId();
         Image thumbImage = imageDao.get(thumgId);
+        
+        if ( thumbImage == null ) {
+            thumbImage = imageDao.getDefaultThumb();
+        }
 
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
 
@@ -255,12 +259,18 @@ public class BlogController {
         }
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
-        post.setSlug(postCommand.getTitle());
+        //post.setSlug(postCommand.getTitle());
+        
+        post.setTitle(postCommand.getTitle());
+        String slug = createSlug(post.getTitle());
+        post.setSlug(slug);
+        
+        
         post.setAuthor(author);
         post.setCategory(category);
         post.setContent(postCommand.getContent());
         post.setComments(comments);
-        post.setImage(img);
+        post.setImage(thumbImage);
         post.setHashTag(hashTags);
         post.setPostedOn(datePosted);
         post.setExpireOn(postCommand.getExpireOn());

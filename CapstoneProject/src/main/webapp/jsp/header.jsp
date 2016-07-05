@@ -15,7 +15,7 @@
             <li role="presentation" ><a href="${pageContext.request.contextPath}/aboutUs" class="">About Us</a></li>
 
             <c:forEach items="${staticPages}" var="staticPage">
-                <li role="presentation"><a href="static/show/${staticPage.id}">${staticPage.title}</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/static/show/${staticPage.id}">${staticPage.title}</a></li>
             </c:forEach>
 
             <li role="presentation"><a href="${pageContext.request.contextPath}/logout" class="">Log Out</a></li>

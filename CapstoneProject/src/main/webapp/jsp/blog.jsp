@@ -86,6 +86,8 @@
                                 </div>
                             </div>
 
+                            <input type="hidden" id="thumbId" name="thumbId" value="${blogPost.image.id}" />
+
                             <div class="form-group" id='author-input-div'>
                                 <label for="author" class="col-md-4 control-label">Author: </label>
                                 <div class="col-md-8">
@@ -138,7 +140,7 @@
         <%@ include file="selectSingleImageModal.jsp" %>
 
         <script>
-                var contextRoot = "${pageContext.request.contextPath}";
+            var contextRoot = "${pageContext.request.contextPath}";
         </script>
 
         <!-- Placed at the end of the document so the pages load faster -->
@@ -150,7 +152,6 @@
         <script src="${pageContext.request.contextPath}/js/image-picker/image-picker.js"></script>
         <script src="${pageContext.request.contextPath}/js/editblog-custom.js"></script>
         <script src="${pageContext.request.contextPath}/js/tinymce-drop-file.js"></script>
-
 
     </body>
 </html>
