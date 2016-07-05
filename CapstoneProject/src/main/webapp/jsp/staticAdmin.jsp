@@ -30,7 +30,7 @@
 
             .drop-area {
                 width: 300px;
-/*                height: 300px;*/
+                /*                height: 300px;*/
                 border: 2px solid black;
             }
 
@@ -39,10 +39,10 @@
     </head>
     <body>
 
-        <%@ include file="header.jsp" %>
 
         <div class="container">
             <div id="dragandrophandler">
+                <%@ include file="header.jsp" %>
 
 
                 <div class="row">

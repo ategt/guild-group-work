@@ -161,30 +161,6 @@ public class HomeController {
         return "category";
     }
 
-    @RequestMapping(value = "/showImage/{id}", produces = MediaType.IMAGE_PNG_VALUE, method = RequestMethod.GET)
-    @ResponseBody
-    public Image getImage(@PathVariable Integer postId) throws MalformedURLException, IOException {
-
-        BlogPost post = blogPostDao.getById(postId);
-
-        Image image = post.getImage();
-
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-        if (image != null) {
-            post.setImage(image);
-        } else {
-            Image i = new Image();
-            i.setId(postId);
-            i.setUrl("http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030");
-
-            post.setImage(i);
-            return i;
-        }
-
-        return image;
-    }
-
     public Integer getOffset(Integer pageNumber) {
         Integer numOfPosts = 3; //how many posts we want to see on a page
         Integer offset = (pageNumber * numOfPosts) - numOfPosts;
