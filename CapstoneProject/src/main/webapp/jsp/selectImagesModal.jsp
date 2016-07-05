@@ -20,11 +20,11 @@
               </div>
               <div class="modal-body">
 
-                <div class="picker masonry">
-                    <select multiple="multiple" style="width: 500px; height: 150px;" id="modal-image-picker" class="image-picker show-html">
-                        <c:forEach items="${imageIdList}" var="imageId">
-                            <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
-                        </c:forEach>
+                <div class="picker masonry" style="overflow: scroll;max-height: 400px;">
+                     <select multiple="multiple" style="width: 500px; height: 150px;" id="modal-image-picker" class="image-picker show-html">
+                     <c:forEach items="${imageIdList}" var="imageId">
+                        <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
+                    </c:forEach>
                     </select>
                 </div>
 
