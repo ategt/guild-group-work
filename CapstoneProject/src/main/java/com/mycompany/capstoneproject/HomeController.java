@@ -131,7 +131,7 @@ public class HomeController {
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
 
         automaticallyPublishScheduledPosts();
-        automaticallyRemoveExpiredPosts();
+//        automaticallyRemoveExpiredPosts();
 
         Integer offset;
         if (pageNumber == null) {
@@ -208,19 +208,19 @@ public class HomeController {
         }
     }
 
-    public void automaticallyRemoveExpiredPosts() {
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
-
-        List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
-        for (BlogPost post : allBlogPosts) {
-            String postExpiresOn = format.format(post.getExpireOn());
-            if (postExpiresOn.equals(currentDay)) {
-                blogPostDao.delete(post);
-            }
-        }
-    }
+//    public void automaticallyRemoveExpiredPosts() {
+//        Date date = new Date();
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String currentDay = format.format(date);
+//
+//        List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
+//        for (BlogPost post : allBlogPosts) {
+//            String postExpiresOn = format.format(post.getExpireOn());
+//            if (postExpiresOn.equals(currentDay)) {
+//                blogPostDao.delete(post);
+//            }
+//        }
+//    }
 
     @RequestMapping(value = "/setNumberOfPosts", method = RequestMethod.POST)
     public void setNumberOfPostsPerPage(Integer number) {

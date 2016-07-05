@@ -26,7 +26,6 @@
     </head>
     <body>
 
-        <%@ include file="header.jsp" %>
 
         <div class="container">
             <h1>Capstone</h1>
