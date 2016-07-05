@@ -171,13 +171,7 @@
                             }
                         });
                     }
-//                    change: function (event, ui) {
-//
-////ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
-//
-//
-//
-//                    }
+
                 });
 
 
