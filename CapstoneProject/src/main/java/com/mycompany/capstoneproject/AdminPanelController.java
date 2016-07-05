@@ -92,7 +92,7 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "adminPanel";
+        return "adminPanelTest";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -124,7 +124,7 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "adminPanelTest";
+        return "adminPanel";
     }
 
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)
