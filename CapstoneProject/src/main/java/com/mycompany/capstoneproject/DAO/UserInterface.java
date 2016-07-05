@@ -13,11 +13,15 @@ import java.util.List;
  * @author apprentice
  */
 public interface UserInterface {
-    
+
     public User create(User user);
+
     public User get(int id);
+
     public void update(User user);
+
     public void delete(User user);
+
     public List<User> list();
-    
+
 }

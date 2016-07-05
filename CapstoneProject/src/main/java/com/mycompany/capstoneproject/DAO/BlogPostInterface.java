@@ -16,20 +16,33 @@ import java.util.List;
  * @author apprentice
  */
 public interface BlogPostInterface {
-    
+
     public BlogPost create(BlogPost post);
+
     public BlogPost getById(Integer id);
+
     public BlogPost getBySlug(String slug);
+
     public void update(BlogPost post);
+
     public void delete(BlogPost post);
+
     public List<BlogPost> listBlogs();
+
     public List<BlogPost> listBlogs(Date date);
+
     public List<BlogPost> listBlogsWithLimit(int pageNumber);
+
     public Integer getNumOfPosts();
+
     public List<BlogPost> listPendingPosts();
+
     public List<String> listSlugs();
+
     public BlogPost publish(BlogPost post);
+
     public void setNumOfPostsPerPage(Integer number);
+
     public Integer getNumOfPostsPerPage();
-    
+
 }

@@ -42,6 +42,7 @@ public class HashTagDaoDBImpl implements HashTagInterface {
             + "ON category_post.category_id=category.id \n"
             + "JOIN user \n"
             + "ON user.id=user_id";
+
     private static final String SQL_UPDATE_HASHTAG = "UPDATE `capstone`.`hashtag` SET `number_of_uses`= ? WHERE `id`=?";
     private static final String SQL_DELETE_HASHTAG = "DELETE FROM `capstone`.`hashtag` WHERE `id`= ?";
     private static final String SQL_GET_HASHTAG_LIST = "SELECT id, name, number_of_uses FROM hashtag GROUP BY name";
@@ -58,18 +59,10 @@ public class HashTagDaoDBImpl implements HashTagInterface {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public HashTag create(HashTag hashTag) {
-//        List<HashTag> existingHashTags = jdbcTemplate.query(SQL_GET_HASHTAG_LIST, new HashTagMapper());
-//
-//        if (existingHashTags.contains(hashTag)) {
-//
-//            List<Integer> count = jdbcTemplate.query(SQL_SELECT_NUM_OF_USES, new CountMapper());
-//            int numOfUses = count.get(0);
-//            jdbcTemplate.update(SQL_UPDATE_HASHTAG, numOfUses++, hashTag.getId());
-//        } else {
+
         jdbcTemplate.update(SQL_INSERT_HASHTAG, hashTag.getName(), 1);
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         hashTag.setId(id);
-//        }
 
         return hashTag;
     }
@@ -103,7 +96,6 @@ public class HashTagDaoDBImpl implements HashTagInterface {
         Matcher mat = MY_PATTERN.matcher(content);
         List<String> strs = new ArrayList<String>();
         while (mat.find()) {
-            //System.out.println(mat.group(1));
             strs.add(mat.group(1));
         }
 

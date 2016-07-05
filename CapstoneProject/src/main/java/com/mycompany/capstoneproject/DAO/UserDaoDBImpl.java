@@ -84,7 +84,6 @@ public class UserDaoDBImpl implements UserInterface {
     @Override
     public void update(User user) {
 
-        //UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ? WHERE id = ?
         if (user == null) {
             return;
         }

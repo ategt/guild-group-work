@@ -93,9 +93,9 @@ public class BlogPostDBImpl implements BlogPostInterface {
     private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post WHERE post.status = 'published' AND post.expired = '0'";
 
     private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.post";
-    
+
     private static final String SQL_PUBLISH_POST = "UPDATE `capstone`.`post` SET `status`='published' WHERE `id`= ?";
-    
+
     private JdbcTemplate jdbcTemplate;
 
     @Inject
@@ -136,7 +136,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
                 post.getStatus(),
                 imageId,
                 post.getExpired()
-                );
+        );
 
         Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
@@ -163,7 +163,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
         try {
             return jdbcTemplate.queryForObject(SQL_GET_BLOGPOST, new BlogPostMapper(), id);
-        }catch(EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
 
@@ -185,10 +185,10 @@ public class BlogPostDBImpl implements BlogPostInterface {
             Logger.getLogger(com.mycompany.capstoneproject.DAO.BlogPostDBImpl.class.getName()).log(Level.INFO, null, "Category not set, update aborted.");
             return;
         }
-        
+
         Integer imageId;
-        
-        if ( post.getImage() == null ) {
+
+        if (post.getImage() == null) {
             imageId = null;
         } else {
             imageId = post.getImage().getId();
@@ -265,18 +265,18 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     @Override
     public BlogPost publish(BlogPost post) {
-        
+
         jdbcTemplate.update(SQL_PUBLISH_POST, post.getId());
-        
+
         return post;
-        
+
     }
 
     @Override
     public void setNumOfPostsPerPage(Integer number) {
         Integer numberOfPosts = 3; //hardcoding this until adam is done with the admin panel. 
-                                   //I want to add a feature that allows the admin to 
-                                   //input how many posts per page they want
+        //I want to add a feature that allows the admin to 
+        //input how many posts per page they want
     }
 
     @Override

@@ -35,23 +35,18 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     //list query
     private static final String SQL_GET_CATEGORY_LIST = "SELECT * FROM category";
 
-    
     private JdbcTemplate jdbcTemplate;
 
     public CategoryDAODBImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Category create(Category category) {
         jdbcTemplate.update(SQL_INSERT_CATEGORY,
                 category.getName()
-               
-            );
-               
-        
+        );
 
         int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
@@ -70,7 +65,6 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public void update(Category category) {
         jdbcTemplate.update(SQL_UPDATE_CATEGORY,
-               
                 category.getName(),
                 category.getId()
         );
@@ -101,7 +95,5 @@ public class CategoryDAODBImpl implements CategoriesInterface {
         }
 
     }
-    
-    
 
 }

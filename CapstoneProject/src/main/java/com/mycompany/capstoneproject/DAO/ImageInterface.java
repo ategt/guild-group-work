@@ -25,7 +25,7 @@ public interface ImageInterface {
     public List<Image> list();
 
     public Image getDefaultThumb();
-    
+
     public void setDefaultThumb(Image image);
 
 }

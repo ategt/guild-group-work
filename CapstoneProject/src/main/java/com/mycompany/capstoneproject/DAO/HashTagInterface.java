@@ -16,7 +16,7 @@ import java.util.List;
 public interface HashTagInterface {
 
     public HashTag create(HashTag hashTag);
-    
+
     public void updateHashTagPostTable(HashTag hashtag, BlogPost post);
 
     public HashTag get(String name);
@@ -28,11 +28,11 @@ public interface HashTagInterface {
     public List<BlogPost> listBlogs(HashTag hashTag);
 
     public List<HashTag> listHashTags();
-    
+
     public List<String> listHashTagNames();
 
     public List<String> findHashTags(String content);
-    
+
     public void incrementNumOfUses(HashTag hashtag);
 
 }

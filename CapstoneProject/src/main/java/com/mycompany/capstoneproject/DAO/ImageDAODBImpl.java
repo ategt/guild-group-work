@@ -36,7 +36,6 @@ public class ImageDAODBImpl implements ImageInterface {
     private static final String SQL_GET_IMAGE_DEFAULT_ID = "SELECT id FROM capstone.image_preferences\n"
             + "ORDER BY image_preferences.id ASC LIMIT 1;";
 
-    // # id, url, image, original_name, width, height, description
     private JdbcTemplate jdbcTemplate;
 
     public ImageDAODBImpl(JdbcTemplate jdbcTemplate) {
@@ -91,8 +90,10 @@ public class ImageDAODBImpl implements ImageInterface {
     @Transactional(propagation = Propagation.REQUIRED)
     public void setDefaultThumb(Image image) {
 
-        if (image == null) return;
-        
+        if (image == null) {
+            return;
+        }
+
         try {
             Integer id = jdbcTemplate.queryForObject(SQL_GET_IMAGE_DEFAULT_ID, Integer.class);
             jdbcTemplate.update(SQL_UPDATE_IMAGE_THUMB_DEFAULT,
@@ -101,12 +102,11 @@ public class ImageDAODBImpl implements ImageInterface {
 
         } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
             jdbcTemplate.update(SQL_CREATE_IMAGE_THUMB_DEFAULT,
-                            image.getId());
+                    image.getId());
         }
 
     }
 
-    //"UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?  WHERE id = ?";
     @Override
     public void update(Image image) {
 
