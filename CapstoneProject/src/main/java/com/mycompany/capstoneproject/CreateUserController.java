@@ -28,7 +28,6 @@ public class CreateUserController {
 
     private UserInterface createUserDAO;
 
-
     @Inject
     public CreateUserController(UserInterface dao) {
         this.createUserDAO = dao;
@@ -62,4 +61,3 @@ public class CreateUserController {
         return "editUser";
     }
 }
-

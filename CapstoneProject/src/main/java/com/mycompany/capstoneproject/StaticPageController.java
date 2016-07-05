@@ -98,12 +98,12 @@ public class StaticPageController {
     @ResponseBody
     public List<Integer> orderStatic(@RequestParam("positionArray") List<Integer> positionArray) {
 
-        for (int i=0; i < positionArray.size(); i++ ) {
+        for (int i = 0; i < positionArray.size(); i++) {
 
             StaticPage staticPage = staticPageDao.get(positionArray.get(i));
             staticPage.setTab_position(i + 1);
             staticPageDao.update(staticPage);
-            
+
         }
         return positionArray;
 

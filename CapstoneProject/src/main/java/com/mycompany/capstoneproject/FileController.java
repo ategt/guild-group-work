@@ -52,7 +52,7 @@ public class FileController {
 
     @Autowired
     ImageServices imageServices;
-    
+
     @Autowired
     ImageInterface imageDao;
 
@@ -200,7 +200,6 @@ public class FileController {
 //    }
     //{"/", "/{id}"}
     // @RequestMapping(value = {"/upload/", "/upload/{id}"}, method = RequestMethod.POST)
-    
     @RequestMapping(value = "/upload/", method = RequestMethod.POST)
     @ResponseBody
     public Integer ajaxFileUploaded(@PathVariable("id") Optional<Integer> id, Model model, @Validated com.mycompany.capstoneproject.DTO.File file,
@@ -208,28 +207,24 @@ public class FileController {
 
         Integer postId = null;
         Integer returnId = null;
-        
+
         if (id.isPresent()) {
             postId = id.get(); //returns the id
         }
 
-        
-        
         if (result.hasErrors()) {
             return 0;
         } else {
             Image image = imageServices.ajaxUploadFile(file, model);
-            if (image != null ){
-                
+            if (image != null) {
+
                 returnId = image.getId();
-                
-                
+
             }
-            
+
         }
         return returnId;
     }
-
 
 //
 //    @Autowired
@@ -338,5 +333,4 @@ public class FileController {
 //    public String ajaxFilePreUploaded(Model model) {
 //        return "fileDrop";
 //    }
-
 }

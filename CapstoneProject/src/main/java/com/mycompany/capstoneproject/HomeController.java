@@ -40,7 +40,7 @@ public class HomeController {
     private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
-    
+
     @Inject
     public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao) {
         this.blogPostDao = BPDao;
@@ -55,13 +55,10 @@ public class HomeController {
 
         return "aboutUs";
     }
-    
-    
+
     @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
     public String adminPanel(Map model) {
-        
-        
-     
+
         List<BlogPost> posts = blogPostDao.listBlogs();
 
         List<StaticPage> staticPages = staticPageDao.listPages();
@@ -84,24 +81,13 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-       
-        
-        
-        
 
         return "adminPanel";
     }
- 
+
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
 
-//         Integer offset;
-//        if (pageNumber == null) {
-//            offset = 0;
-//        } else {
-//            offset = getOffset(pageNumber);
-//        }
-//        
         List<BlogPost> posts = blogPostDao.listBlogs();
 
         List<StaticPage> staticPages = staticPageDao.listPages();
@@ -130,10 +116,10 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
-        
+
         automaticallyPublishScheduledPosts();
         automaticallyRemoveExpiredPosts();
-        
+
         Integer offset;
         if (pageNumber == null) {
             offset = 0;
@@ -183,17 +169,14 @@ public class HomeController {
 
         Image image = post.getImage();
 
-//            ByteArrayInputStream input = new ByteArrayInputStream();
         ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-//          File imgPath = new File();
         if (image != null) {
             post.setImage(image);
         } else {
             Image i = new Image();
             i.setId(postId);
             i.setUrl("http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030");
-//                String imageString = i.toString();
 
             post.setImage(i);
             return i;
@@ -202,77 +185,67 @@ public class HomeController {
         return image;
     }
 
-//
-//    @RequestMapping(value = "/home/{pageNumber}", method = RequestMethod.GET)
-//    public String populateHomePage(@PathVariable("pageNumber") int pageNumber, Map model) {
-//        Integer offset = 3; //hardcoding for second page, will figure out once i get it working
-//        List<BlogPost> blogList = blogPostDao.listBlogsWithLimit(offset);
-//
-//        model.put("blogList", blogList);
-//        return "home";
-//    }
     public Integer getOffset(Integer pageNumber) {
         Integer numOfPosts = 3; //how many posts we want to see on a page
         Integer offset = (pageNumber * numOfPosts) - numOfPosts;
         return offset;
     }
-    
-        @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public User softDeleteUser(@PathVariable("id") Integer userId) {
 
-
         User user = userDao.get(userId);
-        
+
         user.setEnabled(0);
-        
+
         userDao.update(user);
-        
+
         return user;
 
     }
-    
-    public void automaticallyPublishScheduledPosts(){
+
+    public void automaticallyPublishScheduledPosts() {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String currentDay = format.format(date);
-    
+
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
         for (BlogPost pendingPost : pendingPosts) {
             String pendingPostDate = format.format(pendingPost.getDateToPostOn());
-            if(pendingPostDate.equals(currentDay)){
+            if (pendingPostDate.equals(currentDay)) {
                 blogPostDao.publish(pendingPost);
             }
         }
     }
-    
-    public void automaticallyRemoveExpiredPosts(){
+
+    public void automaticallyRemoveExpiredPosts() {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String currentDay = format.format(date);
-    
+
         List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
         for (BlogPost post : allBlogPosts) {
             String postExpiresOn = format.format(post.getExpireOn());
-            if(postExpiresOn.equals(currentDay)){
+            if (postExpiresOn.equals(currentDay)) {
                 blogPostDao.delete(post);
             }
         }
     }
-    
-    @RequestMapping(value="/setNumberOfPosts", method=RequestMethod.POST)
-    public void setNumberOfPostsPerPage(Integer number){
+
+    @RequestMapping(value = "/setNumberOfPosts", method = RequestMethod.POST)
+    public void setNumberOfPostsPerPage(Integer number) {
         blogPostDao.setNumOfPostsPerPage(number);
     }
-     
-    public List<Integer> getPages(Integer number){
+
+    public List<Integer> getPages(Integer number) {
         Integer count = blogPostDao.getNumOfPosts();
         Integer numOfPages = (count / number);
         List<Integer> pages = new ArrayList();
         for (int i = 1; i <= numOfPages; i++) {
             pages.add(i);
         }
-        
+
         return pages;
     }
 }

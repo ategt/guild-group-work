@@ -233,27 +233,6 @@ public class BlogController {
         Image thumbImage = imageDao.get(thumgId);
 
         List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
-//        List<HashTag> hashTags = new ArrayList();
-//        List<String> existingHashTags = hashTagDao.listHashTagNames();
-//
-//        for (String hashTag : str) {
-//
-//            if (!existingHashTags.contains(hashTag)) {
-//                HashTag newHashTag = new HashTag();
-//                newHashTag.setName(hashTag.toLowerCase());
-//                hashTagDao.create(newHashTag);
-//                hashTags.add(newHashTag);
-//            } else {
-//                HashTag existingHashTag = hashTagDao.get(hashTag);
-//                existingHashTag.setNumOfUses(existingHashTag.getNumOfUses() + 1);
-//                hashTagDao.incrementNumOfUses(existingHashTag);
-//            }
-//
-////            if (hashTags.contains(newHashTag.getName())) {
-////
-////            } else {
-////            }
-//        }
 
         if (postCommand.getPublishOn() == null) {
             postCommand.setPublishOn(new Date());
@@ -314,15 +293,8 @@ public class BlogController {
 
         BlogPost post = blogPostDao.getById(postId);
 
-//        User author = userDao.get(post.getAuthor().getId());
-//        post.setAuthor(author);
-//        Category category = categoriesDao.get(post.getCategory().getId());
-//        post.setCategory(category);
         model.put("post", post);
 
-//        List<Category> categories = categoriesDao.listCategories();
-//
-//        model.put("categories", categories);
         return "showSingleBlog";
     }
 
@@ -375,7 +347,6 @@ public class BlogController {
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-//        model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
 
@@ -440,6 +411,5 @@ public class BlogController {
         blogPostDao.publish(post);
         return "adminPanel";
     }
-    
-    
+
 }
