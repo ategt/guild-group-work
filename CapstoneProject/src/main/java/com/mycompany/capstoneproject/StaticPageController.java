@@ -71,6 +71,19 @@ public class StaticPageController {
 
     }
 
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showB(@PathVariable("id") Integer id, Map model) {
+
+        List<StaticPage> staticPages = staticPageDao.listPages();
+        StaticPage staticPage = staticPageDao.get(id);
+
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+
+        return "staticPageDisplay";
+
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String create(@ModelAttribute StaticPage staticPage, Map model) {
 
@@ -107,7 +120,18 @@ public class StaticPageController {
 
         staticPageDao.update(staticPage);
 
-        return "staticAdmin";
+        //return "staticAdmin";
+        return "redirect:/static/";
+
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String editSubmitById(@ModelAttribute StaticPage staticPage) {
+
+        staticPageDao.update(staticPage);
+
+        //return "staticAdmin";
+        return "redirect:/static/";
 
     }
 
