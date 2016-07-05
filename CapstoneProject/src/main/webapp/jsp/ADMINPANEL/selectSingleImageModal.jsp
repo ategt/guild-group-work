@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="AdminPanelHeader.jsp" %>
 
 <div id="selectSingleImageModal" class="modal fade" role="dialog">
           <div class="modal-dialog">

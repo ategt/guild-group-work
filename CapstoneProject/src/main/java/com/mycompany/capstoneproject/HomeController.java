@@ -95,7 +95,7 @@ public class HomeController {
         model.put("categories", categories);
         model.put("hashTag", hash);
 
-        return "adminPanel";
+        return "WORKINGADMIN";
     }
 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)

@@ -46,6 +46,7 @@
 
 
         </style>
+        <%@ include file="AdminPanelHeader.jsp" %>
     </head>
     <body>
         <div class="container">

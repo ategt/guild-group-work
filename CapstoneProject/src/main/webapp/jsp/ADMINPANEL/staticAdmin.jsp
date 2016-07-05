@@ -6,14 +6,14 @@
 <html>
     <head>
         <title>Basic Static Page</title>
-         Bootstrap core CSS 
+        <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/js/image-picker/image-picker.css" rel="stylesheet">
 
-         Custom styles for this template 
-        <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <!--<link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">-->
 
-         SWC Icon 
+        <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
         <style>
@@ -30,7 +30,7 @@
 
             .drop-area {
                 width: 300px;
-                /*                height: 300px;*/
+/*                height: 300px;*/
                 border: 2px solid black;
             }
 
@@ -39,10 +39,10 @@
     </head>
     <body>
 
+        <%@ include file="header.jsp" %>
 
         <div class="container">
             <div id="dragandrophandler">
-                <%@ include file="header.jsp" %>
 
 
                 <div class="row">
@@ -130,7 +130,7 @@
         <%@ include file="selectImagesModal.jsp" %>
         <%@ include file="selectSingleImageModal.jsp" %>
 
-         Placed at the end of the document so the pages load faster 
+        <!-- Placed at the end of the document so the pages load faster -->
 
         <script>
             var contextRoot = '${pageContext.request.contextPath}';
@@ -171,7 +171,13 @@
                             }
                         });
                     }
-
+//                    change: function (event, ui) {
+//
+////ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
+//
+//
+//
+//                    }
                 });
 
 
