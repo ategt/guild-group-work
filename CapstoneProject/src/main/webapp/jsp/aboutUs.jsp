@@ -45,7 +45,30 @@
                     <section id="team">
                         <h2>Our Team</h2>
                         <ul class="clear">
-                            <li class="one_third first">
+                          <li class="one_third first">
+                               <c:forEach items="${employees}" var="e">
+                                         <figure><img  height="350" width="300" src="http://www.clker.com/cliparts/A/Y/O/m/o/N/placeholder-hi.png" alt="">
+                                    <figcaption>
+                                        <p class="team_name">${e.name}</p>
+                                        <p class="team_title">${e.role}</p>
+                                        <p class="team_description" pattern="mm/dd/yyyy"><fmt:formatDate value="${e.joinedOn}"></fmt:formatDate></p>
+                                    </figcaption>
+                                </figure>
+                                          
+                                            
+                                        
+
+                                    </c:forEach>
+<!--                                <figure><img  height="350" width="300" src="https://scontent-dfw1-1.xx.fbcdn.net/v/t1.0-9/12472838_10100949446508600_133852599205000801_n.jpg?oh=ab6287e05512b917b0aba4e021d06425&oe=57F99B65" alt="">
+                                    <figcaption>
+                                        <p class="team_name">Adam P.</p>
+                                        <p class="team_title">Software Developer</p>
+                                        <p class="team_description">Some information about Adam.</p>
+                                    </figcaption>
+                                </figure>
+                            </li>-->
+                        
+<!--                            <li class="one_third first">
                                 <figure><img  height="350" width="300" src="https://scontent-dfw1-1.xx.fbcdn.net/v/t1.0-9/12472838_10100949446508600_133852599205000801_n.jpg?oh=ab6287e05512b917b0aba4e021d06425&oe=57F99B65" alt="">
                                     <figcaption>
                                         <p class="team_name">Adam P.</p>
@@ -88,7 +111,7 @@
                                         <p class="team_title">Owner</p>
                                         <p class="team_description">Some information about Pat.</p>
                                     </figcaption>
-                                </figure>
+                                </figure>-->
                             </li>
                         </ul>
                     </section>

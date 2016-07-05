@@ -76,15 +76,15 @@
                             <!-- start: User Dropdown -->
                             <li class="dropdown">
                                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="halflings-icon white user"></i> Dennis Ji
+                                    <i class="halflings-icon white user"></i> USER
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-menu-title">
                                         <span>Account Settings</span>
                                     </li>
-                                    <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-                                    <li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
+                                    <!--<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>-->
+                                    <li><a href="${pageContext.request.contextPath}/logout"><i class="halflings-icon off"></i> Logout</a></li>
                                 </ul>
                             </li>
                             <!-- end: User Dropdown -->
@@ -104,8 +104,8 @@
                 <div id="sidebar-left" class="span2">
                     <div class="nav-collapse sidebar-nav">
                         <ul class="nav nav-tabs nav-stacked main-menu">
-                            <li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-                            <li><a href="messages.html"><i class="icon-home"></i><span class="hidden-tablet"> Blog Home</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
+                            <li><a href="${pageContext.request.contextPath}/home"><i class="icon-home"></i><span class="hidden-tablet"> Blog Home</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -125,10 +125,8 @@
                     <ul class="breadcrumb">
                         <li>
                             <i class="icon-home"></i>
-                            <a href="index.html">Home</a> 
-                            <i class="icon-angle-right"></i>
+                            <a href="${pageContext.request.contextPath}">Home</a> 
                         </li>
-                        <li><a href="#">Tables</a></li>
                     </ul>
 
                     <div class="row-fluid sortable">		
@@ -414,8 +412,8 @@
                                 </ul>
                             </div>     
                         </div>
-                        
-<!--                        <div class="box span6">
+<!--                        
+                        <div class="box span6">
                             <div class="box-header">
                                 <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Hashtags</h2>
                                 <div class="box-icon">
@@ -423,8 +421,8 @@
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                     <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                                 </div>
-                            </div>
-                            <div class="box-content">
+                            </div>-->
+<!--                            <div class="box-content">
                                 <table class="table table-bordered table-hover"  id="user-table">
 
                                     <tr>
@@ -453,11 +451,11 @@
                                     </ul>
                                 </div>     
                             </div>
-                        </div>/span-->
+                        </div>/span
 
-                    </div><!--/span-->
+                    </div>/span-->
 
-                    <div class="row-fluid sortable">	
+<!--                    <div class="row-fluid sortable">	
                         <div class="box span6">
                             <div class="box-header">
                                 <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Bordered Table</h2>
@@ -533,7 +531,7 @@
                                     </ul>
                                 </div>     
                             </div>
-                        </div><!--/span-->
+                        </div>/span
 
                         <div class="box span6">
                             <div class="box-header">
@@ -610,11 +608,11 @@
                                     </ul>
                                 </div>     
                             </div>
-                        </div><!--/span-->
+                        </div>/span
 
-                    </div><!--/row-->
+                    </div>/row-->
 
-                    <div class="row-fluid sortable">	
+<!--                    <div class="row-fluid sortable">	
                         <div class="box span12">
                             <div class="box-header">
                                 <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Combined All Table</h2>
@@ -690,8 +688,8 @@
                                     </ul>
                                 </div>     
                             </div>
-                        </div><!--/span-->
-                    </div><!--/row-->
+                        </div>/span
+                    </div>/row-->
 
 
                 </div><!--/.fluid-container-->
