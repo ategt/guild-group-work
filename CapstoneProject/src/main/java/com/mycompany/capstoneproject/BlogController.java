@@ -80,11 +80,27 @@ public class BlogController {
 
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
+        Image image = new Image();
+        BlogPost blogPost = new BlogPost();
+        blogPost.setImage(image);
 
+        
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+
+        model.put("imageIdList", imageIdList);
+        
         List<User> users = userDao.list();
         model.put("users", users);
         model.put("category", category);
         model.put("categories", categories);
+        model.put("blogPost", blogPost);
         return "blog";
     }
 
