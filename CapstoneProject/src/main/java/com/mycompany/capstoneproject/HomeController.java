@@ -53,6 +53,19 @@ public class HomeController {
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Map model) {
 
+        List<User> users = userDao.list();
+
+        List<User> employees = new ArrayList();
+
+        for (User u : users) {
+            if (u.getRole().toUpperCase().equals("ROLE_ADMIN") || u.getRole().toUpperCase().equals("ROLE_AUTHOR")) {
+
+                employees.add(u);
+            }
+        }
+
+        model.put("employees", employees);
+
         return "aboutUs";
     }
 

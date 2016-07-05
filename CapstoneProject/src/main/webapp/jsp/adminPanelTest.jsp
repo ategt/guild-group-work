@@ -120,7 +120,7 @@
                 </noscript>
 
                 <!-- start: Content -->
-                <div id="content" class="span10">
+                <div id="content" class="span10"><!--
 
 
                     <ul class="breadcrumb">
@@ -136,7 +136,7 @@
                                 <h2><i class="halflings-icon user"></i><span class="break"></span>Users</h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <!--                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>-->
+                                                                        <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
@@ -163,19 +163,19 @@
                                                     <span class="label label-success">Active</span>
                                                 </td>
                                                 <td class="center">
-                                                    <a class="btn btn-info" href="#">
+                                                    <td><a data-category-id="${user.id}" data-toggle="modal" data-target="#showUserModal">${user.name}</a></td>
                                                         <i class="halflings-icon white edit"></i>  
                                                     </a>
                                                     <a data-user-id="${user.id}" class="btn btn-danger delete-link-user">
                                                         <i class="halflings-icon white trash"></i> 
                                                     </a>
                                                 </td>
-<!--                                                <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
-                                                <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>-->
+                                                <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                                                <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>
                                             </tr>
 
                                         </c:forEach>
-                                        <!--                                        <tr>
+                                                                                <tr>
                                                                                     <td>Dennis Ji</td>
                                                                                     <td class="center">2012/01/01</td>
                                                                                     <td class="center">Member</td>
@@ -193,14 +193,14 @@
                                                                                             <i class="halflings-icon white trash"></i> 
                                                                                         </a>
                                                                                     </td>
-                                                                                </tr>-->
+                                                                                </tr>
 
                                     </tbody>
                                 </table>            
                             </div>
-                        </div><!--/span-->
+                        </div>/span
 
-                    </div><!--/row-->
+                    </div>/row-->
 
 
 
@@ -310,7 +310,7 @@
 
 
 
-                        <div class="box span6">
+<!--                        <div class="box span6">
                             <div class="box-header">
                                 <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Hashtags</h2>
                                 <div class="box-icon">
@@ -348,9 +348,9 @@
                                     </ul>
                                 </div>     
                             </div>
-                        </div><!--/span-->
+                        </div>/span
 
-                    </div><!--/span-->
+                    </div>/span
 
                     <div class="row-fluid sortable">
                         <div class="box span6">
@@ -363,7 +363,7 @@
                                 </div>
                             </div>
                             <div class="box-content">
-                                <!--<table class="table">-->
+                                <table class="table">
 
                                 <table class="table table-bordered table-hover" id="category-table">
                                     <tr>
@@ -412,7 +412,7 @@
                                     <li><a href="#">Next</a></li>
                                 </ul>
                             </div>     
-                        </div>
+                        </div>-->
 <!--                        
                         <div class="box span6">
                             <div class="box-header">
