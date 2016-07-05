@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +36,15 @@ public class CreateUserController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseBody
-    public User create(@Valid @RequestBody User createUser) {
+    public String create(@Valid @ModelAttribute User user, BindingResult bindingResult, Map model) {
 
-        return createUserDAO.create(createUser);
+        if(bindingResult.hasErrors()){
+            model.put("user", user);
+            return "createAccount";
+        }
+        createUserDAO.create(user);
+        
+        return "redirect:/";
 
     }
 
@@ -52,7 +59,7 @@ public class CreateUserController {
     }
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable("id") Integer createUserId, Map model) {
+    public String edit(@Valid @PathVariable("id") Integer createUserId, Map model) {
 
         User createUser = createUserDAO.get(createUserId);
 

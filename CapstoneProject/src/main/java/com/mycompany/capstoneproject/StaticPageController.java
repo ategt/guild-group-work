@@ -7,10 +7,12 @@ package com.mycompany.capstoneproject;
 
 import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
+import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.bll.StaticPageShow;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +37,18 @@ public class StaticPageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String admin(Map model) {
+
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+
+        model.put("imageIdList", imageIdList);
+
         List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
 
@@ -46,6 +60,19 @@ public class StaticPageController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer id, Map model) {
+
+        List<StaticPage> staticPages = staticPageDao.listPages();
+        StaticPage staticPage = staticPageDao.get(id);
+
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+
+        return "staticPageDisplay";
+
+    }
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showB(@PathVariable("id") Integer id, Map model) {
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = staticPageDao.get(id);
@@ -70,6 +97,17 @@ public class StaticPageController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Map model) {
 
+        List<Image> images = imageDao.list();
+
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+
+        model.put("imageIdList", imageIdList);
+
         StaticPage staticPage = staticPageDao.get(id);
 
         model.put("staticPage", staticPage);
@@ -82,7 +120,18 @@ public class StaticPageController {
 
         staticPageDao.update(staticPage);
 
-        return "staticAdmin";
+        //return "staticAdmin";
+        return "redirect:/static/";
+
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String editSubmitById(@ModelAttribute StaticPage staticPage) {
+
+        staticPageDao.update(staticPage);
+
+        //return "staticAdmin";
+        return "redirect:/static/";
 
     }
 

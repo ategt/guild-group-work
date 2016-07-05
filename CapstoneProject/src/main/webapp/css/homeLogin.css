@@ -15,6 +15,7 @@ body {
 	font-weight: 300;
 	margin: 0;
 	color: #666;
+        
 }
 
 /* Typography */
@@ -30,6 +31,10 @@ h1#title {
 	text-align: center;
 	position: relative;
 	top: 0px;
+}
+
+.error-message{
+    color: red;
 }
 
 h1#title span span {

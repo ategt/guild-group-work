@@ -22,11 +22,11 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-2">Title:</div>
-                <div class="col-lg-10">${staticPage.title}</div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-10"><h1>${staticPage.title}</h1></div>
             </div>
             <div class="row">
-                <div class="col-lg-2">Content:</div>
+                <div class="col-lg-2"></div>
                 <div class="col-lg-10">${staticPage.content}</div>
             </div>
         </div>

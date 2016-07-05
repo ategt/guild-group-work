@@ -5,6 +5,8 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  *
  * @author apprentice
@@ -12,6 +14,8 @@ package com.mycompany.capstoneproject.DTO;
 public class Category {
 
     private int id;
+    
+    @NotEmpty(message = "You must supply a name")
     private String name;
 
     public int getId() {

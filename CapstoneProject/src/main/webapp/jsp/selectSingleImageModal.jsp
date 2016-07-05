@@ -26,7 +26,7 @@
               </div>
               <div class="modal-body">
 
-                <div class="picker masonry">
+                <div class="picker masonry" style="overflow: scroll;max-height: 400px;">
                     <select style="width: 500px;" id="modal-single-image-picker" class="image-picker show-html">
                         <c:forEach items="${imageIdList}" var="imageId">
                             <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
