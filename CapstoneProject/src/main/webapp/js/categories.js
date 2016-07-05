@@ -7,11 +7,11 @@
 $(document).ready(function(){
    
     
-    $('#create-submit').on('click', function(e) {
+    $('#create-category-submit').on('click', function(e) {
         
         e.preventDefault();
         
-        $('#add-contact-validation-errors').empty();
+        $('#add-category-validation-errors').empty();
         var categoryData = JSON.stringify( {
           
             name:$('#name-input').val()
@@ -20,7 +20,6 @@ $(document).ready(function(){
         
         
         $.ajax({
-           
            
            url:contextRoot + "/category/",
            type: 'POST',
@@ -48,14 +47,15 @@ $(document).ready(function(){
               
            },
            error: function(data, status){
-               
+
+               console.log(data);
                var errors = data.responseJSON.errors;
                
                console.log(errors);
                
                $.each(errors , function(index , error){
                   
-                  $('#add-contact-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
+                  $('#add-category-validation-errors').append(error.fieldName + ": " + error.message + "<br/>");
                    
                });
                
