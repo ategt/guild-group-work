@@ -30,7 +30,7 @@
 
             .drop-area {
                 width: 300px;
-/*                height: 300px;*/
+                /*                height: 300px;*/
                 border: 2px solid black;
             }
 
@@ -42,6 +42,7 @@
 
         <div class="container">
             <div id="dragandrophandler">
+                <%@ include file="header.jsp" %>
 
 
                 <div class="row">
@@ -170,13 +171,7 @@
                             }
                         });
                     }
-//                    change: function (event, ui) {
-//
-////ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
-//
-//
-//
-//                    }
+
                 });
 
 

@@ -208,7 +208,53 @@
         <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
         <script src="${pageContext.request.contextPath}/js/user.js"></script>
         <script src="${pageContext.request.contextPath}/js/staticPages.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="${pageContext.request.contextPath}/js/tinymce/js/tinymce/tinymce.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/staticPage.js"></script>
+        <script src="${pageContext.request.contextPath}/js/tinymce.js"></script>
+        <script src="${pageContext.request.contextPath}/js/image-picker/image-picker.js"></script>
+        <script src="${pageContext.request.contextPath}/js/editblog-custom.js"></script>
+        <script src="${pageContext.request.contextPath}/js/tinymce-drop-file.js"></script>
 
+
+        <script>
+
+            $(function () {
+                $("#sortable").sortable({
+                    cursor: 'move',
+                    opacity: 0.65,
+                    stop: function (event, ui) {
+                        var staticPagePositions = $(this).sortable('toArray', {attribute: 'sort-id'});
+                        console.log(staticPagePositions);
+                        var fd = new FormData();
+                        fd.append('positionArray', staticPagePositions);
+                        $.ajax({
+                            url: contextRoot + "/static/order",
+                            type: 'POST',
+                            data: fd,
+                            processData: false,
+                            contentType: false,
+                            success: function (data, status) {
+                                console.log(data);
+                            },
+                            error: function (data, status) {
+                            }
+                        });
+                    }
+//                    change: function (event, ui) {
+//
+////ADD AJAX REQUEST HERE TO SEND AN ARRAY WITH ORDER VALUES......CALCULATE HERE FIRST...oR SERVER SIDE BETTER
+//
+//
+//
+//                    }
+                });
+
+
+
+                $("#sortable").disableSelection();
+            });
+        </script>
 
 
 
