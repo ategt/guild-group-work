@@ -14,7 +14,7 @@
 
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-
+<%@ include file="AdminPanelHeader.jsp" %>
     </head>
     <body>
         <div class="container">

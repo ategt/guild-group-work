@@ -106,13 +106,15 @@
                 <div id="sidebar-left" class="span2">
                     <div class="nav-collapse sidebar-nav">
                         <ul class="nav nav-tabs nav-stacked main-menu">
-                            <li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-                            <li><a href="messages.html"><i class="icon-home"></i><span class="hidden-tablet"> Blog Home</span></a></li>
-                            <li><a href="messages.html"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
-                            <li><a href="messages.html"><i class="icon-file"></i><span class="hidden-tablet"> Static Pages</span></a></li>
-                            <li><a href="messages.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Categories</span></a></li>
-                            <li><a href="messages.html"><i class="icon-th"></i><span class="hidden-tablet"> Hash Tags</span></a></li>
-
+                           <li><a  class="padded" href="${pageContext.request.contextPath}/home"><i class="icon-home"></i><span class="hidden-tablet">Home</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/pendingPosts"><i class="icon-home"></i><span class="hidden-tablet">Pending Posts</span></a></li>
+                            <li><a herf="${pageContext.request.contextPath}/adminPanel/editPosts"><i class="icon-home"></i><span class="hidden-tablet">Edit Posts</span></a></li>
+                            <li><a herf="${pageContext.request.contextPath}/static"><i class="icon-home"></i><span class="hidden-tablet">Static Pages</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/users"><i class="icon-home"></i><span class="hidden-tablet">Manage Users</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/categories"><i class="icon-home"></i><span class="hidden-tablet">Manage Categories</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/hashtags"><i class="icon-home"></i><span class="hidden-tablet">Hashtags</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/adminPanel/images"><i class="icon-home"></i><span class="hidden-tablet">Images</span></a></li>
+                            
                         </ul>
                     </div>
                 </div>
