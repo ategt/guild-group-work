@@ -31,11 +31,10 @@
 
 
     </head>
-    <%@ include file="header.jsp" %>
-
     <body>
         <div class="container">
             <div id="dragandrophandler">
+                <%@ include file="header.jsp" %>
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div class="row">
@@ -86,6 +85,8 @@
                                     <input type="text" id="title-input" name="title" class="form-control"></input>
                                 </div>
                             </div>
+
+                            <input type="hidden" id="thumbId" name="thumbId" value="${blogPost.image.id}" />
 
                             <div class="form-group" id='author-input-div'>
                                 <label for="author" class="col-md-4 control-label">Author: </label>
@@ -139,7 +140,7 @@
         <%@ include file="selectSingleImageModal.jsp" %>
 
         <script>
-                var contextRoot = "${pageContext.request.contextPath}";
+            var contextRoot = "${pageContext.request.contextPath}";
         </script>
 
         <!-- Placed at the end of the document so the pages load faster -->
@@ -151,7 +152,6 @@
         <script src="${pageContext.request.contextPath}/js/image-picker/image-picker.js"></script>
         <script src="${pageContext.request.contextPath}/js/editblog-custom.js"></script>
         <script src="${pageContext.request.contextPath}/js/tinymce-drop-file.js"></script>
-
 
     </body>
 </html>
