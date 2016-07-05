@@ -58,6 +58,7 @@
 
     <bean id="fileValidator" class="com.mycompany.capstoneproject.utilities.FileValidator" />
     <bean id="imageServices" class="com.mycompany.capstoneproject.bll.ImageServicesImpl" />
+    <bean id="staticPageServices" class="com.mycompany.capstoneproject.bll.StaticPageServices" />
 
     <bean id="hashtagDao" class="com.mycompany.capstoneproject.DAO.HashTagDaoDBImpl">
         <constructor-arg ref="jdbcTemplate"/>
