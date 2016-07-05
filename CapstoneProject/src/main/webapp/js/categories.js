@@ -73,7 +73,10 @@ $(document).ready(function(){
         var strVar="";
         return "<tr id='category-row-" + data.id + "'>  \n\
                 <td><a data-category-id='" + data.id +"' data-toggle='modal' data-target='#showCategoryModal'>" + data.name + "</a></td>  \n\
-                <td> <a data-category-id='" + data.id +"' class='delete-link'>Delete</a>  </td>   \n\
+                <td> <a data-category-id='" + data.id +"' data-toggle='modal' data-target='#editCategoryModal' class='btn btn-info edit-category-button'>\n\
+                <i class='halflings-icon white edit'></i> </a>  </td>   \n\
+                <td> <a data-category-id='" + data.id +"' class='btn btn-danger delete-link-category'>\n\
+                <i class='halflings-icon white trash'></i></a>  </td>   \n\
                 </tr>  ";
     }
     
@@ -130,6 +133,7 @@ $(document).ready(function(){
               
               $('#edit-id').val(data.id);
               $('#edit-category-name').val(data.name);
+              console.log(data.name);
            
                 
             },
@@ -183,7 +187,7 @@ $(document).ready(function(){
         });
 });
 
-    $(document).on('click' , '.delete-link' , function(e){
+    $(document).on('click' , '.delete-link-category' , function(e){
        
        e.preventDefault();
        
