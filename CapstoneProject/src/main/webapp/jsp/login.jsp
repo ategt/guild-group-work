@@ -3,8 +3,12 @@
     Created on : Jun 27, 2016, 11:24:26 AM
     Author     : apprentice
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -25,12 +29,12 @@
             <h1 id="title" class="hidden"><span id="logo">Capstone <span>Blog</span></span></h1>
         </div>
 
-        <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+        <form:form action="${pageContext.request.contextPath}/j_spring_security_check" commandName="user" method="POST">
             <div class="login-box animated ">
                 <div class="box-header">
                     <h2>Log In</h2>
                 </div>
-                <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+                <!--<form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">-->
                     <label for="username">Username</label><br/>
                     <input type="text" name="username" id="login-username"/><br/>
                     <label for="password">Password</label><br/>
@@ -45,18 +49,19 @@
 
 
             </div>
+        </form:form>              
     </div>
-</form>
 
-<script>
 
-    var contextRoot = '${pageContext.request.contextPath}'
+    <script>
 
-</script>
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/createUsers.js"></script>
-<script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
+        var contextRoot = '${pageContext.request.contextPath}'
+
+    </script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/createUsers.js"></script>
+    <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
 
 
 </body>

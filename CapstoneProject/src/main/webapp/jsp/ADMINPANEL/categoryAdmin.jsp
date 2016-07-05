@@ -22,6 +22,7 @@
         <table class="table table-bordered table-hover" id="category-table">
         <tr>
             <th>Name</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>    
 
