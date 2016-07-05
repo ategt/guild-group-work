@@ -5,6 +5,7 @@
  */
 package com.mycompany.capstoneproject;
 
+import com.mycompany.capstoneproject.DTO.User;
 import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
-    public String createAccount() {
-
+    public String createAccount(Map model) {
+        User user = new User();
+        model.put("user", user);
         return "createAccount";
     }
 

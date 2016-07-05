@@ -5,7 +5,10 @@
  */
 package com.mycompany.capstoneproject.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -13,12 +16,23 @@ import java.util.Date;
  */
 public class User {
     private int id;
+    
+    @NotEmpty(message="You must supply a name")
     private String name;
+    
+    @NotEmpty(message="You must supply an email")
     private String email;
+    
+    @NotEmpty(message="You must supply a password")
     private String password;
+    
     private String role;
     private int numOfComments;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
+    @NotNull
     private Date joinedOn;
+    
     int enabled = 1;
 
     public int getEnabled() {
