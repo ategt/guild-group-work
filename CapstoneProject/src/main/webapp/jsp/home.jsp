@@ -13,24 +13,19 @@
         <!-- SWC Icon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
 
-        <%@ include file="header.jsp" %>
     </head>
-
     <body>
+        <div class="container">
 
+            <%@ include file="header.jsp" %>
 
-        <div class="row-fluid top30 pagetitle">
-            <div class="container">
+            <div class="row-fluid top30 pagetitle">
                 <div class="row">
 
                     <div class="col-md-12"><h1>Pats Warehouse and Stuff</h1></div>
 
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-
             <div class="row">
                 <div class="col-md-3">
 
@@ -132,9 +127,9 @@
             </div>
         </div>
 
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 </html>
