@@ -82,13 +82,18 @@ public class AdminPanelController {
         List<BlogPost> activePosts = new ArrayList();
 
         for (BlogPost p : allPosts) {
-            if (p.getStatus().toLowerCase().equals("published")) {
-                if (p.getExpired() == 0) {
 
-                    activePosts.add(p);
+
+            if (p.getStatus() != null) {
+                if (p.getStatus().toLowerCase().equals("published")) {
+                    if (p.getExpired() == 0) {
+                        activePosts.add(p);
+                    }
+
                 }
             }
         }
+            
 
         List<HashTag> hashTags = hashTagDao.listHashTags();
 
