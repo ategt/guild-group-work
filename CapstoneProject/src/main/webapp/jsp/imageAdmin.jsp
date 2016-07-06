@@ -40,21 +40,21 @@
     <body>
         <div class="container">
             <div id="dragandrophandler">
-                
+
                 <%@ include file="header.jsp" %>
 
                 <div class="image-admin-panel">
-                    <!--              <div class="image-admin-header">
-                <h4 class="modal-title">Select Images</h4>
-                                            <br />
-                                            Preview Image Size:
-                                            <select id="image-preview-size" class="image-preview-size form-control">
-                                                <option value="1" selected="selected">50x50</option>
-                                                <option value="2">100x100</option>
-                                                <option value="3">150x150</option>
-                                                <option value="4">200x200</option>
-                                            </select>
-              </div>-->
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
+                                <img style="max-width: 150px; max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/0" />
+                            </div>
+
+
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
+                        </div>
+                    </div>
               <div class="image-admin-body">
 
                         <div class="picker">
@@ -90,15 +90,7 @@
                     <div class="col-md-6">
                         <div id="status1">You can drag and drop an image into the center of this page, to add it to the database.</div>
                     </div>
-                    <div class="col-md-6">
 
-                        <div onclick="javascript:$('#selectSingleImageModal').modal();" id="thumb-container" class="thumb-container">
-                            <img style="max-width: 150px; max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/0" />
-                        </div>
-
-
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#selectSingleImageModal">Select Default Thumbnail Image</button>
-                    </div>
                 </div>
             </div>
         </div>

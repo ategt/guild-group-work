@@ -79,7 +79,7 @@
                             <tbody id="sortable">
                                 <c:forEach items="${staticPages}" var="staticPage">
                                     <tr sort-id="${staticPage.id}" id="static-page-row-${staticPage.id}">
-                                        <td><a href="${staticPage.id}">${staticPage.title}</a></td>
+                                        <td><a href="${pageContext.request.contextPath}/static/show/${staticPage.id}">${staticPage.title}</a></td>
                                         <td><a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a></td>
                                         <td><a data-static-page-id="${staticPage.id}" class="delete-static">Delete</a></td>
                                     </tr>
@@ -165,91 +165,101 @@
         </div>
 
 
-        <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Edit Category Details</h4>
-                    </div>
-                    <div class="modal-body">
+        <div class="text-center">
+            <br />
+            <br />
+            <h1>
+                <a href="${pageContext.request.contextPath}/image/imageadmin"> Image Administration </a>
+            </h1>
+        <br />
+        <br />
+    </div>
 
-                        <table class="table table-bordered">
-                            <input type="hidden" id="edit-id"/>
-                            <tr>
-                                <th>Name:</th>
-                                <td>
-                                    <input type="text" id="edit-category">
-                                </td>
-                            </tr>
-                        </table>
+    <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Category Details</h4>
+                </div>
+                <div class="modal-body">
 
-                        <div id="edit-tax-validation-errors" class="pull-right"></div>
+                    <table class="table table-bordered">
+                        <input type="hidden" id="edit-id"/>
+                        <tr>
+                            <th>Name:</th>
+                            <td>
+                                <input type="text" id="edit-category">
+                            </td>
+                        </tr>
+                    </table>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
-                    </div>
-                </div> 
+                    <div id="edit-tax-validation-errors" class="pull-right"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                </div>
             </div> 
         </div> 
-        <div id="editUserModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Edit User Details</h4>
-                    </div>
-                    <div class="modal-body">
+    </div> 
+    <div id="editUserModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit User Details</h4>
+                </div>
+                <div class="modal-body">
 
-                        <table class="table table-bordered">
-                            <input type="hidden" id="edit-id"/>
-                            <input type="hidden" id="edit-user-email"/>
-                            <input type="hidden" id="edit-user-password"/>
-                            <input type="hidden" id="edit-user-date-joined"/>
-                            <input type="hidden" id="edit-user-enabled"/>
-                            <input type="hidden" id="edit-id"/>
-                            <tr>
-                                <th>Name:</th>
-                                <td>
-                                    <input type="text" id="edit-user-name">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Role:</th>
-                                <td>
-                                    <select class="btn btn-default dropdown" name="role" id="edit-user-role">
-                                        <option value="ROLE_ADMIN"class="form-control">Admin</option>
-                                        <option value="ROLE_AUTHOR"class="form-control">Author</option>
-                                        <option value="ROLE_USER"class="form-control">User</option>
-                                    </select>
-                                </td>
-                            </tr>
+                    <table class="table table-bordered">
+                        <input type="hidden" id="edit-id"/>
+                        <input type="hidden" id="edit-user-email"/>
+                        <input type="hidden" id="edit-user-password"/>
+                        <input type="hidden" id="edit-user-date-joined"/>
+                        <input type="hidden" id="edit-user-enabled"/>
+                        <input type="hidden" id="edit-id"/>
+                        <tr>
+                            <th>Name:</th>
+                            <td>
+                                <input type="text" id="edit-user-name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Role:</th>
+                            <td>
+                                <select class="btn btn-default dropdown" name="role" id="edit-user-role">
+                                    <option value="ROLE_ADMIN"class="form-control">Admin</option>
+                                    <option value="ROLE_AUTHOR"class="form-control">Author</option>
+                                    <option value="ROLE_USER"class="form-control">User</option>
+                                </select>
+                            </td>
+                        </tr>
 
-                        </table>
+                    </table>
 
-                        <div id="edit-user-validation-errors" class="pull-right"></div>
+                    <div id="edit-user-validation-errors" class="pull-right"></div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" id="edit-user-button">Save</button>
-                    </div>
-                </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" id="edit-user-button">Save</button>
+                </div>
             </div> 
-
         </div> 
-        <script>
+
+    </div> 
+    <script>
             var contextRoot = "${pageContext.request.contextPath}";
-        </script>
+    </script>
 
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
-        <script src="${pageContext.request.contextPath}/js/category.js"></script>
-        <script src="${pageContext.request.contextPath}/js/user.js"></script>
-    </body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
+    <script src="${pageContext.request.contextPath}/js/category.js"></script>
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
+</body>
 </html>
 

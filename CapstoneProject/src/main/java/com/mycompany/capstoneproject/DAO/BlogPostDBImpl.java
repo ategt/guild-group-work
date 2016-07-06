@@ -44,17 +44,17 @@ public class BlogPostDBImpl implements BlogPostInterface {
 
     private static final String SQL_UPDATE_BLOGPOST = "UPDATE post SET title = ?, user_id = ?, content = ?, date_posted = ?, expires_on = ?, post_on = ?, slug = ?, status = ?, thumb_image = ? WHERE id = ?";
 
-    private static final String SQL_DELETE_BLOGPOST = "UPDATE `capstone`.`post` SET `expired`=1 WHERE `id`=? ";
+    private static final String SQL_DELETE_BLOGPOST = "UPDATE `post` SET `expired`=1 WHERE `id`=? ";
 
-    private static final String SQL_GET_DEFAULT_CATEGORY = "SELECT id FROM capstone.category\n"
+    private static final String SQL_GET_DEFAULT_CATEGORY = "SELECT id FROM category\n"
             + "ORDER BY id ASC\n"
             + "LIMIT 1;";
 
-    private static final String SQL_GET_DEFAULT_AUTHOR = "SELECT id FROM capstone.user\n"
+    private static final String SQL_GET_DEFAULT_AUTHOR = "SELECT id FROM user\n"
             + "ORDER BY id ASC\n"
             + "LIMIT 1;";
 
-    private static final String SQL_GET_DEFAULT_IMAGE = "SELECT id FROM capstone.image\n"
+    private static final String SQL_GET_DEFAULT_IMAGE = "SELECT id FROM image\n"
             + "ORDER BY id ASC\n"
             + "LIMIT 1;";
 
@@ -90,11 +90,11 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "ORDER BY date_posted\n"
             + "LIMIT ?, 3";
 
-    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM capstone.post WHERE post.status = 'published' AND post.expired = '0'";
+    private static final String SQL_GET_BLOG_COUNT = "SELECT COUNT(*) AS total FROM post WHERE post.status = 'published' AND post.expired = '0'";
 
-    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM capstone.post";
+    private static final String SQL_GET_SLUG_LIST = "SELECT slug FROM post";
 
-    private static final String SQL_PUBLISH_POST = "UPDATE `capstone`.`post` SET `status`='published' WHERE `id`= ?";
+    private static final String SQL_PUBLISH_POST = "UPDATE `post` SET `status`='published' WHERE `id`= ?";
 
     private JdbcTemplate jdbcTemplate;
 

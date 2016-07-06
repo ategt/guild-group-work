@@ -20,20 +20,20 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class ImageDAODBImpl implements ImageInterface {
 
-    private static final String SQL_INSERT_IMAGE = "INSERT INTO capstone.image (url, image, original_name, width, height, description, content_type, image_size) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-    private static final String SQL_UPDATE_IMAGE = "UPDATE capstone.image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?, content_type = ? , image_size = ?  WHERE id = ?";
-    private static final String SQL_GET_IMAGE_BY_ID = "SELECT * FROM capstone.image WHERE id = ?";
-    private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM capstone.image WHERE id =?";
-    private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM capstone.image";
-    //private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT default_thumb FROM capstone.image_preferences ORDER BY id ASC LIMIT 1";
-    private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT image.* FROM capstone.image\n"
+    private static final String SQL_INSERT_IMAGE = "INSERT INTO image (url, image, original_name, width, height, description, content_type, image_size) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String SQL_UPDATE_IMAGE = "UPDATE image SET url = ?, image = ?, original_name = ?, width = ?, height = ?, description = ?, content_type = ? , image_size = ?  WHERE id = ?";
+    private static final String SQL_GET_IMAGE_BY_ID = "SELECT * FROM image WHERE id = ?";
+    private static final String SQL_DELETE_IMAGE_BY_ID = "DELETE FROM image WHERE id =?";
+    private static final String SQL_GET_IMAGE_LIST = "SELECT * FROM image";
+    //private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT default_thumb FROM image_preferences ORDER BY id ASC LIMIT 1";
+    private static final String SQL_GET_IMAGE_THUMB_DEFAULT = "SELECT image.* FROM image\n"
             + "JOIN image_preferences\n"
             + "ON image_preferences.default_thumb=image.id\n"
             + "ORDER BY image_preferences.id ASC LIMIT 1;";
 
-    private static final String SQL_CREATE_IMAGE_THUMB_DEFAULT = "INSERT INTO capstone.image_preferences (default_thumb) VALUES (?)";
-    private static final String SQL_UPDATE_IMAGE_THUMB_DEFAULT = "UPDATE capstone.image_preferences SET default_thumb = ? WHERE id = ?;";
-    private static final String SQL_GET_IMAGE_DEFAULT_ID = "SELECT id FROM capstone.image_preferences\n"
+    private static final String SQL_CREATE_IMAGE_THUMB_DEFAULT = "INSERT INTO image_preferences (default_thumb) VALUES (?)";
+    private static final String SQL_UPDATE_IMAGE_THUMB_DEFAULT = "UPDATE image_preferences SET default_thumb = ? WHERE id = ?;";
+    private static final String SQL_GET_IMAGE_DEFAULT_ID = "SELECT id FROM image_preferences\n"
             + "ORDER BY image_preferences.id ASC LIMIT 1;";
 
     private JdbcTemplate jdbcTemplate;
