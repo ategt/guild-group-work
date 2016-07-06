@@ -10,14 +10,14 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li role="presentation"><a href="${pageContext.request.contextPath}/">Home</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
             <li role="presentation" ><a href="${pageContext.request.contextPath}/adminPanel/">Admin Panel</a></li>
 
             <c:forEach items="${staticPages}" var="staticPage">
                 <li role="presentation"><a href="${pageContext.request.contextPath}/static/show/${staticPage.id}">${staticPage.title}</a></li>
             </c:forEach>
 
-            <li role="presentation"><a href="${pageContext.request.contextPath}/login" class="">Log In</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/logout" class="">Log Out</a></li>
         </ul>
     </div>
 </nav>

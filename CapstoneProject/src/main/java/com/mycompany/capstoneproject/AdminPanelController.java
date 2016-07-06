@@ -126,7 +126,9 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "ADMINPANEL/adminPanel";
+         return "WORKINGADMIN";
+//        return "ADMINPANELTRY3";
+//        return "adminPanelTest";
     }
 
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)

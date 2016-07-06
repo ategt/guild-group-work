@@ -75,46 +75,46 @@ public class HomeController {
         return "aboutUs";
     }
 
-    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
-    public String adminPanel(Map model) {
-
-        List<BlogPost> posts = blogPostDao.listBlogs();
-
-        List<StaticPage> staticPages = staticPageDao.listPages();
-        StaticPage staticPage = new StaticPage();
-
-        List<Category> categories = categoriesDao.listCategories();
-
-        List<HashTag> hash = hashTagDao.listHashTags();
-        
-        List<User> users = userDao.list();
-        List<User> activeUsers = new ArrayList();
-        
-        for (User u : users) {
-            if(u.getEnabled() == 1){
-                activeUsers.add(u);
-            }
-        }
-
-        Integer count = blogPostDao.getNumOfPosts();
-        Integer numOfPages = (count / 3);
-        List<Integer> pages = new ArrayList();
-        for (int i = 1; i <= numOfPages; i++) {
-            pages.add(i);
-        }
-
-        model.put("pages", pages);
-        model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
-        model.put("posts", posts);
-        model.put("categories", categories);
-        model.put("hashTag", hash);
-        model.put("users", activeUsers);
-
-//        return "WORKINGADMIN";
-//        return "ADMINPANELTRY3";
-        return "adminPanelTest";
-    }
+//    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+//    public String adminPanel(Map model) {
+//
+//        List<BlogPost> posts = blogPostDao.listBlogs();
+//
+//        List<StaticPage> staticPages = staticPageDao.listPages();
+//        StaticPage staticPage = new StaticPage();
+//
+//        List<Category> categories = categoriesDao.listCategories();
+//
+//        List<HashTag> hash = hashTagDao.listHashTags();
+//        
+//        List<User> users = userDao.list();
+//        List<User> activeUsers = new ArrayList();
+//        
+//        for (User u : users) {
+//            if(u.getEnabled() == 1){
+//                activeUsers.add(u);
+//            }
+//        }
+//
+//        Integer count = blogPostDao.getNumOfPosts();
+//        Integer numOfPages = (count / 3);
+//        List<Integer> pages = new ArrayList();
+//        for (int i = 1; i <= numOfPages; i++) {
+//            pages.add(i);
+//        }
+//
+//        model.put("pages", pages);
+//        model.put("staticPage", staticPage);
+//        model.put("staticPages", staticPages);
+//        model.put("posts", posts);
+//        model.put("categories", categories);
+//        model.put("hashTag", hash);
+//        model.put("users", activeUsers);
+//
+////        return "WORKINGADMIN";
+////        return "ADMINPANELTRY3";
+//        return "adminPanelTest";
+//    }
 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
@@ -145,7 +145,7 @@ public class HomeController {
         return "waitingApproval";
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
 
         automaticallyPublishScheduledPosts();
@@ -175,7 +175,7 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-        return "home";
+        return "index";
     }
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
