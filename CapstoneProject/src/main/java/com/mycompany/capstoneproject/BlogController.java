@@ -324,14 +324,14 @@ public class BlogController {
         return "showSingleBlog";
     }
 
-    @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public BlogPost getPost(@PathVariable String slug, Integer postId) {
-
-        BlogPost post = blogPostDao.getBySlug(slug);
-
-        return post;
-    }
+//    @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public BlogPost getPost(@PathVariable String slug, Integer postId) {
+//
+//        BlogPost post = blogPostDao.getBySlug(slug);
+//
+//        return post;
+//    }
 
     @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
     public String showByCategory(@PathVariable("name") String category, Map model) {
@@ -431,11 +431,40 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "/publish/{id}", method = RequestMethod.POST)
-    public String publishPost(@PathVariable("id") Integer postId) {
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.GET)
+    public String publishPost(@PathVariable("id") Integer postId, Map model) {
         BlogPost post = blogPostDao.getById(postId);
         blogPostDao.publish(post);
-        return "adminPanel";
+        
+        List<StaticPage> staticPages = staticDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+
+        List<HashTag> hashTags = hashTagDao.listHashTags();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<User> users = userDao.list();
+
+        List<BlogPost> posts = blogPostDao.listBlogs();
+
+        model.put("posts", posts);
+        model.put("users", users);
+        model.put("categories", categories);
+        model.put("hashtags", hashTags);
+        model.put("pendingPosts", pendingPosts);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        return "adminPanelTest";
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public BlogPost delete(@PathVariable("id") int id) {
+        BlogPost post = blogPostDao.getById(id);
+        blogPostDao.delete(post);
+        return post;
     }
 
 }

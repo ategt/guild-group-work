@@ -76,7 +76,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             + "JOIN category\n"
             + "ON category_post.category_id=category.id\n"
             + "JOIN user\n"
-            + "ON user.id=user_id AND status = 'Pending'";
+            + "ON user.id=user_id AND status = 'pending' AND expired = 0";
 
     private static final String SQL_GET_BLOGPOST_LIST_WITH_LIMIT = "SELECT * FROM post \n"
             + "JOIN category_post \n"
@@ -123,7 +123,7 @@ public class BlogPostDBImpl implements BlogPostInterface {
             imageId = post.getImage().getId();
         }
 
-        post.setStatus("Pending");
+        post.setStatus("pending");
 
         jdbcTemplate.update(SQL_INSERT_BLOGPOST,
                 post.getTitle(),

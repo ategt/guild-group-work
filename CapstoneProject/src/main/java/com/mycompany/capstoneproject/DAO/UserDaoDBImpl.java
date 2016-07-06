@@ -29,7 +29,7 @@ public class UserDaoDBImpl implements UserInterface {
     private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id = ?";
     private static final String SQL_DELETE_USER_AUTHORITY = "DELETE FROM capstone.authorities WHERE id = ?";
     private static final String SQL_GET_USER = "SELECT * FROM user WHERE id =?";
-    private static final String SQL_GET_USER_LIST = "SELECT * FROM user";
+    private static final String SQL_GET_USER_LIST = "SELECT * FROM user WHERE enabled = 1";
 
     private JdbcTemplate jdbcTemplate;
 

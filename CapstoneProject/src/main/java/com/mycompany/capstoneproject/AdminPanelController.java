@@ -208,7 +208,7 @@ public class AdminPanelController {
         return "ADMINPANEL/usersAdmin";
     }
 
-    @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void delete(@PathVariable("id") Integer userId) {
 
