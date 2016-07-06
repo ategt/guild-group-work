@@ -58,7 +58,7 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
-                                     <td><a data-category-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                                     <td><a data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
 
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
