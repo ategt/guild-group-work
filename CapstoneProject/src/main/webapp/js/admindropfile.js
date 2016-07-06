@@ -42,24 +42,24 @@ function sendFileToServer(formData, status)
 
             $("select").imagepicker({hide_select: false});
 
-            var imageSize = $('#image-preview-size').val();
+//            var imageSize = $('#image-preview-size').val();
 
-            var width = 50;
-            var height = 50;
+            var width = 100;
+            var height = 100;
 
-            if (imageSize == 1) {
-                width = 50;
-                height = 50;
-            } else if (imageSize == 2) {
-                width = 100;
-                height = 100;
-            } else if (imageSize == 3) {
-                width = 150;
-                height = 150;
-            } else if (imageSize == 4) {
-                width = 200;
-                height = 200;
-            }
+//            if (imageSize == 1) {
+//                width = 50;
+//                height = 50;
+//            } else if (imageSize == 2) {
+//                width = 100;
+//                height = 100;
+//            } else if (imageSize == 3) {
+//                width = 150;
+//                height = 150;
+//            } else if (imageSize == 4) {
+//                width = 200;
+//                height = 200;
+//            }
 
             $(".image_picker_image").width(height);
             $(".image_picker_image").height(width);
