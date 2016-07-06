@@ -77,7 +77,16 @@ public class AdminPanelController {
         StaticPage staticPage = new StaticPage();
 
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+        
+        List<BlogPost> allPosts = blogPostDao.listBlogs();
+        List<BlogPost> activePosts = new ArrayList();
 
+        for (BlogPost p : allPosts) {
+            if(p.getStatus().toLowerCase().equals("published")){
+                activePosts.add(p);
+            }
+        }
+        
         List<HashTag> hashTags = hashTagDao.listHashTags();
 
         List<Category> categories = categoriesDao.listCategories();
@@ -91,6 +100,7 @@ public class AdminPanelController {
         model.put("categories", categories);
         model.put("hashtags", hashTags);
         model.put("pendingPosts", pendingPosts);
+        model.put("activePosts", activePosts);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
