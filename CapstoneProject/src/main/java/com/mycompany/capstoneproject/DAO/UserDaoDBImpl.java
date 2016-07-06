@@ -25,6 +25,7 @@ public class UserDaoDBImpl implements UserInterface {
     private static final String SQL_INSERT_USER = "INSERT INTO user (name, role, password, email, num_of_comments, date_joined , enabled) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_INSERT_USER_AUTHORITY = "INSERT INTO `capstone`.`authorities` (`type`, `user_id`) VALUES (?, ?);";
     private static final String SQL_UPDATE_USER = "UPDATE user SET name = ?, role = ?, password = ?, email = ?, num_of_comments = ?, date_joined = ?, enabled = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USER_AUTHORITY = "UPDATE `capstone`.`authorities` SET `type`= ? WHERE `id`= ?;";
     private static final String SQL_SOFT_DELETE_USER = "UPDATE user SET enabled = 0 WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM user WHERE id = ?";
     private static final String SQL_DELETE_USER_AUTHORITY = "DELETE FROM capstone.authorities WHERE id = ?";
@@ -98,6 +99,10 @@ public class UserDaoDBImpl implements UserInterface {
                     user.getNumOfComments(),
                     user.getJoinedOn(),
                     user.getEnabled(),
+                    user.getId());
+            
+            jdbcTemplate.update(SQL_UPDATE_USER_AUTHORITY,
+                    user.getRole(),
                     user.getId());
         }
     }
