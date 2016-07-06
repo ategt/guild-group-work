@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CategoriesController {
 
     private CategoriesInterface categoryDAO;
-    private Category category;
 
     @Inject
     public CategoriesController(CategoriesInterface dao) {

@@ -41,17 +41,17 @@
         <div class="container">
             <div id="dragandrophandler">
                 <div class="image-admin-panel">
-              <div class="image-admin-header">
+                    <!--              <div class="image-admin-header">
                 <h4 class="modal-title">Select Images</h4>
-                        <br />
-                        Preview Image Size:
-                        <select id="image-preview-size" class="image-preview-size form-control">
-                            <option value="1" selected="selected">50x50</option>
-                            <option value="2">100x100</option>
-                            <option value="3">150x150</option>
-                            <option value="4">200x200</option>
-                        </select>
-              </div>
+                                            <br />
+                                            Preview Image Size:
+                                            <select id="image-preview-size" class="image-preview-size form-control">
+                                                <option value="1" selected="selected">50x50</option>
+                                                <option value="2">100x100</option>
+                                                <option value="3">150x150</option>
+                                                <option value="4">200x200</option>
+                                            </select>
+              </div>-->
               <div class="image-admin-body">
 
                         <div class="picker">
@@ -85,7 +85,7 @@
             </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div id="status1"></div>
+                        <div id="status1">You can drag and drop an image into the center of this page, to add it to the database.</div>
                     </div>
                     <div class="col-md-6">
 

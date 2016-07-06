@@ -32,7 +32,7 @@
         <intercept-url pattern="/blog/imagetest" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/edit/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/create" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/adminPanel/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/adminPanel**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/category" access="ROLE_ADMIN"/>
         <intercept-url pattern="/image/imageadmin" access="ROLE_ADMIN"/>

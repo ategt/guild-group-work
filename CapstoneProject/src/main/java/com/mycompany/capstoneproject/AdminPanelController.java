@@ -53,7 +53,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author apprentice
  */
 @Controller
-@RequestMapping(value = "/adminPanel")
+@RequestMapping(value = "/admin")
 public class AdminPanelController {
 
     private StaticPageInterface staticPageDao;
@@ -71,7 +71,7 @@ public class AdminPanelController {
         this.hashTagDao = hashTagDao;
     }
 
-    @RequestMapping(value = "/old", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String admin(Map model) {
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -94,40 +94,45 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "adminPanelTest";
+        return "admin";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String adminTest(Map model) {
-        List<StaticPage> staticPages = staticPageDao.listPages();
-        StaticPage staticPage = new StaticPage();
 
-        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String adminTest(Map model) {
+//        List<StaticPage> staticPages = staticPageDao.listPages();
+//        StaticPage staticPage = new StaticPage();
+//
+//        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+//
+//        List<HashTag> hashTags = hashTagDao.listHashTags();
+//        HashTag hashTag = new HashTag();
+//
+//        List<Category> categories = categoriesDao.listCategories();
+//        Category category = new Category();
+//
+//        List<User> users = userDao.list();
+//        User user = new User();
+//
+//        List<BlogPost> posts = blogPostDao.listBlogs();
+//
+//        model.put("category", category);
+//        model.put("posts", posts);
+//        model.put("users", users);
+//        model.put("user", user);
+//        model.put("categories", categories);
+//        model.put("hashtags", hashTags);
+//        model.put("hashTag", hashTag);
+//        model.put("pendingPosts", pendingPosts);
+//        model.put("staticPage", staticPage);
+//        model.put("staticPages", staticPages);
+//
+//         return "WORKINGADMIN";
+////        return "ADMINPANELTRY3";
+////        return "adminPanelTest";
+//    }
 
-        List<HashTag> hashTags = hashTagDao.listHashTags();
-        HashTag hashTag = new HashTag();
 
-        List<Category> categories = categoriesDao.listCategories();
-        Category category = new Category();
-
-        List<User> users = userDao.list();
-        User user = new User();
-
-        List<BlogPost> posts = blogPostDao.listBlogs();
-
-        model.put("category", category);
-        model.put("posts", posts);
-        model.put("users", users);
-        model.put("user", user);
-        model.put("categories", categories);
-        model.put("hashtags", hashTags);
-        model.put("hashTag", hashTag);
-        model.put("pendingPosts", pendingPosts);
-        model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
-
-        return "ADMINPANEL/adminPanel";
-    }
 
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)
     public String pendingPosts(Map model) {
