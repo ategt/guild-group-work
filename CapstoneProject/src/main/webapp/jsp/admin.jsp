@@ -240,6 +240,11 @@
 
                         <table class="table table-bordered">
                             <input type="hidden" id="edit-id"/>
+                            <input type="hidden" id="edit-user-email"/>
+                            <input type="hidden" id="edit-user-password"/>
+                            <input type="hidden" id="edit-user-date-joined"/>
+                            <input type="hidden" id="edit-user-enabled"/>
+                            <input type="hidden" id="edit-id"/>
                             <tr>
                                 <th>Name:</th>
                                 <td>
@@ -264,7 +269,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                        <button type="button" class="btn btn-default" id="edit-user-button">Save</button>
                     </div>
                 </div> 
             </div> 

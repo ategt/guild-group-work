@@ -67,4 +67,13 @@ public class CreateUserController {
         
         return user;
     }
+    @RequestMapping(value = "/editUser/", method = RequestMethod.PUT)
+    @ResponseBody
+    public User editSubmit(@RequestBody User user) {
+
+        createUserDAO.update(user);
+
+        
+        return user;
+    }
 }
