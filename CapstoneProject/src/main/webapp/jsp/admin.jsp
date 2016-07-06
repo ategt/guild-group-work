@@ -14,10 +14,13 @@
 
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <div class="container">
-            <%@ include file="header.jsp" %>
+
             <div class="row">
+
                 <div class="col-md-12">
+                    <h1>Pending Posts</h1>
                     <table class="table table-bordered table-hover" id="pending-posts-table">
                         <tr>
                             <td>Author</td>
@@ -36,9 +39,12 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/create">Create New Post</a></button>
                 </div>
                 <div class="row">
+
                     <div class="col-md-12">
+                        <h1>Users</h1>
                         <table class="table table-bordered table-hover" id="user-table">
                             <tr>
                                 <td>ID</td>
@@ -52,7 +58,11 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
+<<<<<<< HEAD
                                      <td><a data-category-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+=======
+                                    <td><a <a data-user-id='${user.id}' data-toggle='modal' data-target='#editUserModal'>Edit</a></td>
+>>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
                             </c:forEach>
@@ -117,7 +127,31 @@
                     </div>
                 </div>
                 <div class="row">
+
+                    <div class="col-md-12 center-block">
+                        <h1>Static Pages</h1>
+                        <table class="table table-bordered table-hover" id="static-page-table">
+                            <tr>
+                                <th>Page Title</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tbody id="sortable">
+                                <c:forEach items="${staticPages}" var="staticPage">
+                                    <tr sort-id="${staticPage.id}" id="static-page-row-${staticPage.id}">
+                                        <td><a href="${staticPage.id}">${staticPage.title}</a></td>
+                                        <td><a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a></td>
+                                        <td><a data-static-page-id="${staticPage.id}" class="delete-static">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/static/">Create New Static Page</a></button><br/>
+                    </div> 
+                </div>
+                <div class="row">
                     <div class="col-md-6">
+                        <h1>Categories</h1>
                         <table class="table table-bordered table-hover" id="category-table">
                             <tr>
                                 <td>ID</td>
@@ -146,6 +180,7 @@
                         </form>
                     </div>
                     <div class="col-md-6">
+                        <h1>Hashtags</h1>
                         <table class="table table-bordered table-hover" id="hashtag-table">
                             <tr>
                                 <td>ID</td>
@@ -161,59 +196,79 @@
                         </table>
                     </div>
                 </div><br/>
-                <div class="row">
 
-                    <div class="col-md-12 center-block">
-
-                        <table class="table table-bordered table-hover" id="static-page-table">
-                            <tr>
-                                <th>Page Title</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tbody id="sortable">
-                                <c:forEach items="${staticPages}" var="staticPage">
-                                    <tr sort-id="${staticPage.id}" id="static-page-row-${staticPage.id}">
-                                        <td><a href="${staticPage.id}">${staticPage.title}</a></td>
-                                        <td><a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a></td>
-                                        <td><a data-static-page-id="${staticPage.id}" class="delete-static">Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div> 
-                </div>
             </div>
+        </div>
 
-            <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Edit Category Details</h4>
-                        </div>
-                        <div class="modal-body">
+        <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit Category Details</h4>
+                    </div>
+                    <div class="modal-body">
 
-                            <table class="table table-bordered">
-                                <input type="hidden" id="edit-id"/>
-                                <tr>
-                                    <th>Name:</th>
-                                    <td>
-                                        <input type="text" id="edit-category">
-                                    </td>
-                                </tr>
-                            </table>
+                        <table class="table table-bordered">
+                            <input type="hidden" id="edit-id"/>
+                            <tr>
+                                <th>Name:</th>
+                                <td>
+                                    <input type="text" id="edit-category">
+                                </td>
+                            </tr>
+                        </table>
 
-                            <div id="edit-tax-validation-errors" class="pull-right"></div>
+                        <div id="edit-tax-validation-errors" class="pull-right"></div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
-                        </div>
-                    </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                    </div>
                 </div> 
             </div> 
+        </div> 
+        <div id="editUserModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit User Details</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <table class="table table-bordered">
+                            <input type="hidden" id="edit-id"/>
+                            <tr>
+                                <th>Name:</th>
+                                <td>
+                                    <input type="text" id="edit-user-name">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Role:</th>
+                                <td>
+                                    <select class="btn btn-default dropdown" name="role" id="edit-user-role">
+                                        <option value="ROLE_ADMIN"class="form-control">Admin</option>
+                                        <option value="ROLE_AUTHOR"class="form-control">Author</option>
+                                        <option value="ROLE_USER"class="form-control">User</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <div id="edit-user-validation-errors" class="pull-right"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                    </div>
+                </div> 
+            </div> 
+<<<<<<< HEAD
             <script>
                 var contextRoot = "${pageContext.request.contextPath}";
             </script>
@@ -224,6 +279,19 @@
             <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
             <script src="${pageContext.request.contextPath}/js/category.js"></script>
             <script src="${pageContext.request.contextPath}/js/user.js"></script>
+=======
+        </div> 
+        <script>
+            var contextRoot = "${pageContext.request.contextPath}";
+        </script>
+
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
+        <script src="${pageContext.request.contextPath}/js/category.js"></script>
+        <script src="${pageContext.request.contextPath}/js/user.js"></script>
+>>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
 
     </body>
 </html>

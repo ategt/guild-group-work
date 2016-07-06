@@ -23,6 +23,7 @@
             </c:forEach>
 
             <li role="presentation"><a href="${pageContext.request.contextPath}/login" class="">Log In</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/logout" class="">Log Out</a></li>
         </ul>
     </div>
 </nav>

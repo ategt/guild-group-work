@@ -462,7 +462,36 @@ public class BlogController {
         model.put("pendingPosts", pendingPosts);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-        return "adminPanelTest";
+        return "admin";
+    }
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.GET)
+    public String publish(@PathVariable("id") Integer postId, Map model) {
+        BlogPost post = blogPostDao.getById(postId);
+        List<HashTag> foundHashTags = searchThroughContentForHashTags(post.getContent());
+        post.setHashTag(foundHashTags);
+        blogPostDao.publish(post);
+        updateHashTags(post);
+        List<StaticPage> staticPages = staticDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+
+        List<HashTag> hashTags = hashTagDao.listHashTags();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<User> users = userDao.list();
+
+        List<BlogPost> posts = blogPostDao.listBlogs();
+
+        model.put("posts", posts);
+        model.put("users", users);
+        model.put("categories", categories);
+        model.put("hashtags", hashTags);
+        model.put("pendingPosts", pendingPosts);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        return "admin";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

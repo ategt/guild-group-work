@@ -19,6 +19,7 @@
 
             <%@ include file="header.jsp" %>
 
+<<<<<<< HEAD
 
             <table>
                 <caption>Blog Post Options</caption>
@@ -77,4 +78,57 @@
 <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
 </body>
+=======
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+                        <caption>Blog Post Options</caption>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/edit">Edit/Delete Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/adminPanel/pendingPosts">Publish Post</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table>
+                        <caption>Blog Post Options</caption>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/edit">Edit Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/adminPanel/pendingPosts">Publish Post</a>
+                            </td>
+                        </tr>
+                    </table>   
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
+    </body>
+>>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
 </html>

@@ -61,7 +61,7 @@ public class ImageController {
 
         Image image = null;
 
-        if (id == 0) {
+        if (id == 0 || id == 1) {
             image = imageDao.getDefaultThumb();
         } else {
             image = imageDao.get(id);

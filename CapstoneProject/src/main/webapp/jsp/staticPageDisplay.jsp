@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Basic Static Page</title>
+        <title>Pats Warehouse Blog</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,9 +17,9 @@
 
     </head>
     <body>
-
+        <%@ include file="header.jsp" %>
         <div class="container">
-            <%@ include file="header.jsp" %>
+
 
             <div class="row">
                 <div class="col-lg-2"></div>
