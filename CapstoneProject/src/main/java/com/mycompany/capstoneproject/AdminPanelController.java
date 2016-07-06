@@ -84,7 +84,9 @@ public class AdminPanelController {
         for (BlogPost p : allPosts) {
             if (p.getStatus() != null) {
                 if (p.getStatus().toLowerCase().equals("published")) {
-                    activePosts.add(p);
+                    if (p.getExpired() == 0) {
+                        activePosts.add(p);
+                    }
                 }
             }
         }
