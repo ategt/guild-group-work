@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,29 @@
     </head>
     <body>
         <div class="container">
+
+            
+                        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+   <div> show these for only non admins </div>
+</sec:authorize>
+   88888888888
+   <sec:authorize access="hasRole('ROLE_ADMIN')">
+   <div> You are an admin </div>
+</sec:authorize>
+
+   
+   <sec:authorize access="isAnonymous()">
+ anonymous
+</sec:authorize>
+
+   
+   <sec:authorize access="!isFullyAuthenticated()">
+Log in 
+</sec:authorize>
+
+   <sec:authorize access="isFullyAuthenticated()">
+Log out
+</sec:authorize>
 
             <div class="row">
                 <div class="picker masonry">
