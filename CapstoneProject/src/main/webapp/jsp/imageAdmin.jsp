@@ -40,6 +40,9 @@
     <body>
         <div class="container">
             <div id="dragandrophandler">
+                
+                <%@ include file="header.jsp" %>
+
                 <div class="image-admin-panel">
                     <!--              <div class="image-admin-header">
                 <h4 class="modal-title">Select Images</h4>

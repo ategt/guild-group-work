@@ -62,6 +62,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader("Accept", "application/json");
             },
             success: function (data, status) {
+
                 $('#edit-user-name').val(data.name);
                 $('#edit-user-email').val(data.email);
                 $('#edit-user-password').val(data.password);
@@ -75,8 +76,10 @@ $(document).ready(function () {
             }
 
         });
+        
+        });
 
-    });
+
 
     $('#edit-user-button').on('click', function (e) {
         $('#edit-user-validation-errors').empty();
@@ -133,4 +136,4 @@ $(document).ready(function () {
 
     }
 
-});
+ });
