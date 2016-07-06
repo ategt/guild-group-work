@@ -187,6 +187,18 @@ public class BlogController {
 
         return "showSingleBlog";
     }
+    
+                
+    @RequestMapping(value = "/editPosts", method = RequestMethod.GET)
+    public String blogEditPosts(Map model) {
+
+        List<BlogPost> blogPosts = blogPostDao.listBlogs();
+
+        model.put("blogPosts", blogPosts);
+        return "editBlogAdmin";
+    }
+            
+            
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {

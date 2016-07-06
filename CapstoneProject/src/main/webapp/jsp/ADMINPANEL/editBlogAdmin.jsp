@@ -21,9 +21,38 @@
     <body>
 
         <div class="container">
+                    
             
-        <form:form method="POST" action="./" class="form-horizontal">
-            <input type="hidden" name="id" value="${blogPost.id}"/>
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered table-hover" id="static-page-table">
+                        <tr>
+                            <th>Page Title</th>
+                            <th><span class="glyphicon glyphicon-edit"></span> Edit</th>
+                            <th><i class="glyphicon glyphicon-remove"></i> Delete</th>
+                        </tr>
+                        <tbody id="sortable">
+                            <c:forEach items="${blogPosts}" var="staticPage">
+                                <tr sort-id="${staticPag.id}" id="static-page-row-${staticPage.id}">
+                                    <td><a href="${staticPage.id}">${staticPage.title}</a></td>
+                                    <td><a href="edit/${staticPage.id}">Edit</a></td>
+                                    <td><a data-static-page-id="${staticPage.id}" class="delete-link">Delete</a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div> 
+            </div> 
+
+
+
+
+
+
+            <form:form method="POST" action="./" class="form-horizontal">
+                <input type="hidden" name="id" value="${blogPost.id}"/>
                 <div class="form-group">
                     <label for="title" class="col-md-4 control-label">Title: </label>
                     <div class="col-md-8">

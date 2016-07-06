@@ -27,7 +27,7 @@ $(document).ready(function ()
         });
 
 
-        var imageLink = '"<img src="${pageContext.request.contextPath}/image/showimage/' + selectedValue + '" />';
+        var imageLink = '"<img src="' + contextRoot + '/image/showimage/' + selectedValue + '" />';
         $(".image-container").html(imageLink);
     });
     $(document).on('click', '.delete-selected-images', function (e) {
@@ -37,61 +37,66 @@ $(document).ready(function ()
         console.log("Images To Be Deleted: " + selectedValues);
         var imageLinkCum = "";
         var imageLink = "";
-        $(selectedValues).each(function (index, value) {
 
-            console.log('deleting: ' + value);
+        if (confirm('You are about to Permanently delete files from the database.\n\nPages that use these images may not load correctly.\n\nAre You Sure You Want To Continue?')) {
 
-            e.preventDefault();
+            $(selectedValues).each(function (index, value) {
 
-            $.ajax({
-                type: "DELETE",
-                url: contextRoot + "/image/" + value,
-                async: false,
-                success: function (data, status) {
-                    console.log("Data: " + data);
-                    console.log("Status: " + status);
-                    //$('#contact-row-'+ contactId).remove();
-                },
-                error: function (data, status) {
-                    console.log("Failed - Data: " + data);
-                    console.log("Failed - Status: " + status);
+                console.log('deleting: ' + value);
 
-                }
-            });
+                e.preventDefault();
+
+                $.ajax({
+                    type: "DELETE",
+                    url: contextRoot + "/image/" + value,
+                    async: false,
+                    success: function (data, status) {
+                        console.log("Data: " + data);
+                        console.log("Status: " + status);
+                        //$('#contact-row-'+ contactId).remove();
+                    },
+                    error: function (data, status) {
+                        console.log("Failed - Data: " + data);
+                        console.log("Failed - Status: " + status);
+
+                    }
+                });
+
+            }
+            );
 
         }
-        );
 
         location.reload();
 
     });
 
     // Wire up the change preview size dropdown.
-    $(".image-preview-size").change(function () {
-
-        var imageSize = $('#image-preview-size').val();
-
-        var width = 50;
-        var height = 50;
-
-        if (imageSize == 1) {
-            width = 50;
-            height = 50;
-        } else if (imageSize == 2) {
-            width = 100;
-            height = 100;
-        } else if (imageSize == 3) {
-            width = 150;
-            height = 150;
-        } else if (imageSize == 4) {
-            width = 200;
-            height = 200;
-        }
-
-        $(".image_picker_image").width(height);
-        $(".image_picker_image").height(width);
-
-    });
+//    $(".image-preview-size").change(function () {
+//
+//        var imageSize = $('#image-preview-size').val();
+//
+//        var width = 50;
+//        var height = 50;
+//
+//        if (imageSize == 1) {
+//            width = 50;
+//            height = 50;
+//        } else if (imageSize == 2) {
+//            width = 100;
+//            height = 100;
+//        } else if (imageSize == 3) {
+//            width = 150;
+//            height = 150;
+//        } else if (imageSize == 4) {
+//            width = 200;
+//            height = 200;
+//        }
+//
+//        $(".image_picker_image").width(height);
+//        $(".image_picker_image").height(width);
+//
+//    });
 
     function determineImageSize(imageSize) {
         var imgLink = "";
