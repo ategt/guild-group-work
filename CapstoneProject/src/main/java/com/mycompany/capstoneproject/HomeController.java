@@ -192,13 +192,13 @@ public class HomeController {
 
     public void automaticallyRemoveExpiredPosts() {
         Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String currentDay = format.format(date);
 
         List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
         for (BlogPost post : allBlogPosts) {
-            String postExpiresOn = format.format(post.getExpireOn());
-            if (postExpiresOn.equals(currentDay)) {
+            
+            if (post.getExpireOn().before(date)) {
                 blogPostDao.delete(post);
             }
         }
