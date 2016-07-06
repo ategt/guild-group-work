@@ -27,6 +27,8 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +46,8 @@ public class HomeController {
     private UserInterface userDao;
     private ImageServices imageServices;
 
-    
-    
     @Inject
-    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao, ImageServices imageServices ) {
+    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao, ImageServices imageServices) {
         this.blogPostDao = BPDao;
         this.categoriesDao = CDao;
         this.hashTagDao = HDao;
@@ -86,12 +86,12 @@ public class HomeController {
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();
-        
+
         List<User> users = userDao.list();
         List<User> activeUsers = new ArrayList();
-        
+
         for (User u : users) {
-            if(u.getEnabled() == 1){
+            if (u.getEnabled() == 1) {
                 activeUsers.add(u);
             }
         }
@@ -148,6 +148,19 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
 
+        String name = null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+
+            name = auth.getName(); //get logged in username
+
+            if (name != null) {
+
+                model.put("username", name);
+
+            }
+        }
+
         automaticallyPublishScheduledPosts();
 //        automaticallyRemoveExpiredPosts();
 
@@ -161,7 +174,7 @@ public class HomeController {
 
         List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
-        
+
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();
@@ -239,7 +252,6 @@ public class HomeController {
 //            }
 //        }
 //    }
-
     @RequestMapping(value = "/setNumberOfPosts", method = RequestMethod.POST)
     public void setNumberOfPostsPerPage(Integer number) {
         blogPostDao.setNumOfPostsPerPage(number);
