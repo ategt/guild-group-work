@@ -65,6 +65,9 @@ public class ImageController {
             image = imageDao.getDefaultThumb();
         } else {
             image = imageDao.get(id);
+            if (image == null) {
+                image = imageDao.getDefaultThumb();
+            }
         }
 
         response.setContentLengthLong(image.getSize());

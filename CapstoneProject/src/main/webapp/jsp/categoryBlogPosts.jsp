@@ -22,7 +22,7 @@
                 z-index:999;
             }
         </style>
-
+<%@ include file="header.jsp" %>
     </head>
     <body>
 
