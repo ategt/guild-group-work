@@ -77,16 +77,19 @@ public class AdminPanelController {
         StaticPage staticPage = new StaticPage();
 
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
-        
+
         List<BlogPost> allPosts = blogPostDao.listBlogs();
         List<BlogPost> activePosts = new ArrayList();
 
         for (BlogPost p : allPosts) {
-            if(p.getStatus().toLowerCase().equals("published")){
-                activePosts.add(p);
+            if (p.getStatus().toLowerCase().equals("published")) {
+                if (p.getExpired() == 0) {
+
+                    activePosts.add(p);
+                }
             }
         }
-        
+
         List<HashTag> hashTags = hashTagDao.listHashTags();
 
         List<Category> categories = categoriesDao.listCategories();
@@ -106,7 +109,6 @@ public class AdminPanelController {
 
         return "admin";
     }
-
 
 //    @RequestMapping(value = "/", method = RequestMethod.GET)
 //    public String adminTest(Map model) {
@@ -141,9 +143,6 @@ public class AdminPanelController {
 ////        return "ADMINPANELTRY3";
 ////        return "adminPanelTest";
 //    }
-
-
-
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)
     public String pendingPosts(Map model) {
 
@@ -233,11 +232,10 @@ public class AdminPanelController {
         User user = userDao.get(userId);
 
         user.setEnabled(0);
-        
-//        userDao.delete(user);
 
+//        userDao.delete(user);
     }
-    
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getUserInfo(@PathVariable("id") Integer userId) {
@@ -248,10 +246,9 @@ public class AdminPanelController {
 
         return user;
     }
-  
 
     @RequestMapping(value = "/editUser", method = RequestMethod.PUT)
-   @ResponseBody
+    @ResponseBody
     public String editSubmit(@RequestBody User u) {
 
         Integer id = u.getId();
@@ -271,13 +268,11 @@ public class AdminPanelController {
         user.setRole(role);
 //        user.setEnabled(enabled);
         user.setJoinedOn(date);
-                
+
         userDao.update(user);
 
 //        User users = userDao.get(id);
-
 //        model.put("users", users);
-
         return "ADMINPANEL/usersAdmin";
     }
 
