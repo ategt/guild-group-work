@@ -58,7 +58,7 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
-                                     <td><a data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                                    <td><a data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
 
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
@@ -139,6 +139,31 @@
 
             </div>
         </div>
+
+
+        <div class="col-md-12">
+            <h1>Active Posts</h1>
+            <table class="table table-bordered table-hover" id="pending-posts-table">
+                <tr>
+                    <td>Author</td>
+                    <td>Title</td>
+                    <!--<td>Publish</td>-->
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                <c:forEach items="${activePosts}" var="post">
+                    <tr id="post-row-${post.id}">
+                        <td>${post.author.name}</td>
+                        <td><a href='${pageContext.request.contextPath}/blog/${post.id}'>${post.title}</a></td>
+                        <!--<td><a href='${pageContext.request.contextPath}/blog/publish/${post.id}'>Publish</a></td>-->
+                        <td><a href='${pageContext.request.contextPath}/blog/edit/${post.id}'>Edit</a></td>
+                        <td><a data-post-id="${post.id}" class="delete-link" id="delete-post">Delete</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/">Create New Post</a></button>
+        </div>
+
 
         <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog">
