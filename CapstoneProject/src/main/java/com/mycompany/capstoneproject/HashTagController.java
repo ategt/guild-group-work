@@ -56,11 +56,11 @@ public class HashTagController {
         
         List<BlogPost> activePosts = new ArrayList();
         
-        for (BlogPost p : posts) {
-            if(p.getStatus().toLowerCase().equals("published")){
-                activePosts.add(p);
-            }
-        }
+//        for (BlogPost p : posts) {
+//            if(p.getStatus().toLowerCase().equals("published")){
+//                activePosts.add(p);
+//            }
+//        }
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -79,7 +79,7 @@ public class HashTagController {
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-        model.put("posts", activePosts);
+        model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
         return "index";

@@ -39,7 +39,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/create">Create New Post</a></button>
+                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/">Create New Post</a></button>
                 </div>
                 <div class="row">
 
@@ -58,11 +58,8 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
-<<<<<<< HEAD
                                      <td><a data-category-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
-=======
-                                    <td><a <a data-user-id='${user.id}' data-toggle='modal' data-target='#editUserModal'>Edit</a></td>
->>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
+
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
                             </c:forEach>
