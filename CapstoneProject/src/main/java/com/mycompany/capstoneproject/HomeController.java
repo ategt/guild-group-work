@@ -178,22 +178,17 @@ public class HomeController {
 
     public void automaticallyPublishScheduledPosts() {
         Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
 
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
         for (BlogPost pendingPost : pendingPosts) {
-            String pendingPostDate = format.format(pendingPost.getDateToPostOn());
-            if (pendingPostDate.equals(currentDay)) {
-                blogPostDao.publish(pendingPost);
+            if (pendingPost.getDateToPostOn().after(date)) {
+                blogPostDao.delete(pendingPost);
             }
         }
     }
 
     public void automaticallyRemoveExpiredPosts() {
         Date date = new Date();
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        String currentDay = format.format(date);
 
         List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
         for (BlogPost post : allBlogPosts) {

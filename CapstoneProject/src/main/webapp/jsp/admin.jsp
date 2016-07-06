@@ -39,7 +39,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/create">Create New Post</a></button>
+                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/">Create New Post</a></button>
                 </div>
                 <div class="row">
 
