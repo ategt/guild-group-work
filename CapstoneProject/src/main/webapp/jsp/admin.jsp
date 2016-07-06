@@ -66,6 +66,29 @@
                     </div>
                 </div>
                 <div class="row">
+
+                    <div class="col-md-12 center-block">
+                        <h1>Static Pages</h1>
+                        <table class="table table-bordered table-hover" id="static-page-table">
+                            <tr>
+                                <th>Page Title</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tbody id="sortable">
+                                <c:forEach items="${staticPages}" var="staticPage">
+                                    <tr sort-id="${staticPage.id}" id="static-page-row-${staticPage.id}">
+                                        <td><a href="${staticPage.id}">${staticPage.title}</a></td>
+                                        <td><a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a></td>
+                                        <td><a data-static-page-id="${staticPage.id}" class="delete-static">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/static/">Create New Static Page</a></button><br/>
+                    </div> 
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <h1>Categories</h1>
                         <table class="table table-bordered table-hover" id="category-table">
@@ -112,29 +135,7 @@
                         </table>
                     </div>
                 </div><br/>
-                <div class="row">
-
-                    <div class="col-md-12 center-block">
-                        <h1>Static Pages</h1>
-                        <table class="table table-bordered table-hover" id="static-page-table">
-                            <tr>
-                                <th>Page Title</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tbody id="sortable">
-                                <c:forEach items="${staticPages}" var="staticPage">
-                                    <tr sort-id="${staticPage.id}" id="static-page-row-${staticPage.id}">
-                                        <td><a href="${staticPage.id}">${staticPage.title}</a></td>
-                                        <td><a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a></td>
-                                        <td><a data-static-page-id="${staticPage.id}" class="delete-static">Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/static/">Create New Static Page</a></button><br/><br/>
-                    </div> 
-                </div>
+                
             </div>
         </div>
 
