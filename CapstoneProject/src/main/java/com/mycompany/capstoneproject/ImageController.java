@@ -91,20 +91,11 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = filterTestFiles(images);
+        List<Integer> imageIdList = imageServices.filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
         return "pickerTest";
-    }
-
-    private List<Integer> filterTestFiles(List<Image> images) {
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null).filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
-        return imageIdList;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/imagetestb")
@@ -112,7 +103,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = filterTestFiles(images);
+        List<Integer> imageIdList = imageServices.filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 
@@ -124,7 +115,7 @@ public class ImageController {
 
         List<Image> images = imageDao.list();
 
-        List<Integer> imageIdList = filterTestFiles(images);
+        List<Integer> imageIdList = imageServices.filterTestFiles(images);
 
         model.put("imageIdList", imageIdList);
 

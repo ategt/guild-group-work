@@ -10,7 +10,6 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/js/image-picker/image-picker.css" rel="stylesheet">
 
-
         <!-- Custom styles for this template -->
         <link href="${pageContext.request.contextPath}/css/starter-template.css" rel="stylesheet">
 
@@ -33,10 +32,10 @@
 
     </head>
     <body>
-        <%@ include file="header.jsp" %>
 
         <div class="container">
             <div id="dragandrophandler">
+                <%@ include file="header.jsp" %>
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div class="row">
@@ -104,7 +103,7 @@
         <%@ include file="selectSingleImageModal.jsp" %>
 
         <script>
-                    var contextRoot = "${pageContext.request.contextPath}";
+            var contextRoot = "${pageContext.request.contextPath}";
         </script>
 
 

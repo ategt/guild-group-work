@@ -9,7 +9,8 @@ import com.mycompany.capstoneproject.DAO.ImageInterface;
 import com.mycompany.capstoneproject.DAO.StaticPageInterface;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
-import com.mycompany.capstoneproject.bll.StaticPageShow;
+import com.mycompany.capstoneproject.bll.ImageServices;
+import com.mycompany.capstoneproject.bll.StaticPageServices;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,44 +29,46 @@ public class StaticPageController {
 
     private StaticPageInterface staticPageDao;
     private ImageInterface imageDao;
+    private ImageServices imageServices;
+    private StaticPageServices staticPageServices;
 
     @Inject
-    public StaticPageController(StaticPageInterface staticPageDao, ImageInterface imageDao) {
+    public StaticPageController(StaticPageInterface staticPageDao, ImageInterface imageDao, ImageServices imageServices, StaticPageServices staticPageServices) {
         this.staticPageDao = staticPageDao;
         this.imageDao = imageDao;
+        this.imageServices = imageServices;
+        this.staticPageServices = staticPageServices;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String admin(Map model) {
 
-        List<Image> images = imageDao.list();
+        imageServices.loadImageIdsIntoModel(model);
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        loadStaticPagesIntoModelInOrder(model);
 
-        model.put("imageIdList", imageIdList);
-
-        List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
 
         model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
 
         return "staticAdmin";
+    }
+
+    private void loadStaticPagesIntoModelInOrder(Map model) {
+        List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
+        model.put("staticPages", staticPages);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Integer id, Map model) {
 
-        List<StaticPage> staticPages = staticPageDao.listPages();
+        //List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = staticPageDao.get(id);
 
+        staticPageServices.loadStaticPagesIntoModelInOrder(model);
+
         model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
+        //model.put("staticPages", staticPages);
 
         return "staticPageDisplay";
 
@@ -74,11 +77,13 @@ public class StaticPageController {
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String showB(@PathVariable("id") Integer id, Map model) {
 
-        List<StaticPage> staticPages = staticPageDao.listPages();
+        staticPageServices.loadStaticPagesIntoModelInOrder(model);
+
+        //List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = staticPageDao.get(id);
 
         model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
+        //model.put("staticPages", staticPages);
 
         return "staticPageDisplay";
 
@@ -88,13 +93,13 @@ public class StaticPageController {
     public String create(@ModelAttribute StaticPage staticPage, Map model) {
 
         int oldImageId = staticPage.getImage_id();
-        
-        if (oldImageId == 0){
-           Image image = imageDao.getDefaultThumb();
+
+        if (oldImageId == 0) {
+            Image image = imageDao.getDefaultThumb();
             int imageId = image.getId();
             staticPage.setImage_id(imageId);
         }
-        
+
         staticPageDao.create(staticPage);
 
         model.put("staticPage", staticPage);
@@ -105,16 +110,8 @@ public class StaticPageController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Map model) {
 
-        List<Image> images = imageDao.list();
-
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
-
-        model.put("imageIdList", imageIdList);
+        imageServices.loadImageIdsIntoModel(model);
+        loadStaticPagesIntoModelInOrder(model);
 
         StaticPage staticPage = staticPageDao.get(id);
 
@@ -169,37 +166,37 @@ public class StaticPageController {
     @RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
     public String showbyid(@PathVariable("id") Integer staticPageId, Map model) {
 
-        return StaticPageShow.showById(staticPageId, model, staticPageDao);
+        return StaticPageServices.showById(staticPageId, model, staticPageDao);
     }
 
     @RequestMapping(value = "/ById/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable("id") Integer staticPageId, Map model) {
 
-        return StaticPageShow.showById(staticPageId, model, staticPageDao);
+        return StaticPageServices.showById(staticPageId, model, staticPageDao);
     }
 
     @RequestMapping(value = "/bytitle/{title}", method = RequestMethod.GET)
     public String showbytitle(@PathVariable("title") String title, Map model) {
 
-        return StaticPageShow.showByTitle(title, model, staticPageDao);
+        return StaticPageServices.showByTitle(title, model, staticPageDao);
     }
 
     @RequestMapping(value = "/byTitle/{title}", method = RequestMethod.GET)
     public String showByTitle(@PathVariable("title") String title, Map model) {
 
-        return StaticPageShow.showByTitle(title, model, staticPageDao);
+        return StaticPageServices.showByTitle(title, model, staticPageDao);
     }
 
     @RequestMapping(value = "/title/{title}", method = RequestMethod.GET)
     public String showByJusttitle(@PathVariable("title") String title, Map model) {
 
-        return StaticPageShow.showByTitle(title, model, staticPageDao);
+        return StaticPageServices.showByTitle(title, model, staticPageDao);
     }
 
     @RequestMapping(value = "/Title/{title}", method = RequestMethod.GET)
     public String showByJustTitle(@PathVariable("title") String title, Map model) {
 
-        return StaticPageShow.showByTitle(title, model, staticPageDao);
+        return StaticPageServices.showByTitle(title, model, staticPageDao);
     }
 
 }
