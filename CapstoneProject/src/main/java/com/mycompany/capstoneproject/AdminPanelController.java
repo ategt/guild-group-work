@@ -228,7 +228,7 @@ public class AdminPanelController {
 
     }
     
-    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getUserInfo(@PathVariable("id") Integer userId) {
 

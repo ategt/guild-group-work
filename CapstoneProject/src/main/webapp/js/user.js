@@ -28,7 +28,7 @@ $(document).ready(function(){
             },
             success: function (data, status) {
 
-                $('#edit-id').val(data.id);
+                $('#edit-user-id').val(data.id);
                 $('#edit-user-name').val(data.name);
                 $('#edit-user-password').val(data.pasword);
                 $('#edit-user-email').val(data.email);
@@ -47,7 +47,7 @@ $(document).ready(function(){
           var userData = JSON.stringify( {
           
           
-            id:$('#edit-id').val(),
+            id:$('#edit-user-id').val(),
             name:$('#edit-user-name').val(),
             password:$('#edit-user-password').val(),
             email:$('#edit-user-email').val(),

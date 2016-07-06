@@ -53,6 +53,14 @@ public class HashTagController {
         HashTag hashTag = hashTagDao.get(hashTagName);
 
         List<BlogPost> posts = hashTagDao.listBlogs(hashTag);
+        
+        List<BlogPost> activePosts = new ArrayList();
+        
+        for (BlogPost p : posts) {
+            if(p.getStatus().toLowerCase().equals("published")){
+                activePosts.add(p);
+            }
+        }
 
         List<StaticPage> staticPages = staticPageDao.listPages();
         StaticPage staticPage = new StaticPage();
@@ -71,10 +79,10 @@ public class HashTagController {
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-        model.put("posts", posts);
+        model.put("posts", activePosts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-        return "home";
+        return "index";
     }
 
 }
