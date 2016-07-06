@@ -203,7 +203,6 @@ public class BlogController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRequest(@ModelAttribute BlogPostCommand postCommand, Map model) {
         BlogPost post = convertPostCommandToPost(postCommand);
-        post.setStatus("pending");
 
         blogPostDao.create(post);
 

@@ -11,8 +11,6 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
 import com.mycompany.capstoneproject.bll.ImageServices;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -190,7 +188,7 @@ public class HomeController {
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
         for (BlogPost pendingPost : pendingPosts) {
             if (pendingPost.getDateToPostOn().after(date)) {
-                blogPostDao.delete(pendingPost);
+                blogPostDao.publish(pendingPost);
             }
         }
     }
