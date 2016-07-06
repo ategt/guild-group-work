@@ -8,6 +8,8 @@ package com.mycompany.capstoneproject.bll;
 import com.mycompany.capstoneproject.DTO.File;
 import com.mycompany.capstoneproject.DTO.Image;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +24,9 @@ public interface ImageServices {
     Image ajaxUploadFile(File uploadedFile, Model model);
 
     void loadRecentInfoIntoModel(Model model, Image image);
+
+    List<Integer> filterTestFiles(List<Image> images);
+    
+    public void loadImageIdsIntoModel(Map model);
 
 }

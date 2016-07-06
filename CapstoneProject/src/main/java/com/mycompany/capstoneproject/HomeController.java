@@ -11,6 +11,7 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import com.mycompany.capstoneproject.bll.ImageServices;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -24,6 +25,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +42,18 @@ public class HomeController {
     private HashTagInterface hashTagDao;
     private StaticPageInterface staticPageDao;
     private UserInterface userDao;
+    private ImageServices imageServices;
 
+    
+    
     @Inject
-    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao) {
+    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao, ImageServices imageServices ) {
         this.blogPostDao = BPDao;
         this.categoriesDao = CDao;
         this.hashTagDao = HDao;
         this.staticPageDao = SPDao;
         this.userDao = UDao;
+        this.imageServices = imageServices;
     }
 
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
@@ -80,6 +86,15 @@ public class HomeController {
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();
+        
+        List<User> users = userDao.list();
+        List<User> activeUsers = new ArrayList();
+        
+        for (User u : users) {
+            if(u.getEnabled() == 1){
+                activeUsers.add(u);
+            }
+        }
 
         Integer count = blogPostDao.getNumOfPosts();
         Integer numOfPages = (count / 3);
@@ -94,8 +109,11 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
+        model.put("users", activeUsers);
 
-        return "WORKINGADMIN";
+//        return "WORKINGADMIN";
+//        return "ADMINPANELTRY3";
+        return "adminPanelTest";
     }
 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
@@ -143,7 +161,7 @@ public class HomeController {
 
         List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
-
+        
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();

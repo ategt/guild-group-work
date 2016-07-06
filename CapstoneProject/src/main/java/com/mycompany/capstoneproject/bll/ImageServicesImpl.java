@@ -13,8 +13,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +117,7 @@ public class ImageServicesImpl implements ImageServices {
         model.addAttribute("multipartFileName", multipartFileName);
         //return originalName;
     }
-    
+
     public void loadRecentInfoIntoModel(Model model, Image image) {
         String originalName = image.getOriginalName();
         String contentType = image.getContentType();
@@ -149,4 +152,21 @@ public class ImageServicesImpl implements ImageServices {
         return savedPath;
     }
 
+    public List<Integer> filterTestFiles(List<Image> images) {
+        List<Integer> imageIdList = images.stream()
+                .filter(a -> a != null).filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .map(Image::getId)
+                .collect(Collectors.toList());
+        return imageIdList;
+    }
+
+    public void loadImageIdsIntoModel(Map model) {
+        List<Image> images = imageDao.list();
+        
+        List<Integer> imageIdList = filterTestFiles(images);
+        
+        model.put("imageIdList", imageIdList);
+    }
+    
 }

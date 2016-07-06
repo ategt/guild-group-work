@@ -35,6 +35,7 @@
     <body>
         <div class="container">
             <div id="dragandrophandler">
+
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div class="row">

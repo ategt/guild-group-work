@@ -19,6 +19,8 @@ import com.mycompany.capstoneproject.DTO.HashTag;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
+import com.mycompany.capstoneproject.bll.ImageServices;
+import com.mycompany.capstoneproject.bll.StaticPageServices;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,16 +57,20 @@ public class BlogController {
     private StaticPageInterface staticDao;
     private HashTagInterface hashTagDao;
     private ImageInterface imageDao;
+    private ImageServices imageServices;
+    private StaticPageServices staticPageServices;
 
     @Inject
-    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface SDao, HashTagInterface HDao, ImageInterface imageDao) {
+    public BlogController(BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, StaticPageInterface staticPageDao, HashTagInterface HDao, ImageInterface imageDao, ImageServices imageServices, StaticPageServices staticPageServices) {
 
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
-        this.staticDao = SDao;
+        this.staticDao = staticPageDao;
         this.hashTagDao = HDao;
         this.imageDao = imageDao;
+        this.imageServices = imageServices;
+        this.staticPageServices = staticPageServices;
 
     }
 
@@ -84,18 +90,10 @@ public class BlogController {
         BlogPost blogPost = new BlogPost();
         blogPost.setImage(image);
 
-        
-        List<Image> images = imageDao.list();
+        loadStaticPagesIntoModel(model);
 
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
+        imageServices.loadImageIdsIntoModel(model);
 
-        model.put("imageIdList", imageIdList);
-        
         List<User> users = userDao.list();
         model.put("users", users);
         model.put("category", category);
@@ -104,19 +102,18 @@ public class BlogController {
         return "blog";
     }
 
+    private void loadStaticPagesIntoModel(Map model) {
+        staticPageServices.loadStaticPagesIntoModelInOrder(model);
+
+//        List<StaticPage> staticPages = staticDao.listPagesByPosition();
+//        StaticPage staticPage = new StaticPage();
+//        model.put("staticPages", staticPages);
+    }
+
     @RequestMapping(value = "/imagetest", method = RequestMethod.GET)
     public String blogImageTest(Map model) {
 
-        List<Image> images = imageDao.list();
-
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
-
-        model.put("imageIdList", imageIdList);
+        imageServices.loadImageIdsIntoModel(model);
 
         List<Category> categories = categoriesDao.listCategories();
         Category category = new Category();
@@ -139,18 +136,11 @@ public class BlogController {
             return "unableToEdit";
         }
 
-        List<Image> images = imageDao.list();
-
-        List<Integer> imageIdList = images.stream()
-                .filter(a -> a != null)
-                .filter(a -> a.getDescription() != null)
-                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
-                .map(Image::getId)
-                .collect(Collectors.toList());
-
-        model.put("imageIdList", imageIdList);
+        imageServices.loadImageIdsIntoModel(model);
+        staticPageServices.loadStaticPagesIntoModelInOrder(model);
 
         List<Category> categories = categoriesDao.listCategories();
+        loadStaticPagesIntoModel(model);
 
         model.put("categories", categories);
         model.put("users", users);
@@ -196,6 +186,8 @@ public class BlogController {
 
         blogPostDao.update(blogPost);
 
+        loadStaticPagesIntoModel(model);
+        
         model.put("post", blogPost);
 
         return "showSingleBlog";
@@ -221,6 +213,8 @@ public class BlogController {
         blogPostDao.create(post);
 
         updateHashTags(post);
+
+        loadStaticPagesIntoModel(model);
 
         model.put("post", post);
         return "showSingleBlog";
@@ -259,8 +253,8 @@ public class BlogController {
 
         int thumgId = postCommand.getThumbId();
         Image thumbImage = imageDao.get(thumgId);
-        
-        if ( thumbImage == null ) {
+
+        if (thumbImage == null) {
             thumbImage = imageDao.getDefaultThumb();
         }
 
@@ -272,12 +266,11 @@ public class BlogController {
         BlogPost post = new BlogPost();
         post.setTitle(postCommand.getTitle());
         //post.setSlug(postCommand.getTitle());
-        
+
         post.setTitle(postCommand.getTitle());
         String slug = createSlug(post.getTitle());
         post.setSlug(slug);
-        
-        
+
         post.setAuthor(author);
         post.setCategory(category);
         post.setContent(postCommand.getContent());
@@ -332,18 +325,19 @@ public class BlogController {
         BlogPost post = blogPostDao.getById(postId);
 
         model.put("post", post);
+        loadStaticPagesIntoModel(model);
 
         return "showSingleBlog";
     }
 
-    @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public BlogPost getPost(@PathVariable String slug, Integer postId) {
-
-        BlogPost post = blogPostDao.getBySlug(slug);
-
-        return post;
-    }
+//    @RequestMapping(value = "/{slug}/{id}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public BlogPost getPost(@PathVariable String slug, Integer postId) {
+//
+//        BlogPost post = blogPostDao.getBySlug(slug);
+//
+//        return post;
+//    }
 
     @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
     public String showByCategory(@PathVariable("name") String category, Map model) {
@@ -382,9 +376,11 @@ public class BlogController {
             pages.add(i);
         }
 
+                loadStaticPagesIntoModel(model);
+
         model.put("pages", pages);
         model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
+        //model.put("staticPages", staticPages);
         model.put("categories", categories);
         model.put("hashTag", hash);
 
@@ -443,11 +439,40 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "/publish/{id}", method = RequestMethod.POST)
-    public String publishPost(@PathVariable("id") Integer postId) {
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.GET)
+    public String publishPost(@PathVariable("id") Integer postId, Map model) {
         BlogPost post = blogPostDao.getById(postId);
         blogPostDao.publish(post);
-        return "adminPanel";
+        
+        List<StaticPage> staticPages = staticDao.listPages();
+        StaticPage staticPage = new StaticPage();
+
+        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+
+        List<HashTag> hashTags = hashTagDao.listHashTags();
+
+        List<Category> categories = categoriesDao.listCategories();
+
+        List<User> users = userDao.list();
+
+        List<BlogPost> posts = blogPostDao.listBlogs();
+
+        model.put("posts", posts);
+        model.put("users", users);
+        model.put("categories", categories);
+        model.put("hashtags", hashTags);
+        model.put("pendingPosts", pendingPosts);
+        model.put("staticPage", staticPage);
+        model.put("staticPages", staticPages);
+        return "adminPanelTest";
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public BlogPost delete(@PathVariable("id") int id) {
+        BlogPost post = blogPostDao.getById(id);
+        blogPostDao.delete(post);
+        return post;
     }
 
 }

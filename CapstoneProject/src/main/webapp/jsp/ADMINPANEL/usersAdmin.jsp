@@ -34,7 +34,7 @@
                     <td>${user.role}</td>
                     <td><fmt:formatDate pattern="MM/dd/yyyy" value="${user.joinedOn}"/></td>
                     <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
-                    <td><a data-user-id="${user.id}" class="delete-link">Delete</a></td>
+                    <td><a data-user-id="${user.id}" class="delete-user-link">Delete</a></td>
                 </tr>
 
             </c:forEach>
@@ -111,6 +111,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/adminPanel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
 
 

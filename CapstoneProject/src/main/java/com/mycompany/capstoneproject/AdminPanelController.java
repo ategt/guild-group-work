@@ -24,6 +24,7 @@ import com.mycompany.capstoneproject.DTO.User;
 import com.mycompany.capstoneproject.bll.ImageServices;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -41,6 +42,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -147,7 +149,7 @@ public class AdminPanelController {
         return "ADMINPANEL/hashtagAdmin";
     }
 
-    @RequestMapping(value = "/editPosts", method = RequestMethod.GET)
+    @RequestMapping(value = "/editPosts/", method = RequestMethod.GET)
     public String editPosts(Map model) {
 
         List<StaticPage> staticPages = staticPageDao.listPages();
@@ -178,7 +180,8 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "ADMINPANEL/editBlogAdmin";
+        return "editBlog";
+
     }
 
     @RequestMapping(value = "/staticPages", method = RequestMethod.GET)
@@ -208,25 +211,41 @@ public class AdminPanelController {
         return "ADMINPANEL/usersAdmin";
     }
 
-    @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void delete(@PathVariable("id") Integer userId) {
 
         User user = userDao.get(userId);
 
-        userDao.delete(user);
+        user.setEnabled(0);
+        
+//        userDao.delete(user);
 
     }
+    
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public User getUserInfo(@PathVariable("id") Integer userId) {
 
-    @RequestMapping(value = "/adminPanel/", method = RequestMethod.PUT)
-    public String edit(@PathVariable("id") Integer orderId, Map model, User u) {
+        User user = userDao.get(userId);
+
+        userDao.update(user);
+
+        return user;
+    }
+  
+
+    @RequestMapping(value = "/editUser", method = RequestMethod.PUT)
+   @ResponseBody
+    public String editSubmit(@RequestBody User u) {
 
         Integer id = u.getId();
         String username = u.getName();
         String password = u.getPassword();
         String email = u.getEmail();
         String role = u.getRole();
-        Integer enabled = u.getEnabled();
+//        Integer enabled = u.getEnabled();
+        Date date = u.getJoinedOn();
 
         User user = new User();
 
@@ -235,13 +254,14 @@ public class AdminPanelController {
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
-        user.setEnabled(enabled);
-
+//        user.setEnabled(enabled);
+        user.setJoinedOn(date);
+                
         userDao.update(user);
 
-        User users = userDao.get(orderId);
+//        User users = userDao.get(id);
 
-        model.put("users", users);
+//        model.put("users", users);
 
         return "ADMINPANEL/usersAdmin";
     }

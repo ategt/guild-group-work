@@ -42,7 +42,6 @@
 
         <div class="container">
             <div id="dragandrophandler">
-                <%@ include file="header.jsp" %>
 
 
                 <div class="row">
