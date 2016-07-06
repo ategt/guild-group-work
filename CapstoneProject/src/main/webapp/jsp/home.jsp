@@ -52,7 +52,7 @@
 
                         <div class="well">
                             <div class="list-group list-group">
-                                <h4 class=""> Top Trending #hashtags</h4>
+                                <h4>#hashtags</h4>
                                 <c:forEach items="${hashTag}" var="hashtag">
                                     <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
                                     </c:forEach>
@@ -79,19 +79,7 @@
                 </div>
 
                 <div class="col-md-9">
-                    <div class="well hidden-xs"> 
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <select class="form-control">
-                                    <option>Newest</option>
-                                    <option>Oldest</option>
-                                    <option>A-Z</option>
-                                    <option>Z-A</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <hr>
 
                     <c:forEach items="${posts}" var="post">
