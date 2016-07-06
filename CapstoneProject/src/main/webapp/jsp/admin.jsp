@@ -15,14 +15,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>Pat's Dresses and Stuff</h1>
-            <hr/>
-            <div class="navbar">
-                <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
-                </ul>    
-            </div>
+            <%@ include file="header.jsp" %>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-hover" id="pending-posts-table">
@@ -84,6 +77,16 @@
                                 </tr>
                             </c:forEach>
                         </table>
+                        <form method="POST" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="name" class="col-md-4">Name: </label>
+                                <div class="col-md-8">
+                                    <input type="text" id="category-input" class="form-control"/>                           
+                                </div>
+                            </div>
+                            <input id="category-create-submit" type="submit" class="btn btn-primary center-block"/>
+                            <div id="add-category-validation-errors" class="pull-right"></div>
+                        </form>
                     </div>
                     <div class="col-md-6">
                         <table class="table table-bordered table-hover" id="hashtag-table">
@@ -97,11 +100,11 @@
                                     <td>${hashtag.id}</td>
                                     <td>${hashtag.name}</td>
                                     <td>${hashtag.numOfUses}</td>                                </tr>
-                            </c:forEach>
+                                </c:forEach>
                         </table>
                     </div>
-                </div>
-                 <div class="row">
+                </div><br/>
+                <div class="row">
 
                     <div class="col-md-12 center-block">
 
@@ -125,83 +128,44 @@
                 </div>
             </div>
 
+            <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Edit Category Details</h4>
+                        </div>
+                        <div class="modal-body">
 
+                            <table class="table table-bordered">
+                                <input type="hidden" id="edit-id"/>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>
+                                        <input type="text" id="edit-category">
+                                    </td>
+                                </tr>
+                            </table>
 
-            <!--        <div id="showTaxModal" class="modal fade" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Tax Details</h4>
-                                </div>
-                                <div class="modal-body">
-            
-                                    <table class="table table-bordered">
-            
-                                        <tr>
-                                            <th>State:</th>
-                                            <td id="tax-state"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tax Rate:</th>
-                                            <td id="tax-taxrate"></td>
-                                        </tr>
-            
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div> /.modal-content 
-                        </div> /.modal-dialog 
-                    </div> /.modal 
-            
-                    <div id="editTaxModal" class="modal fade" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Edit Tax Details</h4>
-                                </div>
-                                <div class="modal-body">
-            
-                                    <table class="table table-bordered">
-            
-                                        <tr>
-                                            <th>State:</th>
-                                            <td>
-                                                <input type="text" id="edit-tax-state">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tax Rate:</th>
-                                            <td> 
-                                                <input type="text" id="edit-tax-taxrate">
-                                            </td>
-                                        </tr>
-            
-            
-                                    </table>
-            
-                                    <div id="edit-tax-validation-errors" class="pull-right"></div>
-            
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-default" id="edit-tax-button">Save</button>
-                                </div>
-                            </div> /.modal-content 
-                        </div> /.modal-dialog 
-                    </div> /.modal -->
+                            <div id="edit-tax-validation-errors" class="pull-right"></div>
 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                        </div>
+                    </div> 
+                </div> 
+            </div> 
             <script>
-            var contextRoot = "${pageContext.request.contextPath}";
+                var contextRoot = "${pageContext.request.contextPath}";
             </script>
 
             <!-- Placed at the end of the document so the pages load faster -->
             <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
+            <script src="${pageContext.request.contextPath}/js/category.js"></script>
 
     </body>
 </html>
