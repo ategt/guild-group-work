@@ -21,16 +21,11 @@ import com.mycompany.capstoneproject.DTO.StaticPage;
 import com.mycompany.capstoneproject.DTO.User;
 import com.mycompany.capstoneproject.bll.ImageServices;
 import com.mycompany.capstoneproject.bll.StaticPageServices;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -187,7 +182,7 @@ public class BlogController {
         blogPostDao.update(blogPost);
 
         loadStaticPagesIntoModel(model);
-        
+
         model.put("post", blogPost);
 
         return "showSingleBlog";
@@ -212,7 +207,7 @@ public class BlogController {
 
         blogPostDao.create(post);
 
-        updateHashTags(post);
+        
 
         loadStaticPagesIntoModel(model);
 
@@ -258,8 +253,7 @@ public class BlogController {
             thumbImage = imageDao.getDefaultThumb();
         }
 
-        List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
-
+//        List<HashTag> hashTags = searchThroughContentForHashTags(postCommand.getContent());
         if (postCommand.getPublishOn() == null) {
             postCommand.setPublishOn(new Date());
         }
@@ -276,7 +270,7 @@ public class BlogController {
         post.setContent(postCommand.getContent());
         post.setComments(comments);
         post.setImage(thumbImage);
-        post.setHashTag(hashTags);
+//        post.setHashTag(hashTags);
         post.setPostedOn(datePosted);
         post.setExpireOn(postCommand.getExpireOn());
         post.setDateToPostOn(postCommand.getPublishOn());
@@ -338,7 +332,6 @@ public class BlogController {
 //
 //        return post;
 //    }
-
     @RequestMapping(value = "/category/{name}", method = RequestMethod.GET)
     public String showByCategory(@PathVariable("name") String category, Map model) {
 
@@ -376,7 +369,7 @@ public class BlogController {
             pages.add(i);
         }
 
-                loadStaticPagesIntoModel(model);
+        loadStaticPagesIntoModel(model);
 
         model.put("pages", pages);
         model.put("staticPage", staticPage);
@@ -439,11 +432,13 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "/publish/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/publish/{id}", method = RequestMethod.POST)
     public String publishPost(@PathVariable("id") Integer postId, Map model) {
         BlogPost post = blogPostDao.getById(postId);
+        List<HashTag> foundHashTags = searchThroughContentForHashTags(post.getContent());
+        post.setHashTag(foundHashTags);
         blogPostDao.publish(post);
-        
+        updateHashTags(post);
         List<StaticPage> staticPages = staticDao.listPages();
         StaticPage staticPage = new StaticPage();
 
@@ -466,7 +461,7 @@ public class BlogController {
         model.put("staticPages", staticPages);
         return "adminPanelTest";
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public BlogPost delete(@PathVariable("id") int id) {

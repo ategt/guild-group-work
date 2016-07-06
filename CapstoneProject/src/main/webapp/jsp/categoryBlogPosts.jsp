@@ -69,9 +69,9 @@
                             <div class="well">
                                 <div class="list-group list-group">
                                     <h4 class=""> Top Trending #hashtags</h4>
-                                    <c:forEach items="${hashTag}" var="hashtag">
-                                        <a class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
-                                        </c:forEach>
+                                <c:forEach items="${hashTag}" var="hashtag">
+                                    <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
+                                    </c:forEach>
                                 </div>
                                 <hr>
                             </div>
@@ -125,7 +125,7 @@
                                 <div class="col-sm-4"><img height="1280" width="720" src="${pageContext.request.contextPath}/home/showImage/{id}" class="img-responsive"></a>
                                 </div>
                                 <div class="col-sm-8">
-                                    <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
+                                    <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a></h3>
                                     <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                     <h5>${post.content}</h5>
 

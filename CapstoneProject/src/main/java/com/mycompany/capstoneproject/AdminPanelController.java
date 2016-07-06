@@ -53,7 +53,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author apprentice
  */
 @Controller
-@RequestMapping(value = "/adminPanel")
+@RequestMapping(value = "/admin")
 public class AdminPanelController {
 
     private StaticPageInterface staticPageDao;
@@ -71,31 +71,32 @@ public class AdminPanelController {
         this.hashTagDao = hashTagDao;
     }
 
-    @RequestMapping(value = "/old", method = RequestMethod.GET)
-    public String admin(Map model) {
-        List<StaticPage> staticPages = staticPageDao.listPages();
-        StaticPage staticPage = new StaticPage();
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String admin(Map model) {
+//        List<StaticPage> staticPages = staticPageDao.listPages();
+//        StaticPage staticPage = new StaticPage();
+//
+//        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
+//
+//        List<HashTag> hashTags = hashTagDao.listHashTags();
+//
+//        List<Category> categories = categoriesDao.listCategories();
+//
+//        List<User> users = userDao.list();
+//
+//        List<BlogPost> posts = blogPostDao.listBlogs();
+//
+//        model.put("posts", posts);
+//        model.put("users", users);
+//        model.put("categories", categories);
+//        model.put("hashtags", hashTags);
+//        model.put("pendingPosts", pendingPosts);
+//        model.put("staticPage", staticPage);
+//        model.put("staticPages", staticPages);
+//
+//        return "admin";
+//    }
 
-        List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
-
-        List<HashTag> hashTags = hashTagDao.listHashTags();
-
-        List<Category> categories = categoriesDao.listCategories();
-
-        List<User> users = userDao.list();
-
-        List<BlogPost> posts = blogPostDao.listBlogs();
-
-        model.put("posts", posts);
-        model.put("users", users);
-        model.put("categories", categories);
-        model.put("hashtags", hashTags);
-        model.put("pendingPosts", pendingPosts);
-        model.put("staticPage", staticPage);
-        model.put("staticPages", staticPages);
-
-        return "adminPanelTest";
-    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String adminTest(Map model) {
@@ -130,6 +131,8 @@ public class AdminPanelController {
 //        return "ADMINPANELTRY3";
 //        return "adminPanelTest";
     }
+
+
 
     @RequestMapping(value = "/pendingPosts", method = RequestMethod.GET)
     public String pendingPosts(Map model) {
