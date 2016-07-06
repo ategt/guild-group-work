@@ -27,13 +27,13 @@ public class CategoryDAODBImpl implements CategoriesInterface {
     private static final String SQL_UPDATE_CATEGORY = "UPDATE category SET name = ? WHERE id = ?";
 
     //delete query
-    private static final String SQL_DELETE_CATEGORY = "DELETE FROM category where id = ?";
+    private static final String SQL_DELETE_CATEGORY = "UPDATE `capstone`.`category` SET `active`=0 WHERE `id`=?;";
 
     //get query
     private static final String SQL_GET_CATEGORY = "SELECT * FROM category where id = ?";
 
     //list query
-    private static final String SQL_GET_CATEGORY_LIST = "SELECT * FROM category";
+    private static final String SQL_GET_CATEGORY_LIST = "SELECT * FROM category WHERE active = 1";
 
     private JdbcTemplate jdbcTemplate;
 
