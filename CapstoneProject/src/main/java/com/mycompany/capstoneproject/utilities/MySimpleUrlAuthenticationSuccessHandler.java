@@ -72,7 +72,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         if (isUser) {
             return "/home";
         } else if (isAdmin) {
-            return "/adminPanel/";
+            return "/admin/";
         } else if (isAuthor) {
             return "";
         } else {

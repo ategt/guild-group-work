@@ -24,13 +24,6 @@
                 </ul>    
             </div>
             <div class="row">
-                <div class="container">
-                    <form action="${pageContext.request.contextPath}/admin/changePassword" method="GET">
-                        <input type="submit" class="btn btn-default center-block" value="Change Password"/>
-                    </form>
-                </div>
-            </div><br><br>
-            <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-hover" id="pending-posts-table">
                         <tr>
