@@ -59,12 +59,12 @@ public class CreateUserController {
     }
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
-    public String edit(@Valid @PathVariable("id") Integer createUserId, Map model) {
+    @ResponseBody
+    public User edit(@Valid @PathVariable("id") Integer userId) {
 
-        User createUser = createUserDAO.get(createUserId);
+        User user = createUserDAO.get(userId);
 
-        model.put("createUser", createUser);
-
-        return "editUser";
+        
+        return user;
     }
 }

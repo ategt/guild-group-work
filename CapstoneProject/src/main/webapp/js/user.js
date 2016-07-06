@@ -55,7 +55,7 @@ $(document).ready(function () {
         var user = link.data('user-id');
         $('#edit-user-validation-errors').empty();
         $.ajax({
-            url: contextRoot + '/user/' + user,
+            url: contextRoot + '/createUser/editUser/' + user,
             type: 'GET',
             dataType: 'json',
             beforeSend: function (xhr) {
@@ -63,6 +63,7 @@ $(document).ready(function () {
             },
             success: function (data, status) {
                 $('#edit-user-name').val(data.name);
+                $('#edit-user-role').val(data.role);
                 $('#edit-id').val(data.id);
             },
             error: function (data, status) {
