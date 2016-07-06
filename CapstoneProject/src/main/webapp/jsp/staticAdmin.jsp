@@ -39,6 +39,7 @@
     </head>
     <body>
 
+        <%@ include file="header.jsp" %>
 
         <div class="container">
             <div id="dragandrophandler">
@@ -51,8 +52,8 @@
                         <table class="table table-bordered table-hover" id="static-page-table">
                             <tr>
                                 <th>Page Title</th>
-                                <th><span class="glyphicon glyphicon-edit"></span> Edit</th>
-                                <th><i class="glyphicon glyphicon-remove"></i> Delete</th>
+                                <th><span class=""></span> Edit</th>
+                                <th><i class=""></i> Delete</th>
                             </tr>
                             <tbody id="sortable">
                                 <c:forEach items="${staticPages}" var="staticPage">
@@ -77,14 +78,6 @@
                                     <input type="text" id="title-input" name="title" class="form-control"/>
                                 </div>
                             </div>
-
-                            <!--                            <div class="form-group">
-                                                            <label for="title" class="col-md-4 control-label">Image Id: </label>
-                                                            <div class="col-md-8">
-                                                                <input type="text" id="image-id" name="image_id" class="form-control"/>
-                                                            </div>
-                                                        </div>-->
-
                             <div class="form-group center-block">
                                 <label for="content" class="col-md-4 control-label"> Content:</label>
                                 <div class="col-md-8">
@@ -105,9 +98,9 @@
                             </div>
 
                             <div class="col-md-6">
-                               
+
                                 <div class="image-size">
-                                     <label for="image-size-input">Image Size:</label>
+                                    <label for="image-size-input">Image Size:</label>
                                     <select class="btn btn-default dropdown center-block" id="image-size-input" name="image-size-input">
                                         <option value="0">Native</option>
                                         <option value="1">Large</option>

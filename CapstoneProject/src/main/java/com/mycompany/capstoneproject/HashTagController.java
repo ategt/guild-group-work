@@ -74,7 +74,7 @@ public class HashTagController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
-        return "home";
+        return "index";
     }
 
 }
