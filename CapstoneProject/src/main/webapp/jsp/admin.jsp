@@ -58,11 +58,72 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
+<<<<<<< HEAD
+                                     <td><a data-category-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+=======
                                     <td><a <a data-user-id='${user.id}' data-toggle='modal' data-target='#editUserModal'>Edit</a></td>
+>>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </table>
+                        
+                        <div id="editUserModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit User</h4>
+              </div>
+              <div class="modal-body">
+
+                        <table class="table table-bordered" id="edit-user-table">
+
+                            <input type="hidden" id="edit-user-id"/>
+
+                            <tr>
+                                <th>Username:</th>
+                                <td>
+                                    <input type="text" id="edit-user-name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password:</th>
+                                <td>
+                                    <input type="password" id="edit-user-password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>
+                                    <input type="text" id="edit-user-email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Role:</th>
+                                <td>
+                                    <select id="edit-user-role">
+                                        <option>ROLE_USER</option>
+                                        <option>ROLE_AUTHOR</option>
+                                        <option>ROLE_ADMIN</option>
+                                    </select>
+                                    <!--<input type="text" id="edit-user-role"/>-->
+                                </td>
+                            </tr>
+
+                        </table>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="edit-user-button">Save</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -207,6 +268,18 @@
                     </div>
                 </div> 
             </div> 
+<<<<<<< HEAD
+            <script>
+                var contextRoot = "${pageContext.request.contextPath}";
+            </script>
+
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
+            <script src="${pageContext.request.contextPath}/js/category.js"></script>
+            <script src="${pageContext.request.contextPath}/js/user.js"></script>
+=======
         </div> 
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
@@ -218,6 +291,7 @@
         <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
         <script src="${pageContext.request.contextPath}/js/category.js"></script>
         <script src="${pageContext.request.contextPath}/js/user.js"></script>
+>>>>>>> 843994595b6c7a260076c5890550aa5f2689b22c
 
     </body>
 </html>

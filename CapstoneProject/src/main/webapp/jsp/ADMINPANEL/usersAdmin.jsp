@@ -102,7 +102,7 @@
 
 
 
-    </table>
+   
     <script>
         var contextRoot = '${pageContext.request.contextPath}';
     </script>
