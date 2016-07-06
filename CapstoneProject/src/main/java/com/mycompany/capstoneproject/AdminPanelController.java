@@ -214,11 +214,25 @@ public class AdminPanelController {
 
         User user = userDao.get(userId);
 
-        userDao.delete(user);
+        user.setEnabled(0);
+        
+//        userDao.delete(user);
 
     }
+    
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public User editUser(@PathVariable("id") Integer userId) {
 
-    @RequestMapping(value = "/adminPanel/", method = RequestMethod.PUT)
+        User user = userDao.get(userId);
+
+        userDao.update(user);
+
+        return user;
+    }
+  
+
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public String edit(@PathVariable("id") Integer orderId, Map model, User u) {
 
         Integer id = u.getId();
@@ -226,7 +240,7 @@ public class AdminPanelController {
         String password = u.getPassword();
         String email = u.getEmail();
         String role = u.getRole();
-        Integer enabled = u.getEnabled();
+//        Integer enabled = u.getEnabled();
 
         User user = new User();
 
@@ -235,7 +249,7 @@ public class AdminPanelController {
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
-        user.setEnabled(enabled);
+//        user.setEnabled(enabled);
 
         userDao.update(user);
 
