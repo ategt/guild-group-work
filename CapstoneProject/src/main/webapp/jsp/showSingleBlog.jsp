@@ -42,20 +42,20 @@
                     </div>
                     <div class="col-sm-8">
                         <h3 class="title">${post.title}</h3>
-                        <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${posts.category}</h4>
+                        <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                         <h5>${post.content}</h5>
 
                         <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
                         <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
     <!--                                    <h5 class = "text-right"class="text-muted">Ralated Topics :  <a href="#">${post.category}</a></h5>-->
-                        <h4 align="right">Status: ${post.status}</h4>
+                        <!--<h4 align="right">Status: ${post.status}</h4>-->
 
                     </div>
                 </div>
                 <hr>
             </div>
 
-<!--            <div id="disqus_thread"></div>
+            <div id="disqus_thread"></div>
             <script>
               
                 (function () {  // DON'T EDIT BELOW THIS LINE
@@ -67,7 +67,7 @@
                     (d.head || d.body).appendChild(s);
                 })();
             </script>
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>-->
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
         </div>
 

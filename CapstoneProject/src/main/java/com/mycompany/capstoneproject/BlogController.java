@@ -317,8 +317,11 @@ public class BlogController {
     public String show(@PathVariable("id") Integer postId, Map model) {
 
         BlogPost post = blogPostDao.getById(postId);
-
+        
+       
+        
         model.put("post", post);
+       
         loadStaticPagesIntoModel(model);
 
         return "showSingleBlog";
