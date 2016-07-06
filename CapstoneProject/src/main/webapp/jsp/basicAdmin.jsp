@@ -19,61 +19,55 @@
 
             <%@ include file="header.jsp" %>
 
-
-            <table>
-                <caption>Blog Post Options</caption>
-                <tr>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/blog/edit">Edit Post</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/adminPanel/pendingPosts">Publish Post</a>
-                    </td>
-                </tr>
-            </table>                
-
-
-
-
-
-
-            <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/blog/')">Create Post</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/pendingPosts')">Pending Posts</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/editPosts/')">Edit Posts</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/static/')">Edit Static Pages</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/users')">Manage Users</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/categories')">Manage Categories</a>
-
-            <a class="padded" class="btn btn-success" onclick="changeContent('${pageContext.request.contextPath}/adminPanel/hashtags')">Manage Hashtags</a>
-            <a class="padded" class="btn btn-success" href="${pageContext.request.contextPath}/home">Home</a>
-
-
-
-        </td>
-
-    </table>
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+                        <caption>Blog Post Options</caption>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/edit">Edit/Delete Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/adminPanel/pendingPosts">Publish Post</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table>
+                        <caption>Blog Post Options</caption>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/">Create Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/blog/edit">Edit Post</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/adminPanel/pendingPosts">Publish Post</a>
+                            </td>
+                        </tr>
+                    </table>   
+                </div>
+            </div>
 
 
+        </div>
 
-</div>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-</body>
+    </body>
 </html>
