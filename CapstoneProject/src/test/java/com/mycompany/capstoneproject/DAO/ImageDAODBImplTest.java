@@ -349,77 +349,213 @@ public class ImageDAODBImplTest {
     /**
      * Test of list method, of class ImageDAODBImpl.
      */
-//    @Test
-//    public void testGetDefaultImage() {
-//        System.out.println("DefaultImage");
-//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-//
-//        Image image = instance.getDefaultThumb();
-//
-//        assertNotNull(image);
-//
-//        assertTrue(image.getId() > 0);
-//
-//    }
+    @Test
+    public void testGetDefaultImage() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        assertNotNull(image);
+
+        assertTrue(image.getId() > 0);
+
+    }
 
     /**
      * Test of list method, of class ImageDAODBImpl.
      */
-//    @Test
-//    public void testSetDefaultImage() {
-//        System.out.println("DefaultImage");
-//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-//
-//        instance.setDefaultThumb(null);
-//
-//        // If it makes it here, it passed.
-//        assertTrue(true);
-//
-//    }
+    @Test
+    public void testSetAndGetDefaultImage() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        List<Image> imageList = instance.list();
+
+        List<Image> filteredImageList = imageList.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getContentType().contains("image"))
+                .collect(Collectors.toList());
+
+        int filteredImageListSize = filteredImageList.size();
+
+        Image imageZ = filteredImageList.get(filteredImageListSize - 1);
+
+        if (image == null) {
+
+            instance.setDefaultThumb(imageZ);
+        }
+
+        //List<Image> imageList = instance.list();
+        //int imageListSize = imageList.size();
+
+        //Image imageA = instance.get(imageListSize - 1);
+        Image imageA = filteredImageList.get(filteredImageListSize - 1);
+        
+        instance.setDefaultThumb(imageA);
+
+        Image imageB = instance.getDefaultThumb();
+
+        //int oldId = image.getId();
+        assertTrue(isImageEqual(imageB, imageA));
+
+        instance.setDefaultThumb(image);
+
+        Image imageC = instance.getDefaultThumb();
+
+        assertTrue(isImageEqual(image, imageC));
+
+    }
 
     /**
      * Test of list method, of class ImageDAODBImpl.
      */
-//    @Test
-//    public void testSetAndGetDefaultImage() {
-//        System.out.println("DefaultImage");
-//        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
-//
-//        Image image = instance.getDefaultThumb();
-//
-//        if (image == null) {
-//            List<Image> imageList = instance.list();
-//            
-//            List<Image> filteredImageList = imageList.stream()
-//                                            .filter(a -> a != null)
-//                                            .collect(Collectors.toList());
-//                    
-//            int filteredImageListSize = filteredImageList.size();
-//
-//            Image imageZ = filteredImageList.get(filteredImageListSize - 1);
-//            
-//            instance.setDefaultThumb(imageZ);
-//        }
-//
-//
-//        List<Image> imageList = instance.list();
-//        int imageListSize = imageList.size();
-//
-//        Image imageA = instance.get(imageListSize - 1);
-//
-//        instance.setDefaultThumb(imageA);
-//
-//        Image imageB = instance.getDefaultThumb();
-//
-//        //int oldId = image.getId();
-//        assertTrue(isImageEqual(imageB, imageA));
-//
-//        instance.setDefaultThumb(image);
-//
-//        Image imageC = instance.getDefaultThumb();
-//
-//        assertTrue(isImageEqual(image, imageC));
-//
-//    }
+    @Test
+    public void testSetAndGetDefaultImageB() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        List<Image> imageList = instance.list();
+
+        List<Image> filteredImageList = imageList.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getContentType().contains("image"))
+                .collect(Collectors.toList());
+
+        int filteredImageListSize = filteredImageList.size();
+
+        Image imageZ = filteredImageList.get(filteredImageListSize - 1);
+
+        if (image == null) {
+
+            instance.setDefaultThumb(imageZ);
+        }
+
+        //List<Image> imageList = instance.list();
+        //int imageListSize = imageList.size();
+
+        //Image imageA = instance.get(imageListSize - 1);
+        Image imageA = filteredImageList.get(filteredImageListSize - 1);
+        
+        instance.setDefaultThumb(imageA);
+
+        Image imageB = instance.getDefaultThumb();
+
+        //int oldId = image.getId();
+        assertTrue(isImageEqual(imageB, imageA));
+
+        instance.setDefaultThumb(image);
+
+        Image imageC = instance.getDefaultThumb();
+
+        assertTrue(isImageEqual(image, imageC));
+
+    }
+
+    /**
+     * Test of list method, of class ImageDAODBImpl.
+     */
+    @Test
+    public void testSetAndGetDefaultImageC() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        List<Image> imageList = instance.list();
+
+        List<Image> filteredImageList = imageList.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getContentType().contains("image"))
+                .collect(Collectors.toList());
+
+        int filteredImageListSize = filteredImageList.size();
+
+        Image imageZ = filteredImageList.get(filteredImageListSize - 1);
+
+        if (image == null) {
+
+            instance.setDefaultThumb(imageZ);
+        }
+
+        //List<Image> imageList = instance.list();
+        //int imageListSize = imageList.size();
+
+        //Image imageA = instance.get(imageListSize - 1);
+        Image imageA = filteredImageList.get(filteredImageListSize - 1);
+        
+        instance.setDefaultThumb(imageA);
+
+        Image imageB = instance.getDefaultThumb();
+
+        //int oldId = image.getId();
+        assertTrue(isImageEqual(imageB, imageA));
+
+        instance.setDefaultThumb(image);
+
+        Image imageC = instance.getDefaultThumb();
+
+        assertTrue(isImageEqual(image, imageC));
+
+    }
+
+    /**
+     * Test of list method, of class ImageDAODBImpl.
+     */
+    @Test
+    public void testSetAndGetDefaultImageD() {
+        System.out.println("DefaultImage");
+        ImageInterface instance = ctx.getBean("imageDaoDBImpl", ImageInterface.class);
+
+        Image image = instance.getDefaultThumb();
+
+        List<Image> imageList = instance.list();
+
+        List<Image> filteredImageList = imageList.stream()
+                .filter(a -> a != null)
+                .filter(a -> a.getDescription() != null)
+                .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getContentType().contains("image"))
+                .collect(Collectors.toList());
+
+        int filteredImageListSize = filteredImageList.size();
+
+        Image imageZ = filteredImageList.get(filteredImageListSize - 1);
+
+        if (image == null) {
+
+            instance.setDefaultThumb(imageZ);
+        }
+
+        //List<Image> imageList = instance.list();
+        //int imageListSize = imageList.size();
+
+        //Image imageA = instance.get(imageListSize - 1);
+        Image imageA = filteredImageList.get(filteredImageListSize - 1);
+        
+        instance.setDefaultThumb(imageA);
+
+        Image imageB = instance.getDefaultThumb();
+
+        //int oldId = image.getId();
+        assertTrue(isImageEqual(imageB, imageA));
+
+        instance.setDefaultThumb(image);
+
+        Image imageC = instance.getDefaultThumb();
+
+        assertTrue(isImageEqual(image, imageC));
+
+    }
 
 }

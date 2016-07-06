@@ -6,7 +6,9 @@
 <!DOCTYPE>
 <html>
     <head>
-        <title>Home</title>
+
+        <title>Pats Warehouse Blog</title>
+
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,8 +17,8 @@
 
     </head>
     <body>
-        <%@ include file="header.jsp" %>
         <div class="container">
+        <%@ include file="header.jsp" %>
 
             
 

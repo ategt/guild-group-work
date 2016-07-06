@@ -13,7 +13,7 @@
 
 <html>
     <meta charset="utf-8">
-    <title>Daily UI - Day 1 Sign In</title>
+        <title>Pats Warehouse Blog</title>
 
     <!--Google Fonts--> 
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
