@@ -178,7 +178,7 @@ public class AdminPanelController {
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
 
-        return "ADMINPANEL/editBlogPostsAdmin";
+        return "ADMINPANEL/editBlogAdmin";
     }
 
     @RequestMapping(value = "/staticPages", method = RequestMethod.GET)
