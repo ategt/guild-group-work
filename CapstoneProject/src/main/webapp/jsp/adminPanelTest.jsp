@@ -54,39 +54,39 @@
 
     <body>
         <!-- start: Header -->
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container-fluid">
-                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </a>
-                            <a class="brand" href="index.html"><span>Capstone Project</span></a><!--
-        
-                             start: Header Menu 
--->                            <div class="nav-no-collapse header-nav">
-                                <ul class="nav pull-right">
-                                    <li class="dropdown">
-                                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                            <i class="halflings-icon white user"></i> ${user.name}
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-menu-title">
-                                                <span>Account Settings</span>
-                                            </li>
-                                            <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/logout"><i class="halflings-icon off"></i> Logout</a></li>
-                                        </ul>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="index.html"><span>Capstone Project</span></a><!--
+
+                     start: Header Menu 
+                    -->                            <div class="nav-no-collapse header-nav">
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="halflings-icon white user"></i> ${user.name}
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-menu-title">
+                                        <span>Account Settings</span>
                                     </li>
+                                    <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/logout"><i class="halflings-icon off"></i> Logout</a></li>
                                 </ul>
-                            </div><!--
-                             end: Header Menu 
-        
--->                        </div>
-                    </div>
-                </div>
+                            </li>
+                        </ul>
+                    </div><!--
+                     end: Header Menu 
+
+                    -->                        </div>
+            </div>
+        </div>
         <!-- start: Header -->
 
         <div class="container-fluid-full">
@@ -174,43 +174,92 @@
                     <div class="row-fluid sortable">		
                         <div class="box span12">
                             <div class="box-content">
-                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+
+                                <table class="table table-bordered table-hover" id="user-table">
+
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Date Joined</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+
+                                    <c:forEach items="${users}" var="user">
+
+                                        <tr id="user-row-${user.id}">
+                                            <td>${user.name}</td>
+                                            <td>${user.email}</td>
+                                            <td>${user.role}</td>
+                                            <td><fmt:formatDate pattern="MM/dd/yyyy" value="${user.joinedOn}"/></td>
+                                            <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                                            <td><a data-user-id="${user.id}" class="delete-user-link">Delete</a></td>
                                         </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <c:forEach items="${users}" var="user">
 
-                                            <tr id="user-row-${user.id}">
-                                                <td>${user.name}</td>
-                                                <td>${user.email}</td>
-                                                <td><fmt:formatDate pattern="MM/dd/yyyy" value="${user.joinedOn}"/></td>
-                                                <td>${user.role}</td>
-                                                <td class="center">
-                                                    <span class="label label-success">Active</span>
-                                                </td>
-                                                <td class="center">
-                                                    <a data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal" class="btn btn-info edit-user-button">
-                                                    <i class="halflings-icon white edit"></i> 
-                                                    </a>
-                                                
-                                                    <a data-user-id="${user.id}" class="btn btn-danger delete-link-user">
-                                                        <i class="halflings-icon white trash"></i> 
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                    </c:forEach>
 
-                                        </c:forEach>
+                                </table>
 
-                                    </tbody>
-                                </table>            
+
+
+                                <div id="editUserModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit User</h4>
+              </div>
+              <div class="modal-body">
+
+                                                <table class="table table-bordered" id="edit-user-table">
+
+                                                    <input type="hidden" id="edit-id"/>
+
+                                                    <tr>
+                                                        <th>Username:</th>
+                                                        <td>
+                                                            <input type="text" id="edit-user-name"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Password:</th>
+                                                        <td>
+                                                            <input type="password" id="edit-user-password"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Email:</th>
+                                                        <td>
+                                                            <input type="text" id="edit-user-email"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Role:</th>
+                                                        <td>
+                                                            <select id="edit-user-role">
+                                                                <option>ROLE_USER</option>
+                                                                <option>ROLE_AUTHOR</option>
+                                                                <option>ROLE_ADMIN</option>
+                                                            </select>
+                                                            <!--<input type="text" id="edit-user-role"/>-->
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="edit-user-button">Save</button>
+              </div>
+            </div>
+
+          </div>
+        </div>  
+                                >>>>>>> a8934b115b478ad8f4539154f22d2ec39de2e0c0
                             </div>
                         </div><!--/span-->
 
@@ -219,7 +268,7 @@
                     <div class="row-fluid sortable">
                         <div class="box span6">
                             <div class="box-content">
-                                <table class="table table-bordered table-hover" id="category-table">
+                                <table class="table table-bordered " id="category-table">
                                     <tr>
                                         <th>Name</th>
                                         <th>Edit</th>
@@ -258,18 +307,18 @@
                                 <input id="create-category-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
                             </center>
                             </form>
-<!--                            <div class="pagination pagination-centered">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>     -->
+                            <!--                            <div class="pagination pagination-centered">
+                                                            <ul>
+                                                                <li><a href="#">Prev</a></li>
+                                                                <li class="active">
+                                                                    <a href="#">1</a>
+                                                                </li>
+                                                                <li><a href="#">2</a></li>
+                                                                <li><a href="#">3</a></li>
+                                                                <li><a href="#">4</a></li>
+                                                                <li><a href="#">Next</a></li>
+                                                            </ul>
+                                                        </div>     -->
                         </div>
 
                         <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
@@ -308,7 +357,7 @@
                                         <th>Uses</th>
                                     </tr>
 
-                                    <c:forEach items="${hashtags}" var="hashtag">
+                                    <c:forEach items="${hashTag}" var="hashtag">
                                         <tr id="user-row-${hashtag.id}">
                                             <td>${hashtag.name}</td>
                                             <td>${hashtag.numOfUses}</td>
@@ -316,18 +365,18 @@
                                     </c:forEach>
 
                                 </table> 
-<!--                                <div class="pagination pagination-centered">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>     -->
+                                <!--                                <div class="pagination pagination-centered">
+                                                                    <ul>
+                                                                        <li><a href="#">Prev</a></li>
+                                                                        <li class="active">
+                                                                            <a href="#">1</a>
+                                                                        </li>
+                                                                        <li><a href="#">2</a></li>
+                                                                        <li><a href="#">3</a></li>
+                                                                        <li><a href="#">4</a></li>
+                                                                        <li><a href="#">Next</a></li>
+                                                                    </ul>
+                                                                </div>     -->
                             </div>
                         </div><!--/span-->
 
@@ -373,18 +422,18 @@
                                 <input id="create-submit" class="btn btn-primary pull-right"  type="submit" value="Submit"/>
                             </center>
                             </form>
-<!--                            <div class="pagination pagination-centered">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>     -->
+                            <!--                            <div class="pagination pagination-centered">
+                                                            <ul>
+                                                                <li><a href="#">Prev</a></li>
+                                                                <li class="active">
+                                                                    <a href="#">1</a>
+                                                                </li>
+                                                                <li><a href="#">2</a></li>
+                                                                <li><a href="#">3</a></li>
+                                                                <li><a href="#">4</a></li>
+                                                                <li><a href="#">Next</a></li>
+                                                            </ul>
+                                                        </div>     -->
                         </div>
 
 
