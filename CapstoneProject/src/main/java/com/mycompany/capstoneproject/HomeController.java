@@ -219,6 +219,11 @@ public class HomeController {
     public List<Integer> getPages(Integer number) {
         Integer count = blogPostDao.getNumOfPosts();
         Integer numOfPages = (count / number);
+        Integer remainder = (count % number);
+        
+        if (remainder > 0){
+            numOfPages += remainder;
+        }
         List<Integer> pages = new ArrayList();
         for (int i = 1; i <= numOfPages; i++) {
             pages.add(i);
