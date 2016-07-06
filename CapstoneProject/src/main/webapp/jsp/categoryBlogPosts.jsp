@@ -68,7 +68,7 @@
                             <hr>
                             <div class="well">
                                 <div class="list-group list-group">
-                                    <h4 class=""> Top Trending #hashtags</h4>
+                                    <h4 class="">#hashtags</h4>
                                 <c:forEach items="${hashTag}" var="hashtag">
                                     <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
                                     </c:forEach>
@@ -117,7 +117,7 @@
                         <c:forEach items="${categoryList}" var="post">
 
                             <div class="row">
-                                <div class="col-sm-4"><img height="1280" width="720" src="${pageContext.request.contextPath}/home/showImage/{id}" class="img-responsive"></a>
+                                <div class="col-sm-4"><img height="1280" width="720" src="${pageContext.request.contextPath}/image/showimage/${post.image.id}" class="img-responsive"></a>
                                 </div>
                                 <div class="col-sm-8">
                                     <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a></h3>
