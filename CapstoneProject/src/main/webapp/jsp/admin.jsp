@@ -52,7 +52,7 @@
                                     <td>${user.id}</td>
                                     <td>${user.name}</td>
                                     <td>${user.role}</a></td>
-                                    <td><a>Edit</a></td>
+                                    <td><a <a data-user-id='${user.id}' data-toggle='modal' data-target='#editUserModal'>Edit</a></td>
                                     <td><a data-user-id="${user.id}" class="delete-link" id="delete-user">Delete</a></td>
                                 </tr>
                             </c:forEach>
@@ -143,6 +143,35 @@
                                     <th>Name:</th>
                                     <td>
                                         <input type="text" id="edit-category">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div id="edit-tax-validation-errors" class="pull-right"></div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" id="edit-category-button">Save</button>
+                        </div>
+                    </div> 
+                </div> 
+            </div> 
+            <div id="editUserModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Edit User Details</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <table class="table table-bordered">
+                                <input type="hidden" id="edit-id"/>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>
+                                        <input type="text" id="edit-user-name">
                                     </td>
                                 </tr>
                             </table>
