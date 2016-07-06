@@ -5,50 +5,6 @@
  */
 $(document).ready(function () {
 
-    $('#user-create-submit').on('click', function (e) {
-        $('#add-user-validation-errors').empty();
-        e.preventDefault();
-
-//        alert('works');
-
-
-        var userData = JSON.stringify({
-            name: $('#user-input').val()
-        });
-
-        $.ajax({
-            url: contextRoot + '/user/',
-            type: 'POST',
-            data: userData,
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Accept", "application/json");
-                xhr.setRequestHeader("Content-type", "application/json");
-            },
-            success: function (data, status) {
-
-                console.log(data);
-
-                var tableRow = buildUserRow(data);
-                $('#user-table').append($(tableRow));
-
-                name: $('#user-input').val('');
-
-            },
-            error: function (data, status) {
-                var errors = data.responseJSON.errors;
-
-                $.each(errors, function (index, error) {
-
-                    $('#add-user-validation-errors').append(error.message + "<br />");
-
-                });
-            }
-        });
-
-    });
-
-   
     $('#editUserModal').on('show.bs.modal', function (e) {
         var link = $(e.relatedTarget);
 
@@ -62,7 +18,6 @@ $(document).ready(function () {
                 xhr.setRequestHeader("Accept", "application/json");
             },
             success: function (data, status) {
-
                 $('#edit-user-name').val(data.name);
                 $('#edit-user-email').val(data.email);
                 $('#edit-user-password').val(data.password);
@@ -76,10 +31,8 @@ $(document).ready(function () {
             }
 
         });
-        
-        });
 
-
+    });
 
     $('#edit-user-button').on('click', function (e) {
         $('#edit-user-validation-errors').empty();
@@ -136,4 +89,4 @@ $(document).ready(function () {
 
     }
 
- });
+});
