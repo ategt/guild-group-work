@@ -177,42 +177,90 @@
                     <div class="row-fluid sortable">		
                         <div class="box span12">
                             <div class="box-content">
-                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Date registered</th>
-                                            <th>Role</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <c:forEach items="${users}" var="user">
+                                   <table class="table table-bordered table-hover" id="user-table">
 
-                                            <tr id="user-row-${user.id}">
-                                                <td>${user.name}</td>
-                                                <td>${user.email}</td>
-                                                <td><fmt:formatDate pattern="MM/dd/yyyy" value="${user.joinedOn}"/></td>
-                                                <td>${user.role}</td>
-                                                <td class="center">
-                                                    <span class="label label-success">Active</span>
-                                                </td>
-                                                <td class="center">
-                                                    <a class="btn btn-info" href="#">
-                                                        <i class="halflings-icon white edit"></i>  
-                                                    </a>
-                                                    <a data-user-id="${user.id}" class="btn btn-danger delete-link-user">
-                                                        <i class="halflings-icon white trash"></i> 
-                                                    </a>
-                                                </td>
-                                            </tr>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Date Joined</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
 
-                                        </c:forEach>
+            <c:forEach items="${users}" var="user">
 
-                                    </tbody>
-                                </table>            
+                <tr id="user-row-${user.id}">
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td><fmt:formatDate pattern="MM/dd/yyyy" value="${user.joinedOn}"/></td>
+                    <td><a  data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal">Edit</a></td>
+                    <td><a data-user-id="${user.id}" class="delete-user-link">Delete</a></td>
+                </tr>
+
+            </c:forEach>
+
+        </table>
+
+
+
+        <div id="editUserModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit User</h4>
+              </div>
+              <div class="modal-body">
+
+                        <table class="table table-bordered" id="edit-user-table">
+
+                            <input type="hidden" id="edit-id"/>
+
+                            <tr>
+                                <th>Username:</th>
+                                <td>
+                                    <input type="text" id="edit-user-name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password:</th>
+                                <td>
+                                    <input type="password" id="edit-user-password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>
+                                    <input type="text" id="edit-user-email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Role:</th>
+                                <td>
+                                    <select id="edit-user-role">
+                                        <option>ROLE_USER</option>
+                                        <option>ROLE_AUTHOR</option>
+                                        <option>ROLE_ADMIN</option>
+                                    </select>
+                                    <!--<input type="text" id="edit-user-role"/>-->
+                                </td>
+                            </tr>
+
+                        </table>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="edit-user-button">Save</button>
+              </div>
+            </div>
+
+          </div>
+        </div>  
                             </div>
                         </div><!--/span-->
 
@@ -221,7 +269,7 @@
                     <div class="row-fluid sortable">
                         <div class="box span6">
                             <div class="box-content">
-                                <table class="table table-bordered table-hover" id="category-table">
+                                <table class="table table-bordered " id="category-table">
                                     <tr>
                                         <th>Name</th>
                                         <th>Edit</th>
@@ -310,7 +358,7 @@
                                         <th>Uses</th>
                                     </tr>
 
-                                    <c:forEach items="${hashtags}" var="hashtag">
+                                    <c:forEach items="${hashTag}" var="hashtag">
                                         <tr id="user-row-${hashtag.id}">
                                             <td>${hashtag.name}</td>
                                             <td>${hashtag.numOfUses}</td>

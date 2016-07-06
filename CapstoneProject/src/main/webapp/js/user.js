@@ -7,15 +7,6 @@
 
 $(document).ready(function(){
     
-//    function buildCategoryRow(data){
-//        var strVar="";
-//        return "<tr id='category-row-" + data.id + "'>  \n\
-//                <td><a data-category-id='" + data.id +"' data-toggle='modal' data-target='#showUserModal'>" + data.name + "</a></td>  \n\
-//                <td> <a data-category-id='" + data.id +"' data-toggle='modal' data-target='#editUserModal' class='btn btn-info edit-category-button'>\n\
-//                <i class='halflings-icon white edit'></i> </a>  </td>   \n\
-//                <td> <a data-category-id='" + data.id +"' class='btn btn-danger delete-link-category'>\n\
-//                <i class='halflings-icon white trash'></i></a>  </td>   \n\
-//                </tr>  ";
       
       $('#editUserModal').on('show.bs.modal' , function(e){
        
@@ -68,7 +59,7 @@ $(document).ready(function(){
         $.ajax({
            
            
-           url:contextRoot + "/adminPanel/edit",
+           url:contextRoot + "/adminPanel/editUser",
             
            type: 'PUT',
            data: userData,
@@ -84,9 +75,9 @@ $(document).ready(function(){
             $('#editUserModal').modal('hide');
            
             
-//            var tableRow = buildUserRow(data);
+            var tableRow = buildUserRow(data);
             
-//            $('#user-row-' + data.id).replaceWith($(tableRow));
+            $('#user-row-' + data.id).replaceWith($(tableRow));
             
             
     },
@@ -117,6 +108,19 @@ $(document).ready(function(){
        });
         
     });
+    
+    
+    function buildOrderRow(data){
+        var strVar="";
+        return "<tr id='order-row-" + data.id + "'>  \n\
+                <td><a data-order-id='" + data.id +"' data-toggle='modal' data-target='#showOrderModal'>" + data.name + "</a></td>  \n\
+                <td> " + data.password + "</td>  \n\
+                <td> " + data.email + "</td>    \n\
+                <td> " + data.role + "</td>    \n\
+                <td> <a data-order-id='" + data.id +"' data-toggle='modal' data-target='#editOrderModal'>Edit</a>  </td>   \n\
+                <td> <a data-order-id='" + data.id +"' class='delete-link'>Delete</a>  </td>   \n\
+                </tr>  ";
+    }
     });
 
 

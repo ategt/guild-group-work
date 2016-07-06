@@ -86,6 +86,15 @@ public class HomeController {
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();
+        
+        List<User> users = userDao.list();
+        List<User> activeUsers = new ArrayList();
+        
+        for (User u : users) {
+            if(u.getEnabled() == 1){
+                activeUsers.add(u);
+            }
+        }
 
         Integer count = blogPostDao.getNumOfPosts();
         Integer numOfPages = (count / 3);
@@ -100,8 +109,11 @@ public class HomeController {
         model.put("posts", posts);
         model.put("categories", categories);
         model.put("hashTag", hash);
+        model.put("users", activeUsers);
 
-        return "WORKINGADMIN";
+//        return "WORKINGADMIN";
+//        return "ADMINPANELTRY3";
+        return "adminPanelTest";
     }
 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
