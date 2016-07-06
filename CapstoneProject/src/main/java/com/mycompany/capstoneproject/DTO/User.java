@@ -28,9 +28,7 @@ public class User {
     
     private String role;
     private int numOfComments;
-    
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="EST")
-    @NotNull
+
     private Date joinedOn;
     
     int enabled = 1;

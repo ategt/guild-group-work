@@ -18,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +38,8 @@ public class HomeController {
     private UserInterface userDao;
     private ImageServices imageServices;
 
-    
-    
     @Inject
-    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao, ImageServices imageServices ) {
+    public HomeController(BlogPostInterface BPDao, CategoriesInterface CDao, StaticPageInterface SPDao, UserInterface UDao, HashTagInterface HDao, ImageServices imageServices) {
         this.blogPostDao = BPDao;
         this.categoriesDao = CDao;
         this.hashTagDao = HDao;
@@ -65,48 +66,6 @@ public class HomeController {
 
         return "aboutUs";
     }
-
-
-//    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
-//    public String adminPanel(Map model) {
-//
-//        List<BlogPost> posts = blogPostDao.listBlogs();
-//
-//        List<StaticPage> staticPages = staticPageDao.listPages();
-//        StaticPage staticPage = new StaticPage();
-//
-//        List<Category> categories = categoriesDao.listCategories();
-//
-//        List<HashTag> hash = hashTagDao.listHashTags();
-//        
-//        List<User> users = userDao.list();
-//        List<User> activeUsers = new ArrayList();
-//        
-//        for (User u : users) {
-//            if(u.getEnabled() == 1){
-//                activeUsers.add(u);
-//            }
-//        }
-//
-//        Integer count = blogPostDao.getNumOfPosts();
-//        Integer numOfPages = (count / 3);
-//        List<Integer> pages = new ArrayList();
-//        for (int i = 1; i <= numOfPages; i++) {
-//            pages.add(i);
-//        }
-//
-//        model.put("pages", pages);
-//        model.put("staticPage", staticPage);
-//        model.put("staticPages", staticPages);
-//        model.put("posts", posts);
-//        model.put("categories", categories);
-//        model.put("hashTag", hash);
-//        model.put("users", activeUsers);
-//
-////        return "WORKINGADMIN";
-////        return "ADMINPANELTRY3";
-//        return "adminPanelTest";
-//    }
 
     @RequestMapping(value = "/blog/waitingApproval", method = RequestMethod.GET)
     public String postsWaitingApproval(Map model) {
@@ -140,8 +99,21 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Map model, @RequestParam(value = "page", required = false) Integer pageNumber) {
 
+        String name = null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+
+            name = auth.getName(); //get logged in username
+
+            if (name != null) {
+
+                model.put("username", name);
+
+            }
+        }
+
         automaticallyPublishScheduledPosts();
-        automaticallyRemoveExpiredPosts();
+//        automaticallyRemoveExpiredPosts();
 
         Integer offset;
         if (pageNumber == null) {
@@ -153,7 +125,7 @@ public class HomeController {
 
         List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
-        
+
         List<Category> categories = categoriesDao.listCategories();
 
         List<HashTag> hash = hashTagDao.listHashTags();
@@ -218,19 +190,19 @@ public class HomeController {
         }
     }
 
-    public void automaticallyRemoveExpiredPosts() {
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
-
-        List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
-        for (BlogPost post : allBlogPosts) {
-            String postExpiresOn = format.format(post.getExpireOn());
-            if (postExpiresOn.equals(currentDay)) {
-                blogPostDao.delete(post);
-            }
-        }
-    }
+//    public void automaticallyRemoveExpiredPosts() {
+//        Date date = new Date();
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String currentDay = format.format(date);
+//
+//        List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
+//        for (BlogPost post : allBlogPosts) {
+//            String postExpiresOn = format.format(post.getExpireOn());
+//            if (postExpiresOn.equals(currentDay)) {
+//                blogPostDao.delete(post);
+//            }
+//        }
+//    }
 
     @RequestMapping(value = "/setNumberOfPosts", method = RequestMethod.POST)
     public void setNumberOfPostsPerPage(Integer number) {

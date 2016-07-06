@@ -82,12 +82,12 @@
                     <div class="well hidden-xs"> 
                         <div class="row">
                             <div class="col-xs-4">
-                                <select class="form-control">
+<!--                                <select class="form-control">
                                     <option>Newest</option>
                                     <option>Oldest</option>
                                     <option>A-Z</option>
                                     <option>Z-A</option>
-                                </select>
+                                </select>-->
                             </div>
                         </div>
                     </div>
@@ -108,9 +108,9 @@
                                 <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
                                 <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                 <h5>${post.content}</h5>
-                                <p class="text-muted">Created by <a href="#">${post.author.name}</a></p>
+                                <p class="text-muted">Created by ${post.author.name}</a></p>
                                 <h5 class="text-muted">Posted on : ${post.postedOn}</h5>
-                                <h4 align="right" >Status: ${post.status}</h4>
+                                <!--<h4 align="right" >Status: ${post.status}</h4>-->
 
                             </div>
                         </div>
