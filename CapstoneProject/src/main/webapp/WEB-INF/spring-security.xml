@@ -12,8 +12,8 @@
                 class="com.mycompany.capstoneproject.utilities.MySimpleUrlAuthenticationSuccessHandler" />
     
     <http pattern="/login" security="none"/>
-    <http pattern="/" security="none"/>
     <http pattern="/home" security="none"/>
+    <http pattern="/" security="none"/>
     <http pattern="/static/show/**" security="none"/>
     <http pattern="/blog/" security="none"/>
     <http pattern="/css/**" security="none"/>
@@ -32,7 +32,8 @@
         <intercept-url pattern="/blog/imagetest" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/edit/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/blog/create" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/adminPanel**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/static/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/category" access="ROLE_ADMIN"/>
         <intercept-url pattern="/image/imageadmin" access="ROLE_ADMIN"/>

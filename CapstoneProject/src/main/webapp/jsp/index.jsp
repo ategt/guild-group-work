@@ -6,7 +6,7 @@
 <!DOCTYPE>
 <html>
     <head>
-        <title>Hello Controller Page</title>
+        <title>Home</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,9 +15,10 @@
 
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <div class="container">
 
-            <%@ include file="header.jsp" %>
+            
 
             <div class="row-fluid top30 pagetitle">
                 <div class="row">
@@ -52,7 +53,7 @@
 
                         <div class="well">
                             <div class="list-group list-group">
-                                <h4 class=""> Top Trending #hashtags</h4>
+                                <h4>#hashtags</h4>
                                 <c:forEach items="${hashTag}" var="hashtag">
                                     <a href="${pageContext.request.contextPath}/hashtag/${hashtag.name}" class="list-group-item"><span class = "badge"></span>${hashtag.name}</a>
                                     </c:forEach>
@@ -79,33 +80,21 @@
                 </div>
 
                 <div class="col-md-9">
-                    <div class="well hidden-xs"> 
-                        <div class="row">
-                            <div class="col-xs-4">
-<!--                                <select class="form-control">
-                                    <option>Newest</option>
-                                    <option>Oldest</option>
-                                    <option>A-Z</option>
-                                    <option>Z-A</option>
-                                </select>-->
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <hr>
 
                     <c:forEach items="${posts}" var="post">
 
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="#" class="">
+                                  <a href="#" class="">
                                     <!--<img src="http://placehold.it/1280X720" class="img-responsive">-->
                                     <img style="max-width: 200px;max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/${post.image.id}" class="img-responsive">
                                 </a>
                             </div>
                             <div class="col-sm-8">
 
-                                <h3 class="title"><a href="blog/${post.id}">${post.title}</a></h3>
+                                <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a></h3>
                                 <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                 <h5>${post.content}</h5>
                                 <p class="text-muted">Created by ${post.author.name}</a></p>
@@ -117,11 +106,9 @@
                         <hr>
                     </c:forEach>
                     <ul class="pagination pagination-lg pull-right">
-                        <li><a href="#">«</a></li>
-                            <c:forEach items="${pages}" var="page"> 
-                            <li><a  href="${pageContext.request.contextPath}/home?page=${page}" class="page">${page}</a></li>
-                            </c:forEach>
-                        <li><a href="#">»</a></li>
+                        <c:forEach items="${pages}" var="page"> 
+                            <li><a  href="${pageContext.request.contextPath}/?page=${page}" class="page">${page}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

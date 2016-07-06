@@ -14,10 +14,13 @@
 
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <div class="container">
-            <%@ include file="header.jsp" %>
+            
             <div class="row">
+
                 <div class="col-md-12">
+                    <h1>Pending Posts</h1>
                     <table class="table table-bordered table-hover" id="pending-posts-table">
                         <tr>
                             <td>Author</td>
@@ -36,9 +39,12 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/blog/create">Create New Post</a></button>
                 </div>
                 <div class="row">
+
                     <div class="col-md-12">
+                        <h1>Users</h1>
                         <table class="table table-bordered table-hover" id="user-table">
                             <tr>
                                 <td>ID</td>
@@ -61,6 +67,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        <h1>Categories</h1>
                         <table class="table table-bordered table-hover" id="category-table">
                             <tr>
                                 <td>ID</td>
@@ -89,6 +96,7 @@
                         </form>
                     </div>
                     <div class="col-md-6">
+                        <h1>Hashtags</h1>
                         <table class="table table-bordered table-hover" id="hashtag-table">
                             <tr>
                                 <td>ID</td>
@@ -107,7 +115,7 @@
                 <div class="row">
 
                     <div class="col-md-12 center-block">
-
+                        <h1>Static Pages</h1>
                         <table class="table table-bordered table-hover" id="static-page-table">
                             <tr>
                                 <th>Page Title</th>
@@ -124,9 +132,11 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <button class='btn btn-primary center-block'><a style="color: white"href="${pageContext.request.contextPath}/static/">Create New Static Page</a></button><br/><br/>
                     </div> 
                 </div>
             </div>
+        </div>
 
             <div id="editCategoryModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -195,6 +205,7 @@
             <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/adminDelete.js"></script>
             <script src="${pageContext.request.contextPath}/js/category.js"></script>
+            <script src="${pageContext.request.contextPath}/js/user.js"></script>
 
     </body>
 </html>

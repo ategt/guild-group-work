@@ -6,7 +6,7 @@
 <!DOCTYPE>
 <html>
     <head>
-        <title>Hello Controller Page</title>
+        <title>Home</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,9 +15,10 @@
 
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <div class="container">
 
-            <%@ include file="header.jsp" %>
+            
 
             <div class="row-fluid top30 pagetitle">
                 <div class="row">
@@ -105,11 +106,9 @@
                         <hr>
                     </c:forEach>
                     <ul class="pagination pagination-lg pull-right">
-                        <li><a href="#">«</a></li>
-                            <c:forEach items="${pages}" var="page"> 
-                            <li><a  href="${pageContext.request.contextPath}/home?page=${page}" class="page">${page}</a></li>
-                            </c:forEach>
-                        <li><a href="#">»</a></li>
+                        <c:forEach items="${pages}" var="page"> 
+                            <li><a  href="${pageContext.request.contextPath}/?page=${page}" class="page">${page}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
