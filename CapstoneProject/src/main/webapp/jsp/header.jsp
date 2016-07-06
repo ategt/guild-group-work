@@ -32,7 +32,7 @@
                 <li role="presentation"><a href="${pageContext.request.contextPath}/login">Log In</a></li>
                 </sec:authorize>
 
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <sec:authorize access="!isAnonymous()">
                 <li role="presentation"><a href="${pageContext.request.contextPath}/logout">Log Out</a></li>
                 </sec:authorize>
                 
