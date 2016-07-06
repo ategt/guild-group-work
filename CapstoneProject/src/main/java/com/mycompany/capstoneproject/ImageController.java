@@ -12,6 +12,7 @@ import com.mycompany.capstoneproject.DTO.Category;
 import com.mycompany.capstoneproject.DTO.File;
 import com.mycompany.capstoneproject.DTO.Image;
 import com.mycompany.capstoneproject.bll.ImageServices;
+import com.mycompany.capstoneproject.bll.StaticPageServices;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +54,10 @@ public class ImageController {
 
     @Autowired
     private ImageServices imageServices;
+    
+    @Autowired
+    private StaticPageServices staticPageServices;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/showimage/{id}")
     @ResponseBody
@@ -116,11 +121,14 @@ public class ImageController {
     @RequestMapping(method = RequestMethod.GET, value = "/imageadmin")
     public String imageAdmin(Map model) {
 
-        List<Image> images = imageDao.list();
+//        List<Image> images = imageDao.list();
+//
+//        List<Integer> imageIdList = imageServices.filterTestFiles(images);
+//
+//        model.put("imageIdList", imageIdList);
 
-        List<Integer> imageIdList = imageServices.filterTestFiles(images);
-
-        model.put("imageIdList", imageIdList);
+        imageServices.loadImageIdsIntoModel(model);
+        staticPageServices.loadStaticPagesIntoModelInOrder(model);
 
         return "imageAdmin";
     }
