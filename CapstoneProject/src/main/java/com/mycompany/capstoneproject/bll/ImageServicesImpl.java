@@ -156,6 +156,7 @@ public class ImageServicesImpl implements ImageServices {
         List<Integer> imageIdList = images.stream()
                 .filter(a -> a != null).filter(a -> a.getDescription() != null)
                 .filter(a -> a.getDescription().toLowerCase().contains("ajax"))
+                .filter(a -> a.getContentType().contains("image") )
                 .map(Image::getId)
                 .collect(Collectors.toList());
         return imageIdList;

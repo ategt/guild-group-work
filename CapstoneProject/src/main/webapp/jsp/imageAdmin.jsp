@@ -99,11 +99,42 @@
                 </div>
             </div>
         </div>
+
+        <div id="selectSingleImageModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-body">
+
+                        <div class="picker masonry" style="overflow: scroll;max-height: 400px;">
+                            <select style="width: 500px;" id="modal-single-image-picker" class="image-picker show-html">
+                                <c:forEach items="${imageIdList}" var="imageId">
+                                    <option data-img-src="${pageContext.request.contextPath}/image/showimage/${imageId}" value="${imageId}">${pageContext.request.contextPath}/image/showimage/${imageId}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+
+
+              </div>
+              <div class="modal-footer">
+
+                <button type="button" class="submit-from-single-detail-button btn btn-default" data-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <script>
             var contextRoot = "${pageContext.request.contextPath}";
         </script>
 
-        <%@ include file="selectSingleImageModal.jsp" %>
+
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>

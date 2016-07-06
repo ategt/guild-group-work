@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Basic Static Page</title>
-        <!--Bootstrap core CSS--> 
+        <title>Pats Warehouse Blog</title>
+  <!--Bootstrap core CSS--> 
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/js/image-picker/image-picker.css" rel="stylesheet">
 
