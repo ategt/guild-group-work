@@ -33,6 +33,8 @@
     </head>
 
     <body>
+                <%@ include file="header.jsp" %>
+
         <div class="container">
             <div id="dragandrophandler">
 

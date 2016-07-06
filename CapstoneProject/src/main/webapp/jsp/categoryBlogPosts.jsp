@@ -99,12 +99,7 @@
                             <div class="row">
                                 <div class="col-xs-4">
 
-                                    <select class="form-control">
-                                        <option>Oldest</option>
-                                        <option>Newest</option>
-                                        <option>A-Z</option>
-                                        <option>Z-A</option>
-                                    </select>
+
                                 </div>          
 
                                 <div class="col-md-8">

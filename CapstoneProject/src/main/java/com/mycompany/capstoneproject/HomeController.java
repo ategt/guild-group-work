@@ -122,6 +122,14 @@ public class HomeController {
             offset = getOffset(pageNumber);
         }
         List<BlogPost> posts = blogPostDao.listBlogsWithLimit(offset);
+        List<BlogPost> activePosts = new ArrayList();
+        
+        for (BlogPost p : posts) {
+            if(p.getStatus().toLowerCase().equals("published")){
+                activePosts.add(p);
+                
+            }
+        }
 
         List<StaticPage> staticPages = staticPageDao.listPagesByPosition();
         StaticPage staticPage = new StaticPage();
@@ -136,7 +144,7 @@ public class HomeController {
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-        model.put("posts", posts);
+        model.put("posts", activePosts);
         model.put("categories", categories);
         model.put("hashTag", hash);
         return "index";
@@ -178,28 +186,29 @@ public class HomeController {
 
     public void automaticallyPublishScheduledPosts() {
         Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
 
         List<BlogPost> pendingPosts = blogPostDao.listPendingPosts();
         for (BlogPost pendingPost : pendingPosts) {
-            String pendingPostDate = format.format(pendingPost.getDateToPostOn());
-            if (pendingPostDate.equals(currentDay)) {
-                blogPostDao.publish(pendingPost);
+            if (pendingPost.getDateToPostOn().after(date)) {
+                blogPostDao.delete(pendingPost);
             }
         }
     }
 
     public void automaticallyRemoveExpiredPosts() {
         Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDay = format.format(date);
 
         List<BlogPost> allBlogPosts = blogPostDao.listBlogs();
         for (BlogPost post : allBlogPosts) {
-            String postExpiresOn = format.format(post.getExpireOn());
-            if (postExpiresOn.equals(currentDay)) {
+
+            if(post.getExpireOn() != null){
+ 
+
+            
+            if (post.getExpireOn().before(date)) {
+
                 blogPostDao.delete(post);
+            }
             }
         }
     }
