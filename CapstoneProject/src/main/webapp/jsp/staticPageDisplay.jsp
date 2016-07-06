@@ -23,7 +23,16 @@
 
             <div class="row">
                 <div class="col-lg-2"></div>
-                <div class="col-lg-10"><h1>${staticPage.title}</h1></div>
+                <div class="col-lg-10">
+                    <h1>
+                        ${staticPage.title}
+
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            - <a href="${pageContext.request.contextPath}/static/edit/${staticPage.id}">Edit</a>
+
+                        </sec:authorize>
+                    </h1>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-2"></div>

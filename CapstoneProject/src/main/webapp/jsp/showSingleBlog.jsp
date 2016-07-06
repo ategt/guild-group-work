@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <!--Form validation -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,7 +29,12 @@
                     </a>
                 </div>
                 <div class="col-sm-8">
-                    <h3 class="title">${post.title}</h3>
+                    <h3 class="title">${post.title}
+                        <sec:authorize access="hasRole('ROLE_ADMIN')"> - 
+                            <a href="${pageContext.request.contextPath}/blog/edit/${post.id}">Edit</a>
+                        </sec:authorize>
+
+                    </h3>
                     <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                     <h5>${post.content}</h5>
 

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <!--Form validation -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE>
@@ -18,7 +19,7 @@
         <%@ include file="header.jsp" %>
         <div class="container">
 
-            
+
 
             <div class="row-fluid top30 pagetitle">
                 <div class="row">
@@ -80,21 +81,25 @@
                 </div>
 
                 <div class="col-md-9">
-                   
+
                     <hr>
 
                     <c:forEach items="${posts}" var="post">
 
                         <div class="row">
                             <div class="col-sm-4">
-                                  <a href="#" class="">
+                                <a href="#" class="">
                                     <!--<img src="http://placehold.it/1280X720" class="img-responsive">-->
                                     <img style="max-width: 200px;max-height: 200px;" src="${pageContext.request.contextPath}/image/showimage/${post.image.id}" class="img-responsive">
                                 </a>
                             </div>
                             <div class="col-sm-8">
 
-                                <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a></h3>
+                                <h3 class="title"><a href="${pageContext.request.contextPath}/blog/${post.id}">${post.title}</a>
+                                    <sec:authorize access="hasRole('ROLE_ADMIN')"> - 
+                                        <a href="${pageContext.request.contextPath}/blog/edit/${post.id}">Edit</a>
+                                    </sec:authorize>
+                                </h3>
                                 <h4 class="text-muted"><span class="glyphicon glyphicon-lock"></span>${post.category.name}</h4>
                                 <h5>${post.content}</h5>
                                 <p class="text-muted">Created by ${post.author.name}</a></p>
@@ -108,7 +113,7 @@
                     <ul class="pagination pagination-lg pull-right">
                         <c:forEach items="${pages}" var="page"> 
                             <li><a  href="${pageContext.request.contextPath}/?page=${page}" class="page">${page}</a></li>
-                        </c:forEach>
+                            </c:forEach>
                     </ul>
                 </div>
             </div>
