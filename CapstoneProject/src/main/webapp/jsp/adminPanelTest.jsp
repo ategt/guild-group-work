@@ -15,9 +15,6 @@
         <!-- start: Meta -->
         <meta charset="utf-8">
         <title>Admin Panel</title>
-        <meta name="description" content="Bootstrap Metro Dashboard">
-        <meta name="author" content="Dennis Ji">
-        <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         <!-- end: Meta -->
 
         <!-- start: Mobile Specific -->
@@ -26,7 +23,7 @@
 
         <!-- start: CSS -->
         <link id="bootstrap-style" href="${pageContext.request.contextPath}/css/bootstrap.ap.min.css" rel="stylesheet">
-        <!--<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" rel="stylesheet">-->
+        <link href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link id="base-style" href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link id="base-style" href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet">
         <link id="base-style-responsive" href="${pageContext.request.contextPath}/css/style-responsive.css" rel="stylesheet">
@@ -200,9 +197,10 @@
                                                     <span class="label label-success">Active</span>
                                                 </td>
                                                 <td class="center">
-                                                    <a class="btn btn-info" href="#">
-                                                        <i class="halflings-icon white edit"></i>  
+                                                    <a data-user-id="${user.id}" data-toggle="modal" data-target="#editUserModal" class="btn btn-info edit-user-button">
+                                                    <i class="halflings-icon white edit"></i> 
                                                     </a>
+                                                
                                                     <a data-user-id="${user.id}" class="btn btn-danger delete-link-user">
                                                         <i class="halflings-icon white trash"></i> 
                                                     </a>
