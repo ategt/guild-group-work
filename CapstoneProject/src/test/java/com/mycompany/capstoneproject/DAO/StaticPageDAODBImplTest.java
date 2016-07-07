@@ -81,55 +81,55 @@ public class StaticPageDAODBImplTest {
     /**
      * Test of get method, of class StaticPageDAODBImpl.
      */
-//    @Test
-//    public void testGetC() {
-//        System.out.println("get");
-//        Integer id = 1;
-//        StaticPageDAODBImpl instance = ctx.getBean("staticPageDao", StaticPageDAODBImpl.class);
-//
-//        StaticPage result = instance.get(id);
-//        
-//        StaticPage expResult = new StaticPage();
-//
-//        expResult.setContent("TEST");
-//        expResult.setTitle("BOB");
-//        expResult.setId(1);
-//
-//        assertTrue(verifyStaticPage(expResult, result ));
-//        
-//    }
+    @Test
+    public void testGetC() {
+        System.out.println("get");
+        Integer id = 1;
+        StaticPageInterface instance = ctx.getBean("staticPageDao", StaticPageInterface.class);
 
-//    private Boolean verifyStaticPage(StaticPage staticPage1, StaticPage staticPage2) {
-//
-//        assertEquals(staticPage1.getContent(), staticPage2.getContent());
-//        assertEquals(staticPage1.getTitle(), staticPage2.getTitle());
-//        assertEquals(staticPage1.getId(), staticPage2.getId());
-//        
-//        if (staticPage1 == null && staticPage2 == null) {
-//            return true;
-//        }
-//
-//        if (staticPage1 == null || staticPage2 == null) {
-//            return false;
-//        }
-//
-//        boolean valid = true;
-//
-//        if (!staticPage1.getContent().equals(staticPage2.getContent())) {
-//            valid = false;
-//        }
-//
-//        if (!staticPage1.getTitle().equals(staticPage2.getTitle())) {
-//            valid = false;
-//        }
-//
-//        if (staticPage1.getId() != staticPage2.getId()) {
-//            valid = false;
-//        }
-//
-//        return valid;
-//
-//    }
+        StaticPage result = instance.get(id);
+        
+        StaticPage expResult = new StaticPage();
+
+        expResult.setContent("TEST");
+        expResult.setTitle("BOB");
+        expResult.setId(1);
+
+        assertTrue(verifyStaticPage(expResult, result ));
+        
+    }
+
+    private Boolean verifyStaticPage(StaticPage staticPage1, StaticPage staticPage2) {
+
+        assertEquals(staticPage1.getContent(), staticPage2.getContent());
+        assertEquals(staticPage1.getTitle(), staticPage2.getTitle());
+        assertEquals(staticPage1.getId(), staticPage2.getId());
+        
+        if (staticPage1 == null && staticPage2 == null) {
+            return true;
+        }
+
+        if (staticPage1 == null || staticPage2 == null) {
+            return false;
+        }
+
+        boolean valid = true;
+
+        if (!staticPage1.getContent().equals(staticPage2.getContent())) {
+            valid = false;
+        }
+
+        if (!staticPage1.getTitle().equals(staticPage2.getTitle())) {
+            valid = false;
+        }
+
+        if (staticPage1.getId() != staticPage2.getId()) {
+            valid = false;
+        }
+
+        return valid;
+
+    }
 
 ////    /**
 ////     * Test of update method, of class StaticPageDAODBImpl.
