@@ -55,48 +55,7 @@ public class HashTagController {
         HashTag hashTag = hashTagDao.get(hashTagName);
 
         List<BlogPost> posts = hashTagDao.listBlogs(hashTag);
-        
-//        List<BlogPost> post = blogPostDao.listBlogs();
-        
-        
-//        List<BlogPost> getRidOfDoubles = new ArrayList();
-//        List<BlogPost> get = new ArrayList();
-//        List<BlogPost> check = hashTagDao.listBlogs(hashTag);
-//        
-//        int counter = 0;
-        
-        
-        
-//        for (BlogPost p : posts) {
-//            for (BlogPost P : check) {
-//                if(counter >= 0){
-//                    if(P.getContent().equals(p.getContent())){
-//                        counter++;
-//                        getRidOfDoubles.add(p);
-//                    }
-//                }
-//            }
-//        }
-        
-        
-        
-        
-        
-//        for (BlogPost p : posts) {
-//            for (BlogPost P : check) {
-//                if(!p.getContent().equals(P.getContent())){
-//                    
-//                }else{
-//                    for (BlogPost b : getRidOfDoubles) {
-//                        if(b.getContent().equals(P.getContent())){
-//                    
-//                    get.add(p);
-//                }}
-//            }
-//            
-//   
-//        }
-//        }
+
         
 //        List<BlogPost> activePosts = new ArrayList();
         
