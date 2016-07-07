@@ -185,7 +185,7 @@ public class BlogController {
 
         model.put("post", blogPost);
 
-        return "showSingleBlog";
+        return "showSingleBlogCreate";
     }
     
                 
@@ -211,7 +211,7 @@ public class BlogController {
         loadStaticPagesIntoModel(model);
 
         model.put("post", post);
-        return "showSingleBlog";
+        return "showSingleBlogCreate";
     }
 
     private void updateHashTags(BlogPost post) {

@@ -144,7 +144,7 @@ public class HomeController {
         model.put("staticPages", staticPages);
         model.put("posts", activePosts);
         model.put("categories", categories);
-        model.put("hashTag", hash);
+        Object object = new Object();        model.put("hashTag", hash);
         return "index";
     }
 
