@@ -346,7 +346,10 @@ public class BlogController {
         for (BlogPost blogPost : list) {
 
             if (category.toLowerCase().equals(blogPost.getCategory().getName().toLowerCase())) {
-                newArray.add(blogPost);
+                if(blogPost.getExpired()== 0 ){
+                     newArray.add(blogPost);
+                }
+               
 
             }
 

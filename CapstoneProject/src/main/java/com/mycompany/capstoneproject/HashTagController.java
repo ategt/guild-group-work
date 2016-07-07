@@ -51,13 +51,34 @@ public class HashTagController {
     public String getPostsByHashTag(@PathVariable("hashtag") String hashTagName, Map model) {
         
         
+        int counter1 = 0;
+        int counter = 0;
+        
 
         HashTag hashTag = hashTagDao.get(hashTagName);
 
         List<BlogPost> posts = hashTagDao.listBlogs(hashTag);
+        List<BlogPost> posting = hashTagDao.listBlogs(hashTag);
+        List<BlogPost> activePosts = new ArrayList();
+        
+        for (BlogPost p : posts) {
+//            while(counter1 <= ){
+//                
+            
+            for (BlogPost a : posting) {
+                while(counter <= 0){
+                if(a.getTitle().equals(p.getTitle())){
+                    activePosts.add(p);
+                    counter++;
+                }
+                }
+                counter1++;
+            }
+            }
+//        }
 
         
-//        List<BlogPost> activePosts = new ArrayList();
+//        List<BlogPost> activeP newArray.add(blogPost);osts = new ArrayList();
         
 //        for (BlogPost p : posts) {
 //            if(p.getStatus().toLowerCase().equals("published")){
@@ -82,7 +103,7 @@ public class HashTagController {
         model.put("pages", pages);
         model.put("staticPage", staticPage);
         model.put("staticPages", staticPages);
-        model.put("posts", posts);
+        model.put("posts", activePosts);
         model.put("categories", categories);
         model.put("hashTag", hash);
         return "index";

@@ -65,7 +65,6 @@ public class AdminPanelController {
     @Inject
     public AdminPanelController(StaticPageInterface staticPageDao, BlogPostInterface blogPostDao, UserInterface userDao, CategoriesInterface categoriesDao, HashTagInterface hashTagDao) {
         this.staticPageDao = staticPageDao;
-
         this.blogPostDao = blogPostDao;
         this.userDao = userDao;
         this.categoriesDao = categoriesDao;
